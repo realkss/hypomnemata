@@ -61,3 +61,78 @@ article blockquote {
   padding-left: 1rem;
   margin-left: 0;
 }
+.left.sidebar {
+  width: 320px;
+}
+
+.center {
+  max-width: 920px;
+}
+
+.wiki-lang-switcher {
+  position: relative;
+  margin: 0.9rem 0 1rem 0;
+}
+
+.wiki-lang-button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.wiki-lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 0.35rem 0;
+}
+
+.wiki-lang-switcher:hover .wiki-lang-menu,
+.wiki-lang-switcher:focus-within .wiki-lang-menu {
+  display: block;
+}
+
+.wiki-lang-menu a {
+  display: block;
+  padding: 0.45rem 0.8rem;
+  text-decoration: none;
+}
+
+.wiki-lang-menu a:hover {
+  background: var(--highlight);
+}
+
+.wiki-lang-menu a.active {
+  font-weight: 700;
+}
+
+.toc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+article blockquote {
+  border-left: 3px solid var(--secondary);
+  padding-left: 1rem;
+  margin-left: 0;
+}
