@@ -45,46 +45,36 @@ const config: QuartzConfig = {
     },
 
     // Theme
-    theme: {
+          theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
-
-      // Art Deco header + readable body
       typography: {
-        header: "Limelight",
-        body: "Josefin Sans",
+        header: "Cinzel",
+        body: "EB Garamond",
         code: "JetBrains Mono",
       },
-
-      /**
-       * A cleaner, less “plain” look:
-       * - softer background
-       * - stronger text contrast
-       * - deeper accent for links/buttons
-       * - slightly warmer highlight
-       */
       colors: {
         lightMode: {
-          light: "#fbfaf7",
-          lightgray: "#ebe7e2",
-          gray: "#c7c0b8",
-          darkgray: "#3a3a3a",
-          dark: "#161616",
-          secondary: "#1f4d6b",
-          tertiary: "#b07a2a",
-          highlight: "rgba(31, 77, 107, 0.10)",
-          textHighlight: "#fff3a6cc",
+          light: "#f8f5ef",
+          lightgray: "#d9d4c8",
+          gray: "#b7afa1",
+          darkgray: "#4e463d",
+          dark: "#1f1b16",
+          secondary: "#8b6b2c",
+          tertiary: "#6f8c9b",
+          highlight: "rgba(139, 107, 44, 0.10)",
+          textHighlight: "#f3df9b88",
         },
         darkMode: {
-          light: "#121214",
-          lightgray: "#26262a",
-          gray: "#6f6f78",
-          darkgray: "#d8d8de",
-          dark: "#f3f3f6",
-          secondary: "#8db6d6",
-          tertiary: "#d6a35a",
-          highlight: "rgba(141, 182, 214, 0.12)",
-          textHighlight: "#ffd86bcc",
+          light: "#121212",
+          lightgray: "#2a2a2a",
+          gray: "#5f5a54",
+          darkgray: "#ddd6cc",
+          dark: "#f6f1e8",
+          secondary: "#c6a15b",
+          tertiary: "#8fb7cc",
+          highlight: "rgba(198, 161, 91, 0.12)",
+          textHighlight: "#c6a15b66",
         },
       },
     },
