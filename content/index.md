@@ -2,13 +2,9 @@
 title: Hypomnemata
 ---
 
-# Hypomnemata
+> **Hypomnemata** (ὑπομνήματα) were personal notebooks used in antiquity for recording ideas, quotations, arguments, and observations. Rather than a diary of private feelings, they functioned as **intellectual working documents** — a place to collect knowledge and refine thought.
 
-> **Hypomnemata** (ὑπομνήματα) were personal notebooks used in antiquity for recording ideas, quotations, arguments, and observations.  
-> Rather than a diary of private feelings, they functioned as **intellectual working documents**—a place to collect knowledge and refine thought.
-
-The concept was later discussed by the philosopher :contentReference[oaicite:1]{index=1} as a method of **self-formation through writing and study**.  
-In this spirit, this site serves as a structured repository of notes, references, and explorations across several domains of knowledge.
+The term later came to describe a disciplined practice of writing, excerpting, and organizing thought. In that spirit, this site serves as a structured repository of notes, references, and explorations across several domains.
 
 ---
 
@@ -51,24 +47,10 @@ Machine learning, computational models, and algorithmic systems.
 
 ## Purpose of this Notebook
 
-This site functions as a **digital commonplace book** — a place to:
-
-- collect and organize knowledge  
-- document conceptual structures across disciplines  
-- link ideas between mathematics, physics, and computation  
-- develop long-form notes and references  
-
-Rather than a blog, it is intended as a **living intellectual archive**.
+This site functions as a **digital commonplace book** — a place to collect, connect, and refine ideas across mathematics, physics, graphics, and computation.
 
 ---
 
 ## Navigation
 
-Use the **Explorer panel** on the left to browse topics hierarchically,  
-or the **Graph View** to explore connections between notes.
-
----
-
-## Technical Notes
-
-This site is generated using **Quartz**, a static-site generator designed for publishing interconnected notes from an Obsidian vault.
+Use the **Table of Contents** on the left to move through this page, and the **Graph View** to explore relationships across notes.
