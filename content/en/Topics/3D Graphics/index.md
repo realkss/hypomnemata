@@ -5,7 +5,10 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-3D graphics belongs here because it joins geometry, simulation, optics, and representation. It is one of the places where abstract mathematics becomes visible and where computational technique becomes a mode of thought.
+> *Ars est celare artem.*  
+> Art consists in concealing art.
+
+3D graphics belongs here because it joins geometry, rendering, simulation, and representation. It is one of the places where abstract mathematics becomes visible and where computational technique becomes a mode of thought.
 
 ## Emphases
 

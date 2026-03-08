@@ -16,26 +16,38 @@ In the Greek and later Hellenistic traditions of learning, study was not only a 
 
 This site tries to recover something of that spirit in digital form. It is neither diary nor news sheet, but a working archive: a place where connected notes are kept in view long enough to become understanding. The aim is not merely to store information, but to cultivate a mode of study in which ideas can be gathered, compared, revised, and made to illuminate one another.
 
-The notebook therefore remains deliberately broad. Its materials may include technical subjects, historical questions, conceptual analysis, philosophical fragments, and whatever else proves worth preserving in ordered relation. What unites them is less a department than a discipline of inquiry.
+The notebook therefore remains deliberately broad. Its materials may include technical subjects, historical questions, conceptual analysis, philosophical fragments, literary works, games of strategy, and whatever else proves worth preserving in ordered relation. What unites them is less a department than a discipline of inquiry.
 
 ## Topics
 
 <div class="landing-grid">
   <a class="landing-card" href="./en/Topics/Physics/">
     <strong>Physics</strong>
-    <span>Natural philosophy in its modern form: matter, motion, fields, quanta, and cosmological structure.</span>
+    <span>Matter, motion, fields, quanta, and cosmological structure.</span>
   </a>
   <a class="landing-card" href="./en/Topics/Mathematics/">
     <strong>Mathematics</strong>
-    <span>Formal structure, proof, abstraction, and the grammar by which difficult thought is clarified.</span>
+    <span>Formal structure, proof, abstraction, and the grammar of difficult thought.</span>
   </a>
   <a class="landing-card" href="./en/Topics/3D Graphics/">
     <strong>3D Graphics</strong>
-    <span>Geometry, rendering, simulation, and the construction of intelligible visual worlds.</span>
+    <span>Geometry, rendering, simulation, and intelligible visual worlds.</span>
   </a>
   <a class="landing-card" href="./en/Topics/AI/">
     <strong>Computation</strong>
-    <span>Algorithms, models, machine intelligence, and computational techniques of representation and inference.</span>
+    <span>Algorithms, models, machine intelligence, and representation.</span>
+  </a>
+  <a class="landing-card" href="./en/Literature/">
+    <strong>Literature</strong>
+    <span>Reading, form, memory, interpretation, and works worth returning to.</span>
+  </a>
+  <a class="landing-card" href="./en/Chess/">
+    <strong>Chess</strong>
+    <span>Calculation, structure, and strategic judgment under constraint.</span>
+  </a>
+  <a class="landing-card" href="./en/Go/">
+    <strong>Go</strong>
+    <span>Shape, influence, whole-board thought, and long strategic rhythm.</span>
   </a>
 </div>
 

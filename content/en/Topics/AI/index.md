@@ -5,7 +5,10 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-Computation is treated broadly: algorithms, formal procedures, machine intelligence, and the technical means by which models are built, trained, and interpreted.
+> *Omnia mutantur, nos et mutamur in illis.*  
+> All things change, and we change with them.
+
+Computation is treated broadly: algorithms, formal procedures, machine intelligence, and the technical means by which models are built, trained, and interpreted. What matters here is not only implementation but the way procedures reshape what can be represented, tested, and understood.
 
 ## Emphases
 
