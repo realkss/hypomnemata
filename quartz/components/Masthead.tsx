@@ -4,7 +4,8 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
   const root = pathToRoot(fileData.slug!)
   const homeHref = root
-  const subjectsHref = `${root}#topics`
+  const topicsHref = `${root}#topics`
+  const lexiconHref = joinSegments(root, "lexicon")
   const keeperHref = joinSegments(root, "keeper")
   const greekTitle = "\u1f51\u03c0\u03bf\u03bc\u03bd\u03ae\u03bc\u03b1\u03c4\u03b1"
 
@@ -26,7 +27,8 @@ const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
           </div>
           <nav class="site-masthead__nav" aria-label="Primary">
             <a href={homeHref}>Home</a>
-            <a href={subjectsHref}>Topics</a>
+            <a href={topicsHref}>Topics</a>
+            <a href={lexiconHref}>Lexicon</a>
             <a href={keeperHref}>On the Keeper</a>
           </nav>
         </div>
@@ -38,4 +40,3 @@ const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
 Masthead.displayName = "Masthead"
 
 export default (() => Masthead) satisfies QuartzComponentConstructor
-

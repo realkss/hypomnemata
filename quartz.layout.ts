@@ -7,6 +7,8 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
+      Lexicon: "/hypomnemata/lexicon",
+      "Works and Library": "/hypomnemata/works",
       GitHub: "https://github.com/realkss/hypomnemata",
     },
   }),
@@ -68,7 +70,7 @@ export const defaultContentPageLayout: PageLayout = {
           enableRadial: true,
         },
       }),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => page.fileData.slug !== "index" && page.fileData.slug !== "keeper",
     }),
     Component.ConditionalRender({
       component: Component.Backlinks(),

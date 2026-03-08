@@ -4,11 +4,11 @@ const BASE_PATH = "/hypomnemata"
 
 const LANGS = [
   { code: "index", label: "English", href: `${BASE_PATH}/` },
-  { code: "ko", label: "한국어", href: `${BASE_PATH}/ko/` },
-  { code: "fr", label: "Français", href: `${BASE_PATH}/fr/` },
+  { code: "ko", label: "\uD55C\uAD6D\uC5B4", href: `${BASE_PATH}/ko/` },
+  { code: "fr", label: "Fran\u00E7ais", href: `${BASE_PATH}/fr/` },
   { code: "de", label: "Deutsch", href: `${BASE_PATH}/de/` },
   { code: "la", label: "Latina", href: `${BASE_PATH}/la/` },
-  { code: "ru", label: "Русский", href: `${BASE_PATH}/ru/` },
+  { code: "ru", label: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439", href: `${BASE_PATH}/ru/` },
 ]
 
 const LanguageSwitcher: QuartzComponent = ({ fileData }: QuartzComponentProps) => {

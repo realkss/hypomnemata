@@ -1,5 +1,8 @@
 ---
 title: Hypomnemata
+lang: en
+sourceLanguage: en
+translationStatus: original
 ---
 
 <div class="landing-inscription">
@@ -36,13 +39,23 @@ The notebook therefore remains deliberately broad. Its materials may include tec
   </a>
 </div>
 
+## Reference Rooms
+
+<div class="landing-grid landing-grid--reference">
+  <a class="landing-card" href="./lexicon">
+    <strong>Lexicon</strong>
+    <span>Definitions, first terms, and short orienting entries for the vocabulary of the notebook.</span>
+  </a>
+  <a class="landing-card" href="./works">
+    <strong>Works and Library</strong>
+    <span>The books, papers, and textual companions to which the notes most often return.</span>
+  </a>
+</div>
+
 ## Method
 
 The notebook is arranged as a **commonplace book** rather than a chronological blog. Topics are meant to deepen over time; pages branch, return, and cross-reference one another. The graph is not ornament alone but a map of intellectual adjacency. The hope is to preserve something of the old scholarly practice: to read slowly, excerpt carefully, connect rigorously, and leave behind an ordered record of thought in motion.
 
 ## Orientation
 
-Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above and proceed outward from any note.
-
-
-
+Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above, the [[lexicon|Lexicon]], or the [[works|Works and Library]], and proceed outward from any note.
