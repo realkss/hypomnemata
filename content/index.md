@@ -45,7 +45,7 @@ The notebook therefore remains deliberately broad. Its materials may include tec
     <strong>Chess</strong>
     <span>Calculation, structure, and strategic judgment under constraint.</span>
   </a>
-  <a class="landing-card" href="./en/Baduk/">
+  <a class="landing-card" href="./ko/Baduk/">
     <strong>Baduk</strong>
     <span>Shape, influence, whole-board thought, and long strategic rhythm.</span>
   </a>

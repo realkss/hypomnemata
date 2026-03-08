@@ -6,7 +6,6 @@ import { globby } from "globby"
 
 const ROOT = process.cwd()
 const CONTENT_DIR = path.join(ROOT, "content")
-const SOURCE_LANG = "en"
 const DEFAULT_TARGETS = ["ko", "fr", "de", "la", "ru"]
 const MODEL = process.env.OPENAI_TRANSLATION_MODEL ?? "gpt-4.1-mini"
 
@@ -38,14 +37,31 @@ function getSourceFiles() {
     "content/index.md",
     "content/keeper.md",
     "content/en/**/*.md",
+    "content/ko/Baduk/**/*.md",
   ], { cwd: ROOT, absolute: true })
 }
 
-function destinationFor(sourceFile: string, lang: string) {
+function detectSourceLanguage(sourceFile: string, markdown: string) {
+  const parsed = matter(markdown)
+  const explicit = typeof parsed.data.sourceLanguage === "string"
+    ? parsed.data.sourceLanguage
+    : typeof parsed.data.lang === "string"
+      ? parsed.data.lang
+      : undefined
+  if (explicit) return explicit
+
+  const rel = path.relative(CONTENT_DIR, sourceFile).replace(/\\/g, "/")
+  const first = rel.split("/")[0]
+  return first in LANGUAGE_NAMES ? first : "en"
+}
+
+function destinationFor(sourceFile: string, sourceLang: string, targetLang: string) {
   const rel = path.relative(CONTENT_DIR, sourceFile)
-  if (rel === "index.md") return path.join(CONTENT_DIR, lang, "index.md")
-  if (rel === "keeper.md") return path.join(CONTENT_DIR, lang, "keeper.md")
-  if (rel.startsWith(`en${path.sep}`)) return path.join(CONTENT_DIR, lang, rel.slice(3))
+  if (rel === "index.md") return path.join(CONTENT_DIR, targetLang, "index.md")
+  if (rel === "keeper.md") return path.join(CONTENT_DIR, targetLang, "keeper.md")
+  if (rel.startsWith(`${sourceLang}${path.sep}`)) {
+    return path.join(CONTENT_DIR, targetLang, rel.slice(sourceLang.length + 1))
+  }
   throw new Error(`Unsupported source path: ${sourceFile}`)
 }
 
@@ -62,14 +78,14 @@ async function exists(filePath: string) {
   }
 }
 
-async function translateMarkdown(markdown: string, targetLang: string, translatedFrom: string) {
+async function translateMarkdown(markdown: string, sourceLang: string, targetLang: string, translatedFrom: string) {
   const apiKey = process.env.OPENAI_API_KEY
   if (!apiKey) {
     throw new Error("OPENAI_API_KEY is not set. Add it to your environment before running translations.")
   }
 
   const targetName = LANGUAGE_NAMES[targetLang] ?? targetLang
-  const sourceName = LANGUAGE_NAMES[SOURCE_LANG]
+  const sourceName = LANGUAGE_NAMES[sourceLang] ?? sourceLang
 
   const system = [
     "You translate Markdown files for a static knowledge website.",
@@ -81,7 +97,7 @@ async function translateMarkdown(markdown: string, targetLang: string, translate
 
   const user = [
     `Translate this Markdown from ${sourceName} to ${targetName}.`,
-    `Set frontmatter fields: lang: ${targetLang}, sourceLanguage: ${SOURCE_LANG}, translatedFrom: ${translatedFrom}, translationStatus: ai-translated.`,
+    `Set frontmatter fields: lang: ${targetLang}, sourceLanguage: ${sourceLang}, translatedFrom: ${translatedFrom}, translationStatus: ai-translated.`,
     "If frontmatter already exists, preserve existing keys and update title/description text where appropriate.",
     "Preserve internal links and file paths exactly unless they are visible prose.",
     "Return only the translated Markdown file.",
@@ -119,10 +135,10 @@ async function translateMarkdown(markdown: string, targetLang: string, translate
   return output.endsWith("\n") ? output : `${output}\n`
 }
 
-function ensureMetadata(markdown: string, sourceFile: string, lang: string) {
+function ensureMetadata(markdown: string, sourceFile: string, sourceLang: string, lang: string) {
   const parsed = matter(markdown)
   parsed.data.lang = parsed.data.lang ?? lang
-  parsed.data.sourceLanguage = parsed.data.sourceLanguage ?? SOURCE_LANG
+  parsed.data.sourceLanguage = parsed.data.sourceLanguage ?? sourceLang
   parsed.data.translatedFrom = parsed.data.translatedFrom ?? translatedFromValue(sourceFile)
   parsed.data.translationStatus = parsed.data.translationStatus ?? "ai-translated"
   return matter.stringify(parsed.content, parsed.data)
@@ -135,9 +151,12 @@ async function main() {
   for (const sourceFile of sourceFiles) {
     const markdown = await readFile(sourceFile, "utf8")
     const translatedFrom = translatedFromValue(sourceFile)
+    const sourceLang = detectSourceLanguage(sourceFile, markdown)
 
     for (const lang of targets) {
-      const dest = destinationFor(sourceFile, lang)
+      if (lang === sourceLang) continue
+
+      const dest = destinationFor(sourceFile, sourceLang, lang)
       const alreadyExists = await exists(dest)
       if (alreadyExists && !force) {
         console.log(`skip ${lang}: ${translatedFrom}`)
@@ -147,8 +166,8 @@ async function main() {
       console.log(`${dryRun ? "plan" : "translate"} ${translatedFrom} -> ${path.relative(ROOT, dest)}`)
       if (dryRun) continue
 
-      const translated = await translateMarkdown(markdown, lang, translatedFrom)
-      const withMetadata = ensureMetadata(translated, sourceFile, lang)
+      const translated = await translateMarkdown(markdown, sourceLang, lang, translatedFrom)
+      const withMetadata = ensureMetadata(translated, sourceFile, sourceLang, lang)
       await mkdir(path.dirname(dest), { recursive: true })
       await writeFile(dest, withMetadata, "utf8")
     }
