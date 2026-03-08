@@ -39,16 +39,12 @@ The notebook therefore remains deliberately broad. Its materials may include tec
   </a>
 </div>
 
-## Reference Rooms
+## Reference
 
 <div class="landing-grid landing-grid--reference">
   <a class="landing-card" href="./lexicon">
     <strong>Lexicon</strong>
     <span>Definitions, first terms, and short orienting entries for the vocabulary of the notebook.</span>
-  </a>
-  <a class="landing-card" href="./works">
-    <strong>Works and Library</strong>
-    <span>The books, papers, and textual companions to which the notes most often return.</span>
   </a>
 </div>
 
@@ -58,4 +54,4 @@ The notebook is arranged as a **commonplace book** rather than a chronological b
 
 ## Orientation
 
-Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above, the [[lexicon|Lexicon]], or the [[works|Works and Library]], and proceed outward from any note.
+Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above or the [[lexicon|Lexicon]], and proceed outward from any note.
