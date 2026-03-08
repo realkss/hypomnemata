@@ -628,3 +628,138 @@ article hr {
     font-size: 1.02rem;
   }
 }
+
+/* Final dark-mode pass */
+.page-title {
+  text-wrap: balance;
+}
+
+.page-title a {
+  overflow-wrap: anywhere;
+}
+
+[saved-theme="dark"] body {
+  background:
+    radial-gradient(circle at 14% 16%, rgba(201, 162, 88, 0.08), transparent 18%),
+    radial-gradient(circle at 84% 20%, rgba(92, 121, 148, 0.08), transparent 16%),
+    linear-gradient(180deg, #090a0d 0%, #0f1117 38%, #15151b 100%);
+}
+
+[saved-theme="dark"] .site-masthead,
+[saved-theme="dark"] .landing-inscription,
+[saved-theme="dark"] .landing-card,
+[saved-theme="dark"] .toc,
+[saved-theme="dark"] .wiki-lang-button,
+[saved-theme="dark"] .wiki-lang-menu,
+[saved-theme="dark"] article blockquote,
+[saved-theme="dark"] footer {
+  background: linear-gradient(180deg, rgba(24, 26, 33, 0.96), rgba(15, 17, 22, 0.96));
+  border-color: rgba(194, 158, 92, 0.24);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+[saved-theme="dark"] .site-masthead {
+  background:
+    radial-gradient(circle at top, rgba(194, 158, 92, 0.09), transparent 22%),
+    linear-gradient(180deg, rgba(26, 29, 37, 0.98), rgba(15, 17, 22, 0.98));
+}
+
+[saved-theme="dark"] .site-masthead__title,
+[saved-theme="dark"] .page-title a,
+[saved-theme="dark"] .landing-card strong,
+[saved-theme="dark"] article h2,
+[saved-theme="dark"] article h3,
+[saved-theme="dark"] .toc .toc-header,
+[saved-theme="dark"] footer,
+[saved-theme="dark"] footer a {
+  color: #f3ead8;
+}
+
+[saved-theme="dark"] .site-masthead__subtitle,
+[saved-theme="dark"] .landing-inscription__translation,
+[saved-theme="dark"] .landing-card span,
+[saved-theme="dark"] article,
+[saved-theme="dark"] .toc,
+[saved-theme="dark"] .wiki-lang-button,
+[saved-theme="dark"] .wiki-lang-menu a,
+[saved-theme="dark"] .translation-badge {
+  color: #d6c8ae;
+}
+
+[saved-theme="dark"] .site-masthead__kicker,
+[saved-theme="dark"] .landing-inscription__greek,
+[saved-theme="dark"] .graph > h3,
+[saved-theme="dark"] .translation-badge strong,
+[saved-theme="dark"] .translation-badge a,
+[saved-theme="dark"] .wiki-lang-button::after {
+  color: #c9a45f;
+}
+
+[saved-theme="dark"] .site-masthead__nav a,
+[saved-theme="dark"] .landing-card,
+[saved-theme="dark"] .wiki-lang-button,
+[saved-theme="dark"] .toc,
+[saved-theme="dark"] .landing-inscription {
+  backdrop-filter: blur(3px);
+}
+
+[saved-theme="dark"] .site-masthead__nav a {
+  background: rgba(201, 164, 95, 0.06);
+  border-color: rgba(201, 164, 95, 0.24);
+  color: #efe4cf;
+}
+
+[saved-theme="dark"] .site-masthead__nav a:hover,
+[saved-theme="dark"] .wiki-lang-menu a:hover,
+[saved-theme="dark"] .wiki-lang-menu a.active,
+[saved-theme="dark"] .landing-card:hover {
+  background: rgba(201, 164, 95, 0.14);
+  color: #fff6e6;
+}
+
+[saved-theme="dark"] .toc {
+  background: linear-gradient(180deg, rgba(32, 35, 44, 0.94), rgba(20, 22, 28, 0.94));
+}
+
+[saved-theme="dark"] .toc a {
+  color: #d6c8ae;
+}
+
+[saved-theme="dark"] .toc a:hover,
+[saved-theme="dark"] .toc a.in-view {
+  color: #f0ddb6;
+}
+
+[saved-theme="dark"] article blockquote {
+  border-left-color: #c9a45f;
+  background: linear-gradient(180deg, rgba(42, 31, 18, 0.92), rgba(31, 24, 17, 0.92));
+}
+
+[saved-theme="dark"] .landing-inscription {
+  background: linear-gradient(180deg, rgba(29, 33, 41, 0.94), rgba(20, 23, 30, 0.94));
+}
+
+[saved-theme="dark"] .landing-card {
+  background: linear-gradient(180deg, rgba(31, 34, 43, 0.94), rgba(22, 25, 32, 0.94));
+}
+
+[saved-theme="dark"] .wiki-lang-menu {
+  background: linear-gradient(180deg, rgba(24, 26, 33, 0.98), rgba(15, 17, 22, 0.98));
+}
+
+[saved-theme="dark"] .graph {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(201, 164, 95, 0.14), transparent 18%),
+    radial-gradient(circle at 80% 25%, rgba(90, 122, 155, 0.12), transparent 18%),
+    linear-gradient(180deg, rgba(16, 19, 25, 0.98), rgba(10, 12, 16, 0.98));
+  border-color: rgba(194, 158, 92, 0.22);
+}
+
+[saved-theme="dark"] .graph svg line,
+[saved-theme="dark"] .graph svg path {
+  stroke: rgba(124, 158, 192, 0.5) !important;
+}
+
+[saved-theme="dark"] .graph svg circle {
+  filter: drop-shadow(0 0 5px rgba(201, 164, 95, 0.7));
+}

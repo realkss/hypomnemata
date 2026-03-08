@@ -3,7 +3,7 @@ title: Hypomnemata
 ---
 
 <div class="landing-inscription">
-  <p class="landing-inscription__greek">á½‘Ï€Î¿Î¼Î½Î®Î¼Î±Ï„Î±</p>
+  <p class="landing-inscription__greek">&#x1F51;&#x03C0;&#x03BF;&#x03BC;&#x03BD;&#x03AE;&#x03BC;&#x03B1;&#x03C4;&#x03B1;</p>
   <p class="landing-inscription__translation">A digital commonplace book shaped by the older disciplines of study, recollection, and return.</p>
 </div>
 
@@ -15,7 +15,7 @@ This site tries to recover something of that spirit in digital form. It is neith
 
 The notebook therefore remains deliberately broad. Its materials may include technical subjects, historical questions, conceptual analysis, philosophical fragments, and whatever else proves worth preserving in ordered relation. What unites them is less a department than a discipline of inquiry.
 
-<h2 id="topics">Topics</h2>
+## Topics
 
 <div class="landing-grid">
   <a class="landing-card" href="./en/Topics/Physics/">
@@ -43,4 +43,6 @@ The notebook is arranged as a **commonplace book** rather than a chronological b
 ## Orientation
 
 Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above and proceed outward from any note.
+
+
 

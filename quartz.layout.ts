@@ -26,7 +26,6 @@ export const defaultContentPageLayout: PageLayout = {
       component: Component.ContentMeta(),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.TranslationBadge(),
     Component.TagList(),
   ],
   left: [
@@ -71,17 +70,22 @@ export const defaultContentPageLayout: PageLayout = {
       }),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.Backlinks(),
+    Component.ConditionalRender({
+      component: Component.Backlinks(),
+      condition: (page) => {
+        const frontmatter = page.fileData.frontmatter
+        return (
+          page.fileData.slug !== "index" &&
+          page.fileData.slug !== "keeper" &&
+          frontmatter?.translatedFrom == null
+        )
+      },
+    }),
   ],
 }
 
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [
-    Component.Breadcrumbs(),
-    Component.ArticleTitle(),
-    Component.ContentMeta(),
-    Component.TranslationBadge(),
-  ],
+  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
