@@ -15,26 +15,26 @@ const LanguageSwitcher: QuartzComponent = ({ fileData }: QuartzComponentProps) =
   const slug = fileData.slug ?? "index"
 
   let current = "index"
-  if (slug === "index") {
-    current = "index"
-  } else {
+  if (slug !== "index") {
     const first = slug.split("/")[0]
     if (["ko", "fr", "de", "la", "ru"].includes(first)) {
       current = first
     }
   }
 
+  const currentLanguage = LANGS.find((lang) => lang.code === current)?.label ?? "English"
+
   return (
-    <div class="wiki-lang-switcher">
-      <button class="wiki-lang-button" type="button">Languages ▾</button>
-      <div class="wiki-lang-menu">
+    <details class="wiki-lang-switcher">
+      <summary class="wiki-lang-button">Language: {currentLanguage}</summary>
+      <nav class="wiki-lang-menu" aria-label="Language selector">
         {LANGS.map((lang) => (
           <a href={lang.href} class={current === lang.code ? "active" : ""}>
             {lang.label}
           </a>
         ))}
-      </div>
-    </div>
+      </nav>
+    </details>
   )
 }
 

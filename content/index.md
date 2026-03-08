@@ -1,40 +1,41 @@
----
+﻿---
 title: Hypomnemata
 ---
 
-> **Hypomnemata** (ὑπομνήματα) were personal notebooks used in antiquity for recording ideas, quotations, arguments, and observations. Rather than private diaries, they served as **intellectual working documents** — places to gather knowledge and refine thought.
+<div class="landing-inscription">
+  <p class="landing-inscription__greek">ὑπομνήματα</p>
+  <p class="landing-inscription__translation">A disciplined notebook of inquiry in physics, mathematics, graphics, and computation.</p>
+</div>
 
-The term later came to describe a disciplined practice of writing, excerpting, and organizing thought. In that spirit, this site serves as a structured repository of notes, references, and explorations across several domains.
+> **Hypomnemata** were notebooks of recollection and study: places where one gathered passages, arguments, observations, and lines of thought so that they might be revisited, ordered, and sharpened.
 
-## Topics
+This site continues that older idea in digital form. It is neither diary nor news sheet, but a working archive: a place where connected notes are kept in view long enough to become understanding.
 
-### Physics
-Study notes and references in theoretical and mathematical physics.
+## Subjects {#subjects}
 
-- [[Topics/Physics/Relativity and Gravitation]]
-- [[Topics/Physics/Quantum Mechanics]]
-- [[Topics/Physics/Quantum Computing]]
-- [[Topics/Physics/Quantum Optics]]
-- [[Topics/Physics/Particle Physics]]
-- [[Topics/Physics/Classical Mechanics]]
-- [[Topics/Physics/Electrodynamics]]
+<div class="landing-grid">
+  <a class="landing-card" href="./en/Topics/Physics/">
+    <strong>Physics</strong>
+    <span>Relativity, quantum theory, optics, particle physics, and computation.</span>
+  </a>
+  <a class="landing-card" href="./en/Topics/Mathematics/">
+    <strong>Mathematics</strong>
+    <span>Structures, proofs, analysis, and the formal grammar of physical thought.</span>
+  </a>
+  <a class="landing-card" href="./en/Topics/3D Graphics/">
+    <strong>3D Graphics</strong>
+    <span>Rendering, geometry, simulation, and visual reasoning.</span>
+  </a>
+  <a class="landing-card" href="./en/Topics/AI/">
+    <strong>Artificial Intelligence</strong>
+    <span>Learning systems, algorithms, and computational models.</span>
+  </a>
+</div>
 
-### Mathematics
-Concepts, proofs, and structured notes in pure and applied mathematics.
+## Method
 
-- [[Topics/Mathematics/Abstract Algebra]]
-- [[Topics/Mathematics/Analysis]]
+The notebook is arranged as a **commonplace book** rather than a chronological blog. Topics are meant to deepen over time; pages branch, return, and cross-reference one another. The graph is not ornament alone but a map of intellectual adjacency.
 
-### 3D Graphics
-Notes on computer graphics, rendering techniques, and visual simulation.
+## Orientation
 
-- [[Topics/3D Graphics]]
-
-### Artificial Intelligence
-Machine learning, computational models, and algorithmic systems.
-
-- [[Topics/AI]]
-
-## Purpose of this Notebook
-
-This site functions as a digital commonplace book — a place to collect, connect, and refine ideas across mathematics, physics, graphics, and computation.
+Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the subject catalogue above and proceed outward from any note.

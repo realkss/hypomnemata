@@ -1,152 +1,19 @@
-@use "./base.scss";
-
-// put your custom CSS here!
-
-.left.sidebar {
-  width: 320px;
-}
-
-.center {
-  max-width: 920px;
-}
-
-.lang-switcher {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 0.7rem;
-  align-items: center;
-  margin: 1rem 0 1.25rem 0;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid var(--lightgray);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--light) 92%, var(--secondary) 8%);
-}
-
-.lang-switcher .lang-label {
-  font-weight: 700;
-  margin-right: 0.35rem;
-  color: var(--darkgray);
-}
-
-.lang-switcher a {
-  text-decoration: none;
-  padding: 0.15rem 0.45rem;
-  border-radius: 6px;
-}
-
-.lang-switcher a:hover {
-  background: var(--highlight);
-  text-decoration: underline;
-}
-
-.toc {
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-.toc a {
-  text-decoration: none;
-}
-
-.toc a:hover {
-  text-decoration: underline;
-}
-
-.page-title {
-  letter-spacing: 0.02em;
-}
-
-article blockquote {
-  border-left: 3px solid var(--secondary);
-  padding-left: 1rem;
-  margin-left: 0;
-}
-.left.sidebar {
-  width: 320px;
-}
-
-.center {
-  max-width: 920px;
-}
-
-.wiki-lang-switcher {
-  position: relative;
-  margin: 0.9rem 0 1rem 0;
-}
-
-.wiki-lang-button {
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: 1px solid var(--lightgray);
-  border-radius: 8px;
-  padding: 0.55rem 0.7rem;
-  font: inherit;
-  cursor: pointer;
-}
-
-.wiki-lang-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 0.35rem);
-  left: 0;
-  right: 0;
-  z-index: 20;
-  background: var(--light);
-  border: 1px solid var(--lightgray);
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 0.35rem 0;
-}
-
-.wiki-lang-switcher:hover .wiki-lang-menu,
-.wiki-lang-switcher:focus-within .wiki-lang-menu {
-  display: block;
-}
-
-.wiki-lang-menu a {
-  display: block;
-  padding: 0.45rem 0.8rem;
-  text-decoration: none;
-}
-
-.wiki-lang-menu a:hover {
-  background: var(--highlight);
-}
-
-.wiki-lang-menu a.active {
-  font-weight: 700;
-}
-
-.toc {
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-.toc a {
-  text-decoration: none;
-}
-
-.toc a:hover {
-  text-decoration: underline;
-}
-
-article blockquote {
-  border-left: 3px solid var(--secondary);
-  padding-left: 1rem;
-  margin-left: 0;
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap");
-
-/* ---------- Overall typography ---------- */
+﻿@use "./base.scss";
 
 body {
   font-family: "EB Garamond", serif;
   letter-spacing: 0.01em;
+  background:
+    radial-gradient(circle at top, rgba(169, 132, 76, 0.08), transparent 28%),
+    linear-gradient(180deg, #f7f1e3 0%, #f3ecdd 42%, #efe7d8 100%);
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .page-title,
 .article-title {
   font-family: "Cinzel", serif;
@@ -154,76 +21,220 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .page-title {
+  font-size: clamp(1.35rem, 1rem + 0.9vw, 1.9rem);
   font-weight: 700;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 28%, transparent);
+}
+
+.page-title a {
+  color: var(--dark);
 }
 
 .center {
-  max-width: 940px;
+  max-width: min(100%, 60rem);
+}
+
+.left.sidebar,
+.right.sidebar {
+  min-width: 0;
 }
 
 .left.sidebar {
-  width: 320px;
-}
-
-/* ---------- Philosopher mode: papyrus / marble ---------- */
-
-:root[saved-theme="light"] body,
-body {
-  background: #f8f5ef;
+  width: min(100%, 18rem);
 }
 
 :root[saved-theme="dark"] body {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.03), transparent 20%),
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.02), transparent 18%),
-    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.025), transparent 24%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03), transparent 20%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.02), transparent 18%),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.025), transparent 24%),
     linear-gradient(180deg, #121212 0%, #171614 100%);
 }
 
-/* ---------- Wikipedia-style language switcher ---------- */
+.page #quartz-body {
+  row-gap: 0.85rem;
+}
+
+.page #quartz-body .page-header {
+  margin-top: 0;
+}
+
+.page #quartz-body .sidebar.left,
+.page #quartz-body .sidebar.right {
+  gap: 1rem;
+}
+
+.page #quartz-body .sidebar.left > *,
+.page #quartz-body .sidebar.right > *,
+.page #quartz-body .center,
+.page #quartz-body .center > article {
+  min-width: 0;
+}
+
+.site-masthead {
+  position: relative;
+  padding: 1.4rem 1.6rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 239, 0.94), rgba(246, 238, 224, 0.94)),
+    linear-gradient(180deg, rgba(139, 107, 44, 0.06), rgba(139, 107, 44, 0));
+  box-shadow: 0 14px 36px rgba(88, 66, 34, 0.08);
+  overflow: hidden;
+}
+
+.site-masthead::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(139, 107, 44, 0.08) 50%, transparent 100%);
+  mask: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  pointer-events: none;
+}
+
+.site-masthead__ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+}
+
+.site-masthead__ornament span {
+  display: block;
+  height: 1px;
+  background: color-mix(in srgb, var(--secondary) 50%, transparent);
+}
+
+.site-masthead__ornament span:first-child,
+.site-masthead__ornament span:last-child {
+  flex: 1;
+}
+
+.site-masthead__ornament span:nth-child(2) {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 50%, var(--lightgray));
+  background: radial-gradient(circle, rgba(139, 107, 44, 0.18) 0%, rgba(139, 107, 44, 0.02) 70%);
+}
+
+.site-masthead__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.site-masthead__body {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.site-masthead__title {
+  margin: 0;
+  font-size: clamp(2.25rem, 1.6rem + 1.6vw, 3.4rem);
+  line-height: 0.96;
+}
+
+.site-masthead__subtitle {
+  margin: 0.5rem 0 0;
+  max-width: 42rem;
+  font-size: 1.04rem;
+  color: var(--darkgray);
+}
+
+.site-masthead__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.site-masthead__nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--dark);
+  font-size: 0.95rem;
+}
+
+.site-masthead__nav a:hover {
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+  color: var(--secondary);
+}
 
 .wiki-lang-switcher {
+  width: 100%;
   position: relative;
-  margin: 0.9rem 0 1rem 0;
+}
+
+.wiki-lang-switcher[open] {
+  z-index: 2;
 }
 
 .wiki-lang-button {
+  list-style: none;
   width: 100%;
-  text-align: left;
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   border: 1px solid var(--lightgray);
-  border-radius: 8px;
-  padding: 0.55rem 0.7rem;
-  font: inherit;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+  background: color-mix(in srgb, var(--light) 94%, var(--secondary) 6%);
   cursor: pointer;
+  font: inherit;
+  color: var(--darkgray);
+}
+
+.wiki-lang-button::-webkit-details-marker {
+  display: none;
+}
+
+.wiki-lang-button::after {
+  content: "▾";
+  color: var(--secondary);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.wiki-lang-switcher[open] .wiki-lang-button::after {
+  transform: rotate(180deg);
+}
+
+.wiki-lang-button:hover {
+  border-color: var(--secondary);
 }
 
 .wiki-lang-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 0.35rem);
-  left: 0;
-  right: 0;
-  z-index: 20;
-  background: var(--light);
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.45rem;
   border: 1px solid var(--lightgray);
   border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 0.35rem 0;
-}
-
-.wiki-lang-switcher:hover .wiki-lang-menu,
-.wiki-lang-switcher:focus-within .wiki-lang-menu {
-  display: block;
+  background: var(--light);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  padding: 0.35rem;
 }
 
 .wiki-lang-menu a {
   display: block;
-  padding: 0.45rem 0.8rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.5rem;
   text-decoration: none;
 }
 
-.wiki-lang-menu a:hover {
+.wiki-lang-menu a:hover,
+.wiki-lang-menu a.active {
   background: var(--highlight);
 }
 
@@ -231,7 +242,36 @@ body {
   font-weight: 700;
 }
 
-/* ---------- Greek-style blockquotes ---------- */
+.toc {
+  padding: 1rem 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 0.97rem;
+  line-height: 1.7;
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+a {
+  text-underline-offset: 0.12em;
+}
+
+article {
+  font-size: 1.08rem;
+  line-height: 1.72;
+}
+
+article h2 {
+  margin-top: 2.5rem;
+  padding-top: 0.25rem;
+}
 
 article blockquote {
   border-left: 4px solid var(--secondary);
@@ -246,50 +286,96 @@ article blockquote p {
   margin: 0;
 }
 
-/* ---------- Table of contents ---------- */
-
-.toc {
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
-.toc a {
-  text-decoration: none;
-}
-
-.toc a:hover {
-  text-decoration: underline;
-}
-
-/* ---------- Links ---------- */
-
-a {
-  text-underline-offset: 0.12em;
-}
-
-/* ---------- Subtle manuscript spacing ---------- */
-
 article hr {
   border: none;
   border-top: 1px solid var(--lightgray);
   margin: 2rem 0;
 }
 
-/* ---------- Constellation-style graph ---------- */
+.landing-inscription {
+  padding: 1.1rem 1.2rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.landing-inscription__greek {
+  margin: 0;
+  color: var(--secondary);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.landing-inscription__translation {
+  margin: 0.45rem 0 0;
+  font-size: 1.05rem;
+}
+
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.landing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.15rem 1.15rem 1.05rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
+  box-shadow: 0 8px 22px rgba(96, 77, 48, 0.05);
+  color: var(--dark);
+}
+
+.landing-card strong {
+  font-family: "Cinzel", serif;
+  font-size: 1.05rem;
+  color: var(--dark);
+}
+
+.landing-card span {
+  color: var(--darkgray);
+}
+
+.landing-card:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+}
 
 .graph {
-  border: 1px solid var(--lightgray);
-  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 1.1rem;
   overflow: hidden;
   position: relative;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 20%),
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.05), transparent 18%),
-    radial-gradient(circle at 50% 75%, rgba(255,255,255,0.04), transparent 22%),
-    linear-gradient(180deg, rgba(111,140,155,0.06), rgba(0,0,0,0));
+    radial-gradient(circle at 20% 20%, rgba(255, 246, 214, 0.18), transparent 20%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.08), transparent 18%),
+    radial-gradient(circle at 50% 75%, rgba(203, 171, 110, 0.1), transparent 22%),
+    linear-gradient(180deg, rgba(95, 110, 126, 0.08), rgba(0, 0, 0, 0));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
-/* works for most Quartz graph SVGs */
+.graph > h3 {
+  margin: 0;
+  padding: 0.9rem 1rem 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--secondary);
+}
+
+.graph .graph-outer {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
 .graph svg {
   background: transparent;
 }
@@ -318,23 +404,24 @@ article hr {
 }
 
 @keyframes starPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.75;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.08);
   }
 }
 
-/* darker graph feel in philosopher mode */
 :root[saved-theme="dark"] .graph {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.07), transparent 20%),
-    radial-gradient(circle at 80% 25%, rgba(255,255,255,0.05), transparent 18%),
-    radial-gradient(circle at 50% 75%, rgba(255,255,255,0.04), transparent 20%),
-    linear-gradient(180deg, rgba(20,20,24,0.95), rgba(10,10,12,0.98));
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.07), transparent 20%),
+    radial-gradient(circle at 80% 25%, rgba(255, 255, 255, 0.05), transparent 18%),
+    radial-gradient(circle at 50% 75%, rgba(255, 255, 255, 0.04), transparent 20%),
+    linear-gradient(180deg, rgba(20, 20, 24, 0.95), rgba(10, 10, 12, 0.98));
 }
 
 :root[saved-theme="dark"] .graph svg line,
@@ -344,4 +431,118 @@ article hr {
 
 :root[saved-theme="dark"] .graph svg circle {
   filter: drop-shadow(0 0 4px rgba(198, 161, 91, 0.75));
+}
+
+@media (max-width: 1199px) {
+  .page #quartz-body {
+    row-gap: 1rem;
+  }
+
+  .center {
+    max-width: min(100%, 54rem);
+  }
+
+  .page #quartz-body .sidebar.left {
+    width: min(100%, 16rem);
+    padding-right: 1rem;
+  }
+
+  .page #quartz-body .sidebar.right {
+    position: static;
+    height: auto;
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .page #quartz-body .sidebar.right > * {
+    flex: unset;
+    max-height: none;
+  }
+
+  .site-masthead {
+    padding: 1.25rem 1.25rem 1.05rem;
+  }
+
+  .site-masthead__body {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .site-masthead__nav {
+    justify-content: flex-start;
+  }
+
+  .landing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .page #quartz-body .sidebar.left {
+    position: static;
+    height: auto;
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.25rem 0 0;
+  }
+
+  .page #quartz-body .sidebar.left .page-title {
+    text-align: left;
+  }
+
+  .page #quartz-body .sidebar.left .flex-component {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .page #quartz-body .sidebar.left .search {
+    min-width: 0;
+  }
+
+  .wiki-lang-switcher,
+  .wiki-lang-menu {
+    width: 100%;
+  }
+
+  .center {
+    max-width: 100%;
+  }
+
+  .site-masthead {
+    padding: 1rem 1rem 0.9rem;
+    border-radius: 1rem;
+  }
+
+  .site-masthead__title {
+    font-size: clamp(1.9rem, 1.4rem + 2vw, 2.4rem);
+  }
+
+  .site-masthead__subtitle {
+    font-size: 0.98rem;
+  }
+
+  .site-masthead__nav {
+    width: 100%;
+  }
+
+  .site-masthead__nav a {
+    flex: 1 1 calc(50% - 0.4rem);
+    justify-content: center;
+  }
+
+  .landing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .graph {
+    min-height: 15rem;
+  }
+
+  article {
+    font-size: 1.02rem;
+  }
 }

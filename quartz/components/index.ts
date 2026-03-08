@@ -1,4 +1,4 @@
-import Content from "./pages/Content"
+﻿import Content from "./pages/Content"
 import TagContent from "./pages/TagContent"
 import FolderContent from "./pages/FolderContent"
 import NotFound from "./pages/404"
@@ -23,6 +23,8 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
+import LanguageSwitcher from "./LanguageSwitcher"
+import Masthead from "./Masthead"
 
 export {
   ArticleTitle,
@@ -50,5 +52,6 @@ export {
   Comments,
   Flex,
   ConditionalRender,
+  LanguageSwitcher,
+  Masthead,
 }
-export { default as LanguageSwitcher } from "./LanguageSwitcher"

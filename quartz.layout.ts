@@ -1,10 +1,9 @@
-import { PageLayout, SharedLayout } from "./quartz/cfg"
+﻿import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  header: [],
+  header: [Component.Masthead()],
   afterBody: [],
   footer: Component.Footer({
     links: {
@@ -13,12 +12,11 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
-// components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => page.fileData.slug !== "index" && page.fileData.slug !== "keeper",
     }),
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
@@ -48,14 +46,34 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   right: [
     Component.ConditionalRender({
-      component: Component.Graph(),
+      component: Component.Graph({
+        localGraph: {
+          depth: 2,
+          scale: 1.05,
+          repelForce: 0.8,
+          centerForce: 0.25,
+          linkDistance: 42,
+          fontSize: 0.75,
+          opacityScale: 1.15,
+          focusOnHover: true,
+        },
+        globalGraph: {
+          scale: 0.95,
+          repelForce: 0.65,
+          centerForce: 0.2,
+          linkDistance: 46,
+          fontSize: 0.75,
+          opacityScale: 1.1,
+          focusOnHover: true,
+          enableRadial: true,
+        },
+      }),
       condition: (page) => page.fileData.slug !== "index",
     }),
     Component.Backlinks(),
   ],
 }
 
-// components for pages that display lists of pages
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
   left: [
