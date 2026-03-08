@@ -21,31 +21,31 @@ The notebook therefore remains deliberately broad. Its materials may include tec
 ## Topics
 
 <div class="landing-grid">
-  <a class="landing-card" href="./en/Topics/Physics/">
+  <a class="landing-card" href="/hypomnemata/en/Topics/Physics/">
     <strong>Physics</strong>
     <span>Matter, motion, fields, quanta, and cosmological structure.</span>
   </a>
-  <a class="landing-card" href="./en/Topics/Mathematics/">
+  <a class="landing-card" href="/hypomnemata/en/Topics/Mathematics/">
     <strong>Mathematics</strong>
     <span>Formal structure, proof, abstraction, and the grammar of difficult thought.</span>
   </a>
-  <a class="landing-card" href="./en/Topics/3D Graphics/">
+  <a class="landing-card" href="/hypomnemata/en/Topics/3D Graphics/">
     <strong>3D Graphics</strong>
     <span>Geometry, rendering, simulation, and intelligible visual worlds.</span>
   </a>
-  <a class="landing-card" href="./en/Topics/AI/">
+  <a class="landing-card" href="/hypomnemata/en/Topics/AI/">
     <strong>Computation</strong>
     <span>Algorithms, models, machine intelligence, and representation.</span>
   </a>
-  <a class="landing-card" href="./en/Literature/">
+  <a class="landing-card" href="/hypomnemata/en/Literature/">
     <strong>Literature</strong>
     <span>Reading, form, memory, interpretation, and works worth returning to.</span>
   </a>
-  <a class="landing-card" href="./en/Chess/">
+  <a class="landing-card" href="/hypomnemata/en/Chess/">
     <strong>Chess</strong>
     <span>Calculation, structure, and strategic judgment under constraint.</span>
   </a>
-  <a class="landing-card" href="./ko/Baduk/">
+  <a class="landing-card" href="/hypomnemata/ko/Baduk/">
     <strong>Baduk</strong>
     <span>Shape, influence, whole-board thought, and long strategic rhythm.</span>
   </a>
@@ -54,11 +54,11 @@ The notebook therefore remains deliberately broad. Its materials may include tec
 ## Reference
 
 <div class="landing-grid landing-grid--reference">
-  <a class="landing-card" href="./lexicon">
+  <a class="landing-card" href="/hypomnemata/lexicon">
     <strong>Lexicon</strong>
     <span>Definitions, first terms, and short orienting entries for the vocabulary of the notebook.</span>
   </a>
-  <a class="landing-card" href="./map">
+  <a class="landing-card" href="/hypomnemata/map">
     <strong>Map of the Notebook</strong>
     <span>A larger graph view for tracing clusters, bridges, and the shape of the archive as a whole.</span>
   </a>
