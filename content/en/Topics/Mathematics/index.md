@@ -5,6 +5,9 @@ sourceLanguage: en
 translationStatus: original
 ---
 
+> *Nulla est via regia ad geometriam.*  
+> There is no royal road to geometry.
+
 Mathematics appears here as both instrument and independent object of study: a language of proof, abstraction, and formal order through which difficult physical and philosophical questions may be made precise.
 
 ## Emphases
@@ -16,4 +19,4 @@ Mathematics appears here as both instrument and independent object of study: a l
 
 ## Use
 
-This section will gather definitions, short lemmas, worked examples, and links outward into physics and computation.
+This section gathers definitions, short lemmas, worked examples, and links outward into physics, graphics, and computation.
