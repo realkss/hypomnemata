@@ -1,14 +1,14 @@
 ---
-title: Go
+title: Baduk
 lang: en
 sourceLanguage: en
 translationStatus: original
 ---
 
-> *Via longa, ars subtilis.*  
-> The way is long, the art is subtle.
+> "The board is a mirror of the mind of the players as the moments pass."  
+> -- Anonymous baduk saying
 
-Go belongs here as a study in form, balance, territory, and influence. It trains attention to shape, relation, and the slow unfolding of consequences across a whole field.
+Baduk belongs here as a study in form, balance, territory, and influence. It trains attention to shape, relation, and the slow unfolding of consequences across a whole field.
 
 ## Emphases
 

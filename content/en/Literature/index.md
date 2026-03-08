@@ -5,8 +5,8 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-> *Verba volant, scripta manent.*  
-> Spoken words fly away, written words remain.
+> "Life can only be understood backwards; but it must be lived forwards."  
+> -- Soren Kierkegaard
 
 Literature enters the notebook not as ornament but as another discipline of attention. It belongs wherever language, form, memory, and interpretation shape how a world is understood.
 

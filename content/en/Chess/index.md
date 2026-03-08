@@ -5,8 +5,8 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-> *Ludus latrunculorum disciplinam animi exercet.*  
-> The game of pieces exercises the discipline of the mind.
+> "You may learn much more from a game you lose than from a game you win."  
+> -- Jose Raul Capablanca
 
 Chess belongs here as a form of ordered struggle: calculation, pattern recognition, strategic patience, and the study of consequence under constraint.
 
