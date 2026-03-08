@@ -5,8 +5,8 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-> "To myself I seem to have been only like a boy playing on the sea-shore, and diverting myself in now and then finding a smoother pebble or a prettier shell than ordinary, whilst the great ocean of truth lay all undiscovered before me."  
-> -- Isaac Newton
+> *Amicus Plato, sed magis amica veritas.*  
+> Plato is dear, but truth is dearer.
 
 Physics appears here as an ongoing attempt to understand structure in nature: motion, field, matter, light, information, and spacetime. The point of these notes is not simply to list results, but to hold onto arguments, derivations, and conceptual transitions long enough for them to become intelligible.
 
