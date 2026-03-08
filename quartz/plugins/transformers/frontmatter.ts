@@ -26,7 +26,6 @@ function coalesceAliases(data: { [key: string]: any }, aliases: string[]) {
 function coerceToArray(input: string | string[]): string[] | undefined {
   if (input === undefined || input === null) return undefined
 
-  // coerce to array
   if (!Array.isArray(input)) {
     input = input
       .toString()
@@ -34,7 +33,6 @@ function coerceToArray(input: string | string[]): string[] | undefined {
       .map((tag: string) => tag.trim())
   }
 
-  // remove all non-strings
   return input
     .filter((tag: unknown) => typeof tag === "string" || typeof tag === "number")
     .map((tag: string | number) => tag.toString())
@@ -82,7 +80,7 @@ export const FrontMatter: QuartzTransformerPlugin<Partial<Options>> = (userOpts)
 
             const aliases = coerceToArray(coalesceAliases(data, ["aliases", "alias"]))
             if (aliases) {
-              data.aliases = aliases // frontmatter
+              data.aliases = aliases
               file.data.aliases = getAliasSlugs(aliases)
               allSlugs.push(...file.data.aliases)
             }
@@ -112,18 +110,16 @@ export const FrontMatter: QuartzTransformerPlugin<Partial<Options>> = (userOpts)
               "last-modified",
             ])
             if (modified) data.modified = modified
-            data.modified ||= created // if modified is not set, use created
+            data.modified ||= created
 
             const published = coalesceAliases(data, ["published", "publishDate", "date"])
             if (published) data.published = published
 
             if (socialImage) data.socialImage = socialImage
 
-            // Remove duplicate slugs
             const uniqueSlugs = [...new Set(allSlugs)]
             allSlugs.splice(0, allSlugs.length, ...uniqueSlugs)
 
-            // fill in frontmatter
             file.data.frontmatter = data as QuartzPluginData["frontmatter"]
           }
         },
@@ -152,6 +148,9 @@ declare module "vfile" {
         cssclasses: string[]
         socialImage: string
         comments: boolean | string
+        sourceLanguage: string
+        translatedFrom: string
+        translationStatus: "original" | "ai-translated" | "reviewed"
       }>
   }
 }

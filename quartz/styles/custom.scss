@@ -46,10 +46,10 @@ h6,
 
 :root[saved-theme="dark"] body {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03), transparent 20%),
-    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.02), transparent 18%),
-    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.025), transparent 24%),
-    linear-gradient(180deg, #121212 0%, #171614 100%);
+    radial-gradient(circle at 12% 18%, rgba(198, 161, 91, 0.08), transparent 20%),
+    radial-gradient(circle at 78% 22%, rgba(143, 183, 204, 0.08), transparent 18%),
+    radial-gradient(circle at 48% 82%, rgba(198, 161, 91, 0.05), transparent 24%),
+    linear-gradient(180deg, #0f0d0b 0%, #15110d 44%, #1b1611 100%);
 }
 
 .page #quartz-body {
@@ -416,21 +416,103 @@ article hr {
   }
 }
 
+:root[saved-theme="dark"] .page-title {
+  border-bottom-color: rgba(198, 161, 91, 0.24);
+}
+
+:root[saved-theme="dark"] .page-title a,
+:root[saved-theme="dark"] .site-masthead__title,
+:root[saved-theme="dark"] .landing-card strong,
+:root[saved-theme="dark"] article h2,
+:root[saved-theme="dark"] article h3 {
+  color: #f3e6cd;
+}
+
+:root[saved-theme="dark"] .site-masthead,
+:root[saved-theme="dark"] .landing-inscription,
+:root[saved-theme="dark"] .landing-card,
+:root[saved-theme="dark"] .toc,
+:root[saved-theme="dark"] .wiki-lang-button,
+:root[saved-theme="dark"] .wiki-lang-menu,
+:root[saved-theme="dark"] article blockquote {
+  background:
+    linear-gradient(180deg, rgba(34, 28, 22, 0.96), rgba(24, 20, 16, 0.96));
+  border-color: rgba(198, 161, 91, 0.26);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+}
+
+:root[saved-theme="dark"] .site-masthead {
+  background:
+    radial-gradient(circle at top, rgba(198, 161, 91, 0.1), transparent 26%),
+    linear-gradient(180deg, rgba(33, 28, 22, 0.98), rgba(20, 17, 13, 0.98));
+}
+
+:root[saved-theme="dark"] .site-masthead::after {
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(198, 161, 91, 0.1) 50%, transparent 100%);
+}
+
+:root[saved-theme="dark"] .site-masthead__kicker,
+:root[saved-theme="dark"] .landing-inscription__greek,
+:root[saved-theme="dark"] .graph > h3 {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] .site-masthead__subtitle,
+:root[saved-theme="dark"] .landing-inscription__translation,
+:root[saved-theme="dark"] .landing-card span,
+:root[saved-theme="dark"] article,
+:root[saved-theme="dark"] .toc,
+:root[saved-theme="dark"] .wiki-lang-button,
+:root[saved-theme="dark"] .wiki-lang-menu a {
+  color: #dfd2bb;
+}
+
+:root[saved-theme="dark"] .site-masthead__nav a {
+  background: rgba(198, 161, 91, 0.08);
+  border-color: rgba(198, 161, 91, 0.35);
+  color: #f3e6cd;
+}
+
+:root[saved-theme="dark"] .site-masthead__nav a:hover,
+:root[saved-theme="dark"] .wiki-lang-menu a:hover,
+:root[saved-theme="dark"] .wiki-lang-menu a.active,
+:root[saved-theme="dark"] .landing-card:hover {
+  background: rgba(198, 161, 91, 0.16);
+  color: #fff5de;
+}
+
+:root[saved-theme="dark"] .wiki-lang-button:hover {
+  border-color: rgba(213, 175, 99, 0.55);
+}
+
+:root[saved-theme="dark"] article blockquote {
+  border-left-color: #d5af63;
+}
+
+:root[saved-theme="dark"] article hr {
+  border-top-color: rgba(198, 161, 91, 0.18);
+}
+
 :root[saved-theme="dark"] .graph {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.07), transparent 20%),
-    radial-gradient(circle at 80% 25%, rgba(255, 255, 255, 0.05), transparent 18%),
+    radial-gradient(circle at 20% 20%, rgba(213, 175, 99, 0.14), transparent 18%),
+    radial-gradient(circle at 80% 25%, rgba(143, 183, 204, 0.11), transparent 18%),
     radial-gradient(circle at 50% 75%, rgba(255, 255, 255, 0.04), transparent 20%),
-    linear-gradient(180deg, rgba(20, 20, 24, 0.95), rgba(10, 10, 12, 0.98));
+    linear-gradient(180deg, rgba(20, 18, 16, 0.98), rgba(11, 10, 9, 0.98));
+  border-color: rgba(198, 161, 91, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
 :root[saved-theme="dark"] .graph svg line,
 :root[saved-theme="dark"] .graph svg path {
-  stroke: rgba(143, 183, 204, 0.42) !important;
+  stroke: rgba(143, 183, 204, 0.46) !important;
 }
 
 :root[saved-theme="dark"] .graph svg circle {
-  filter: drop-shadow(0 0 4px rgba(198, 161, 91, 0.75));
+  filter: drop-shadow(0 0 5px rgba(213, 175, 99, 0.8));
 }
 
 @media (max-width: 1199px) {

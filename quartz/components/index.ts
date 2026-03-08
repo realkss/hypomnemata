@@ -1,4 +1,4 @@
-﻿import Content from "./pages/Content"
+import Content from "./pages/Content"
 import TagContent from "./pages/TagContent"
 import FolderContent from "./pages/FolderContent"
 import NotFound from "./pages/404"
@@ -25,6 +25,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import LanguageSwitcher from "./LanguageSwitcher"
 import Masthead from "./Masthead"
+import TranslationBadge from "./TranslationBadge"
 
 export {
   ArticleTitle,
@@ -54,4 +55,5 @@ export {
   ConditionalRender,
   LanguageSwitcher,
   Masthead,
+  TranslationBadge,
 }
