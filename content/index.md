@@ -46,6 +46,10 @@ The notebook therefore remains deliberately broad. Its materials may include tec
     <strong>Lexicon</strong>
     <span>Definitions, first terms, and short orienting entries for the vocabulary of the notebook.</span>
   </a>
+  <a class="landing-card" href="./map">
+    <strong>Map of the Notebook</strong>
+    <span>A larger graph view for tracing clusters, bridges, and the shape of the archive as a whole.</span>
+  </a>
 </div>
 
 ## Method
@@ -54,4 +58,4 @@ The notebook is arranged as a **commonplace book** rather than a chronological b
 
 ## Orientation
 
-Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above or the [[lexicon|Lexicon]], and proceed outward from any note.
+Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above, the [[lexicon|Lexicon]], or the [[map|Map of the Notebook]], and proceed outward from any note.

@@ -5,7 +5,10 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-Physics is treated here in the older spirit of natural philosophy, though in its modern mathematical forms. The aim is not only to collect results but to preserve chains of reasoning, conceptual transitions, and points of comparison between texts.
+> "To myself I seem to have been only like a boy playing on the sea-shore, and diverting myself in now and then finding a smoother pebble or a prettier shell than ordinary, whilst the great ocean of truth lay all undiscovered before me."  
+> -- Isaac Newton
+
+Physics appears here as an ongoing attempt to understand structure in nature: motion, field, matter, light, information, and spacetime. The point of these notes is not simply to list results, but to hold onto arguments, derivations, and conceptual transitions long enough for them to become intelligible.
 
 ## Regions of Study
 
@@ -14,4 +17,4 @@ Physics is treated here in the older spirit of natural philosophy, though in its
 
 ## Method
 
-Notes in this section are often arranged as working commentaries on books, problem sequences, and longer conceptual arcs. They are meant to reward return and cross-reference rather than one-pass reading.
+This section leans toward worked reasoning rather than summary. It gathers reading notes, calculations, conceptual comparisons, and longer chains of thought that would be lost in a shorter reference format.

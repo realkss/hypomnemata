@@ -1,6 +1,12 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
+const languageLandingPages = new Set(["ko", "fr", "de", "la", "ru"])
+
+function isLanguageLanding(slug?: string) {
+  return slug != null && languageLandingPages.has(slug)
+}
+
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [Component.Masthead()],
@@ -8,6 +14,7 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       Lexicon: "/hypomnemata/lexicon",
+      "Map of the Notebook": "/hypomnemata/map",
       GitHub: "https://github.com/realkss/hypomnemata",
     },
   }),
@@ -17,7 +24,10 @@ export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index" && page.fileData.slug !== "keeper",
+      condition: (page) =>
+        page.fileData.slug !== "index" &&
+        page.fileData.slug !== "keeper" &&
+        !isLanguageLanding(page.fileData.slug),
     }),
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
@@ -25,7 +35,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ConditionalRender({
       component: Component.ContentMeta(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => page.fileData.slug !== "index" && !isLanguageLanding(page.fileData.slug),
     }),
     Component.TagList(),
   ],
@@ -69,7 +79,10 @@ export const defaultContentPageLayout: PageLayout = {
           enableRadial: true,
         },
       }),
-      condition: (page) => page.fileData.slug !== "index" && page.fileData.slug !== "keeper",
+      condition: (page) =>
+        page.fileData.slug !== "index" &&
+        page.fileData.slug !== "keeper" &&
+        !isLanguageLanding(page.fileData.slug),
     }),
     Component.ConditionalRender({
       component: Component.Backlinks(),
@@ -78,6 +91,7 @@ export const defaultContentPageLayout: PageLayout = {
         return (
           page.fileData.slug !== "index" &&
           page.fileData.slug !== "keeper" &&
+          !isLanguageLanding(page.fileData.slug) &&
           frontmatter?.translatedFrom == null
         )
       },
