@@ -1,18 +1,9 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { joinSegments } from "../util/path"
 
 const BASE_PATH = "/hypomnemata"
 const NON_ENGLISH = ["ko", "fr", "de", "la", "ru"] as const
-const ROOT_ENGLISH_PAGES = new Set(["keeper", "lexicon", "map"])
-const LOCALIZED_TOP_LEVEL = new Set([
-  "",
-  "Topics/Physics",
-  "Topics/Mathematics",
-  "Topics/3D Graphics",
-  "Topics/AI",
-  "Literature",
-  "Chess",
-  "Baduk",
-])
+const ROOT_SHARED_PAGES = new Set(["keeper", "lexicon", "map"])
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -43,36 +34,39 @@ function parseSlug(slug?: string) {
   return { current: "en", rest: normalized }
 }
 
-function joinUrl(...parts: string[]) {
-  return parts.filter(Boolean).join("/").replace(/(?<!:)\/+/g, "/")
-}
-
-function hrefFor(lang: string, rest: string) {
+function candidateSlug(lang: string, rest: string) {
   if (lang === "en") {
-    if (rest === "") return `${BASE_PATH}/`
-    if (ROOT_ENGLISH_PAGES.has(rest)) return joinUrl(BASE_PATH, rest)
-    return joinUrl(BASE_PATH, "en", rest)
+    return rest === "" ? "index" : ROOT_SHARED_PAGES.has(rest) ? rest : `en/${rest}`
   }
 
-  if (rest === "") return joinUrl(BASE_PATH, lang)
-  if (ROOT_ENGLISH_PAGES.has(rest)) return joinUrl(BASE_PATH, rest)
-  if (LOCALIZED_TOP_LEVEL.has(rest)) return joinUrl(BASE_PATH, lang, rest)
-  return joinUrl(BASE_PATH, lang)
+  return rest === "" ? lang : ROOT_SHARED_PAGES.has(rest) ? rest : `${lang}/${rest}`
 }
 
-const LanguageSwitcher: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
+function hrefFromSlug(slug: string) {
+  if (slug === "index") return `${BASE_PATH}/`
+  return joinSegments(BASE_PATH, slug)
+}
+
+const LanguageSwitcher: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
   const { current, rest } = parseSlug(fileData.slug)
   const currentLanguage = LANGS.find((lang) => lang.code === current)?.label ?? "English"
+  const available = new Set(allFiles.map((file) => file.slug).filter(Boolean))
 
   return (
     <details class="wiki-lang-switcher">
       <summary class="wiki-lang-button">Language: {currentLanguage}</summary>
       <nav class="wiki-lang-menu" aria-label="Language selector">
-        {LANGS.map((lang) => (
-          <a href={hrefFor(lang.code, rest)} class={current === lang.code ? "active" : ""}>
-            {lang.label}
-          </a>
-        ))}
+        {LANGS.map((lang) => {
+          const exact = candidateSlug(lang.code, rest)
+          const fallback = candidateSlug(lang.code, "")
+          const target = available.has(exact) ? exact : fallback
+
+          return (
+            <a href={hrefFromSlug(target)} class={current === lang.code ? "active" : ""}>
+              {lang.label}
+            </a>
+          )
+        })}
       </nav>
     </details>
   )
