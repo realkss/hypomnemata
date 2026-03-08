@@ -1,45 +1,21 @@
-﻿---
+---
 title: Hypomnemata
+lang: la
+sourceLanguage: en
+translatedFrom: index.md
+translationStatus: ai-translated
 ---
 
-<div class="landing-inscription">
-  <p class="landing-inscription__greek">ὑπομνήματα</p>
-  <p class="landing-inscription__translation">Commentarius digitalis formatus antiquis disciplinis studii, memoriae, et reditus.</p>
-</div>
+<div class="landing-inscription"><p class="landing-inscription__greek">ὑπομνήματα</p><p class="landing-inscription__translation">Commentarius digitalis formatus antiquis disciplinis studii, memoriae, et reditus.</p></div>
 
-> **Hypomnemata** erant commentarii laboris, in quibus sententiae, citationes, argumenta atque observationes colligebantur, ut iterum legi, ordinari, et expoliri possent.
-
-Apud Graecos et in traditionibus Hellenisticis discere non tantum significabat conclusiones adipisci. Textus describebantur, excerpebantur, reordinabantur, annotabantur, atque denuo repetebantur. Scientia procedebat per assiduam frequentationem, per scholia, per collectiones, et per patientem ordinationem eorum quae lecta erant.
-
-Hic situs conatur aliquid ex hoc spiritu in forma digitali recipere. Non est diarium neque nuntiorum series, sed archivum laboris: locus ubi notae inter se conexae satis diu in conspectu manent, ut in intellectum vertantur. Propositum non est tantum informationem servare, sed modum studii colere quo res colligi, comparari, emendari, atque inter se illuminari possint.
-
-Itaque commentarius hic consulto latior manet. Continere potest materias technicas, quaestiones historicas, analyses notionum, fragmenta philosophica, atque quicquid ordine vivo servari dignum est. Ea minus una disciplina academica quam disciplina quaerendi coniungit.
-
-<h2 id="subjects">Lineae Quaestionis</h2>
+## Themata
 
 <div class="landing-grid">
-  <a class="landing-card" href="../en/Topics/Physics/">
-    <strong>Physics</strong>
-    <span>Philosophia naturalis forma moderna: materia, motus, campi, quanta, et structura cosmologica.</span>
-  </a>
-  <a class="landing-card" href="../en/Topics/Mathematics/">
-    <strong>Mathematics</strong>
-    <span>Structura formalis, demonstratio, abstractio, et grammatica quae difficilem cogitationem illuminat.</span>
-  </a>
-  <a class="landing-card" href="../en/Topics/3D Graphics/">
-    <strong>3D Graphics</strong>
-    <span>Geometria, redditus imaginum, simulatio, et constructio mundorum visibilium intellegibilium.</span>
-  </a>
-  <a class="landing-card" href="../en/Topics/AI/">
-    <strong>Computation</strong>
-    <span>Algorithmi, exempla, intelligentia artificialis, atque technicae computationis ad repraesentationem et inferentiam.</span>
-  </a>
+  <a class="landing-card" href="./Topics/Physics/"><strong>Physica</strong><span>Materia, motus, campi, quanta, et structura cosmologica.</span></a>
+  <a class="landing-card" href="./Topics/Mathematics/"><strong>Mathematica</strong><span>Structura formalis, demonstratio, abstractio, et grammatica arduae cogitationis.</span></a>
+  <a class="landing-card" href="./Topics/3D Graphics/"><strong>Graphica tridimensionalis</strong><span>Geometria, redditus imaginum, simulatio, et mundi visibiles intellegibiles.</span></a>
+  <a class="landing-card" href="./Topics/AI/"><strong>Computatio</strong><span>Algorithmi, exempla, intelligentia artificialis, atque repraesentatio.</span></a>
+  <a class="landing-card" href="./Literature/"><strong>Litterae</strong><span>Lectio, forma, memoria, interpretatio, et opera ad quae redeundum est.</span></a>
+  <a class="landing-card" href="./Chess/"><strong>Ludus scaccorum</strong><span>Calculus, structura, et iudicium strategicum sub vinculis.</span></a>
+  <a class="landing-card" href="./Baduk/"><strong>Baduk</strong><span>Figura, vis, iudicium totius tabulae, et tardus rhythmus strategicus.</span></a>
 </div>
-
-## Methodus
-
-Commentarius hic ordinatur more **commonplace book**, non more diarii chronologici. Themata tempore altius descendunt; paginae se dividunt, ad se redeunt, atque inter se referuntur. Graphium non est ornamentum tantum, sed tabula vicinitatum intellectualium.
-
-## Orientatio
-
-Qui praesentiam humanam post commentarium quaerunt, [[../keeper|On the Keeper]] consulere possunt. Qui vero materiam ipsam statim ingredi volunt, ab his lineis quaestionis incipere possunt.
