@@ -2,7 +2,7 @@
 title: Berechnung
 lang: de
 sourceLanguage: en
-translatedFrom: en/Topics/AI/index.md
+translatedFrom: en/Topics/Computation/index.md
 translationStatus: ai-translated
 ---
 

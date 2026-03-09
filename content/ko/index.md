@@ -29,7 +29,7 @@ translationStatus: original
     <strong>3D 그래픽스</strong>
     <span>기하, 렌더링, 시뮬레이션, 그리고 이해 가능한 시각 세계.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Topics/AI/">
+  <a class="landing-card" href="/hypomnemata/ko/Topics/Computation/">
     <strong>계산</strong>
     <span>알고리즘, 모델, 기계 지능, 그리고 표현과 추론.</span>
   </a>

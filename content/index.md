@@ -33,7 +33,7 @@ The notebook therefore remains deliberately broad. Its materials may include tec
     <strong>3D Graphics</strong>
     <span>Geometry, rendering, simulation, and intelligible visual worlds.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/en/Topics/AI/">
+  <a class="landing-card" href="/hypomnemata/en/Topics/Computation/">
     <strong>Computation</strong>
     <span>Algorithms, models, machine intelligence, and representation.</span>
   </a>

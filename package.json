@@ -18,7 +18,9 @@
                     "format":  "npx prettier . --write",
                     "test":  "tsx --test",
                     "profile":  "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
-                    "translate":  "tsx scripts/translate.ts"
+                    "translate":  "tsx scripts/translate.ts",
+                    "sync:obsidian":  "tsx scripts/sync-obsidian-public.ts",
+                    "build:local":  "node quartz/bootstrap-cli.mjs build"
                 },
     "engines":  {
                     "npm":  "\u003e=10.9.2",
