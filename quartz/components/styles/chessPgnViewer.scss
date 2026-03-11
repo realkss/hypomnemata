@@ -184,3 +184,135 @@
     grid-template-columns: 1fr;
   }
 }
+.training-session-openings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: -0.1rem 0 1.1rem;
+}
+
+.training-session-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 93%, var(--secondary) 7%);
+  color: var(--dark);
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+.training-session-chip strong {
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.training-session-chip em {
+  font-style: normal;
+  padding: 0.12rem 0.42rem;
+  border-radius: 999px;
+  background: rgba(139, 107, 44, 0.1);
+  color: var(--secondary);
+  font-size: 0.78rem;
+}
+
+.training-session-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1.05rem 0 1.35rem;
+}
+
+.training-session-nav__link,
+.training-session-nav__text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.35rem;
+  padding: 0.48rem 0.88rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 93%, var(--secondary) 7%);
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.training-session-nav__link {
+  color: var(--dark);
+}
+
+.training-session-nav__link:hover {
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+  color: var(--secondary);
+}
+
+.training-session-nav__text {
+  background: transparent;
+  color: var(--gray);
+}
+
+.training-session-note {
+  margin: 0.35rem 0 1.5rem;
+  padding: 0.95rem 1rem;
+  border: 1px dashed color-mix(in srgb, var(--secondary) 28%, var(--lightgray));
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.52);
+  color: var(--darkgray);
+}
+
+.training-master-list {
+  margin: 0.55rem 0 1.85rem;
+  padding-left: 1.45rem;
+}
+
+.training-master-list li {
+  margin-bottom: 0.8rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
+  box-shadow: 0 10px 24px rgba(96, 77, 48, 0.05);
+}
+
+:root[saved-theme="dark"] .training-session-chip,
+:root[saved-theme="dark"] .training-session-nav__link,
+:root[saved-theme="dark"] .training-master-list li,
+:root[saved-theme="dark"] .training-session-note {
+  border-color: rgba(198, 161, 91, 0.26);
+  background: linear-gradient(180deg, rgba(30, 25, 20, 0.96), rgba(20, 17, 14, 0.96));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
+  color: #efe3cc;
+}
+
+:root[saved-theme="dark"] .training-session-chip strong,
+:root[saved-theme="dark"] .training-session-chip em,
+:root[saved-theme="dark"] .training-session-nav__link:hover {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] .training-session-chip em {
+  background: rgba(213, 175, 99, 0.12);
+}
+
+:root[saved-theme="dark"] .training-session-nav__link:hover {
+  background: rgba(198, 161, 91, 0.12);
+}
+
+:root[saved-theme="dark"] .training-session-nav__text {
+  border-color: rgba(198, 161, 91, 0.2);
+  color: #bba98a;
+}
+
+@media (max-width: 900px) {
+  .training-session-nav__link,
+  .training-session-nav__text {
+    flex: 1 1 calc(50% - 0.35rem);
+  }
+}

@@ -958,3 +958,72 @@ body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover .
     text-align: left;
   }
 }
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row {
+  grid-template-columns: minmax(7.5rem, 8.5rem) minmax(0, 1fr) minmax(15rem, 22rem);
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 94%, var(--secondary) 6%);
+  color: var(--darkgray);
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover .training-session-row__chip {
+  border-color: color-mix(in srgb, var(--secondary) 24%, var(--lightgray));
+}
+
+body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags {
+  margin: 0.6rem 0 1rem;
+  gap: 0.45rem;
+}
+
+body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags a.internal.tag-link {
+  padding: 0.28rem 0.62rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 93%, var(--secondary) 7%);
+  color: var(--secondary);
+  font-size: 0.78rem;
+  text-decoration: none;
+}
+
+body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags a.internal.tag-link:hover {
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__chip,
+:root[saved-theme="dark"] body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags a.internal.tag-link {
+  border-color: rgba(198, 161, 91, 0.22);
+  background: rgba(198, 161, 91, 0.08);
+  color: #dfd2bb;
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover .training-session-row__chip,
+:root[saved-theme="dark"] body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags a.internal.tag-link:hover {
+  background: rgba(198, 161, 91, 0.16);
+  color: #fff5de;
+}
+
+@media (max-width: 900px) {
+  body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__summary {
+    justify-content: flex-start;
+  }
+}
+
+.training-session-row .external-icon,
+.training-session-nav__link .external-icon {
+  display: none;
+}

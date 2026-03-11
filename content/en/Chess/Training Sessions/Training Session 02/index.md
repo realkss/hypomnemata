@@ -1,9 +1,14 @@
-﻿---
+---
 title: "Training Session #2"
 lang: en
 sourceLanguage: en
 translationStatus: original
 date: 2025-09-01
+hideFolderListing: true
+tags:
+  - training-session
+  - gruenfeld-defense
+  - scotch-game
 ---
 
 <ul class="training-session-meta">
@@ -11,6 +16,20 @@ date: 2025-09-01
   <li>White game: 2025.09.01 (1-0)</li>
   <li>Black game: 2025.09.01 (1-0)</li>
 </ul>
+
+<div class="training-session-openings">
+  <span class="training-session-chip"><strong>White opening</strong> Gruenfeld Defense <em>D78</em></span>
+  <span class="training-session-chip"><strong>Black opening</strong> Scotch Game <em>C45</em></span>
+</div>
+
+<nav class="training-session-nav" aria-label="Session navigation">
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-01/">Prev Session</a>
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-02/Master-Games/">Master Games</a>
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-03/">Next Session</a>
+</nav>
+
+The cited model games from the annotations are collected on the [Master Games](https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-02/Master-Games/) subpage.
 
 ## White Game
 
@@ -20,3 +39,9 @@ date: 2025-09-01
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 
+<nav class="training-session-nav" aria-label="Session navigation">
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-01/">Prev Session</a>
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-02/Master-Games/">Master Games</a>
+  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-03/">Next Session</a>
+</nav>
