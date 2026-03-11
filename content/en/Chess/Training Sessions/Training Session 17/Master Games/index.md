@@ -7,8 +7,8 @@ date: 2026-01-21
 hideFolderListing: true
 tags:
   - training-session
-  - sicilian-defense
-  - caro-kann-defense
+  - sicilian-defense-kan-variation
+  - caro-kann-defense-two-knights-attack
   - master-games
 ---
 

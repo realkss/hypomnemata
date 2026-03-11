@@ -7,8 +7,8 @@ date: 2026-01-21
 hideFolderListing: true
 tags:
   - training-session
-  - sicilian-defense
-  - caro-kann-defense
+  - sicilian-defense-kan-variation
+  - caro-kann-defense-two-knights-attack
 ---
 
 <ul class="training-session-meta">
@@ -21,13 +21,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Sicilian Defense</span><em>B43</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Sicilian Defense: Kan Variation</span><em>B43</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense</span><em>B11</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense: Two Knights Attack</span><em>B11</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

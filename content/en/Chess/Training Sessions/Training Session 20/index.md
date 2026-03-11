@@ -7,8 +7,8 @@ date: 2026-02-15
 hideFolderListing: true
 tags:
   - training-session
-  - sicilian-defense
-  - nimzo-indian-defense
+  - sicilian-defense-taimanov-variation
+  - caro-kann-defense-panov-attack
 ---
 
 <ul class="training-session-meta">
@@ -21,13 +21,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Sicilian Defense</span><em>B47</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Sicilian Defense: Taimanov Variation</span><em>B47</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Nimzo-Indian Defense</span><em>E54</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense: Panov Attack</span><em>B14</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

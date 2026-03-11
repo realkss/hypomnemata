@@ -7,7 +7,7 @@ date: 2025-09-25
 hideFolderListing: true
 tags:
   - training-session
-  - king-s-indian-defense
+  - king-s-indian-defense-saemisch-variation
   - vienna-game
   - master-games
 ---

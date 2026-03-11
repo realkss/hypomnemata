@@ -7,8 +7,8 @@ date: 2025-09-12
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
-  - four-knights-game
+  - sicilian-defense-grand-prix-attack
+  - four-knights-game-scotch-variation
 ---
 
 <ul class="training-session-meta">
@@ -21,13 +21,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Closed Sicilian</span><em>B23</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Sicilian Defense: Grand Prix Attack</span><em>B23</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Four Knights Game</span><em>C47</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Four Knights Game: Scotch Variation</span><em>C47</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

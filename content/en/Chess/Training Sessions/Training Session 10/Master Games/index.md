@@ -7,7 +7,7 @@ date: 2025-11-22
 hideFolderListing: true
 tags:
   - training-session
-  - king-s-indian-defense
+  - king-s-indian-defense-saemisch-variation
   - caro-kann-defense-classical-variation
   - master-games
 ---

@@ -7,8 +7,8 @@ date: 2025-09-12
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
-  - four-knights-game
+  - sicilian-defense-grand-prix-attack
+  - four-knights-game-scotch-variation
   - master-games
 ---
 

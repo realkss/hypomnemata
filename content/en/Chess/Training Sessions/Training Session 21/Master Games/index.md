@@ -7,7 +7,7 @@ date: 2026-02-24
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
+  - sicilian-defense
   - caro-kann-defense-advance-variation
   - master-games
 ---

@@ -8,7 +8,7 @@ hideFolderListing: true
 tags:
   - training-session
   - benoni-defense
-  - caro-kann-defense
+  - caro-kann-defense-two-knights-attack
 ---
 
 <ul class="training-session-meta">
@@ -27,7 +27,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense</span><em>B11</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense: Two Knights Attack</span><em>B11</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

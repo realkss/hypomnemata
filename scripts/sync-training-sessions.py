@@ -17,35 +17,36 @@ TOKEN_RE = re.compile(r"\{[^}]*\}|\(|\)|\$\d+|\d+\.(?:\.\.)?|1-0|0-1|1/2-1/2|\*|
 
 
 OPENING_NAMES: dict[str, str] = {
-    "A09": "Reti Opening",
+    "A13": "English Opening",
     "A56": "Benoni Defense",
-    "A59": "Benoni Defense",
+    "A59": "Benko Gambit Accepted",
     "B10": "Caro-Kann Defense",
-    "B11": "Caro-Kann Defense",
+    "B11": "Caro-Kann Defense: Two Knights Attack",
     "B12": "Caro-Kann Defense: Advance Variation",
     "B13": "Caro-Kann Defense: Exchange Variation",
-    "B15": "Caro-Kann Defense",
+    "B14": "Caro-Kann Defense: Panov Attack",
+    "B15": "Caro-Kann Defense: Gurgenidze System",
     "B18": "Caro-Kann Defense: Classical Variation",
     "B19": "Caro-Kann Defense: Classical Variation",
+    "B20": "Sicilian Defense",
     "B21": "Sicilian Defense",
-    "B23": "Closed Sicilian",
-    "B43": "Sicilian Defense",
-    "B47": "Sicilian Defense",
-    "C02": "French Defense",
+    "B23": "Sicilian Defense: Grand Prix Attack",
+    "B43": "Sicilian Defense: Kan Variation",
+    "B47": "Sicilian Defense: Taimanov Variation",
+    "C02": "French Defense: Advance Variation",
     "C26": "Vienna Game",
     "C45": "Scotch Game",
-    "C47": "Four Knights Game",
+    "C47": "Four Knights Game: Scotch Variation",
     "C55": "Italian Game",
-    "C78": "Ruy Lopez",
-    "D02": "Queen's Pawn Game",
-    "D30": "Queen's Gambit Declined",
-    "D37": "Queen's Gambit Declined",
-    "D78": "Gruenfeld Defense",
+    "C65": "Ruy Lopez: Berlin Defense",
+    "D20": "Queen's Gambit Accepted",
+    "D32": "Queen's Gambit Declined: Tarrasch Defense",
+    "D78": "Neo-Gruenfeld Defense",
     "D85": "Gruenfeld Defense",
-    "D87": "Gruenfeld Defense",
+    "D87": "Gruenfeld Defense: Exchange Variation",
     "E01": "Catalan Opening",
-    "E54": "Nimzo-Indian Defense",
-    "E81": "King's Indian Defense",
+    "E16": "Queen's Indian Defense",
+    "E81": "King's Indian Defense: Saemisch Variation",
 }
 
 
@@ -117,6 +118,27 @@ def tokenize_movetext(text: str) -> list[str]:
     return TOKEN_RE.findall(text)
 
 
+def mainline_moves(text: str) -> list[str]:
+    tokens = tokenize_movetext(strip_headers(text))
+    moves: list[str] = []
+    depth = 0
+
+    for token in tokens:
+        if token == "(":
+            depth += 1
+            continue
+        if token == ")":
+            depth = max(0, depth - 1)
+            continue
+        if depth > 0 or token.startswith("{") or token.startswith("$"):
+            continue
+        if MOVE_NUMBER_RE.match(token) or token in RESULT_TOKENS or token == "...":
+            continue
+        moves.append(token)
+
+    return moves
+
+
 def parse_pgn_date(raw: str) -> date:
     year, month, day = (int(part) for part in raw.split("."))
     return date(year, month, day)
@@ -131,21 +153,109 @@ def render_catalog_date(value: date) -> str:
 
 
 def opening_name(eco: str) -> str:
-    if eco in OPENING_NAMES:
-        return OPENING_NAMES[eco]
+    return OPENING_NAMES.get(eco, "Opening")
 
-    if eco.startswith("A"):
-        return "Flank Opening"
-    if eco.startswith("B"):
-        return "Semi-Open Game"
-    if eco.startswith("C"):
-        return "Open Game"
-    if eco.startswith("D"):
-        return "Closed Game"
-    if eco.startswith("E"):
-        return "Indian Defense"
 
-    return "Opening"
+def has_prefix(moves: list[str], seq: list[str]) -> bool:
+    return moves[: len(seq)] == seq
+
+
+def infer_opening(moves: list[str], header_eco: str) -> tuple[str, str]:
+    if has_prefix(moves, ["e4", "c6", "d4", "d5", "exd5", "cxd5", "c4"]):
+        return ("Caro-Kann Defense: Panov Attack", "B14")
+
+    if has_prefix(moves, ["e4", "c6", "d4", "d5", "exd5", "cxd5"]):
+        return ("Caro-Kann Defense: Exchange Variation", "B13")
+
+    if has_prefix(moves, ["e4", "c6", "d4", "d5", "e5", "h5"]):
+        return ("Caro-Kann Defense: Advance Variation", "B12")
+
+    if has_prefix(moves, ["e4", "c6", "d4", "d5", "e5", "Bf5"]):
+        if "g4" in moves[:10]:
+            return ("Caro-Kann Defense: Advance Variation", "B12")
+        return ("Caro-Kann Defense: Advance Variation", "B12")
+
+    if has_prefix(moves, ["e4", "c6", "d4", "d5", "Nc3", "g6"]):
+        return ("Caro-Kann Defense: Gurgenidze System", "B15")
+
+    if has_prefix(moves, ["e4", "c6", "Nc3", "d5", "Nf3", "Bg4"]):
+        return ("Caro-Kann Defense: Two Knights Attack", "B11")
+
+    if has_prefix(moves, ["e4", "c6", "d4", "d5", "Nc3", "dxe4", "Nxe4", "Bf5", "Ng3", "Bg6"]):
+        if moves[10:12] == ["h4", "h6"]:
+            return ("Caro-Kann Defense: Classical Variation", "B19")
+        return ("Caro-Kann Defense: Classical Variation", "B18")
+
+    if has_prefix(moves, ["e4", "c6", "Nf3", "d5"]):
+        return ("Caro-Kann Defense", "B10")
+
+    if has_prefix(moves, ["e4", "e5", "Nf3", "Nc6", "Bb5", "Nf6"]):
+        return ("Ruy Lopez: Berlin Defense", "C65")
+
+    if has_prefix(moves, ["e4", "e5", "Nc3", "Nc6"]):
+        return ("Vienna Game", "C26")
+
+    if has_prefix(moves, ["e4", "e5", "Nf3", "Nc6", "Bc4", "Nf6", "d3"]):
+        return ("Italian Game", "C55")
+
+    if has_prefix(moves, ["e4", "e5", "Nf3", "Nc6", "d4", "exd4", "Nxd4"]):
+        return ("Scotch Game", "C45")
+
+    if has_prefix(moves, ["e4", "e5", "Nf3", "Nc6", "Nc3", "Nf6", "d4"]):
+        return ("Four Knights Game: Scotch Variation", "C47")
+
+    if has_prefix(moves, ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7"]):
+        return ("Sicilian Defense: Taimanov Variation", "B47")
+
+    if has_prefix(moves, ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "a6"]):
+        return ("Sicilian Defense: Kan Variation", "B43")
+
+    if moves[:3] == ["e4", "c5", "Nc3"] and "f4" in moves[:6]:
+        return ("Sicilian Defense: Grand Prix Attack", "B23")
+
+    if moves[:3] == ["e4", "c5", "Nc3"] and "Qxd4" in moves[:8]:
+        return ("Sicilian Defense", "B20")
+
+    if has_prefix(moves, ["d4", "Nf6", "Nf3", "d5", "g3", "g6"]):
+        return ("Neo-Gruenfeld Defense", "D78")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "c5", "d5", "b5"]):
+        return ("Benko Gambit Accepted", "A59")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "c5", "dxc5"]):
+        return ("Benoni Defense", "A56")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "e6", "Nf3", "b6"]):
+        return ("Queen's Indian Defense", "E16")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "e6", "Nf3", "c5"]):
+        return ("English Opening", "A13")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "d5", "cxd5", "Nxd5", "e4", "Nxc3"]):
+        return ("Gruenfeld Defense: Exchange Variation", "D87")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "d5", "cxd5", "Nxd5"]):
+        return ("Gruenfeld Defense", "D85")
+
+    if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "Bg7", "e4", "d6", "f3"]):
+        return ("King's Indian Defense: Saemisch Variation", "E81")
+
+    if has_prefix(moves, ["d4", "d5", "Nf3", "e6", "c4", "c5"]):
+        return ("Queen's Gambit Declined: Tarrasch Defense", "D32")
+
+    if has_prefix(moves, ["d4", "d5", "c4", "c6", "Nf3", "Nf6", "g3"]):
+        return ("Catalan Opening", "E01")
+
+    if has_prefix(moves, ["d4", "d5", "c4", "dxc4"]):
+        return ("Queen's Gambit Accepted", "D20")
+
+    if has_prefix(moves, ["e4", "e6", "d4", "d5", "e5"]):
+        return ("French Defense: Advance Variation", "C02")
+
+    if header_eco in OPENING_NAMES:
+        return (OPENING_NAMES[header_eco], header_eco)
+
+    return ("Opening", header_eco or "?")
 
 
 def extract_citation(comment_text: str) -> str | None:
@@ -292,8 +402,9 @@ def load_game(game_path: Path, role: str) -> GameData:
     text = game_path.read_text(encoding="utf-8-sig")
     headers = parse_headers(text)
     raw_date = headers.get("Date", "1900.01.01")
-    eco = headers.get("ECO", "")
-    opening = opening_name(eco)
+    header_eco = headers.get("ECO", "")
+    moves = mainline_moves(text)
+    opening, eco = infer_opening(moves, header_eco)
     return GameData(
         role=role,
         date_text=raw_date,
@@ -491,11 +602,11 @@ def render_catalog(sessions: list[SessionData]) -> str:
 
 
 def write_master_reference_files(master_dir: Path, references: list[MasterReference]) -> None:
-    for pgn_path in master_dir.glob('*.pgn'):
+    for pgn_path in master_dir.glob("*.pgn"):
         pgn_path.unlink()
 
     for reference in references:
-        (master_dir / reference.filename).write_text(reference.pgn_text, encoding='utf-8')
+        (master_dir / reference.filename).write_text(reference.pgn_text, encoding="utf-8")
 
 
 def main() -> None:

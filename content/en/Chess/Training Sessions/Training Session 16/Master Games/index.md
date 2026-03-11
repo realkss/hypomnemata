@@ -7,8 +7,8 @@ date: 2026-01-17
 hideFolderListing: true
 tags:
   - training-session
-  - queen-s-pawn-game
-  - caro-kann-defense
+  - english-opening
+  - caro-kann-defense-two-knights-attack
   - master-games
 ---
 

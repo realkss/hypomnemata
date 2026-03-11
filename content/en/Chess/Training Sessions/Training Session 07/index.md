@@ -7,8 +7,8 @@ date: 2025-11-01
 hideFolderListing: true
 tags:
   - training-session
-  - benoni-defense
-  - ruy-lopez
+  - benko-gambit-accepted
+  - ruy-lopez-berlin-defense
 ---
 
 <ul class="training-session-meta">
@@ -21,13 +21,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Benoni Defense</span><em>A59</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Benko Gambit Accepted</span><em>A59</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Ruy Lopez</span><em>C78</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Ruy Lopez: Berlin Defense</span><em>C65</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

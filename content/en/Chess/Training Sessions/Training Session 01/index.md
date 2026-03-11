@@ -7,7 +7,7 @@ date: 2025-08-24
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
+  - sicilian-defense-grand-prix-attack
   - italian-game
 ---
 
@@ -21,7 +21,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Closed Sicilian</span><em>B23</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Sicilian Defense: Grand Prix Attack</span><em>B23</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 

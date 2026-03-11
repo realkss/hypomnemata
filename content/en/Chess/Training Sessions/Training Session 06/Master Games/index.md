@@ -7,8 +7,8 @@ date: 2025-10-24
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
-  - queen-s-gambit-declined
+  - sicilian-defense-grand-prix-attack
+  - queen-s-gambit-declined-tarrasch-defense
   - master-games
 ---
 

@@ -7,8 +7,8 @@ date: 2025-09-19
 hideFolderListing: true
 tags:
   - training-session
-  - queen-s-gambit-declined
-  - reti-opening
+  - queen-s-indian-defense
+  - queen-s-gambit-accepted
 ---
 
 <ul class="training-session-meta">
@@ -21,13 +21,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Queen&#x27;s Gambit Declined</span><em>D37</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Queen&#x27;s Indian Defense</span><em>E16</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Reti Opening</span><em>A09</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Queen&#x27;s Gambit Accepted</span><em>D20</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

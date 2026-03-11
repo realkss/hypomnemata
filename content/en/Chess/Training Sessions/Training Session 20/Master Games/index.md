@@ -7,8 +7,8 @@ date: 2026-02-15
 hideFolderListing: true
 tags:
   - training-session
-  - sicilian-defense
-  - nimzo-indian-defense
+  - sicilian-defense-taimanov-variation
+  - caro-kann-defense-panov-attack
   - master-games
 ---
 

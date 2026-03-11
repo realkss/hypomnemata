@@ -7,8 +7,8 @@ date: 2025-11-01
 hideFolderListing: true
 tags:
   - training-session
-  - benoni-defense
-  - ruy-lopez
+  - benko-gambit-accepted
+  - ruy-lopez-berlin-defense
   - master-games
 ---
 

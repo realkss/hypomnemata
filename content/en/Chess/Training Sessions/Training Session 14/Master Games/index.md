@@ -7,7 +7,7 @@ date: 2026-01-04
 hideFolderListing: true
 tags:
   - training-session
-  - french-defense
+  - french-defense-advance-variation
   - caro-kann-defense-advance-variation
   - master-games
 ---

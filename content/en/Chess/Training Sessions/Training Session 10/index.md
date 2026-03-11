@@ -7,7 +7,7 @@ date: 2025-11-22
 hideFolderListing: true
 tags:
   - training-session
-  - king-s-indian-defense
+  - king-s-indian-defense-saemisch-variation
   - caro-kann-defense-classical-variation
 ---
 
@@ -21,7 +21,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>King&#x27;s Indian Defense</span><em>E81</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>King&#x27;s Indian Defense: Saemisch Variation</span><em>E81</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 

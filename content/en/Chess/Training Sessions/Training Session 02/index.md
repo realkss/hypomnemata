@@ -7,7 +7,7 @@ date: 2025-09-01
 hideFolderListing: true
 tags:
   - training-session
-  - gruenfeld-defense
+  - neo-gruenfeld-defense
   - scotch-game
 ---
 
@@ -21,7 +21,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Gruenfeld Defense</span><em>D78</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Neo-Gruenfeld Defense</span><em>D78</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 

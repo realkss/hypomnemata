@@ -7,7 +7,7 @@ date: 2026-01-04
 hideFolderListing: true
 tags:
   - training-session
-  - french-defense
+  - french-defense-advance-variation
   - caro-kann-defense-advance-variation
 ---
 
@@ -21,7 +21,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>French Defense</span><em>C02</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>French Defense: Advance Variation</span><em>C02</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 

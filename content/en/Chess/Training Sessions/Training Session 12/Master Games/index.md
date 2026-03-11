@@ -7,7 +7,7 @@ date: 2025-12-06
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
+  - sicilian-defense-grand-prix-attack
   - italian-game
   - master-games
 ---

@@ -7,7 +7,7 @@ date: 2025-11-08
 hideFolderListing: true
 tags:
   - training-session
-  - closed-sicilian
+  - sicilian-defense-grand-prix-attack
   - caro-kann-defense-classical-variation
   - master-games
 ---

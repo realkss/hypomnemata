@@ -8,7 +8,7 @@ hideFolderListing: true
 tags:
   - training-session
   - benoni-defense
-  - caro-kann-defense
+  - caro-kann-defense-two-knights-attack
   - master-games
 ---
 

@@ -7,8 +7,8 @@ date: 2025-09-19
 hideFolderListing: true
 tags:
   - training-session
-  - queen-s-gambit-declined
-  - reti-opening
+  - queen-s-indian-defense
+  - queen-s-gambit-accepted
   - master-games
 ---
 
