@@ -316,3 +316,52 @@
     flex: 1 1 calc(50% - 0.35rem);
   }
 }
+
+.training-session-opening-note {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin: -0.55rem 0 0.7rem;
+  color: var(--darkgray);
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.training-session-opening-note strong {
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.training-session-opening-note span {
+  color: var(--dark);
+}
+
+.training-session-opening-note em {
+  font-style: normal;
+  padding: 0.08rem 0.42rem;
+  border-radius: 999px;
+  background: rgba(139, 107, 44, 0.08);
+  color: var(--secondary);
+  font-size: 0.76rem;
+}
+
+:root[saved-theme="dark"] .training-session-opening-note {
+  color: #cfc2ab;
+}
+
+:root[saved-theme="dark"] .training-session-opening-note strong,
+:root[saved-theme="dark"] .training-session-opening-note em {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] .training-session-opening-note span {
+  color: #efe3cc;
+}
+
+:root[saved-theme="dark"] .training-session-opening-note em {
+  background: rgba(213, 175, 99, 0.12);
+}

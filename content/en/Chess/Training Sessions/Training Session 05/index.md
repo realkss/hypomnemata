@@ -17,11 +17,6 @@ tags:
   <li>Black game: 2025.09.25 (1-0)</li>
 </ul>
 
-<div class="training-session-openings">
-  <span class="training-session-chip"><strong>White opening</strong> King's Indian Defense <em>E81</em></span>
-  <span class="training-session-chip"><strong>Black opening</strong> Vienna Game <em>C26</em></span>
-</div>
-
 <nav class="training-session-nav" aria-label="Session navigation">
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-04/">Prev Session</a>
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
@@ -33,9 +28,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
+<p class="training-session-opening-note"><strong>Opening</strong><span>King's Indian Defense</span><em>E81</em></p>
+
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
+
+<p class="training-session-opening-note"><strong>Opening</strong><span>Vienna Game</span><em>C26</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 

@@ -17,11 +17,6 @@ tags:
   <li>Black game: 2025.08.24 (1-0)</li>
 </ul>
 
-<div class="training-session-openings">
-  <span class="training-session-chip"><strong>White opening</strong> Closed Sicilian <em>B23</em></span>
-  <span class="training-session-chip"><strong>Black opening</strong> Italian Game <em>C55</em></span>
-</div>
-
 <nav class="training-session-nav" aria-label="Session navigation">
   <span class="training-session-nav__text">Prev Session</span>
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
@@ -33,9 +28,13 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
+<p class="training-session-opening-note"><strong>Opening</strong><span>Closed Sicilian</span><em>B23</em></p>
+
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 ## Black Game
+
+<p class="training-session-opening-note"><strong>Opening</strong><span>Italian Game</span><em>C55</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 
