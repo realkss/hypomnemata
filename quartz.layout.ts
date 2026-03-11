@@ -13,8 +13,8 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      Lexicon: "/hypomnemata/lexicon",
-      "Map of the Notebook": "/hypomnemata/map",
+      Lexicon: "lexicon",
+      "Map of the Notebook": "map",
       GitHub: "https://github.com/realkss/hypomnemata",
     },
   }),

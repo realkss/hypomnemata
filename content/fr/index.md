@@ -11,11 +11,11 @@ translationStatus: ai-translated
 ## Sujets
 
 <div class="landing-grid">
-  <a class="landing-card" href="/hypomnemata/fr/Topics/Physics/"><strong>Physique</strong><span>Matière, mouvement, champs, quanta et structure cosmologique.</span></a>
-  <a class="landing-card" href="/hypomnemata/fr/Topics/Mathematics/"><strong>Mathématiques</strong><span>Structure formelle, preuve, abstraction et grammaire de la pensée rigoureuse.</span></a>
-  <a class="landing-card" href="/hypomnemata/fr/Topics/3D Graphics/"><strong>Graphisme 3D</strong><span>Géométrie, rendu, simulation et mondes visuels intelligibles.</span></a>
-  <a class="landing-card" href="/hypomnemata/fr/Topics/Computation/"><strong>Calcul</strong><span>Algorithmes, modèles, intelligence machinique et représentation.</span></a>
-  <a class="landing-card" href="/hypomnemata/fr/Literature/"><strong>Littérature</strong><span>Lecture, forme, mémoire, interprétation et oeuvres à reprendre.</span></a>
-  <a class="landing-card" href="/hypomnemata/fr/Chess/"><strong>Échecs</strong><span>Calcul, structure et jugement stratégique sous contrainte.</span></a>
-  <a class="landing-card" href="/hypomnemata/fr/Baduk/"><strong>Baduk</strong><span>Forme, influence, vision d’ensemble et lenteur stratégique.</span></a>
+  <a class="landing-card" href="./Topics/Physics/"><strong>Physique</strong><span>Matière, mouvement, champs, quanta et structure cosmologique.</span></a>
+  <a class="landing-card" href="./Topics/Mathematics/"><strong>Mathématiques</strong><span>Structure formelle, preuve, abstraction et grammaire de la pensée rigoureuse.</span></a>
+  <a class="landing-card" href="./Topics/3D Graphics/"><strong>Graphisme 3D</strong><span>Géométrie, rendu, simulation et mondes visuels intelligibles.</span></a>
+  <a class="landing-card" href="./Topics/Computation/"><strong>Calcul</strong><span>Algorithmes, modèles, intelligence machinique et représentation.</span></a>
+  <a class="landing-card" href="./Literature/"><strong>Littérature</strong><span>Lecture, forme, mémoire, interprétation et oeuvres à reprendre.</span></a>
+  <a class="landing-card" href="./Chess/"><strong>Échecs</strong><span>Calcul, structure et jugement stratégique sous contrainte.</span></a>
+  <a class="landing-card" href="./Baduk/"><strong>Baduk</strong><span>Forme, influence, vision d’ensemble et lenteur stratégique.</span></a>
 </div>

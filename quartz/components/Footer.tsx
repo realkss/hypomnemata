@@ -1,3 +1,4 @@
+import { joinSegments, pathToRoot } from "../util/path"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import style from "./styles/footer.scss"
 import { version } from "../../package.json"
@@ -22,6 +23,26 @@ export default ((opts?: Options) => {
     const year = new Date().getFullYear()
     const links = opts?.links ?? []
     const TranslationNote = TranslationBadge()
+    const root = fileData.slug ? pathToRoot(fileData.slug) : "."
+    const basePath = cfg.baseUrl
+      ? new URL(`https://${cfg.baseUrl}`).pathname.replace(/^\/+|\/+$/g, "")
+      : ""
+    const resolveLink = (link: string) => {
+      if (/^(?:[a-z]+:)?\/\//i.test(link) || link.startsWith("#")) {
+        return link
+      }
+
+      if (link.startsWith("./") || link.startsWith("../")) {
+        return link
+      }
+
+      let normalized = link.replace(/^\/+/, "")
+      if (basePath && (normalized === basePath || normalized.startsWith(`${basePath}/`))) {
+        normalized = normalized.slice(basePath.length).replace(/^\/+/, "")
+      }
+
+      return normalized.length > 0 ? joinSegments(root, normalized) : root
+    }
 
     return (
       <footer class={`${displayClass ?? ""}`}>
@@ -42,7 +63,7 @@ export default ((opts?: Options) => {
         <ul>
           {Object.entries(links).map(([text, link]) => (
             <li>
-              <a href={link}>{text}</a>
+              <a href={resolveLink(link)}>{text}</a>
             </li>
           ))}
         </ul>

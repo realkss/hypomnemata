@@ -17,31 +17,31 @@ translationStatus: original
 ## 주제
 
 <div class="landing-grid">
-  <a class="landing-card" href="/hypomnemata/ko/Topics/Physics/">
+  <a class="landing-card" href="./Topics/Physics/">
     <strong>물리학</strong>
     <span>물질, 운동, 장, 양자, 그리고 우주적 구조.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Topics/Mathematics/">
+  <a class="landing-card" href="./Topics/Mathematics/">
     <strong>수학</strong>
     <span>형식, 증명, 추상화, 그리고 어려운 사고의 문법.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Topics/3D Graphics/">
+  <a class="landing-card" href="./Topics/3D Graphics/">
     <strong>3D 그래픽스</strong>
     <span>기하, 렌더링, 시뮬레이션, 그리고 이해 가능한 시각 세계.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Topics/Computation/">
+  <a class="landing-card" href="./Topics/Computation/">
     <strong>계산</strong>
     <span>알고리즘, 모델, 기계 지능, 그리고 표현과 추론.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Literature/">
+  <a class="landing-card" href="./Literature/">
     <strong>문학</strong>
     <span>독해, 형식, 기억, 해석, 그리고 다시 돌아볼 만한 작품들.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Chess/">
+  <a class="landing-card" href="./Chess/">
     <strong>체스</strong>
     <span>계산, 구조, 그리고 제약 아래의 전략적 판단.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/ko/Baduk/">
+  <a class="landing-card" href="./Baduk/">
     <strong>바둑</strong>
     <span>형태, 세력, 전반 판단, 그리고 긴 전략의 호흡.</span>
   </a>
@@ -50,11 +50,11 @@ translationStatus: original
 ## 참고
 
 <div class="landing-grid landing-grid--reference">
-  <a class="landing-card" href="/hypomnemata/lexicon">
+  <a class="landing-card" href="../lexicon/">
     <strong>어휘집</strong>
     <span>반복되는 핵심 어휘와 개념을 위한 짧은 안내.</span>
   </a>
-  <a class="landing-card" href="/hypomnemata/map">
+  <a class="landing-card" href="../map/">
     <strong>노트의 지도</strong>
     <span>연결망과 군집, 그리고 아카이브의 전체 형상을 보는 그래프 페이지.</span>
   </a>
@@ -66,4 +66,4 @@ translationStatus: original
 
 ## 길잡이
 
-이 노트를 유지하는 사람의 흔적을 보려면 [[../keeper|On the Keeper]]를 참고할 수 있습니다. 자료 자체에서 시작하고 싶다면 위의 주제들, [[/hypomnemata/lexicon|어휘집]], 또는 [[/hypomnemata/map|노트의 지도]]에서 시작하면 됩니다.
+이 노트를 유지하는 사람의 흔적을 보려면 [[../keeper|On the Keeper]]를 참고할 수 있습니다. 자료 자체에서 시작하고 싶다면 위의 주제들, [[../lexicon|어휘집]], 또는 [[../map|노트의 지도]]에서 시작하면 됩니다.
