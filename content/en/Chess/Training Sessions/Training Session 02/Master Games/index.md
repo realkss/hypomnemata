@@ -7,7 +7,7 @@ date: 2025-09-01
 hideFolderListing: true
 tags:
   - training-session
-  - neo-gruenfeld-defense
+  - neo-grunfeld-defense
   - scotch-game
   - master-games
 ---

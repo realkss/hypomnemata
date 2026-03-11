@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import html
 import re
+import unicodedata
 from collections import OrderedDict
 from dataclasses import dataclass
 from datetime import date
@@ -14,6 +15,7 @@ SITE_ROOT = "https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions"
 RESULT_TOKENS = {"1-0", "0-1", "1/2-1/2", "*"}
 MOVE_NUMBER_RE = re.compile(r"^\d+\.(?:\.\.)?$")
 TOKEN_RE = re.compile(r"\{[^}]*\}|\(|\)|\$\d+|\d+\.(?:\.\.)?|1-0|0-1|1/2-1/2|\*|[^\s(){}]+", re.DOTALL)
+DEFAULT_COMMENTS_TEXT = "No comments yet."
 
 
 OPENING_NAMES: dict[str, str] = {
@@ -41,9 +43,9 @@ OPENING_NAMES: dict[str, str] = {
     "C65": "Ruy Lopez: Berlin Defense",
     "D20": "Queen's Gambit Accepted",
     "D32": "Queen's Gambit Declined: Tarrasch Defense",
-    "D78": "Neo-Gruenfeld Defense",
-    "D85": "Gruenfeld Defense",
-    "D87": "Gruenfeld Defense: Exchange Variation",
+    "D78": "Neo-Grünfeld Defense",
+    "D85": "Grünfeld Defense",
+    "D87": "Grünfeld Defense: Exchange Variation",
     "E01": "Catalan Opening",
     "E16": "Queen's Indian Defense",
     "E81": "King's Indian Defense: Saemisch Variation",
@@ -91,7 +93,8 @@ class SessionData:
 
 
 def slugify(value: str) -> str:
-    return re.sub(r"-{2,}", "-", re.sub(r"[^a-z0-9]+", "-", value.lower())).strip("-")
+    normalized = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"-{2,}", "-", re.sub(r"[^a-z0-9]+", "-", normalized.lower())).strip("-")
 
 
 def parse_session_number(folder_name: str) -> int:
@@ -217,7 +220,7 @@ def infer_opening(moves: list[str], header_eco: str) -> tuple[str, str]:
         return ("Sicilian Defense", "B20")
 
     if has_prefix(moves, ["d4", "Nf6", "Nf3", "d5", "g3", "g6"]):
-        return ("Neo-Gruenfeld Defense", "D78")
+        return ("Neo-Grünfeld Defense", "D78")
 
     if has_prefix(moves, ["d4", "Nf6", "c4", "c5", "d5", "b5"]):
         return ("Benko Gambit Accepted", "A59")
@@ -232,10 +235,10 @@ def infer_opening(moves: list[str], header_eco: str) -> tuple[str, str]:
         return ("English Opening", "A13")
 
     if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "d5", "cxd5", "Nxd5", "e4", "Nxc3"]):
-        return ("Gruenfeld Defense: Exchange Variation", "D87")
+        return ("Grünfeld Defense: Exchange Variation", "D87")
 
     if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "d5", "cxd5", "Nxd5"]):
-        return ("Gruenfeld Defense", "D85")
+        return ("Grünfeld Defense", "D85")
 
     if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "Bg7", "e4", "d6", "f3"]):
         return ("King's Indian Defense: Saemisch Variation", "E81")
@@ -490,7 +493,41 @@ def render_session_nav(prev_url: str | None, all_url: str, master_url: str, next
     )
 
 
-def render_session_body(session: SessionData, prev_url: str | None, next_url: str | None) -> str:
+def load_comments_text(session_dir: Path) -> str:
+    comments_path = session_dir / "comments.txt"
+    if not comments_path.exists():
+        comments_path.write_text(DEFAULT_COMMENTS_TEXT + "\n", encoding="utf-8")
+
+    content = comments_path.read_text(encoding="utf-8").strip()
+    return content or DEFAULT_COMMENTS_TEXT
+
+
+def render_comments_section(comments_text: str) -> str:
+    paragraphs = [block.strip() for block in re.split(r"\n\s*\n", comments_text.strip()) if block.strip()]
+    if not paragraphs:
+        paragraphs = [DEFAULT_COMMENTS_TEXT]
+
+    body = "\n".join(
+        f'  <p class="training-session-comments__paragraph">{html.escape(paragraph).replace(chr(10), "<br />")}</p>'
+        for paragraph in paragraphs
+    )
+    return "\n".join(
+        [
+            '<details class="training-session-comments">',
+            '  <summary class="training-session-comments__summary">Comments</summary>',
+            '  <p class="training-session-comments__owner">Only Jwipo can add or revise these notes through the site repository.</p>',
+            body,
+            '</details>',
+        ]
+    )
+
+
+def render_session_body(
+    session: SessionData,
+    prev_url: str | None,
+    next_url: str | None,
+    comments_text: str,
+) -> str:
     session_date = render_iso_date(session.session_date)
     return "\n".join(
         [
@@ -517,6 +554,8 @@ def render_session_body(session: SessionData, prev_url: str | None, next_url: st
             '<div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>',
             "",
             render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
+            "",
+            render_comments_section(comments_text),
         ]
     )
 
@@ -621,12 +660,14 @@ def main() -> None:
         next_session = session_by_number.get(session.number + 1)
 
         session_dir = SESSIONS_DIR / session.folder_name
+        comments_text = load_comments_text(session_dir)
         session_index = session_dir / "index.md"
         session_index.write_text(
             render_session_body(
                 session,
                 prev_session.url if prev_session else None,
                 next_session.url if next_session else None,
+                comments_text,
             )
             + "\n",
             encoding="utf-8",

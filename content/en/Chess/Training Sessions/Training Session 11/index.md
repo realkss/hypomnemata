@@ -7,7 +7,7 @@ date: 2025-11-29
 hideFolderListing: true
 tags:
   - training-session
-  - gruenfeld-defense-exchange-variation
+  - grunfeld-defense-exchange-variation
   - caro-kann-defense-exchange-variation
 ---
 
@@ -21,7 +21,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Gruenfeld Defense: Exchange Variation</span><em>D87</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Grünfeld Defense: Exchange Variation</span><em>D87</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
@@ -37,3 +37,9 @@ The cited model games from the annotations are collected on the [Master Games](h
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-11/Master-Games/">Master Games</a>
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-12/">Next Session</a>
 </nav>
+
+<details class="training-session-comments">
+  <summary class="training-session-comments__summary">Comments</summary>
+  <p class="training-session-comments__owner">Only Jwipo can add or revise these notes through the site repository.</p>
+  <p class="training-session-comments__paragraph">No comments yet.</p>
+</details>

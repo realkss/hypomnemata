@@ -7,7 +7,7 @@ date: 2025-11-29
 hideFolderListing: true
 tags:
   - training-session
-  - gruenfeld-defense-exchange-variation
+  - grunfeld-defense-exchange-variation
   - caro-kann-defense-exchange-variation
   - master-games
 ---

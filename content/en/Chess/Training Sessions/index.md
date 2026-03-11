@@ -95,7 +95,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Dec 28, 2025</span>
     <span class="training-session-row__title">Training Session #13</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: Gruenfeld Defense</span>
+      <span class="training-session-row__chip">White: Grünfeld Defense</span>
       <span class="training-session-row__chip">Black: Caro-Kann Defense: Advance Variation</span>
     </span>
   </a>
@@ -111,7 +111,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Nov 29, 2025</span>
     <span class="training-session-row__title">Training Session #11</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: Gruenfeld Defense: Exchange Variation</span>
+      <span class="training-session-row__chip">White: Grünfeld Defense: Exchange Variation</span>
       <span class="training-session-row__chip">Black: Caro-Kann Defense: Exchange Variation</span>
     </span>
   </a>
@@ -127,7 +127,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Nov 15, 2025</span>
     <span class="training-session-row__title">Training Session #9</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: Gruenfeld Defense: Exchange Variation</span>
+      <span class="training-session-row__chip">White: Grünfeld Defense: Exchange Variation</span>
       <span class="training-session-row__chip">Black: Caro-Kann Defense: Gurgenidze System</span>
     </span>
   </a>
@@ -183,7 +183,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Sep 01, 2025</span>
     <span class="training-session-row__title">Training Session #2</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: Neo-Gruenfeld Defense</span>
+      <span class="training-session-row__chip">White: Neo-Grünfeld Defense</span>
       <span class="training-session-row__chip">Black: Scotch Game</span>
     </span>
   </a>

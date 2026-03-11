@@ -7,7 +7,7 @@ date: 2025-11-15
 hideFolderListing: true
 tags:
   - training-session
-  - gruenfeld-defense-exchange-variation
+  - grunfeld-defense-exchange-variation
   - caro-kann-defense-gurgenidze-system
   - master-games
 ---

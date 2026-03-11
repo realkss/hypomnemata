@@ -37,3 +37,9 @@ The cited model games from the annotations are collected on the [Master Games](h
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-12/Master-Games/">Master Games</a>
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-13/">Next Session</a>
 </nav>
+
+<details class="training-session-comments">
+  <summary class="training-session-comments__summary">Comments</summary>
+  <p class="training-session-comments__owner">Only Jwipo can add or revise these notes through the site repository.</p>
+  <p class="training-session-comments__paragraph">No comments yet.</p>
+</details>
