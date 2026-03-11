@@ -878,3 +878,83 @@ body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .desc 
 :root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li > .section::after {
   color: #dfd2bb;
 }
+
+/* Training sessions catalogue */
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-catalog {
+  margin-top: 1.65rem;
+  border-top: 1px solid color-mix(in srgb, var(--secondary) 22%, var(--lightgray));
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 10rem) minmax(0, 1fr) minmax(12rem, 15rem);
+  align-items: baseline;
+  gap: 0.85rem 1.25rem;
+  padding: 1rem 0 1.05rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  color: var(--dark);
+  text-decoration: none;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover {
+  background: linear-gradient(90deg, rgba(139, 107, 44, 0.04), rgba(139, 107, 44, 0));
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__date {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__title {
+  font-family: "Cinzel", serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__summary {
+  justify-self: end;
+  color: var(--darkgray);
+  font-size: 0.98rem;
+  text-align: right;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover .training-session-row__title {
+  color: var(--secondary);
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-catalog {
+  border-top-color: rgba(198, 161, 91, 0.24);
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row {
+  border-bottom-color: rgba(198, 161, 91, 0.2);
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover {
+  background: linear-gradient(90deg, rgba(198, 161, 91, 0.09), rgba(198, 161, 91, 0));
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__date,
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row:hover .training-session-row__title {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__summary {
+  color: #dfd2bb;
+}
+
+@media (max-width: 900px) {
+  body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 0.95rem 0 1rem;
+  }
+
+  body[data-slug="en/Chess/Training-Sessions/index"] .training-session-row__summary {
+    justify-self: start;
+    text-align: left;
+  }
+}

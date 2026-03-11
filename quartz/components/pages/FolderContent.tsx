@@ -102,7 +102,10 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         : htmlToJsx(fileData.filePath!, tree)
     ) as ComponentChildren
 
-    const hasPagesToList = allPagesInFolder.length > 0
+    const hideFolderListing =
+      fileData.frontmatter?.hideFolderListing === true ||
+      fileData.frontmatter?.hideFolderListing === "true"
+    const hasPagesToList = allPagesInFolder.length > 0 && !hideFolderListing
 
     return (
       <div class="popover-hint">
@@ -128,4 +131,5 @@ export default ((opts?: Partial<FolderContentOptions>) => {
   FolderContent.css = concatenateResources(style, PageList.css)
   return FolderContent
 }) satisfies QuartzComponentConstructor
+
 
