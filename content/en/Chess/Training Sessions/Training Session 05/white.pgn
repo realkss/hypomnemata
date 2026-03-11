@@ -1,0 +1,39 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.09.25"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "E81"]
+[PlyCount "56"]
+[EventDate "2025.??.??"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Bd3 ({main and better move
+} 6. Be3 c5 7. Nge2 Nc6 8. d5 Ne5 9. Ng3 e6 10. Be2 exd5 11. cxd5 a6 12. a4 Bd7
+13. f4 Neg4 14. Bd2 h5 15. h3 Nh6 16. O-O b5 17. e5 Ne8 18. axb5 axb5 19. Rxa8
+Qxa8 20. Nxb5 h4 21. Ne4 Bxb5 22. Bxb5 Qxd5 23. Qf3 Nf5 24. Bxe8 Qd4+ 25. Kh2
+d5 26. Nd6 Qxd2 27. Bxf7+ Kh8 28. Nxf5 Rxf7 29. Nxh4 {1-0 (29) Vallejo Pons,F 
+(2684)-Aguera Naredo,J (2375) Bilbao 2015}) 6... e5 ({also good choice} 6... c5
+7. d5 e6 8. Nge2 exd5 9. cxd5 a6 10. a4 Nbd7) 7. d5 a5 {[%cal Gb8a6,Ga6c5]} 8.
+a4 {[%csl Gb4,Gc5] bad strategical move. Dark squares will be weak} ({the
+right way to play} 8. Nge2 Na6 9. Be3 Nd7 10. O-O) 8... Na6 9. Nge2 Nc5 ({
+stronger} 9... Nd7 10. O-O (10. Be3 Bh6 11. Bxh6 Qh4+ 12. Ng3 Qxh6 {[%csl Gb4,
+Gc5][%cal Gh6e3] dark squares are weak}) 10... Ndc5 11. Bb1 Nb4 {[%csl Gb4,Gc5]
+}) 10. Bb1 (10. Bg5 {[%csl Gc5,Gd3] White should not be afraid to trade bad
+bishop on d3. the knight on c5 is much better than Bd3} h6 11. Bh4 Bd7 12. O-O)
+(10. Bc2 {[%csl Gb3]}) 10... Nh5 11. g3 $6 {weakens the kingside} ({more solid
+choice} 11. O-O f5 12. exf5 Bxf5 13. Be3) 11... f5 ({stronger} 11... Bh3 12.
+Kf2 c6 13. Ng1 Bd7 14. Kg2 f5) 12. h4 {[%csl Gg3] weakens g3 pawn} (12. exf5
+gxf5 13. O-O) 12... fxe4 13. Nxe4 (13. fxe4 Bg4 {[%csl Gg3][%cal Gg4d1]} 14.
+Rg1 Qf6 {[%cal Gf6f2]} 15. Be3 Qf3 16. Kd2 Qxe3+ 17. Kxe3 Bh6+ 18. Nf4 exf4+
+19. gxf4 Bxf4+ 20. Kf2 Bxd1 {winning for black}) 13... Rxf3 14. Ng5 (14. Bg5
+Qf8 15. Nxc5 dxc5 16. Be4 Bg4 17. Bxf3 Qxf3 18. Rf1 Qe4 {[%cal Gh5g3]} 19. Ra3
+Qxc4 {Black is much better. White king is too weak}) 14... Rf8 15. Ra3 Bg4 16.
+Qd2 Qf6 17. Qe3 Bh6 ({stronger} 17... e4 18. Nf4 Rae8 19. Nge6 Nxf4 20. Nxf4
+Nd3+ 21. Kd2 Nxc1) 18. Nxh7 Bxe3 19. Nxf6+ Rxf6 20. Bxe3 Bxe2 21. Bg5 $2 (21.
+Bxc5 Bxc4 22. Be3 Bxd5 23. Rg1 Raf8 {Black has big advantage}) 21... Bxc4 22.
+Bxf6 Nxf6 {[%csl Gc5,Gf6] 2 knights are much better than rook} 23. Bxg6 Nxd5
+24. h5 Nb4 (24... e4 {[%cal Gc5d3]}) 25. Rc3 Bd3 {winning for black} 26. Bxd3
+Nbxd3+ 27. Kd2 Ne4+ 28. Kxd3 Nf2+ 0-1
+

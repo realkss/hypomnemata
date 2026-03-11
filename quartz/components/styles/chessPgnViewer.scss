@@ -1,0 +1,94 @@
+.training-session-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 1.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.training-session-meta li {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 92%, var(--secondary) 8%);
+  font-size: 0.95rem;
+}
+
+.chess-training-board {
+  position: relative;
+  min-height: 20rem;
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(247, 240, 226, 0.82));
+  box-shadow: 0 12px 28px rgba(96, 77, 48, 0.06);
+}
+
+.chess-training-board::before {
+  content: attr(data-label);
+  display: block;
+  margin-bottom: 0.85rem;
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.chess-training-board[data-viewer-state="loading"]::after {
+  content: "Loading interactive board...";
+  display: block;
+  color: var(--darkgray);
+}
+
+.chess-training-board__fallback {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.chess-training-board__fallback p {
+  margin: 0;
+}
+
+.training-session-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: -0.5rem 0 1rem;
+}
+
+.training-session-downloads a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  background: rgba(255, 255, 255, 0.55);
+}
+
+:root[saved-theme="dark"] .training-session-meta li,
+:root[saved-theme="dark"] .training-session-downloads a,
+:root[saved-theme="dark"] .chess-training-board {
+  border-color: rgba(198, 161, 91, 0.26);
+  background: linear-gradient(180deg, rgba(24, 26, 33, 0.96), rgba(15, 17, 22, 0.96));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+:root[saved-theme="dark"] .chess-training-board::before {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] .chess-training-board[data-viewer-state="loading"]::after,
+:root[saved-theme="dark"] .chess-training-board__fallback p {
+  color: #dfd2bb;
+}
+
+@media (max-width: 800px) {
+  .chess-training-board {
+    padding: 0.8rem;
+    min-height: 16rem;
+  }
+}

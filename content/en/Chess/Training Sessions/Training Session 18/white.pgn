@@ -1,0 +1,29 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.02.01"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "A56"]
+[PlyCount "48"]
+[EventDate "2026.??.??"]
+
+1. d4 Nf6 2. c4 c5 3. dxc5 ({more popular and ambitious line} 3. d5 g6 4. Nc3
+Bg7 5. e4 O-O 6. Bd3 e6 7. h3 exd5 8. exd5 a6 9. a4 a5 10. Nge2 Na6 11. Bg5 Nb4
+12. Bb1 b6 13. O-O Ba6 14. Nb5 h6 15. Bc1 Bxb5 16. axb5 Ne8 17. Ra3 Nd6 18. Rg3
+Nxc4 19. Nf4 Ne5 20. Nh5 Qh4 21. Nxg7 Kxg7 22. Re1 d6 23. Re4 Qd8 24. Qh5 {1-0
+(24) Aronian,L (2797)-Jobava,B (2727) Wijk aan Zee 2015 CBM 165 [Havasi,G]})
+3... e6 4. b4 $2 {White pieces are not ready for this} ({right way to play} 4.
+Nc3 Bxc5 5. Nf3 O-O 6. e3 Nc6 7. Be2) 4... a5 5. Ba3 $2 ({better choice} 5. b5
+Bxc5 6. Nc3 d5 7. e3 O-O 8. Nf3 Nbd7 9. cxd5 Bb4 10. Bd2 exd5 {Black is
+slightly better}) 5... axb4 6. Bxb4 Na6 7. Qb3 (7. Bc3 Nxc5 8. e3 Nfe4 9. Ne2
+Nxc3 10. Nbxc3 Be7 {Black is better}) 7... Nxb4 8. Qxb4 Ne4 9. e3 (9. Qb2 Qa5+
+10. Nd2 Bxc5 {[%cal Gc5f2]} 11. e3 Nxd2 12. Qxd2 Bb4) 9... Bxc5 (9... Qf6 {
+[%cal Gf6f2,Gf6a1] wins faster}) 10. Qb3 (10. Qb2 Qa5+ 11. Kd1 d5 12. cxd5 O-O
+{[%cal Gf8d8] White king is too weak, Black has winning advantage}) 10... Nxf2
+(10... Qf6 {[%cal Gf6f2,Gf6a1]}) 11. Kxf2 Qf6+ 12. Nf3 Qxa1 13. Bd3 Qxa2+ 14.
+Qxa2 Rxa2+ {winning advantage for black} 15. Nbd2 b6 16. Re1 Bb7 17. Kg3 f6 18.
+Nb3 Ke7 19. Nbd4 Rha8 20. Nb5 Rb2 21. Re2 Rxe2 22. Bxe2 Bxe3 23. Ne1 Ra2 24.
+Bf3 Bf2+ 0-1
+

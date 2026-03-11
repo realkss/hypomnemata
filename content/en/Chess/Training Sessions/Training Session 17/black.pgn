@@ -1,0 +1,32 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.01.21"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "B11"]
+[PlyCount "55"]
+[EventDate "2026.??.??"]
+
+1. e4 c6 2. Nc3 d5 3. Nf3 Bg4 4. h3 Bh5 5. exd5 cxd5 6. Bb5+ Nc6 7. g4 Bg6 8.
+Ne5 Qd6 ({more popular choice} 8... Rc8 9. d4 e6 10. Qe2 Bb4 11. h4 Nge7 12. h5
+Be4 13. f3 O-O 14. Bxc6 Nxc6 15. Nxc6 Rxc6 16. fxe4 Rxc3 17. Kd1 Rc6 18. e5 f6
+19. c3 Ba5 20. exf6 Qxf6 21. Be3 e5 22. dxe5 Qxe5 23. Bd4 Qxe2+ 24. Kxe2 Bb6
+25. Rad1 Re6+ 26. Kd3 Bxd4 27. Kxd4 Re2 28. b4 Rxa2 29. Kxd5 Rc8 30. c4 a5 31.
+b5 Rc2 32. Rd4 b6 33. Rhd1 h6 34. Ke6 Kh7 35. Kd7 Rc5 36. Re1 Rf2 37. Re6 Rf7+
+38. Ke8 Rcc7 39. Rxb6 Rce7+ 40. Kd8 Ra7 41. Kc8 Rf8+ 42. Rd8 Ra8+ 43. Kb7 Rfxd8
+44. c5 Rab8+ {0-1 (44) Khamrakulov,D (2449)-Hovhannisyan,R (2613) Tashkent 2014
+}) 9. d4 a6 10. Ba4 $2 {give the advantage to Black} (10. Bxc6+ bxc6 11. Bf4
+Qb4 12. O-O e6 13. Re1 Qxb2 14. Qf3 Bb4 15. Na4 Qxc2 16. Nb6 Bxe1 17. Nxa8 {
+White has big advantage}) 10... b5 11. Nxg6 hxg6 12. Bb3 e6 13. Be3 Nf6 14. Qf3
+Be7 ({also good} 14... Na5 {[%cal Ga5c4]}) 15. g5 Nd7 $6 ({better} 15... Nh5
+16. Nxd5 exd5 17. Bxd5 Rc8 18. Bxf7+ Kd8 {complicated position}) 16. O-O-O Na5
+$2 ({right way to play} 16... Nb6 17. Bf4 Qd7 18. h4 Bd6 $11) 17. Bxd5 exd5 18.
+Nxd5 {White has strong attack} Rc8 ({better defending idea} 18... Bd8 19. b4
+O-O (19... Nc4 20. Bf4 Qc6 (20... Qe6 21. Rhe1 {[%cal Ge1e8]}) 21. Nf6+) 20.
+Bf4 Qc6 21. bxa5 {White is better}) 19. Rhe1 Nc6 (19... Rxh3 20. Qe4 Nc6 21.
+Bf4 Qe6 22. Nc7+ Rxc7 23. Bxc7 Qxe4 24. Rxe4 {[%cal Gd4d5] White has big
+advantage}) 20. Bf4 {winning for white} Rxh3 21. Bxd6 Rxf3 22. Nxe7 Nxe7 23.
+Rxe7+ Kd8 24. Rde1 Nf6 25. gxf6 Rxf6 26. Bg3 Rcc6 27. Re8+ Kd7 28. R1e7# 1-0
+

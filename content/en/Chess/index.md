@@ -19,4 +19,8 @@ Chess belongs here as a form of ordered struggle: calculation, pattern recogniti
 
 ## Use
 
-This section can gather game analyses, recurring patterns, study notes, and positions worth preserving for later return.
+This section gathers game analyses, recurring patterns, study notes, and positions worth preserving for later return.
+
+## Practice
+
+- [[en/Chess/Training Sessions|Training Sessions]]

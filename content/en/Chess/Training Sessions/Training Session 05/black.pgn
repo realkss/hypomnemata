@@ -1,0 +1,39 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.09.25"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "C26"]
+[PlyCount "61"]
+[EventDate "2025.??.??"]
+
+1. e4 e5 2. Nc3 Nc6 ({another main move for black} 2... Nf6 3. g3 d5 4. exd5
+Nxd5 5. Bg2 Nxc3 6. bxc3 Bc5 7. Nf3 Nc6 8. O-O O-O 9. d3 Bg4 10. Qe1 f6 11. Rb1
+Qd7 12. Nd2 Bh3 13. Bxh3 Qxh3 14. Qe4 Bb6 15. Nc4 Qe6 16. Rb5 Rad8 17. a4 f5
+18. Qe2 Rde8 19. Re1 e4 20. Bf4 Qf7 21. Qd2 h6 22. h4 a6 23. Rbb1 Re6 24. d4 g5
+25. d5 Rg6 26. h5 Rg7 27. Ne5 Qxh5 28. dxc6 gxf4 29. Qxf4 bxc6 30. a5 Bc5 31.
+Nxc6 Bxf2+ 32. Qxf2 f4 33. Rb8 Rxg3+ 34. Kf1 Rxb8 35. Nxb8 Rf3 {0-1 (35) Antal,
+G (2539)-Ipatov,A (2648) Gjakova 2016}) 3. g3 Nf6 4. Bg2 Bc5 5. Nge2 d6 6. d3
+h6 ({it is better to give the bishop some space to run} 6... a6 {[%csl Ga7]})
+7. O-O (7. Na4 Bb6 8. Nxb6 axb6 9. O-O {[%csl Gc1,Gg2] White has 2 bishops
+advantage}) 7... O-O (7... a6 {[%cal Gc5a7]}) 8. h3 (8. Na4 Bb6 9. Nxb6 axb6
+10. c4 Be6 11. h3 Ne7 12. Nc3 {White has advantage}) 8... a6 9. Kh2 b5 10. f4
+Nd4 11. f5 {[%cal Gg3g4,Gg4g5] White's idea will be to push g4-g5 and attack
+on kingside} Bb7 12. g4 d5 ({it is stronger to push White knight to corner
+then play d5} 12... b4 13. Na4 Nxe2 14. Qxe2 Ba7 15. h4 {[%cal Gg4g5]} Nh7 {
+[%csl Gh4] stopping g4-g5} 16. Kg3 d5) 13. Ng3 dxe4 $2 {White piece on e4 will
+be very strong} (13... c6 14. g5 hxg5 15. Bxg5 Re8 16. Nh5 Be7 17. Rg1 {White
+has promising attack}) 14. Ncxe4 Nxe4 15. Nxe4 Bb6 (15... Be7 16. c3 Nc6 17. f6
+Bxf6 18. Rxf6 gxf6 19. Bxh6 Re8 20. g5 {winning attack for white}) 16. Nf6+ (
+16. c3 Nc6 17. f6 Re8 18. fxg7 Re6 19. g5 {winning for white}) 16... Qxf6 17.
+Bxb7 Rad8 18. Be4 {[%csl Gc1,Ge4] White bishops are very strong} c5 19. Rg1 (
+19. g5 hxg5 20. h4 gxh4 21. Qh5 {[%cal Gc1g5]}) 19... g5 20. h4 (20. fxg6 fxg6
+21. Bxh6 $18) 20... c4 $1 {only way to create counterplay} 21. Be3 cxd3 22.
+cxd3 Rc8 {[%csl Gc2][%cal Gc8c2]} 23. Rg2 {[%csl Gc2]} Rfd8 24. Rc1 Rxc1 $2 {
+g5 pawn will be lost} (24... Kg7 25. Qd2 Rxc1 26. Qxc1 Rh8 27. Kg1 Bd8) 25.
+Qxc1 gxh4 (25... Kg7 26. hxg5 hxg5 27. Bxg5 Rh8+ 28. Kg3 Qd6 29. f6+ {very big
+advantage}) 26. g5 Qd6 27. gxh6+ Kf8 (27... Kh8 28. h7 f6 29. Bh6 {[%cal Gh6g7]
+}) 28. h7 Qf6 29. Bg5 Ne2 30. Bxf6 Nxc1 31. h8=Q# 1-0
+

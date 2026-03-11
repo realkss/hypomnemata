@@ -1,0 +1,41 @@
+﻿[Event "Traning game"]
+[Site "?"]
+[Date "2025.11.06"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "B19"]
+[PlyCount "69"]
+[EventDate "2025.??.??"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. h4 h6 7. Nf3 Nf6 ({
+more popular choice} 7... Nd7 8. h5 Bh7 9. Bd3 Bxd3 10. Qxd3 e6 11. Bf4 Qa5+
+12. Bd2 Bb4 13. a3 Bxd2+ 14. Qxd2 Qxd2+ 15. Nxd2 Ngf6 16. O-O-O Ke7 17. Nde4
+Rad8 18. Rhe1 Nxe4 19. Rxe4 Nf6 20. Re5 Ng4 21. Re2 Rd5 22. c4 Rd7 23. f3 Nf6
+24. Re5 Rc8 25. Nf5+ Kf8 26. Ne3 Rcd8 27. Nc2 b6 28. Rde1 Rd6 29. c5 Rd5 30.
+cxb6 axb6 31. g4 R5d6 32. b4 Nd5 33. Kb2 Nf4 34. R1e3 f6 35. R5e4 e5 36. dxe5
+Nd3+ 37. Kc3 fxe5 38. a4 Nf2 39. Rxe5 Nd1+ 40. Kc4 Nxe3+ 41. Rxe3 Rd5 42. Rc3
+Kf7 43. Ne3 b5+ 44. axb5 cxb5+ 45. Kb3 Rd3 46. Nf5 Kf6 47. Kc2 Rd2+ 48. Kc1
+Rd1+ 49. Kc2 R8d2+ 50. Kb3 Rd3 51. Ne3 Rb1+ 52. Kc2 Rxc3+ 53. Kxc3 Ke5 54. Nf5
+Rf1 55. Nxg7 Rxf3+ 56. Kd2 Kf4 57. Nf5 Kxg4 58. Nxh6+ Kxh5 59. Ng8 Rf7 {0-1 
+(59) Ruiz Castillo,J (2377)-So,W (2810) Tbilisi 2017}) 8. h5 ({another choice
+for white} 8. Ne5 Bh7 9. Bd3 Bxd3 10. Qxd3 e6 11. Bd2 Nbd7) 8... Bh7 9. Bd3
+Bxd3 10. Qxd3 e6 11. Bd2 Nbd7 12. O-O-O Bd6 $6 {Black usually develop the
+queen to d5. Bishop on d6 blocks Queen's way} ({better place for bishop} 12...
+Be7 13. Ne4 Nxe4 14. Qxe4 Nf6 15. Qe2 Qd5 {[%csl Gd5][%cal Gd5a2]} 16. c4 Qe4)
+13. Ne4 Nxe4 14. Qxe4 Nf6 15. Qe2 {[%csl Gd6][%cal Gd8d6,Gd8d5] the bishop on
+d6 blocks Queen's way to d5} a5 ({better} 15... Bc7 {[%cal Gd8d5]} 16. Kb1 Qd5
+{the Queen is very useful on d5} 17. c4 Qf5+ 18. Ka1 O-O-O) 16. Ne5 a4 17. Kb1
+Qb6 18. g4 $6 ({stronger} 18. Nc4 Qc7 (18... Qxd4 19. Bxh6 {[%cal Gd1d6]}) 19.
+a3) 18... Nd5 ({better choice for black} 18... Qxd4 19. Nc4 Be7 20. Bxh6 Qxg4
+21. Qxg4 Nxg4 22. Bxg7 Rh7 $11) 19. c4 Ba3 (19... a3 20. Nd3 axb2 21. cxd5 Qa6
+{[%cal Ga6a2]} 22. a4 Qxa4 23. Nxb2 Qa2+ 24. Kc2 Qxd5 25. Ra1 O-O {White is
+better but Black has some compensation, because of weak White king}) 20. Be1
+Nf4 21. Qc2 Bb4 (21... f6 22. Ng6 Nxg6 23. Qxg6+ Kf8 24. Qc2 {White has
+advantage}) 22. c5 (22. Qe4 {[%csl Gf4] Knight on f4 is trapped} Ba3 23. Bc3
+Bxb2 24. Bxb2 a3 25. Rd2 {[%csl Gf4]}) 22... Qb5 23. Nc4 O-O 24. Nd6 Qe2 $2 (
+24... Qa5 25. Nxb7 Qc7 26. Nd6 Bxe1 27. Rhxe1 Rfb8) 25. Qxe2 Nxe2 26. Bxb4 {
+White is pawn up and it is winning} b6 27. cxb6 Rfb8 28. Bc5 a3 29. Rhe1 Nf4
+30. b7 Ra6 31. Re3 axb2 32. Ra3 Rxa3 33. Bxa3 Nd5 34. Kxb2 g6 35. Bc5 1-0
+

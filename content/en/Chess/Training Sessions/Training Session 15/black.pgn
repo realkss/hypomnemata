@@ -1,0 +1,31 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.01.10"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "B12"]
+[PlyCount "63"]
+[EventDate "2026.??.??"]
+
+1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nc3 e6 5. g4 Bg6 6. Be3 ({more popular and
+better choice} 6. Nge2 c5 7. h4 h5 8. Nf4 Bh7 9. Nxh5 Nc6 10. dxc5 Bxc5 11. Bg5
+Qc7 12. f4 a6 13. Bd3 Bxd3 14. Qxd3 Nb4 15. Qe2 Rc8 16. a3 Nc6 17. Nxg7+ Kf8
+18. Nh5 Qb6 19. O-O-O Na5 20. Na4 Be3+ 21. Kb1 Qc6 22. Qxe3 Qxc2+ 23. Ka2 Qxa4
+24. Rc1 Nc4 25. Qf2 Rc6 26. Rc3 Ne7 27. f5 exf5 28. Bxe7+ Kxe7 29. Qxf5 Rb6 30.
+Rh2 Qd1 31. Rf2 Rf8 32. Nf6 Re6 33. Rd3 Qc1 34. Nxd5+ {1-0 (34) Matlakov,M 
+(2685)-Riazantsev,A (2628) Sochi 2020}) 6... h6 ({stronger} 6... h5 7. gxh5 (7.
+g5 Ne7 {[%cal Ge7f5]} 8. Nf3 Nf5) 7... Bxh5) 7. Nge2 Ne7 8. Nf4 Bh7 ({also good
+} 8... Nd7 9. Nxg6 Nxg6 10. f4 c5) 9. Bd3 Ng6 $2 {ruins Black's pawn structure}
+({right way to play} 9... Bxd3 10. Qxd3 Nd7 11. O-O-O Qa5 12. Kb1 c5) 10. Nxg6
+fxg6 (10... Bxg6 11. Bxg6 fxg6 12. Qd3 {White has big advantage}) 11. Ne2 {
+[%cal Ge2f4] big advantage for White} Be7 12. Nf4 g5 (12... Kd7 13. Bxg6 Bg5
+14. Bxh7 Bxf4 15. Bxf4 Rxh7 16. Qd3) 13. Bxh7 ({stronger} 13. Nxe6 Qd7 14.
+Nxg7+) 13... Rxh7 (13... gxf4 14. Bg6+ Kd7 15. Bxf4) 14. Ng6 (14. Nxe6) 14...
+Nd7 15. Qd3 {winning advantage for White} Bb4+ 16. c3 Ba5 17. O-O-O Rc8 (17...
+Kf7 18. f4 Kg8 19. f5) 18. Ne7 Qxe7 19. Qxh7 c5 20. Kb1 cxd4 21. cxd4 Nb6 22.
+Rc1 Nc4 23. b3 Qb4 24. Qg8+ Kd7 25. Qf7+ Kd8 26. Qxe6 Na3+ 27. Kb2 Nc4+ 28. Ka1
+Qc3+ (28... Nb6 29. Qg8+ Kd7 30. Qxg7+) 29. Rxc3 Bxc3+ 30. Kb1 Na3+ 31. Kc1
+Ba1+ 32. Kd1 1-0
+

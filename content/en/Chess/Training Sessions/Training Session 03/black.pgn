@@ -1,0 +1,42 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.09.11"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "C47"]
+[PlyCount "71"]
+[EventDate "2025.??.??"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 {this line is called 4 Knights opening} 4. d4
+exd4 5. Nxd4 Bb4 6. Nxc6 bxc6 7. Bd3 O-O 8. O-O Re8 ({another main move} 8...
+d5 9. exd5 cxd5 10. Bg5 c6 11. Qf3 Bd6 12. Rae1 Rb8 13. b3 a5 14. h3 h6 15.
+Bxf6 Qxf6 16. Qxf6 gxf6 17. Ne2 c5 18. Ng3 Rd8 19. Nf5 Bf8 20. Ne7+ Bxe7 21.
+Rxe7 Be6 22. Rd1 c4 23. Be2 a4 24. bxa4 Bf5 25. Bf3 d4 26. a5 Bxc2 27. Rc1 Rb1
+28. Rxb1 Bxb1 29. Rc7 c3 30. Bd1 Ra8 31. Rc5 Bxa2 32. Bc2 Be6 33. Kf1 Rc8 34.
+Rxc8+ Bxc8 35. Ke2 Ba6+ 36. Kf3 d3 {0-1 (36) Adhiban,B (2655)-Carlsen,M (2834)
+Wijk aan Zee 2018 CBM 183 [Fernandez,D]}) 9. Qf3 Qe7 $6 ({better way to play} 
+9... Rb8 10. Bg5 Bd6 11. Rab1 Be5 12. Bf4 d5 13. Bxe5 Rxe5 14. Qg3 Re6 15. exd5
+cxd5 16. Nb5 Rb7 17. Nd4 Reb6 18. b3 c5 19. Nf5 g6 20. Rbd1 Nh5 21. Qh4 Qxh4
+22. Nxh4 Nf4 23. Rfe1 Bg4 24. f3 Be6 25. g3 Nxd3 26. Rxd3 c4 27. Rd4 Ra6 {0-1 
+(27) Liu,G (2459)-Ding,L (2778) China 2018}) 10. Bg5 Qe5 $6 ({e5 square is
+very important, Black should try to take control of e5 square} 10... Bd6 {
+[%cal Gd6e5]} 11. Bh4 (11. Rae1 Qe5 {[%cal Ge5h2,Ge5g5]}) 11... Be5 12. Rae1
+Rb8) 11. Bf4 Qe6 12. Rfe1 $6 {slow} (12. e5 Nd5 13. Nxd5 cxd5 14. c4 Bb7 15.
+Rad1 g6 16. Bb1 {White is better}) 12... d5 13. Bd2 Bxc3 14. exd5 (14. Bxc3
+dxe4 15. Qg3 {[%csl Ge4][%cal Gd3e4]} Qg4 16. Bxf6 Qxg3 17. fxg3 Bf5 $1 18. Rf1
+gxf6 19. Rxf5 exd3 20. cxd3 {[%csl Ga7,Gc6,Gc7,Gf6,Gf7] White has advantage
+because Black structure is ruined}) 14... Qxe1+ 15. Rxe1 Rxe1+ 16. Bxe1 Bxe1
+17. c3 {[%cal Ge1a5] only move to do not let Be1 to escape} Ng4 $6 (17... Bg4
+18. Qf4 cxd5 19. Bb5 {[%csl Ge1][%cal Ga8e8,Gb5e8,Gf4c1] stopping Re8} h6 (
+19... Rb8 20. Qxc7) 20. Qc1 Rb8 21. Ba4 {[%cal Gc1e1] White has advantage}) 18.
+Qe4 $2 (18. Qe2 Bxf2+ 19. Kf1 Bc5 20. Qe8+ Bf8 21. Qxc6 Rb8 22. Qxc7 Ra8 23. c4
+{[%cal Gc4c5] big advantage for white}) 18... Bxf2+ 19. Kf1 Nf6 $2 (19... Bf5
+$1 20. Qe2 (20. Qxf5 Ne3+ 21. Kxf2 Nxf5 22. Bxf5 cxd5 $19) 20... Bxd3 21. Qxd3
+Re8 22. g3 Re1+ 23. Kg2 cxd5 {winning advantage for black} 24. h3 $2 Rg1+ 25.
+Kf3 Ne5+) 20. Qe7 {[%cal Ge7d8]} Bd7 21. Kxf2 Re8 22. Qc5 Nxd5 23. Qxa7 Be6 24.
+Qc5 Nf4 25. Bf1 Bd5 26. g3 Ng6 27. a4 {[%cal Ga4a8] winning advantage for white
+} h5 28. a5 h4 29. a6 hxg3+ 30. hxg3 Ne5 31. Be2 Bf3 32. Bf1 Bd1 33. a7 Ng4+
+34. Kg1 Re3 35. a8=Q+ Kh7 36. Qh5+ 1-0
+

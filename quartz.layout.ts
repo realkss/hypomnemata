@@ -10,7 +10,7 @@ function isLanguageLanding(slug?: string) {
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [Component.Masthead()],
-  afterBody: [],
+  afterBody: [Component.ChessPgnViewer()],
   footer: Component.Footer({
     links: {
       Lexicon: "lexicon",

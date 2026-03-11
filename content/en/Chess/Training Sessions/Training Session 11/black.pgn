@@ -1,0 +1,39 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.11.29"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "B13"]
+[PlyCount "79"]
+[EventDate "2025.??.??"]
+
+1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nf6 5. c3 e6 $6 {[%csl Ge6] not a good
+move. the bishop on c8 will be bad after e6 move} (5... Nc6 6. Bf4 Bg4 7. Qb3
+Qd7 8. Nd2 e6 9. Ngf3 Bd6 10. Bxd6 Qxd6 11. O-O O-O 12. Rae1 Bxf3 13. Nxf3 Qc7
+14. Re3 Rab8 15. Qd1 g6 16. Ng5 Qf4 17. Rg3 e5 18. Nh3 Qh4 19. f4 exd4 20. Ng5
+dxc3 21. Rh3 Qg4 22. Qc2 Rbe8 23. Qxc3 Nh5 24. Nxh7 Kxh7 25. Rff3 Kg8 26. Qd2
+Re7 27. Qf2 Rfe8 28. Rh4 Re1+ 29. Bf1 Qf5 30. g4 Qb1 31. Kg2 Rxf1 32. Qxf1
+Qxf1+ 33. Kxf1 Nxf4 {0-1 (33) Aronian,L (2782)-Artemiev,V (2699) chess24.com
+INT 2021}) 6. Nf3 Be7 7. O-O O-O 8. Bf4 Nbd7 ({e4 square is very important.
+Black should try to control e4 square} 8... Ne4 9. Nbd2 f5) 9. Nbd2 Nb6 ({
+better choice} 9... Nh5 10. Be3 Qc7 {[%csl Gf4][%cal Gh5f4]} 11. g3 Nhf6 12.
+Bf4 Bd6 13. Bxd6 Qxd6 14. Re1 b6) 10. Ne5 Bd7 11. Qf3 Rc8 (11... Nc8 12. Qh3
+Nd6 {d6 square is better square for the knight}) 12. Qh3 Nc4 13. Ndxc4 dxc4 14.
+Bc2 b5 15. Rad1 Bc6 16. Bg5 $6 (16. Ng4 g6 17. Nh6+ Kg7 18. Be5 Bd5 19. f4 Rc6
+20. g4 {White has very strong attack}) 16... g6 ({White's bishop on c2 is
+dangerous. Black should trade that dangerous bishop} 16... Be4 {[%csl Gc2]} 17.
+Bxe4 Nxe4 18. Bxe7 Qxe7 $11) 17. Nxc6 $6 {this move lose the advantage. Knight
+on e5 was very strong} (17. Bh6 Re8 18. Rfe1 Bd5 19. Re3 Nd7 20. Rg3 Nxe5 21.
+dxe5 {White is better}) 17... Rxc6 18. Rfe1 a5 ({better} 18... Nd5 19. Bh6 Re8
+20. Qf3 Bf8 21. Bc1 Bg7 $11) 19. Re5 Nd5 20. Bxe7 Qxe7 21. Be4 Qd6 (21... Rd6
+22. Re1 Qd7 23. Bxd5 Rxd5 24. Rxd5 Qxd5 25. Re5 {White is slightly better}) 22.
+Qh6 ({stronger} 22. Qf3 Rd8 23. h4 Rb6 24. h5) 22... f5 $2 (22... Rb6 23. Bxd5
+exd5 24. Rde1 b4 25. R5e3 {[%cal Ge3h3]} Qf6 26. Re8 Qg7 27. Qg5 {White has
+advantage, but Black has chances for equality}) 23. Bxd5 exd5 24. Rde1 {[%cal
+Ge1e7,Ge7e8,Gh2h4,Gh4h5] big advantage for White} Rc7 25. Re6 Qd7 26. Qf4 Rb7
+27. Rd6 Qc7 28. Qe5 {[%csl Gd5] d5 pawn will be lost} b4 29. Qxd5+ Kh8 30. Rc6
+Qf7 31. Qe5+ Kg8 32. d5 bxc3 33. bxc3 Rb2 34. d6 {winning for white} Rd2 35. h3
+Rd8 36. Rc7 Qf8 37. Qe6+ Kh8 38. d7 Qd6 39. Qxd6 Rxd6 40. Re8+ 1-0
+

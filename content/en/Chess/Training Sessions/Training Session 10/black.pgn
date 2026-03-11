@@ -1,0 +1,40 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.11.22"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwipo"]
+[Result "1-0"]
+[ECO "B18"]
+[PlyCount "81"]
+[EventDate "2025.??.??"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. h4 h5 $2 {weakens g5
+square and h5 pawn will be weak too} ({right way to play} 6... h6 7. Nf3 Nd7 8.
+h5 Bh7 9. Bd3 Bxd3 10. Qxd3 e6 11. Bd2 Ngf6 12. O-O-O Be7 13. Kb1 O-O 14. Ne4
+Nxe4 15. Qxe4 Nf6 16. Qe2 Qd5) 7. Nf3 ({it is strong too} 7. Nh3 Nd7 8. Nf4)
+7... Nd7 8. Bd3 Bxd3 9. Qxd3 e6 10. Bd2 ({better place for bishop} 10. Bf4 Ngf6
+11. O-O-O Nd5 12. Bg5 {[%csl Gg5] g5 square is weak} Qc7 13. c4 N5f6 14. Ne5 {
+White has advantage}) 10... Ngf6 11. O-O-O Be7 ({the bishop is more active on
+d6} 11... Bd6 12. Ng5 Nb6 13. Rhe1 {White has advantage}) 12. Kb1 (12. Rhe1 Qb6
+13. Ng5 {the knight on g5 is very strong}) 12... Qc7 13. Rhe1 O-O-O 14. Ng5
+Rhf8 15. Nf5 {[%csl Gf5,Gg5] White knights are very strong} Nd5 (15... exf5 $6
+16. Rxe7 Qd6 17. Rxf7) (15... Nc5 16. Qg3 exf5 (16... Qxg3 17. Nxe7+ Kd7 18.
+fxg3 Kxe7 19. dxc5) 17. Qxc7+ Kxc7 18. Rxe7+ Rd7 19. Rxd7+ Ncxd7 20. Re1 Kd8
+21. Bb4 {White has big advantage}) 16. c4 ({stronger} 16. Nxe7+ Nxe7 17. Qa3 {
+[%cal Ga3e7,Ga3a7]} Nb6 18. Qxa7) 16... Bxg5 17. Bxg5 f6 (17... N5f6 18. Nxg7
+Rg8 19. Nxh5 Nxh5 20. Bxd8 Qxd8 21. d5 cxd5 22. cxd5 {[%csl Gd1,Ge1] White
+rooks are dangerous on open files} e5 23. Qf5 Nhf6 24. Rxe5) 18. Bd2 exf5 19.
+cxd5 {White is much better} Kb8 (19... Nb6 20. dxc6 bxc6 21. Qxf5+) 20. g3 {
+[%cal Gd2f4]} Ka8 21. Rc1 ({stronger} 21. Bf4 Qb6 22. dxc6 Qxc6 23. d5 Qb6 24.
+Qxf5) 21... Qb6 22. dxc6 bxc6 23. Qf3 $6 (23. Re7 g6 24. Qa3 {[%cal Gd2a5]} Qb7
+25. d5 cxd5 26. Bf4 Rc8 27. Qd6 Rxc1+ 28. Bxc1 {White has winning advantage})
+23... Rc8 ({only chance to create some counterplay} 23... Ne5 24. dxe5 Rxd2 25.
+Qc3 Rxf2 26. e6 {[%csl Ge6]}) 24. Rc4 ({stronger} 24. Re7 Rfd8 25. Qxf5 Qxd4
+26. Be3 Qd6 27. Rxg7) 24... Rfd8 25. Rec1 Nb8 26. d5 c5 (26... Rxd5 27. Qxd5
+cxd5 28. Rxc8 {[%cal Gd2f4]} Kb7 29. Bf4 Na6 30. Rg8 {[%cal Gg8g7] big
+advantage for white}) 27. Qxf5 Nd7 28. Bf4 Ne5 (28... Qb7 29. d6) 29. Bxe5 fxe5
+30. Qxe5 Rc7 31. Qxh5 {White is 3 pawns up and it is winning for white} Qd6 32.
+Rd1 Re7 33. f4 Re3 34. Qg5 g6 35. Rdc1 Rc8 36. g4 Rd3 37. f5 Rxd5 38. Qxg6 Qg3
+39. f6 Qxh4 40. Qe4 Qg5 41. f7 1-0
+

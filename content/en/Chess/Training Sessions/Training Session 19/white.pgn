@@ -1,0 +1,30 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.02.06"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "B21"]
+[PlyCount "62"]
+[EventDate "2026.??.??"]
+
+1. e4 c5 2. Nc3 e6 3. d4 cxd4 4. Qxd4 Nc6 5. Qd1 ({another main move} 5. Qd3
+Bb4 6. Bd2 Nf6 7. O-O-O O-O 8. a3 Be7 9. Qg3) 5... Nf6 6. f4 ({also good choice
+} 6. Bd3 Be7 7. Nf3 d6 8. O-O O-O 9. Qe2) 6... Bb4 7. Bd3 d5 8. e5 Nd7 ({
+interesting choice} 8... d4 9. a3 Ba5 10. b4 dxc3 11. bxa5 Nd5) 9. Bd2 Nc5 10.
+Bb5 $2 ({better way to play} 10. Nf3 Nxd3+ 11. cxd3 O-O 12. O-O) 10... a6 11.
+Bxc6+ bxc6 {[%csl Gc6,Gd5] Black is better because of 2 bishops and strong
+central pawns} 12. Nge2 O-O ({stronger} 12... a5 {[%cal Gc8a6]} 13. O-O Ba6)
+13. a3 Bxc3 14. Bxc3 Ne4 ({also good} 14... a5 {[%cal Gc8a6]}) 15. Qd4 $2 {
+[%cal Gc6c5] lose the valuable time} ({White should try to trade strong knight
+on e4} 15. Ng3 {[%csl Ge4]} Nxc3 16. bxc3 f6 17. O-O) 15... c5 16. Qd3 a5 {
+[%cal Gc8a6]} 17. Ng3 Ba6 18. Qf3 Nxc3 19. Qxc3 Qb6 {[%csl Ga6,Gc5,Gd5,Gg3]
+[%cal Ga6f1] The bishop is stronger than knight and Black has strong central
+pawns} 20. O-O-O Rab8 {[%cal Gb8b2] open b file is dangerous for White.} 21. f5
+$6 (21. a4 d4 22. Qa3 c4 23. Ne4 c3 24. b3 d3 {decisive attack for black})
+21... d4 22. Qb3 Qxb3 23. cxb3 Rxb3 24. fxe6 fxe6 {Black is pawn up and has
+winning advantage} 25. Ne4 Bb7 ({stronger} 25... Rfb8 26. Rd2 (26. Nxc5 Rc8)
+26... Bd3 27. Nd6 Rc3+ 28. Kd1 Rxa3) 26. Nd6 Bxg2 27. Rhg1 Rf2 28. Nc4 Be4 {
+Black pieces are very active} 29. Rd2 Rxd2 30. Nxd2 Re3 31. Nxe4 Rxe4 0-1
+

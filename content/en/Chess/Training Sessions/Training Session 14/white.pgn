@@ -1,0 +1,29 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.01.04"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "C02"]
+[PlyCount "76"]
+[EventDate "2026.??.??"]
+
+1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. a3 Nh6 7. Bd3 ({more
+popular choice} 7. b4 cxd4 8. Bxh6 gxh6 9. cxd4 Bd7 10. Ra2 Be7 11. Be2 f6 12.
+O-O O-O 13. Nc3 fxe5 14. dxe5 Be8 15. Na4 Qc7 16. Rc2 Qb8 17. Nc5 Bxc5 18. Rxc5
+Nxe5 19. Nd4 Bf7 20. Qc1 Ng6 21. f4 Re8 22. Kh1 Ne7 23. Bg4 Nc6 24. Nxc6 bxc6
+25. Rxc6 Rc8 26. f5 Rxc6 27. Qxc6 Qe8 28. Qa6 e5 29. Qxh6 Qf8 30. Qh4 Kh8 31.
+f6 Bg6 32. Qg5 Qd6 33. h4 Rg8 34. Rc1 Bc2 35. Rxc2 {1-0 (35) Yu,Y (2736)-Xu,Y 
+(2470) Doha 2015}) 7... cxd4 8. cxd4 Nf5 9. Bxf5 exf5 10. O-O Be6 11. Nc3 Be7
+12. Ng5 $2 ({right way to play} 12. b4 O-O 13. Qd3 h6 14. Na4 {[%cal Ga4c5]}
+Qc7 15. Bd2 {[%cal Ga1c1]}) 12... Bxg5 (12... Qxd4 13. Nb5 Qxd1 14. Rxd1 Rc8 {
+Black is better}) 13. Bxg5 Qxd4 14. Qxd4 Nxd4 15. Rad1 Nc6 16. Nxd5 Rc8 (16...
+Bxd5 17. Rxd5 h6 18. Be3 Rd8 19. Rxd8+ Kxd8 20. Rd1+ Kc8 21. f4 Rd8 $11) 17. b4
+h6 18. b5 $2 (18. Be3 b6 19. f4 Ne7 20. Nxe7 Kxe7 $11) 18... hxg5 19. bxc6 Rxc6
+{Black is a pawn up and White has no compensation} 20. Nb4 Rc5 21. Rfe1 O-O 22.
+h3 Rfc8 23. Rd3 (23. Rd6) 23... Rc3 (23... a5 {the knight has no place to run})
+24. Red1 a5 25. Nd5 Rxd3 26. Rxd3 Rc5 27. Ne3 Rxe5 {winning advantage for black
+} 28. Rd8+ Kh7 29. Rb8 b5 30. Nc2 Bc4 31. Ne3 Rc5 32. Rb7 f4 33. Ng4 Bd5 34.
+Ra7 b4 35. axb4 axb4 36. Ne5 b3 37. Nd3 Rc3 38. Nb4 b2 0-1
+

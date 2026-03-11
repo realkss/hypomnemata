@@ -1,0 +1,35 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.10.31"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "A59"]
+[PlyCount "52"]
+[EventDate "2025.??.??"]
+
+1. d4 Nf6 2. c4 c5 3. d5 b5 4. cxb5 a6 {this line is called Benko Gambit} 5.
+bxa6 d6 6. Nc3 Bxa6 7. e4 Bxf1 8. Kxf1 g6 9. Nf3 Bg7 10. g3 O-O 11. Kg2 Nbd7
+12. Re1 ({more popular and better move} 12. a4 Ra6 13. Qc2 Qa8 14. Nb5 Rc8 15.
+Bd2 e6 16. dxe6 fxe6 17. Rhe1 d5 18. exd5 exd5 19. Kg1 Ne4 20. Bf4 Qc6 21. Rad1
+c4 22. Nfd4 Qc5 23. f3 Nef6 24. Kh1 Nf8 25. b3 cxb3 26. Qxc5 Rxc5 27. Nxb3 Rc4
+28. a5 Rb4 29. Nc7 Ra7 30. Nd4 Rc4 31. a6 Raxc7 32. Bxc7 Rxc7 33. Nb5 Rc8 34.
+a7 N8d7 35. Rc1 Ra8 36. Ra1 Nb6 37. Nc7 Rc8 38. a8=Q Nxa8 39. Rxa8 Rxa8 40.
+Nxa8 Bf8 41. Rd1 Kf7 42. Nc7 g5 43. Nxd5 Nd7 44. Kg2 Ne5 45. f4 gxf4 46. gxf4
+Ng6 47. Kf3 Bd6 48. Ke4 Bc5 49. Rc1 {1-0 (49) Laznicka,V (2679)-Georgiev,K 
+(2644) Dubai 2014}) 12... Qa5 ({better choice} 12... Ng4 13. Qe2 Qa5 14. a4
+Rfb8) 13. Nd2 {[%cal Gd2c4]} ({stronger} 13. a4 Rfb8 14. Bd2 Ne8 (14... Rxb2
+15. Nb5 Qb6 16. Bc3 {[%csl Gb2]}) 15. Nb5 Qa6 16. Bc3) 13... Ne5 {[%csl Gc4,
+Gd3][%cal Ge5d3]} 14. Nb3 Qa6 15. f4 $2 ({right way to play} 15. a4 Nd3 16. Re2
+Rfb8 17. Nb5) 15... Nd3 16. Re2 c4 (16... Rfb8 17. a4 Ng4 18. h3 Bxc3 19. bxc3
+Rxb3 20. hxg4 (20. Qxb3 Nxc1) 20... Qc4 {[%csl Gb3,Gd3] Black has very big
+advantage}) 17. Nd4 Nxd5 (17... Rfb8) 18. exd5 (18. Nxd5 Bxd4 19. Nxe7+ Kg7 20.
+Nd5 f5 21. Nc7 Qc8 22. Nxa8 Qxa8 23. Bd2 fxe4 {[%csl Gd3,Gd4,Ge4][%cal Gd6d5]
+Black pieces are very active}) 18... Bxd4 19. Rxe7 Rfe8 20. Rxe8+ Rxe8 {[%csl
+Ga1,Gc1,Gd3,Gd4,Ge8] Winning position for black. White pieces are not developed
+} 21. f5 (21. Bd2 Nxb2 22. Qc2 Na4 23. Re1 Rxe1 24. Bxe1 Nxc3 25. Bxc3 Bxc3 26.
+Qxc3 Qxa2+ 27. Kh3 Qe2 {winning for black}) 21... Bxc3 22. bxc3 Qb6 {[%cal
+Gb6f2]} 23. Qf1 Re1 24. Bh6 (24. Qf3 Qg1+ 25. Kh3 Nf2+ 26. Kh4 Qxh2+ 27. Kg5
+Ne4+ 28. Kf4 g5+ 29. Kg4 h5#) 24... Rxf1 25. Rxf1 Qb2+ 26. Kh3 Qxc3 0-1
+

@@ -1,0 +1,56 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.02.22"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "B23"]
+[PlyCount "108"]
+[EventDate "2026.??.??"]
+
+1. e4 c5 2. Nc3 d6 3. d4 cxd4 4. Qxd4 Nc6 5. Qd2 g6 6. b3 Bg7 7. Bb2 Nf6 8.
+O-O-O O-O 9. f3 Be6 ({another choice for black} 9... Qa5 10. Kb1 Rd8 11. Nge2
+e5 12. g4 Be6 13. g5 Nh5 14. h4 Qb6 15. Nd5 Qf2 16. Bh3 Qxf3 17. Bxe6 fxe6 18.
+Nc7 Rac8 19. Nxe6 Re8 20. Rhf1 Qg4 21. Nxg7 Kxg7 22. Qe3 Rf8 23. Rg1 Qxh4 24.
+Rxd6 Rcd8 25. Rd5 Kg8 26. Rgd1 Rde8 27. Nc1 Qf4 28. Qc5 Qxe4 29. Rd7 Rf7 30.
+Rxf7 Kxf7 31. Rd7+ Kg8 32. Rxb7 Nf4 33. Rc7 Nd8 34. Qxa7 Nde6 35. Rxh7 Rf8 36.
+Ba3 Rf5 37. Rb7 {1-0 (37) Popov,I (2604)-Kovacevic,A (2480) Subotica 2019}) 10.
+Kb1 a6 11. g4 b5 12. Nh3 ({better way to continue the attack on the kingside} 
+12. h4 Qa5 13. h5 Rfc8 14. hxg6 hxg6 15. Nge2 {[%cal Ge2f4]}) 12... Nd7 {[%cal
+Gg7a1,Gd7c5]} 13. Nf4 (13. Ng5 Nc5 14. h4 {[%cal Gh4h5]} b4 15. Nd5 h6 16. h5
+hxg5 17. hxg6 fxg6 18. Qxg5 Bxb2 19. Kxb2 Kf7 20. Rh7+ Ke8 21. f4 {White has
+big compensation}) 13... Nc5 14. g5 b4 15. Ncd5 Bxb2 16. Kxb2 Ne5 (16... a5 17.
+h4 a4 18. h5 axb3 19. cxb3 {White has better attacking resourses} (19. axb3 Qa5
+{[%cal Ga5a2]}) 19... Qa5 20. Kb1 {[%cal Gd2a2]}) 17. Be2 {a bit slow} ({White
+can sacrifice f3 pawn and continue the attack} 17. h4 Nxf3 18. Qg2 Ne5 19. h5 {
+White has promising attack}) 17... a5 18. h4 a4 ({better defending idea} 18...
+h5 19. gxh6 Bxd5 20. Nxd5 e6 21. Ne3 Qf6) 19. h5 ({White can take b4 pawn} 19.
+Qxb4 Qd7 20. Qd2 axb3 21. axb3 Rfb8 22. Ra1 {Black has not enough compensation}
+) 19... axb3 $6 ({better choice} 19... Qd7 {[%cal Gd7a7]} 20. hxg6 Qa7 21.
+gxh7+ Kh8 22. Kb1 axb3 23. cxb3 Nxb3 24. Qb2 Nc5 25. g6 {White is better but
+it is complicated}) 20. axb3 Bd7 $6 (20... Qd7 21. hxg6 fxg6 22. Nxe6 Nxe6 23.
+Qxb4 {White is pawn up}) 21. Ra1 ({winning advantage for white} 21. Nxe7+ Qxe7
+22. Nd5 Qd8 23. Nf6+ Kg7 24. Qxd6 {[%cal Gd6c5,Gd6e5]} Qa5 25. Ra1) 21... Rxa1
+22. Rxa1 Ne6 23. hxg6 fxg6 24. Nxe6 Bxe6 25. f4 Nc6 26. Bb5 Bd7 27. Bc4 ({
+stronger} 27. Ra6 Nb8 28. Bc4 Be6 29. Ra7 Nc6 30. Nxe7+) 27... Be6 28. Bb5 Bd7
+29. Rh1 (29. Ra6) 29... Rf7 30. Qh2 Qf8 31. Bc4 Qg7+ 32. Kb1 Kh8 33. Nb6 e6 34.
+Nxd7 $2 {this move helps Black to activate the pieces} (34. f5 Ne5 35. f6 Qg8
+36. Be2 {right way to keep the big advantage}) 34... Rxd7 35. Bxe6 $2 ({White
+should trade Black's queen, Queen+rook will be dangerous for White} 35. Qh6 {
+[%cal Gd7a7,Gg7a1]} Qxh6 36. gxh6 Nd8 37. Rd1 {White is much better in the
+endgame}) 35... Ra7 {[%csl Gb1]} 36. e5 dxe5 $2 (36... Nd4 37. Bc4 Qb7 {[%cal
+Gb7a8]} 38. f5 (38. exd6 Qa8) 38... Nxc2 39. exd6 Qe4 {winning for black}) 37.
+fxe5 ({it is important to keep the a1-h8 diagonal closed} 37. f5 {[%cal Gg7a1]}
+gxf5 38. Qh5 {[%cal Gh5e8]} Re7 39. Bd5 Nd4 40. g6 {winning advantage}) 37...
+Nxe5 $6 (37... Qxe5 38. Qxe5+ Nxe5 $11) 38. Re1 (38. Qf4 {[%cal Gh1h7]} Ra8 (
+38... Nc6 39. Rxh7+ Kxh7 40. Qh4+) 39. Bd5 Nd3 40. Rxh7+ Qxh7 41. Qd4+ Qg7 42.
+Qh4+ Qh7 43. Qxh7+ Kxh7 44. Bxa8 {winning endgame}) 38... Ra1+ 39. Kxa1 Nd3+ $4
+(39... Nf3+ {wins the queen}) 40. Re5 ({wins the game} 40. c3 Qxc3+ 41. Ka2 {
+[%cal Gh2b8]} Nxe1 42. Qb8+ Kg7 43. Qg8#) 40... Qxe5+ 41. Qxe5+ Nxe5 42. Kb2
+Nf3 43. c4 $2 ({White should create pass pawn} 43. c3 bxc3+ 44. Kxc3 Nxg5 45.
+Bd5 Kg7 46. b4 Kf6 47. b5 Ke5 48. b6 Kd6 49. b7 Kc7 50. Kd4 h5 51. Ke5) 43...
+Nxg5 44. Bd5 Kg7 45. Kc2 Kf6 46. Kd3 Ke5 {[%csl Gg6,Gh7] winning endgame for
+black, Black has 2 pass pawns} 47. Ba8 Ne6 48. Bd5 Nc5+ 49. Kc2 h5 50. Bf7 Kf6
+51. Be8 h4 52. Bc6 Ke5 53. Bg2 g5 54. Bh3 Kf4 0-1
+

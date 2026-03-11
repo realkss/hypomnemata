@@ -1,0 +1,40 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2026.03.05"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "B18"]
+[PlyCount "69"]
+[EventDate "2026.??.??"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. Nh3 e6 7. Nf4 Be7 $6 ({
+more popular and better move} 7... Bd6 8. h4 Qc7 9. Nxg6 hxg6 10. Ne4 Nf6 11.
+Nxd6+ Qxd6 12. Be2 Nbd7 13. g3 e5 14. dxe5 Qxe5 15. O-O O-O 16. c3 Rfe8 17. Re1
+Qf5 18. Bg5 Rad8 19. Qc1 Re4 20. Bf1 Ne5 21. Rxe4 Nxe4 22. Be3 Rd2 23. Bg2 {
+0-1 (23) Vos,T (2204)-Turov,M (2595) Haarlem 2017}) 8. Be2 (8. h4 Bxh4 9. Nxg6
+hxg6 10. Ne4 {[%cal Gg2g3]} Nh6 11. Bf4 {[%csl Gd6]} Be7 12. Qd2 Nd7 13. O-O-O
+Nf6 14. f3 {White has nice compensation. the knight on h6 is out of the game})
+8... Nf6 9. h4 Ne4 $6 ({better choice} 9... Nbd7 10. h5 Bf5 11. Nxf5 exf5 12.
+c3 $14) 10. Nxe4 ({stronger} 10. Nxg6 Nxg3 11. Nxh8 Nxh1 12. g3 Nd7 13. Qd3 g6
+14. Qf3 Bf6 15. Nxf7 Kxf7 16. Qxh1 Bxd4 17. c3 Bf6 18. Be3 {[%csl Ge2,Ge3,Gf7]
+White has 2 bishops advantage+Black king is not that safe}) 10... Bxe4 11. h5
+$6 {lose the advantage} (11. Nh5 {[%csl Gg7]} O-O 12. Ng3 Bf5 13. Nxf5 exf5 14.
+c3 {White is slightly better becasue of 2 bishops advantage}) 11... h6 12. Be3
+Nd7 13. Bd3 Nf6 14. Bxe4 Nxe4 15. Qd3 Nf6 ({it is better to weakens White's
+queenside first. it will be hard to castle long for white} 15... Qa5+ 16. c3
+Nf6) 16. O-O-O Qc7 17. Kb1 O-O 18. Rdg1 Rfd8 ({it is better to prevent White's
+g4 push} 18... Ng4 19. Qe4 Nxe3 20. fxe3 Bf6 21. Nd3 e5 22. dxe5 Rfe8) 19. Qe2
+({stronger} 19. g4 e5 20. Ne2 exd4 21. Bf4 Qb6 22. g5 hxg5 23. Bxg5 Qb5 24. Bh6
+Qxd3 25. Rxg7+ Kh8 26. cxd3) 19... Nd5 ({black should strike at the centre
+while White is attacking in the kingside} 19... c5 20. dxc5 e5 21. Nd3 e4 22.
+Nf4 Bxc5) 20. Nd3 Nxe3 21. Qxe3 Bf6 22. c3 a5 $2 {this move lose very valuable
+time} ({Black idea should be to attack the centre} 22... b6 {[%cal Gc6c5]} 23.
+f4 c5 {There is principle in strategy: When your opponent attack in sides, you
+should strike back at the centre}) 23. f4 b6 $2 {lose valuable time too} ({
+better way to stop g4-g5 push} 23... Rd5 24. g4 Qe7) 24. g4 {[%cal Gg4g5]
+White has very strong attack now} c5 25. g5 cxd4 26. Qe4 hxg5 27. fxg5 Be7 28.
+g6 {it is winning attack.} Bf6 29. h6 {[%csl Gg6,Gh6]} dxc3 30. gxf7+ Qxf7 31.
+hxg7 c2+ 32. Kxc2 Rac8+ 33. Kb1 Bxg7 34. Qh7+ Kf8 35. Rxg7 1-0
+

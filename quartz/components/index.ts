@@ -25,6 +25,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import LanguageSwitcher from "./LanguageSwitcher"
 import Masthead from "./Masthead"
+import ChessPgnViewer from "./ChessPgnViewer"
 import TranslationBadge from "./TranslationBadge"
 
 export {
@@ -55,5 +56,6 @@ export {
   ConditionalRender,
   LanguageSwitcher,
   Masthead,
+  ChessPgnViewer,
   TranslationBadge,
 }

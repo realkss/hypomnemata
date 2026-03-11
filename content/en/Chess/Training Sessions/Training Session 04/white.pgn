@@ -1,0 +1,41 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.09.19"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "D37"]
+[PlyCount "92"]
+[EventDate "2025.??.??"]
+[SourceDate "2025.09.20"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. Nc3 ({another main move} 4. g3 Bb7 5. Bg2 Be7
+6. O-O O-O 7. Nc3 Ne4 8. Bd2 Bf6 9. Rc1 d6 10. d5 Nxd2 11. Nxd2 e5 12. b4 a5
+13. a3 axb4 14. axb4 Na6 15. Qb3 Bg5 16. e3 f5 17. f4 Bf6 18. fxe5 Bxe5 19. Nf3
+Kh8 20. Nxe5 dxe5 21. Nb5 Qd7 22. Qc3 Rae8 23. Rcd1 Rf6 24. e4 fxe4 25. Bxe4 c6
+26. dxc6 Rxf1+ 27. Rxf1 Bxc6 28. Qf3 {1-0 (28) Nakamura,H (2785)-Iturrizaga
+Bonelli,E (2652) Caleta 2017 CBM 177 [Krasenkow,M]}) 4... Bb7 5. Bf4 ({more
+popular choice} 5. Bg5 Be7 6. e3 O-O 7. Bd3 d5 8. O-O Nbd7 9. Rc1) 5... Be7 6.
+e3 O-O 7. Bd3 d5 8. O-O c5 9. Qc2 $6 ({solid way to play} 9. dxc5 dxc4 10. Bxc4
+Bxc5 11. Qe2 Nbd7 12. Rfd1) 9... dxc4 ({stronger} 9... Nc6 {[%cal Gc6b4]} 10.
+a3 cxd4 11. exd4 (11. cxd5 dxc3 12. dxc6 Bxc6 13. bxc3 (13. Qxc3 Bxf3 14. gxf3
+Nd5 15. Qc4 Nxf4 16. exf4 Rc8 {[%csl Gf2,Gf3,Gf4]})) 11... dxc4 12. Bxc4 Nxd4
+13. Nxd4 Qxd4) 10. Bxc4 Bxf3 11. gxf3 cxd4 12. Rad1 Qc8 13. Rxd4 Nc6 14. Rdd1
+Qb7 15. Bd3 $6 {[%cal Gc6b4]} ({better} 15. Ne4 Nb4 16. Nxf6+ Bxf6 17. Qe2 Rfd8
+$11) 15... Nb4 16. Be4 Nxe4 17. Qxe4 Qxe4 18. Nxe4 $2 ({controlling d5 is
+better} 18. fxe4 {[%csl Gd5]}) 18... Rfd8 {[%csl Gd3,Gd5] now black can use d3
+and d5 squares} 19. a3 (19. Bc7 Rxd1 20. Rxd1 Nd5 21. Bd6 f5 22. Bxe7 fxe4 23.
+Bg5 exf3 24. e4 Nb4 25. Rd7 {[%csl Gd7] White has enough compensation for a
+pawn}) 19... Nd3 20. Bg3 $2 (20. Bc7 Rd7 21. Rd2 f5 22. Nc3 Rc8 23. Rfd1 Rcxc7
+24. Rxd3 Rxd3 25. Rxd3 Bf6 {Black has advantage. The bishop is stronger than
+knight}) 20... Nxb2 21. Rxd8+ Rxd8 {Black is pawn up and White has no
+compensation for it} 22. Rb1 Na4 (22... Bxa3 23. Ra1 Rd1+ 24. Rxd1 Nxd1 {[%csl
+Ga7,Gb6]}) 23. Bf4 f6 {[%cal Ge6e5]} 24. Rb3 Nc5 25. Nxc5 Bxc5 26. Kf1 e5 27.
+Bg3 Rd2 28. f4 e4 29. f5 Ra2 30. Bb8 a5 31. Bc7 Rxa3 32. Rxa3 ({only chance to
+continue the game} 32. Rb5 Rc3 33. Bxb6 Bxb6 34. Rxb6 Rc5) 32... Bxa3 33. Bxb6
+a4 {winning for black} 34. Ke2 Bb4 35. Bd4 Kf7 36. Kd1 Ke7 37. Kc2 Kd6 38. Kb2
+Kd5 39. Bc3 (39. Ka2 Kc4 40. Kb2 Kd3 {[%cal Gd3e2,Ge2f2]}) 39... Bxc3+ 40. Kxc3
+Ke5 41. Kb4 Kxf5 42. Kxa4 Kg4 43. Kb4 Kf3 44. Kc4 Kxf2 45. Kd4 Kf3 46. h4 h5
+0-1
+

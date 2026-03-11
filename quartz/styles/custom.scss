@@ -1,4 +1,4 @@
-@use "./base.scss";
+﻿@use "./base.scss";
 
 body {
   font-family: "EB Garamond", serif;
@@ -201,7 +201,7 @@ h6,
 }
 
 .wiki-lang-button::after {
-  content: "▾";
+  content: "â–¾";
   color: var(--secondary);
   font-size: 0.9rem;
   transition: transform 0.2s ease;
@@ -766,4 +766,115 @@ article hr {
 
 [saved-theme="dark"] .graph svg circle {
   filter: drop-shadow(0 0 5px rgba(201, 164, 95, 0.7));
+}
+
+/* Training sessions index */
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing {
+  margin-top: 1.4rem;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing > p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 92%, var(--secondary) 8%);
+  color: var(--secondary);
+  font-size: 0.94rem;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing > p::before {
+  content: "Archive";
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-family: "Cinzel", serif;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin-top: 0;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li {
+  margin: 0;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li > .section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 1.05rem 1.1rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(248, 243, 231, 0.74));
+  box-shadow: 0 10px 24px rgba(96, 77, 48, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li > .section::after {
+  content: "1 White game + 1 Black game";
+  margin-top: auto;
+  color: var(--darkgray);
+  font-size: 0.92rem;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li > .section:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .meta {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .meta time {
+  font-variant-numeric: tabular-nums;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .desc {
+  min-height: 4.75rem;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .desc > h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .desc > h3 > a {
+  display: block;
+  text-decoration: none;
+}
+
+body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .desc > h3 > a:hover {
+  color: var(--secondary);
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing > p,
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li > .section {
+  border-color: rgba(198, 161, 91, 0.26);
+  background: linear-gradient(180deg, rgba(24, 26, 33, 0.96), rgba(15, 17, 22, 0.96));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing > p,
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .meta,
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section .desc > h3 > a:hover {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] body[data-slug="en/Chess/Training-Sessions/index"] .page-listing .section-li > .section::after {
+  color: #dfd2bb;
 }

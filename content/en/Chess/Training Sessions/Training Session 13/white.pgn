@@ -1,0 +1,31 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.12.28"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "D85"]
+[PlyCount "58"]
+[EventDate "2025.??.??"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. Bd2 Bg7 6. e4 Nxc3 7. Bxc3 O-O 8.
+f4 ({right way to play} 8. Qd2 Nc6 9. Nf3 Bg4 10. d5 Bxf3 11. Bxg7 Kxg7 12.
+gxf3 Ne5 13. O-O-O c6 14. Bh3 Kg8 15. Qc3 Qb8 16. d6 exd6 17. f4 Re8 18. Rhe1
+a5 19. Kb1 a4 20. fxe5 Rxe5 21. f4 Rc5 22. Qf6 a3 23. b3 Rh5 24. Rxd6 Qe8 25.
+Be6 fxe6 26. Red1 {1-0 (26) Carlsen,M (2862)-Nepomniachtchi,I (2784) chess24.
+com INT 2020}) 8... c5 9. e5 (9. d5 e6 10. d6 Bxc3+ 11. bxc3 Qf6 12. Qd2 e5 13.
+g3 Nc6 {complicated position}) 9... cxd4 10. Bxd4 (10. Qxd4 Qxd4 11. Bxd4 Nc6
+12. Bc3 Be6 {Black is slighly better}) 10... Nc6 11. Bc3 Qb6 {[%csl Ge1] White
+king is stuck on the centre and White pieces are not developed yet} 12. Qe2 Rd8
+({stronger} 12... Nb4 13. Qf2 Qc6 {[%cal Gc6e4]} 14. Nf3 (14. Bxb4 Qe4+ {[%cal
+Ge4b4]}) 14... Rd8) 13. h4 ({White should try to trade the queens to simplify
+the position} 13. Qf2) 13... Nd4 14. Qf2 Bf5 15. Bxd4 (15. Rc1 Rac8 16. Nf3
+Rxc3 $1 17. Rxc3 Nxf3+ 18. Rxf3 Qb4+ 19. Rc3 Bg4 {[%cal Gd8d1]}) 15... Rxd4 {
+Black pieces are very active and White pieces are not developed} 16. Nf3 Re4+ (
+{stronger} 16... Qb4+ 17. Nd2 Rad8 18. Rd1 Bc2) 17. Be2 Qxf2+ (17... Qxb2 18.
+Rd1 Qc3+ 19. Kf1 Rxf4) 18. Kxf2 Rxf4 19. Rad1 Rc8 20. Rd2 Bg4 21. Rhd1 Bxe5 {
+Black are 2 pawns up and White has no compensation} 22. Ke3 Rf5 23. Rd7 Bf4+
+24. Kf2 Bd6 25. Rxb7 Rc2 {[%cal Gd6c5] winning for black} 26. Rxd6 exd6 27. Kg3
+Rxe2 28. Kxg4 Rxg2+ 29. Kh3 Rf2 0-1
+

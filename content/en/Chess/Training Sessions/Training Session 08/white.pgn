@@ -1,0 +1,49 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.11.08"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "1/2-1/2"]
+[ECO "B23"]
+[PlyCount "117"]
+[EventDate "2025.??.??"]
+
+1. e4 c5 2. Nc3 Nc6 3. f4 e6 4. Nf3 d5 5. d3 ({more popular and better move} 5.
+Bb5 Nge7 6. exd5 exd5 7. Qe2 Bg4 8. Bxc6+ bxc6 9. O-O f6 10. b3 Bxf3 11. Qxf3
+Nf5 12. Ba3 Bd6 13. Rae1+ Kf7 14. Na4 Qa5 15. Qd3 g6 16. c4 d4 17. Re2 h5 18.
+Qf3 Rhe8 19. Rfe1 Rxe2 20. Rxe2 Rc8 21. g3 Rc7 22. Kf1 Ng7 23. Ke1 f5 24. Kd1
+Ne6 25. d3 Rc8 26. Kc2 h4 27. Qg2 Qc7 28. Qf1 hxg3 29. hxg3 Rh8 30. Qe1 Qc8 31.
+Qa5 Rh3 32. Bxc5 Nxc5 33. Nxc5 Qc7 34. Qxc7+ Bxc7 35. Ne6 {1-0 (35) Tari,A 
+(2646)-Bernal Moro,L (2433) Ciudad Real 2021}) 5... Nf6 {waste of time} 6. h3 (
+6. Be2 Be7 7. O-O O-O 8. e5 Nd7 9. d4 cxd4 10. Nb5 {[%cal Gb5d4]}) 6... Be7 7.
+Be2 O-O 8. O-O Rb8 9. Qe1 ({better} 9. a4 a6 10. Qe1 b5 11. axb5 axb5 12. e5
+Nd7 13. Bd2) 9... b5 10. Ng5 $6 {the knight is not doing anthing on g5} ({
+right way to play} 10. e5 Nd7 11. a3 Qb6 12. Kh1 f6 13. exf6 Nxf6 14. Bd2)
+10... b4 11. e5 (11. Na4 h6 12. Nf3 dxe4 13. dxe4 Nxe4) 11... bxc3 12. exf6
+cxb2 ({stronger. Black wins a piece} 12... gxf6 {[%csl Gg5]} 13. Nf3 cxb2) 13.
+Bxb2 Rxb2 14. fxe7 Qxe7 15. Bd1 Nd4 16. Rc1 h6 (16... Rxa2 {Black is 2 pawns
+up and White has no compensation}) 17. Nf3 Nxf3+ 18. Rxf3 Qf6 ({simple and
+better} 18... Rxa2) 19. Qf2 Qd4 20. Qxd4 cxd4 21. a4 Bd7 {[%cal Gd7a4,Gf8c8,
+Gc8b8] White has many weaknesses and White pieces are not active} 22. c4 dxc4
+$6 ({stronger} 22... dxc3 23. Rxc3 Rc8 24. Rxc8+ Bxc8 25. Rf2 Rb1 26. Rd2 Bd7
+27. Kf2 Kf8 28. Ke3 Ke7 29. g4 Kd6 {big advantage for black}) 23. Rxc4 Rd2 24.
+Bc2 Rb8 (24... Rc8 25. Rxc8+ Bxc8 26. Rf2 Rxf2 27. Kxf2 Kf8 {[%cal Gf8e7,Ge7d6]
+} 28. g4 Ke7 29. Bb3 Kd6 {Black is pawn up}) 25. Rf2 (25. Rxd4 {[%cal Gd4d7]}
+Bc6 26. Rf2 Rxf2 27. Kxf2 Bd5 28. Bd1 Rb2+ 29. Be2 Bxg2) 25... Rxf2 26. Kxf2
+Rb2 (26... Rc8 27. Rxc8+ Bxc8 28. g4 f6 {[%cal Gg8f7,Gf7e7] Black is pawn up})
+27. Kf3 f6 ({Black should protect e4 square and prevent Ke4} 27... f5 {[%csl
+Ge4]}) 28. Ke4 {[%csl Gd4]} Kf7 29. Kxd4 Ke7 30. Kc3 Ra2 ({better} 30... Rb8
+31. Rc7 Rc8 32. Rxc8 Bxc8 $11) 31. Rc7 a5 32. Bb3 $2 ({White can win a5 pawn} 
+32. Ra7 {[%csl Ga5]}) 32... Rxg2 33. Bc4 Kd6 34. Ra7 Bxa4 35. Rxa5 (35. Ra6+
+Kc7 36. Bxe6 $11 {[%cal Ga6a5]}) 35... Bc6 36. Ra6 Kd7 37. f5 $6 ({Activating
+the king is stronger} 37. Kd4 {[%cal Gd4c5]}) 37... exf5 38. Kd4 Rb2 39. Kc5
+Bg2 40. Be6+ Kc7 41. Bxf5 Bb7 42. Ra5 Rf2 43. Kd4 $2 (43. Be4) 43... Rf4+ (
+43... Kb6 {[%cal Gb6a5]}) 44. Kc3 (44. Be4) 44... Kd6 (44... Kb6 {wins the
+piece}) 45. Rb5 Bd5 46. Bg4 f5 47. Bd1 g5 48. Rb6+ Bc6 49. Bh5 Kc5 50. Ra6 Bb5
+(50... g4 51. hxg4 fxg4 {winning position for black}) 51. Rxh6 Rh4 52. Rh7 (52.
+Rf6 Rxh5 53. Rxf5+ Kc6 54. h4 Rxh4 55. Rxg5 Rh3 56. Kd4 Rxd3+ 57. Ke4 {White
+has good chances for equality}) 52... Rxh3 53. Bg6 Rxh7 54. Bxh7 f4 55. Bf5 f3
+$2 $11 (55... Kd6 56. Kd4 Bd7 57. Be4 g4 58. Bd5 g3 {[%cal Gd7c6] winning for
+black}) 56. Kd2 Kd4 57. Bg4 f2 58. Ke2 Bxd3+ 59. Kxf2 1/2-1/2
+

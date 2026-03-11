@@ -1,0 +1,37 @@
+﻿[Event "Training game"]
+[Site "?"]
+[Date "2025.10.24"]
+[Round "?"]
+[White "Jwibo"]
+[Black "Parviz"]
+[Result "0-1"]
+[ECO "B23"]
+[PlyCount "66"]
+[EventDate "2025.??.??"]
+
+1. e4 c5 2. Nc3 Nc6 3. f4 d6 4. Bb5 ({main move} 4. Nf3 g6 5. Bc4 Bg7 6. O-O e6
+7. f5 {interesting pawn sacrifice} exf5 8. d3 Nge7 9. Qe1 Ne5 10. exf5 Nxc4 11.
+f6 Bxf6 12. Nd5 Bxb2 13. Bg5 f6 14. Bxf6 Bxf6 15. Nxf6+ Kf7 16. Nxh7 Rxh7 17.
+Ng5+ Kg8 18. Nxh7 Kxh7 19. Rf7+ Kg8 20. Rxe7 Ne5 21. Qh4 Nf7 22. Qf6 Qf8 23.
+Qxg6+ {1-0 (23) Maghsoodloo,P (2674)-Saric,A (2531) Chess.com INT 2020}) 4...
+Bd7 5. Bxc6 ({better} 5. Nf3 g6 6. O-O Bg7 7. d3) 5... Bxc6 6. Nf3 e6 7. O-O
+Nf6 8. d3 Be7 9. h3 ({it is better to develop pieces} 9. Qe2 O-O 10. Bd2 Qc7
+11. Rae1) 9... O-O 10. e5 {White pieces are not ready for this} ({better} 10.
+Bd2 Qc7 11. Qe2) 10... Nd5 (10... Nd7 11. Qe2 Qc7 12. Bd2 dxe5 13. fxe5 c4 14.
+dxc4 Bxf3 15. Qxf3 Qb6+ 16. Be3 Qxb2 17. Bd4 Bc5 18. Bxc5 Nxc5 {Black is better
+}) 11. Bd2 ({putting knight to centre is better} 11. Ne4 dxe5 12. fxe5) 11...
+Nxc3 12. Bxc3 b5 13. exd6 Bxd6 14. Ne5 Bd5 15. b3 f6 16. Ng4 c4 $6 (16... Qc7 {
+[%cal Gd6f4]} 17. Qe2 Rae8 (17... Bxf4 18. Nxf6+ gxf6 19. Qg4+ Bg5 20. Rxf6
+Rxf6 21. Bxf6 h6 22. Rf1 {White has compensation})) 17. Qe1 ({better choice} 
+17. dxc4 bxc4 18. Ne3 Bc5 19. Bd4 Bf3 20. Qxf3 Qxd4 21. Rfe1 cxb3 22. axb3 $11)
+17... cxd3 18. cxd3 {[%csl Gd3] d3 pawn will be weak} Rc8 19. Bb2 Rc2 20. Rf2
+Bc5 {[%csl Gc5,Gd5] Black bishops are very strong} 21. d4 Rxf2 22. Qxf2 Bb6 23.
+Qg3 (23. Rc1 Qd6 24. Ne3 Be4 {Black is better}) 23... Qc7 (23... Qd6 24. Rc1 a5
+25. Ne3 Be4) 24. Rc1 Qb7 25. f5 {only way to create counterplay} e5 $6 (25...
+exf5 26. Nh6+ Kh8 27. Nxf5 Be6 {[%cal Ge6f5]} 28. Ba3 Rg8 29. Nd6 Bxd4+ 30. Kh1
+Qd7 {Black is better}) 26. Kh1 exd4 27. Ba3 Rd8 (27... Kf7 28. Bxf8 Kxf8 29.
+Qd6+ Kg8 30. Re1 {White has advantage}) 28. Nxf6+ Kh8 29. Nh5 (29. Nxd5 Qxd5
+30. Be7 Re8 31. f6 Qf7 32. Qd6 {White is better}) 29... Qf7 30. Re1 ({right
+way to play} 30. Qg4 g6 31. Ng3 gxf5 32. Qxf5) 30... Qxh5 31. Re7 Rg8 {Black
+is a piece up and White has no compensation} 32. Qe5 Qxh3+ 33. Kg1 Qxg2# 0-1
+
