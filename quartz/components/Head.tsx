@@ -1,5 +1,5 @@
-import { i18n } from "../i18n"
-import { FullSlug, getFileExtension, joinSegments, pathToRoot } from "../util/path"
+﻿import { i18n } from "../i18n"
+import { FullSlug, getFileExtension, joinSegments, pathToRoot, simplifySlug } from "../util/path"
 import { CSSResourceToStyleElement, JSResourceToScriptElement } from "../util/resources"
 import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
@@ -35,6 +35,11 @@ export default (() => {
       (e) => e.name === CustomOgImagesEmitterName,
     )
     const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
+    const isFolderIndexPage =
+      fileData.slug != null && (fileData.slug === "index" || fileData.slug.endsWith("/index"))
+    const pageBaseUrl = isFolderIndexPage
+      ? new URL(joinSegments(url.pathname, simplifySlug(fileData.slug!), "/"), url.origin).toString()
+      : undefined
 
     return (
       <head>
@@ -82,6 +87,7 @@ export default (() => {
           </>
         )}
 
+        {pageBaseUrl && <base href={pageBaseUrl} />}
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
@@ -103,3 +109,4 @@ export default (() => {
 
   return Head
 }) satisfies QuartzComponentConstructor
+
