@@ -81,7 +81,16 @@
   grid-template-columns: minmax(0, 1fr) minmax(16.5rem, 18.75rem);
 }
 
+.chess-training-board.lpv .lpv__board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
 .chess-training-board.lpv .lpv__board .cg-wrap {
+  min-width: 0;
+  width: 100%;
   filter: brightness(1.06) saturate(0.92);
 }
 
@@ -532,9 +541,28 @@
   font-size: 0.82rem;
 }
 
+.training-engine__bar-rail {
+  display: flex;
+  align-items: stretch;
+  width: 0.9rem;
+  min-width: 0.9rem;
+  padding: 0.08rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.56);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.training-engine__bar-rail[data-hidden="true"] {
+  display: none;
+}
+
 .training-engine__bar {
   display: flex;
-  height: 0.75rem;
+  flex: 1 1 auto;
+  flex-direction: column-reverse;
+  width: 100%;
+  height: 100%;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(134, 117, 84, 0.15);
@@ -675,7 +703,8 @@
 }
 
 :root[saved-theme="dark"] .training-board-panel,
-:root[saved-theme="dark"] .training-session-comments {
+:root[saved-theme="dark"] .training-session-comments,
+:root[saved-theme="dark"] .training-engine__bar-rail {
   border-color: rgba(198, 161, 91, 0.26);
   background: linear-gradient(180deg, rgba(30, 25, 20, 0.96), rgba(20, 17, 14, 0.96));
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.24);
@@ -732,6 +761,21 @@
 }
 
 @media (max-width: 900px) {
+  .chess-training-board.lpv .lpv__board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .training-engine__bar-rail {
+    width: 100%;
+    min-width: 0;
+    min-height: 0.9rem;
+  }
+
+  .training-engine__bar {
+    flex-direction: row;
+    min-height: 0.74rem;
+  }
+
   .training-board-panel__summary,
   .training-engine__score-row,
   .training-explorer__move-head,

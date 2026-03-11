@@ -33,6 +33,7 @@ type EngineController = {
   score: HTMLElement
   meta: HTMLElement
   pv: HTMLElement
+  barRail: HTMLElement
   bar: HTMLElement
   barWhite: HTMLElement
   barBlack: HTMLElement
@@ -193,16 +194,18 @@ function createEnginePanel(): EngineController {
   const score = makeElement("strong", "training-engine__score", "--")
   const meta = makeElement("span", "training-engine__meta", "Depth --")
 
+  const barRail = makeElement("div", "training-engine__bar-rail")
   const bar = makeElement("div", "training-engine__bar")
   const barWhite = makeElement("div", "training-engine__bar-white")
   const barBlack = makeElement("div", "training-engine__bar-black")
   bar.append(barWhite, barBlack)
+  barRail.appendChild(bar)
 
   const pv = makeElement("p", "training-engine__pv", "Best line will appear here once the engine starts.")
 
   toolbar.append(toggleButton, evalBarButton)
   scoreRow.append(score, meta)
-  body.append(toolbar, status, scoreRow, bar, pv)
+  body.append(toolbar, status, scoreRow, pv)
   details.appendChild(body)
 
   return {
@@ -213,6 +216,7 @@ function createEnginePanel(): EngineController {
     score,
     meta,
     pv,
+    barRail,
     bar,
     barWhite,
     barBlack,
@@ -329,6 +333,8 @@ function renderEngineState(
   const whiteShare = whiteShareFromEval(score, mate)
   controller.barWhite.style.width = `${whiteShare}%`
   controller.barBlack.style.width = `${100 - whiteShare}%`
+  controller.barWhite.style.height = `${whiteShare}%`
+  controller.barBlack.style.height = `${100 - whiteShare}%`
 }
 
 function stopEngineSearch(controller: EngineController) {
@@ -452,8 +458,21 @@ function updateEnginePosition(enhancement: BoardEnhancement) {
 
 function setEvalBarVisible(controller: EngineController, visible: boolean) {
   controller.evalBarVisible = visible
+  controller.barRail.dataset.hidden = visible ? "false" : "true"
   controller.bar.dataset.hidden = visible ? "false" : "true"
   controller.evalBarButton.textContent = visible ? "Hide Eval Bar" : "Show Eval Bar"
+}
+
+function mountEvalBar(node: HTMLElement, controller: EngineController) {
+  const board = node.querySelector<HTMLElement>(".lpv__board")
+  if (!board) {
+    return
+  }
+
+  if (controller.barRail.parentElement !== board) {
+    controller.barRail.remove()
+    board.appendChild(controller.barRail)
+  }
 }
 
 function getMastersEndpoint() {
@@ -646,6 +665,7 @@ function enhanceBoard(node: HTMLElement, viewer: ViewerApi) {
     explorer,
   }
 
+  mountEvalBar(node, engine)
   engine.toggleButton.addEventListener("click", () => {
     toggleEngine(enhancement)
   })
