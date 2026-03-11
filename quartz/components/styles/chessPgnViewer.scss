@@ -365,3 +365,35 @@
 :root[saved-theme="dark"] .training-session-opening-note em {
   background: rgba(213, 175, 99, 0.12);
 }
+
+.training-master-entry {
+  margin: 0 0 1.8rem;
+}
+
+.training-master-caption {
+  display: grid;
+  gap: 0.28rem;
+  margin: 0 0 0.75rem;
+}
+
+.training-master-caption strong {
+  font-family: "Cinzel", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.training-master-caption span {
+  color: var(--dark);
+  font-size: 0.97rem;
+  line-height: 1.45;
+}
+
+:root[saved-theme="dark"] .training-master-caption strong {
+  color: #d5af63;
+}
+
+:root[saved-theme="dark"] .training-master-caption span {
+  color: #efe3cc;
+}

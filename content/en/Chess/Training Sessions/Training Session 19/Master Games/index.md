@@ -12,29 +12,18 @@ tags:
   - master-games
 ---
 
-These are the master-game references cited directly inside the PGN annotations for this training session.
-
-<div class="training-session-openings">
-  <span class="training-session-chip"><strong>White opening</strong> Sicilian Defense <em>B21</em></span>
-  <span class="training-session-chip"><strong>Black opening</strong> Caro-Kann Defense <em>B10</em></span>
-</div>
-
-<nav class="training-session-nav" aria-label="Session navigation">
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-18/Master-Games/">Prev Session</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-19/">Session Boards</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-20/Master-Games/">Next Session</a>
-</nav>
+These boards replay the cited master-game lines embedded in the session annotations.
 
 ## White Game References
 
-<p class="training-session-note">No cited master examples were found in the White game annotations.</p>
+<p class="training-session-note">No cited master examples were found in these annotations.</p>
 
 ## Black Game References
 
-<ol class="training-master-list">
-  <li>1/2-1/2 (62) Santos Latasa,J (2549)-Kuzubov,Y (2689) Batumi 2018</li>
-</ol>
+<section class="training-master-entry">
+  <p class="training-master-caption"><strong>Black reference 1</strong><span>1/2-1/2 (62) Santos Latasa,J (2549)-Kuzubov,Y (2689) Batumi 2018</span></p>
+  <div class="chess-training-board" data-label="Black Reference 1" data-orientation="black" data-pgn-src="./black-reference-01.pgn"></div>
+</section>
 
 <nav class="training-session-nav" aria-label="Session navigation">
   <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-18/Master-Games/">Prev Session</a>

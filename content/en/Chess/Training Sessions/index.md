@@ -71,7 +71,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Jan 17, 2026</span>
     <span class="training-session-row__title">Training Session #16</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: Queen's Pawn Game</span>
+      <span class="training-session-row__chip">White: Queen&#x27;s Pawn Game</span>
       <span class="training-session-row__chip">Black: Caro-Kann Defense</span>
     </span>
   </a>
@@ -119,7 +119,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Nov 22, 2025</span>
     <span class="training-session-row__title">Training Session #10</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: King's Indian Defense</span>
+      <span class="training-session-row__chip">White: King&#x27;s Indian Defense</span>
       <span class="training-session-row__chip">Black: Caro-Kann Defense: Classical Variation</span>
     </span>
   </a>
@@ -152,14 +152,14 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__title">Training Session #6</span>
     <span class="training-session-row__summary">
       <span class="training-session-row__chip">White: Closed Sicilian</span>
-      <span class="training-session-row__chip">Black: Queen's Gambit Declined</span>
+      <span class="training-session-row__chip">Black: Queen&#x27;s Gambit Declined</span>
     </span>
   </a>
   <a class="training-session-row" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-05/">
     <span class="training-session-row__date">Sep 25, 2025</span>
     <span class="training-session-row__title">Training Session #5</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: King's Indian Defense</span>
+      <span class="training-session-row__chip">White: King&#x27;s Indian Defense</span>
       <span class="training-session-row__chip">Black: Vienna Game</span>
     </span>
   </a>
@@ -167,7 +167,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Sep 19, 2025</span>
     <span class="training-session-row__title">Training Session #4</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: Queen's Gambit Declined</span>
+      <span class="training-session-row__chip">White: Queen&#x27;s Gambit Declined</span>
       <span class="training-session-row__chip">Black: Reti Opening</span>
     </span>
   </a>

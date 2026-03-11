@@ -17,13 +17,6 @@ tags:
   <li>Black game: 2026.03.05 (1-0)</li>
 </ul>
 
-<nav class="training-session-nav" aria-label="Session navigation">
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-22/">Prev Session</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-23/Master-Games/">Master Games</a>
-  <span class="training-session-nav__text">Next Session</span>
-</nav>
-
 The cited model games from the annotations are collected on the [Master Games](https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-23/Master-Games/) subpage.
 
 ## White Game

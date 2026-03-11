@@ -17,18 +17,11 @@ tags:
   <li>Black game: 2025.09.19 (1-0)</li>
 </ul>
 
-<nav class="training-session-nav" aria-label="Session navigation">
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-03/">Prev Session</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-04/Master-Games/">Master Games</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-05/">Next Session</a>
-</nav>
-
 The cited model games from the annotations are collected on the [Master Games](https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-04/Master-Games/) subpage.
 
 ## White Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Queen's Gambit Declined</span><em>D37</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Queen&#x27;s Gambit Declined</span><em>D37</em></p>
 
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
