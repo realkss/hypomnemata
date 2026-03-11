@@ -8,32 +8,51 @@
 }
 
 .training-session-meta li {
-  padding: 0.45rem 0.7rem;
+  padding: 0.45rem 0.75rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
   border-radius: 999px;
   background: color-mix(in srgb, var(--light) 92%, var(--secondary) 8%);
-  font-size: 0.95rem;
+  font-size: 0.93rem;
 }
 
 .chess-training-board {
   position: relative;
   min-height: 20rem;
-  margin: 1rem 0 1.5rem;
-  padding: 1rem;
+  margin: 1rem 0 1.75rem;
+  padding: 1.1rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
-  border-radius: 1rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(247, 240, 226, 0.82));
-  box-shadow: 0 12px 28px rgba(96, 77, 48, 0.06);
+  border-radius: 1.1rem;
+  background: linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(244, 236, 221, 0.96));
+  box-shadow:
+    0 18px 42px rgba(96, 77, 48, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  --board-color: #efe1c3;
+  --c-lpv-accent: #8b6b2c;
+  --c-lpv-accent-over: #fffaf1;
+  --c-lpv-bg: #f6f0e4;
+  --c-lpv-bg-player: #efe7d9;
+  --c-lpv-bg-controls: #ebe1d1;
+  --c-lpv-bg-movelist: #fbf7f0;
+  --c-lpv-bg-variation: #f2eadc;
+  --c-lpv-bg-pane: #e9dcc4;
+  --c-lpv-pgn-text: #efe5d3;
+  --c-lpv-font: #3f372f;
+  --c-lpv-font-shy: #8c826f;
+  --c-lpv-font-bg: #d4c7b1;
+  --c-lpv-current-move: #8b6b2c;
+  --c-lpv-move-hover: rgba(139, 107, 44, 0.14);
+  --c-lpv-border: #d6cab7;
+  --c-lpv-side-border: #e6dbc8;
 }
 
 .chess-training-board::before {
   content: attr(data-label);
   display: block;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.9rem;
   font-family: "Cinzel", serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--secondary);
 }
@@ -51,6 +70,52 @@
 
 .chess-training-board__fallback p {
   margin: 0;
+}
+
+.chess-training-board.lpv {
+  max-width: 66rem;
+}
+
+.chess-training-board.lpv--moves-right,
+.chess-training-board.lpv--moves-auto {
+  grid-template-columns: minmax(0, 1fr) minmax(16.5rem, 18.75rem);
+}
+
+.chess-training-board.lpv .lpv__board .cg-wrap {
+  filter: brightness(1.06) saturate(0.92);
+}
+
+.chess-training-board.lpv .lpv__player {
+  padding: 0 1.15rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+.chess-training-board.lpv .lpv__player__title {
+  letter-spacing: 0.03em;
+}
+
+.chess-training-board.lpv .lpv__moves {
+  min-width: 0;
+  line-height: 1.58;
+}
+
+.chess-training-board.lpv .lpv__moves > move {
+  font-size: 1rem;
+}
+
+.chess-training-board.lpv .lpv__moves > comment,
+.chess-training-board.lpv .lpv__moves > variation,
+.chess-training-board.lpv .lpv__pgn__text {
+  font-size: 0.88rem;
+}
+
+.chess-training-board.lpv .lpv__controls .lpv__fbt {
+  font-size: 1.15rem;
+}
+
+.chess-training-board.lpv .lpv__controls__menu.lpv__fbt {
+  font-size: 1rem;
 }
 
 .training-session-downloads {
@@ -72,9 +137,31 @@
 :root[saved-theme="dark"] .training-session-meta li,
 :root[saved-theme="dark"] .training-session-downloads a,
 :root[saved-theme="dark"] .chess-training-board {
-  border-color: rgba(198, 161, 91, 0.26);
-  background: linear-gradient(180deg, rgba(24, 26, 33, 0.96), rgba(15, 17, 22, 0.96));
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+  border-color: rgba(198, 161, 91, 0.28);
+  background: linear-gradient(180deg, rgba(38, 32, 24, 0.98), rgba(24, 20, 16, 0.98));
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+:root[saved-theme="dark"] .chess-training-board {
+  --board-color: #d7c19a;
+  --c-lpv-accent: #d0ab63;
+  --c-lpv-accent-over: #1b150f;
+  --c-lpv-bg: #262019;
+  --c-lpv-bg-player: #2b241c;
+  --c-lpv-bg-controls: #2f271e;
+  --c-lpv-bg-movelist: #211b15;
+  --c-lpv-bg-variation: #2c241c;
+  --c-lpv-bg-pane: #3a3024;
+  --c-lpv-pgn-text: #31281f;
+  --c-lpv-font: #efe3cc;
+  --c-lpv-font-shy: #bfae91;
+  --c-lpv-font-bg: #7f6e57;
+  --c-lpv-current-move: #d0ab63;
+  --c-lpv-move-hover: rgba(208, 171, 99, 0.18);
+  --c-lpv-border: #544537;
+  --c-lpv-side-border: #46392d;
 }
 
 :root[saved-theme="dark"] .chess-training-board::before {
@@ -86,9 +173,14 @@
   color: #dfd2bb;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .chess-training-board {
-    padding: 0.8rem;
+    padding: 0.85rem;
     min-height: 16rem;
+  }
+
+  .chess-training-board.lpv--moves-right,
+  .chess-training-board.lpv--moves-auto {
+    grid-template-columns: 1fr;
   }
 }
