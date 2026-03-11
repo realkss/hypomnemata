@@ -178,7 +178,8 @@ function createPanelSummary(title: string, subtitle: string) {
 
 function createEnginePanel(): EngineController {
   const details = makeElement("details", "training-board-panel training-board-panel--engine")
-  details.appendChild(createPanelSummary("Engine", "Separate Stockfish analysis"))
+  details.open = true
+  details.appendChild(createPanelSummary("Engine", "Stockfish, eval bar, and PV"))
 
   const body = makeElement("div", "training-board-panel__body training-engine")
   const toolbar = makeElement("div", "training-engine__toolbar")
@@ -227,7 +228,8 @@ function createEnginePanel(): EngineController {
 
 function createExplorerPanel(): ExplorerController {
   const details = makeElement("details", "training-board-panel training-board-panel--explorer")
-  details.appendChild(createPanelSummary("Masters Database", "Live Lichess opening explorer"))
+  details.open = true
+  details.appendChild(createPanelSummary("Masters Database", "Opening table and top games"))
 
   const body = makeElement("div", "training-board-panel__body training-explorer")
   const status = makeElement(

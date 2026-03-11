@@ -493,16 +493,28 @@ def render_session_nav(prev_url: str | None, all_url: str, master_url: str, next
     )
 
 
-def load_comments_text(session_dir: Path) -> str:
+def load_legacy_comments_text(session_dir: Path) -> str | None:
     comments_path = session_dir / "comments.txt"
     if not comments_path.exists():
-        comments_path.write_text(DEFAULT_COMMENTS_TEXT + "\n", encoding="utf-8")
+        return None
+
+    content = comments_path.read_text(encoding="utf-8").strip()
+    if not content or content == DEFAULT_COMMENTS_TEXT:
+        return None
+    return content
+
+
+def load_board_comments_text(session_dir: Path, filename: str, seed_text: str | None = None) -> str:
+    comments_path = session_dir / filename
+    if not comments_path.exists():
+        initial_text = seed_text or DEFAULT_COMMENTS_TEXT
+        comments_path.write_text(initial_text + "\n", encoding="utf-8")
 
     content = comments_path.read_text(encoding="utf-8").strip()
     return content or DEFAULT_COMMENTS_TEXT
 
 
-def render_comments_section(comments_text: str) -> str:
+def render_comments_section(summary_label: str, comments_text: str) -> str:
     paragraphs = [block.strip() for block in re.split(r"\n\s*\n", comments_text.strip()) if block.strip()]
     if not paragraphs:
         paragraphs = [DEFAULT_COMMENTS_TEXT]
@@ -513,8 +525,8 @@ def render_comments_section(comments_text: str) -> str:
     )
     return "\n".join(
         [
-            '<details class="training-session-comments">',
-            '  <summary class="training-session-comments__summary">Comments</summary>',
+            '<details class="training-session-comments training-session-comments--board">',
+            f'  <summary class="training-session-comments__summary">{html.escape(summary_label)}</summary>',
             '  <p class="training-session-comments__owner">Only Jwipo can add or revise these notes through the site repository.</p>',
             body,
             '</details>',
@@ -526,7 +538,8 @@ def render_session_body(
     session: SessionData,
     prev_url: str | None,
     next_url: str | None,
-    comments_text: str,
+    white_comments_text: str,
+    black_comments_text: str,
 ) -> str:
     session_date = render_iso_date(session.session_date)
     return "\n".join(
@@ -547,15 +560,17 @@ def render_session_body(
             "",
             '<div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>',
             "",
+            render_comments_section("White Comments", white_comments_text),
+            "",
             "## Black Game",
             "",
             f'<p class="training-session-opening-note"><strong>Opening</strong><span>{html.escape(session.black.opening)}</span><em>{html.escape(session.black.eco)}</em></p>',
             "",
             '<div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>',
             "",
-            render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
+            render_comments_section("Black Comments", black_comments_text),
             "",
-            render_comments_section(comments_text),
+            render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
         ]
     )
 
@@ -660,14 +675,17 @@ def main() -> None:
         next_session = session_by_number.get(session.number + 1)
 
         session_dir = SESSIONS_DIR / session.folder_name
-        comments_text = load_comments_text(session_dir)
+        legacy_comments_text = load_legacy_comments_text(session_dir)
+        white_comments_text = load_board_comments_text(session_dir, "white-comments.txt", legacy_comments_text)
+        black_comments_text = load_board_comments_text(session_dir, "black-comments.txt", legacy_comments_text)
         session_index = session_dir / "index.md"
         session_index.write_text(
             render_session_body(
                 session,
                 prev_session.url if prev_session else None,
                 next_session.url if next_session else None,
-                comments_text,
+                white_comments_text,
+                black_comments_text,
             )
             + "\n",
             encoding="utf-8",
