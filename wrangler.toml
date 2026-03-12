@@ -2,3 +2,7 @@ name = "hypomnemata"
 compatibility_date = "2026-03-12"
 pages_build_output_dir = "public"
 
+[[kv_namespaces]]
+binding = "ACCESS_CONTROL_KV"
+id = "88a4aa7145c145fca12f4453e3821b62"
+preview_id = "88a4aa7145c145fca12f4453e3821b62"
