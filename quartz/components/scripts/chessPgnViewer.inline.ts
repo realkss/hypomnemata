@@ -150,6 +150,7 @@ type BoardPanelKey = "engine" | "explorer"
 
 type PanelContainer = {
   root: HTMLElement
+  bar: HTMLElement
   body: HTMLElement
   tabs: Record<BoardPanelKey, HTMLButtonElement>
 }
@@ -158,8 +159,10 @@ type BoardEnhancement = {
   node: HTMLElement
   mount: HTMLElement
   viewer: ViewerApi
+  panelContainer: PanelContainer
   engine: EngineController
   explorer: ExplorerController
+  pgnText: string
 }
 
 declare global {
@@ -270,12 +273,15 @@ function setActiveBoardPanel(container: PanelContainer, panel: BoardPanelKey) {
 function ensurePanelContainer(node: HTMLElement) {
   const existing = node.querySelector<HTMLElement>(":scope > .training-board-panels")
   if (existing) {
+    const bar =
+      existing.querySelector<HTMLElement>(".training-board-panels__bar") ?? makeElement("div")
     const tabs = Array.from(
       existing.querySelectorAll<HTMLButtonElement>(".training-board-tab[data-panel-target]"),
     )
 
     return {
       root: existing,
+      bar,
       body: existing.querySelector<HTMLElement>(".training-board-panels__body") ?? existing,
       tabs: {
         engine:
@@ -307,6 +313,7 @@ function ensurePanelContainer(node: HTMLElement) {
 
   const container = {
     root,
+    bar,
     body,
     tabs: {
       engine: engineTab,
@@ -322,6 +329,102 @@ function ensurePanelContainer(node: HTMLElement) {
   })
 
   return container
+}
+
+function shouldDockBoardTabsWithControls() {
+  return window.matchMedia("(min-width: 901px) and (hover: hover)").matches
+}
+
+function syncPanelBarDock(enhancement: BoardEnhancement) {
+  const { mount, panelContainer } = enhancement
+  const { root, bar, body } = panelContainer
+  const controls = mount.querySelector<HTMLElement>(".lpv__controls")
+  const shouldDock = shouldDockBoardTabsWithControls() && Boolean(controls)
+
+  if (controls) {
+    controls.removeAttribute("data-training-panel-dock")
+  }
+
+  if (!controls || !shouldDock) {
+    const controlsMain = controls?.querySelector<HTMLElement>(
+      ":scope > .training-board-controls__main",
+    )
+    if (controlsMain) {
+      for (const child of Array.from(controlsMain.children)) {
+        controls.insertBefore(child, controlsMain)
+      }
+      controlsMain.remove()
+    }
+    if (bar.parentElement !== root || bar.nextElementSibling !== body) {
+      root.insertBefore(bar, body)
+    }
+    root.dataset.controlsDocked = "false"
+    return
+  }
+
+  let controlsMain = controls.querySelector<HTMLElement>(":scope > .training-board-controls__main")
+  if (!controlsMain) {
+    controlsMain = makeElement("div", "training-board-controls__main")
+    controls.prepend(controlsMain)
+    for (const child of Array.from(controls.children)) {
+      if (child === controlsMain || child === bar) {
+        continue
+      }
+      controlsMain.appendChild(child)
+    }
+  }
+
+  if (bar.parentElement !== controls) {
+    controls.appendChild(bar)
+  }
+  controls.dataset.trainingPanelDock = "true"
+  root.dataset.controlsDocked = "true"
+}
+
+function extractMovetextForFallback(pgn: string) {
+  const normalized = pgn.replace(/\r/g, "")
+  const parts = normalized.split(/\n\s*\n/)
+  const movetext = parts.length > 1 ? parts.slice(1).join("\n\n").trim() : normalized.trim()
+
+  return movetext || "Move text could not be parsed from this PGN."
+}
+
+function ensureMovePaneFallback(enhancement: BoardEnhancement) {
+  const { node, mount, pgnText } = enhancement
+  const side = mount.querySelector<HTMLElement>(".lpv__side")
+  const sideMoves = side?.querySelector<HTMLElement>(".lpv__moves, .lpv__pgn, .lpv__pgn__text")
+  const sideText = side?.textContent?.replace(/\s+/g, " ").trim() ?? ""
+  const sideRect = side?.getBoundingClientRect()
+  const sideStyle = side ? window.getComputedStyle(side) : null
+  const sideLooksHealthy = Boolean(
+    side &&
+      sideMoves &&
+      sideStyle &&
+      sideStyle.display !== "none" &&
+      sideStyle.visibility !== "hidden" &&
+      (sideRect?.width ?? 0) > 140 &&
+      sideText.length > 24,
+  )
+  const existing = node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
+
+  if (sideLooksHealthy) {
+    node.dataset.pgnFallback = "false"
+    existing?.remove()
+    return
+  }
+
+  node.dataset.pgnFallback = "true"
+  if (existing) {
+    return
+  }
+
+  const fallback = makeElement("section", "training-board-move-fallback")
+  const title = makeElement("p", "training-board-move-fallback__title", "Moves & comments")
+  const body = makeElement("pre", "training-board-move-fallback__body", extractMovetextForFallback(pgnText))
+  fallback.append(title, body)
+
+  const panels = node.querySelector<HTMLElement>(":scope > .training-board-panels")
+  node.insertBefore(fallback, panels ?? null)
 }
 
 function createEnginePanel(): EngineController {
@@ -1093,8 +1196,25 @@ async function loadExplorer(enhancement: BoardEnhancement) {
 }
 
 function syncEnhancement(enhancement: BoardEnhancement) {
+  syncPanelBarDock(enhancement)
+  mountEvalBar(enhancement.mount, enhancement.engine)
   updateEnginePosition(enhancement)
   void loadExplorer(enhancement)
+  window.setTimeout(() => {
+    syncPanelBarDock(enhancement)
+    mountEvalBar(enhancement.mount, enhancement.engine)
+    ensureMovePaneFallback(enhancement)
+  }, 0)
+  window.setTimeout(() => {
+    syncPanelBarDock(enhancement)
+    mountEvalBar(enhancement.mount, enhancement.engine)
+    ensureMovePaneFallback(enhancement)
+  }, 180)
+  window.setTimeout(() => {
+    syncPanelBarDock(enhancement)
+    mountEvalBar(enhancement.mount, enhancement.engine)
+    ensureMovePaneFallback(enhancement)
+  }, 650)
 }
 
 function patchViewerLifecycle(enhancement: BoardEnhancement) {
@@ -1112,7 +1232,7 @@ function patchViewerLifecycle(enhancement: BoardEnhancement) {
   }
 }
 
-function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) {
+function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi, pgnText: string) {
   if (node.dataset.viewerEnhanced === "true") {
     return
   }
@@ -1129,8 +1249,10 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) 
     node,
     mount,
     viewer,
+    panelContainer,
     engine,
     explorer,
+    pgnText,
   }
 
   mountEvalBar(mount, engine)
@@ -1203,7 +1325,7 @@ async function mountBoard(node: HTMLElement) {
     }
 
     const viewer = viewerFactory(mount, config)
-    enhanceBoard(node, mount, viewer)
+    enhanceBoard(node, mount, viewer, pgn)
     node.dataset.viewerState = "ready"
   } catch (error) {
     console.error(error)
