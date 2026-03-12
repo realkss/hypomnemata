@@ -103,6 +103,14 @@ type ExplorerController = {
   requestId: number
 }
 
+type BoardPanelKey = "engine" | "explorer"
+
+type PanelContainer = {
+  root: HTMLElement
+  body: HTMLElement
+  tabs: Record<BoardPanelKey, HTMLButtonElement>
+}
+
 type BoardEnhancement = {
   node: HTMLElement
   mount: HTMLElement
@@ -163,37 +171,83 @@ function makeElement<K extends keyof HTMLElementTagNameMap>(
   return element
 }
 
-function ensurePanelContainer(node: HTMLElement) {
-  // Panels MUST be placed outside the .lpv container because
-  // the Lichess PGN viewer uses explicit grid-template-areas and
-  // overflow:hidden, which swallows any extra children.
-  // Walk up to the outermost .chess-training-board wrapper if needed.
-  let anchor = node
-  while (anchor.parentElement && anchor.parentElement.classList.contains("chess-training-board")) {
-    anchor = anchor.parentElement
+function setActiveBoardPanel(container: PanelContainer, panel: BoardPanelKey) {
+  container.root.dataset.activePanel = panel
+
+  for (const [key, button] of Object.entries(container.tabs) as Array<[BoardPanelKey, HTMLButtonElement]>) {
+    const active = key === panel
+    button.dataset.active = active ? "true" : "false"
+    button.setAttribute("aria-selected", active ? "true" : "false")
   }
 
-  let container = anchor.nextElementSibling as HTMLElement | null
-  if (!container || !container.classList.contains("training-board-panels")) {
-    container = makeElement("div", "training-board-panels")
-    anchor.after(container)
+  for (const section of Array.from(container.body.children) as HTMLElement[]) {
+    const active = section.dataset.panel === panel
+    section.dataset.active = active ? "true" : "false"
+    section.hidden = !active
   }
-  return container
 }
 
-function createPanelHeader(title: string, subtitle: string) {
-  const header = makeElement("div", "training-board-panel__header")
-  const heading = makeElement("div", "training-board-panel__heading")
-  const titleSpan = makeElement("span", "training-board-panel__title", title)
-  const subtitleSpan = makeElement("span", "training-board-panel__subtitle", subtitle)
-  heading.append(titleSpan, subtitleSpan)
-  header.appendChild(heading)
-  return header
+function ensurePanelContainer(node: HTMLElement) {
+  const existing = node.querySelector<HTMLElement>(":scope > .training-board-panels")
+  if (existing) {
+    const tabs = Array.from(
+      existing.querySelectorAll<HTMLButtonElement>(".training-board-tab[data-panel-target]"),
+    )
+
+    return {
+      root: existing,
+      body: existing.querySelector<HTMLElement>(".training-board-panels__body") ?? existing,
+      tabs: {
+        engine: tabs.find((button) => button.dataset.panelTarget === "engine") ?? makeElement("button"),
+        explorer: tabs.find((button) => button.dataset.panelTarget === "explorer") ?? makeElement("button"),
+      },
+    } satisfies PanelContainer
+  }
+
+  const root = makeElement("section", "training-board-panels")
+  const bar = makeElement("div", "training-board-panels__bar")
+  const tabs = makeElement("div", "training-board-panels__tabs")
+  const meta = makeElement("span", "training-board-panels__meta", "Analysis dock")
+  const engineTab = makeElement("button", "training-board-tab", "Engine")
+  engineTab.type = "button"
+  engineTab.dataset.panelTarget = "engine"
+  engineTab.setAttribute("aria-selected", "true")
+  const explorerTab = makeElement("button", "training-board-tab", "Masters")
+  explorerTab.type = "button"
+  explorerTab.dataset.panelTarget = "explorer"
+  explorerTab.setAttribute("aria-selected", "false")
+  tabs.append(engineTab, explorerTab)
+  bar.append(tabs, meta)
+
+  const body = makeElement("div", "training-board-panels__body")
+  root.append(bar, body)
+  node.appendChild(root)
+
+  const container = {
+    root,
+    body,
+    tabs: {
+      engine: engineTab,
+      explorer: explorerTab,
+    },
+  } satisfies PanelContainer
+
+  engineTab.addEventListener("click", () => {
+    setActiveBoardPanel(container, "engine")
+  })
+  explorerTab.addEventListener("click", () => {
+    setActiveBoardPanel(container, "explorer")
+  })
+
+  return container
 }
 
 function createEnginePanel(): EngineController {
   const panel = makeElement("section", "training-board-panel training-board-panel--engine")
+  panel.dataset.panel = "engine"
   const body = makeElement("div", "training-board-panel__body training-engine")
+  const header = makeElement("div", "training-engine__header")
+  const summary = makeElement("div", "training-engine__summary")
   const toolbar = makeElement("div", "training-engine__toolbar")
   const toggleButton = makeElement("button", "training-board-button", "Turn On Stockfish")
   toggleButton.type = "button"
@@ -219,8 +273,10 @@ function createEnginePanel(): EngineController {
 
   toolbar.append(toggleButton, evalBarButton)
   scoreRow.append(score, meta)
-  body.append(toolbar, status, scoreRow, pv)
-  panel.append(createPanelHeader("Engine", "Stockfish, eval bar, and PV"), body)
+  summary.append(scoreRow, status)
+  header.append(summary, toolbar)
+  body.append(header, pv)
+  panel.append(body)
 
   return {
     panel,
@@ -247,7 +303,10 @@ function createEnginePanel(): EngineController {
 
 function createExplorerPanel(): ExplorerController {
   const panel = makeElement("section", "training-board-panel training-board-panel--explorer")
+  panel.dataset.panel = "explorer"
   const body = makeElement("div", "training-board-panel__body training-explorer")
+  const header = makeElement("div", "training-explorer__header")
+  const summary = makeElement("div", "training-explorer__summary")
   const toolbar = makeElement("div", "training-explorer__toolbar")
   const toggleButton = makeElement("button", "training-board-button", "Turn On Database")
   toggleButton.type = "button"
@@ -257,12 +316,16 @@ function createExplorerPanel(): ExplorerController {
     "Masters database is off. Turn it on to fetch opening statistics for the current position.",
   )
   const opening = makeElement("p", "training-explorer__opening")
+  const content = makeElement("div", "training-explorer__content")
   const moves = makeElement("div", "training-explorer__moves")
   const games = makeElement("div", "training-explorer__games")
 
   toolbar.appendChild(toggleButton)
-  body.append(toolbar, status, opening, moves, games)
-  panel.append(createPanelHeader("Masters Database", "Opening table and top games"), body)
+  summary.append(status, opening)
+  header.append(summary, toolbar)
+  content.append(moves, games)
+  body.append(header, content)
+  panel.append(body)
 
   return {
     panel,
@@ -568,6 +631,7 @@ function renderExplorerData(controller: ExplorerController, data: ExplorerRespon
   controller.moves.replaceChildren()
   const moves = (data.moves ?? []).slice(0, EXPLORER_MOVE_LIMIT)
   if (moves.length > 0) {
+    const heading = makeElement("p", "training-explorer__games-title", "Move table")
     const list = makeElement("div", "training-explorer__move-list")
     for (const move of moves) {
       const row = makeElement("div", "training-explorer__move-row")
@@ -595,7 +659,7 @@ function renderExplorerData(controller: ExplorerController, data: ExplorerRespon
       row.append(header, bar, summary)
       list.appendChild(row)
     }
-    controller.moves.appendChild(list)
+    controller.moves.append(heading, list)
   }
 
   controller.games.replaceChildren()
@@ -699,7 +763,8 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) 
   const panelContainer = ensurePanelContainer(node)
   const engine = createEnginePanel()
   const explorer = createExplorerPanel()
-  panelContainer.append(engine.panel, explorer.panel)
+  panelContainer.body.append(engine.panel, explorer.panel)
+  setActiveBoardPanel(panelContainer, "engine")
 
   const enhancement: BoardEnhancement = {
     node,
@@ -711,9 +776,11 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) 
 
   mountEvalBar(mount, engine)
   engine.toggleButton.addEventListener("click", () => {
+    setActiveBoardPanel(panelContainer, "engine")
     toggleEngine(enhancement)
   })
   engine.evalBarButton.addEventListener("click", () => {
+    setActiveBoardPanel(panelContainer, "engine")
     setEvalBarVisible(engine, !engine.evalBarVisible)
   })
   setEvalBarVisible(engine, true)
@@ -724,6 +791,7 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) 
   engine.barBlack.style.height = "50%"
 
   explorer.toggleButton.addEventListener("click", () => {
+    setActiveBoardPanel(panelContainer, "explorer")
     setExplorerEnabled(explorer, !explorer.enabled)
     void loadExplorer(enhancement)
   })
