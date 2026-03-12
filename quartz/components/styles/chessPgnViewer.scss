@@ -17,7 +17,7 @@
 
 .chess-training-board {
   position: relative;
-  min-height: 20rem;
+  min-height: 0;
   margin: 1rem 0 1.75rem;
   padding: 0.95rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
@@ -82,19 +82,17 @@
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   gap: 0.5rem;
   align-items: stretch;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
-  position: relative;
+  flex: 1 1 auto;
   min-width: 0;
   width: 100%;
   filter: brightness(1.06) saturate(0.92);
-  overflow: visible;
-  padding-left: 1.18rem;
+  overflow: hidden;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__player {
@@ -415,13 +413,10 @@
   display: grid;
   gap: 0.38rem;
   width: min(100%, 17.35rem);
-  margin: 0;
+  margin: 0 0 0 auto;
   padding-top: 0.28rem;
   border-top: 1px solid color-mix(in srgb, var(--secondary) 8%, var(--lightgray));
-  position: absolute;
-  right: 0.95rem;
-  bottom: 0.95rem;
-  z-index: 2;
+  position: static;
 }
 
 .training-board-panels__bar {
@@ -582,20 +577,20 @@
 }
 
 .training-engine__bar-rail {
-  position: absolute;
-  top: 0.18rem;
-  bottom: 0.18rem;
-  left: 0;
-  z-index: 3;
+  position: relative;
   display: flex;
   align-items: stretch;
-  width: 0.98rem;
-  min-width: 0.98rem;
-  padding: 0.09rem;
+  align-self: stretch;
+  flex: 0 0 0.92rem;
+  width: 0.92rem;
+  min-width: 0.92rem;
+  padding: 0.08rem 0.06rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 26%, var(--lightgray));
   border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  background: linear-gradient(180deg, rgba(255, 250, 242, 0.95), rgba(230, 220, 200, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.66),
+    0 0 0 1px rgba(139, 107, 44, 0.04);
 }
 
 .training-engine__bar-rail[data-hidden="true"] {
@@ -614,7 +609,7 @@
   height: 100%;
   border-radius: 999px;
   overflow: hidden;
-  background: rgba(134, 117, 84, 0.15);
+  background: rgba(75, 59, 36, 0.16);
 }
 
 .training-engine__bar[data-hidden="true"] {
@@ -622,11 +617,11 @@
 }
 
 .training-engine__bar-white {
-  background: linear-gradient(180deg, #f7f0de, #dfd1ae);
+  background: linear-gradient(180deg, #f7f0de, #fffaf0);
 }
 
 .training-engine__bar-black {
-  background: linear-gradient(180deg, #625448, #2d251f);
+  background: linear-gradient(180deg, #5f4c35, #241b14);
 }
 
 .training-engine__bar-white,
@@ -822,6 +817,10 @@
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.24);
 }
 
+:root[saved-theme="dark"] .training-engine__bar-rail {
+  background: linear-gradient(180deg, rgba(34, 28, 21, 0.94), rgba(20, 16, 12, 0.94));
+}
+
 :root[saved-theme="dark"] .training-board-panel__body,
 :root[saved-theme="dark"] .training-explorer__move-row,
 :root[saved-theme="dark"] .training-explorer__game-row,
@@ -877,11 +876,12 @@
 
 @media (max-width: 900px) {
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
-    padding-left: 0;
+    width: 100%;
   }
 
   .training-board-panels__bar,
@@ -905,6 +905,7 @@
   .training-board-panels {
     position: static;
     width: 100%;
+    margin-left: 0;
     margin-top: 0.4rem;
   }
 
@@ -920,6 +921,7 @@
     width: 100%;
     min-width: 0;
     min-height: 0.9rem;
+    flex: initial;
   }
 
   .training-engine__bar {
@@ -939,16 +941,18 @@
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
-    padding-left: 0;
+    width: 100%;
   }
 
   .training-board-panels {
     position: static;
     width: 100%;
+    margin-left: 0;
     margin-top: 0.4rem;
   }
 
@@ -960,6 +964,7 @@
     width: 100%;
     min-width: 0;
     min-height: 0.9rem;
+    flex: initial;
   }
 
   .training-engine__bar {
