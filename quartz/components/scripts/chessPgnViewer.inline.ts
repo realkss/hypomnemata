@@ -740,6 +740,14 @@ function firstMasterLink() {
   )
 }
 
+function preferredMovesLayout(): "right" | "bottom" {
+  const compactWidth = window.matchMedia("(max-width: 900px)").matches
+  const shortLandscape = window.matchMedia("(orientation: landscape) and (max-height: 720px)").matches
+  const touchLandscape = window.matchMedia("(hover: none) and (orientation: landscape)").matches
+
+  return compactWidth || shortLandscape || touchLandscape ? "bottom" : "right"
+}
+
 async function discoverLocalMasterPgnUrls() {
   const directUrls = Array.from(
     document.querySelectorAll<HTMLElement>(".chess-training-board[data-pgn-src]"),
@@ -1162,7 +1170,7 @@ async function mountBoard(node: HTMLElement) {
       pgn,
       showClocks: false,
       showPlayers: true,
-      showMoves: "auto",
+      showMoves: preferredMovesLayout(),
     }
 
     const orientation = node.dataset.orientation
