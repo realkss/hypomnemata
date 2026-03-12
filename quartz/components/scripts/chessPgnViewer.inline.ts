@@ -26,7 +26,7 @@ try {
   console.error("Failed to resolve Stockfish worker URL", e)
   STOCKFISH_WORKER_URL = "/static/chess/stockfish/stockfish-18-lite-single.js"
 }
-const DEFAULT_MASTERS_ENDPOINT = "https://explorer.lichess.ovh/masters"
+const DEFAULT_MASTERS_ENDPOINT = "/api/chess/masters"
 const ENGINE_DEPTH = 14
 const ENGINE_HASH_MB = 16
 const ENGINE_DEBOUNCE_MS = 220
@@ -641,14 +641,17 @@ function setEvalBarVisible(controller: EngineController, visible: boolean) {
 }
 
 function mountEvalBar(mount: HTMLElement, controller: EngineController) {
-  const board = mount.querySelector<HTMLElement>(".cg-wrap")
+  const board = mount.querySelector<HTMLElement>(".lpv__board")
   if (!board) {
     return
   }
 
-  if (controller.barRail.parentElement !== board) {
+  if (
+    controller.barRail.parentElement !== board ||
+    board.firstElementChild !== controller.barRail
+  ) {
     controller.barRail.remove()
-    board.appendChild(controller.barRail)
+    board.insertBefore(controller.barRail, board.firstChild)
   }
 }
 
