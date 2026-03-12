@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SESSIONS_DIR = ROOT / "content" / "en" / "Chess" / "Training Sessions"
+SITE_ROOT = "en/Chess/Training-Sessions"
 RESULT_TOKENS = {"1-0", "0-1", "1/2-1/2", "*"}
 MOVE_NUMBER_RE = re.compile(r"^\d+\.(?:\.\.)?$")
 TOKEN_RE = re.compile(r"\{[^}]*\}|\(|\)|\$\d+|\d+\.(?:\.\.)?|1-0|0-1|1/2-1/2|\*|[^\s(){}]+", re.DOTALL)
@@ -77,6 +78,14 @@ class SessionData:
     session_date: date
     white: GameData
     black: GameData
+
+    @property
+    def url(self) -> str:
+        return f"{SITE_ROOT}/{self.slug}/"
+
+    @property
+    def master_url(self) -> str:
+        return f"{self.url}Master-Games/"
 
     @property
     def display_title(self) -> str:
@@ -543,7 +552,7 @@ def render_session_body(
             f"  <li>Black game: {session.black.date_text} ({session.black.result})</li>",
             "</ul>",
             "",
-            "The cited model games from the annotations are collected on the [Master Games](./Master-Games/) subpage.",
+            f"The cited model games from the annotations are collected on the [Master Games]({session.master_url}) subpage.",
             "",
             "## White Game",
             "",
@@ -561,7 +570,7 @@ def render_session_body(
             "",
             render_comments_section("Comments", black_comments_text),
             "",
-            render_session_nav(prev_url, "../", "./Master-Games/", next_url),
+            render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
         ]
     )
 
@@ -602,7 +611,7 @@ def render_master_page(session: SessionData, prev_url: str | None, next_url: str
             "",
             render_master_entries("Black", "black", session.black.master_refs),
             "",
-            render_session_nav(prev_url, "../../", "../", next_url).replace("Master Games", "Session Boards"),
+            render_session_nav(prev_url, f"{SITE_ROOT}/", session.url, next_url).replace("Master Games", "Session Boards"),
         ]
     )
 
@@ -613,7 +622,7 @@ def render_catalog(sessions: list[SessionData]) -> str:
     for session in reversed(sessions):
         rows.extend(
             [
-                f'  <a class="training-session-row" href="./{session.slug}/">',
+                f'  <a class="training-session-row" href="{session.url}">',
                 f'    <span class="training-session-row__date">{render_catalog_date(session.session_date)}</span>',
                 f'    <span class="training-session-row__title">{session.display_title}</span>',
                 '    <span class="training-session-row__summary">',
@@ -672,8 +681,8 @@ def main() -> None:
         session_index.write_text(
             render_session_body(
                 session,
-                f"../{prev_session.slug}/" if prev_session else None,
-                f"../{next_session.slug}/" if next_session else None,
+                prev_session.url if prev_session else None,
+                next_session.url if next_session else None,
                 white_comments_text,
                 black_comments_text,
             )
@@ -687,8 +696,8 @@ def main() -> None:
         (master_dir / "index.md").write_text(
             render_master_page(
                 session,
-                f"../../{prev_session.slug}/Master-Games/" if prev_session else None,
-                f"../../{next_session.slug}/Master-Games/" if next_session else None,
+                prev_session.master_url if prev_session else None,
+                next_session.master_url if next_session else None,
             )
             + "\n",
             encoding="utf-8",

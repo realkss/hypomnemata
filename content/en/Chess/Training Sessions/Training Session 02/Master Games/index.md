@@ -33,8 +33,8 @@ These boards replay the cited master-game lines embedded in the session annotati
 </section>
 
 <nav class="training-session-nav" aria-label="Session navigation">
-  <a class="training-session-nav__link" href="../../Training-Session-01/Master-Games/">Prev Session</a>
-  <a class="training-session-nav__link" href="../../">All Sessions</a>
-  <a class="training-session-nav__link" href="../">Session Boards</a>
-  <a class="training-session-nav__link" href="../../Training-Session-03/Master-Games/">Next Session</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-01/Master-Games/">Prev Session</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/">All Sessions</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-02/">Session Boards</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-03/Master-Games/">Next Session</a>
 </nav>
