@@ -74,6 +74,8 @@
 
 .chess-training-board > .chess-training-board__mount.lpv {
   max-width: 64rem;
+  row-gap: 0.55rem;
+  align-items: start;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv--moves-right,
@@ -412,11 +414,15 @@
 .training-board-panels {
   display: grid;
   gap: 0.38rem;
-  width: min(100%, 17.35rem);
-  margin: 0 0 0 auto;
-  padding-top: 0.28rem;
+  width: 100%;
+  max-width: 17.35rem;
+  margin: 0;
+  padding-top: 0.18rem;
   border-top: 1px solid color-mix(in srgb, var(--secondary) 8%, var(--lightgray));
   position: static;
+  grid-column: 2;
+  justify-self: stretch;
+  align-self: start;
 }
 
 .training-board-panels__bar {
@@ -903,8 +909,10 @@
   }
 
   .training-board-panels {
+    grid-column: 1;
     position: static;
     width: 100%;
+    max-width: none;
     margin-left: 0;
     margin-top: 0.4rem;
   }
@@ -934,7 +942,7 @@
   }
 }
 
-@media (hover: none) and (orientation: landscape) {
+@media (hover: none) and (orientation: landscape), (orientation: landscape) and (max-height: 720px) {
   .chess-training-board > .chess-training-board__mount.lpv--moves-right,
   .chess-training-board > .chess-training-board__mount.lpv--moves-auto {
     grid-template-columns: 1fr;
@@ -950,8 +958,10 @@
   }
 
   .training-board-panels {
+    grid-column: 1;
     position: static;
     width: 100%;
+    max-width: none;
     margin-left: 0;
     margin-top: 0.4rem;
   }
