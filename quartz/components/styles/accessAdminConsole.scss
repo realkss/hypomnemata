@@ -1,0 +1,282 @@
+.access-admin-console {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 1.25rem;
+}
+
+.access-admin-console__intro,
+.access-admin-console__summary,
+.access-admin-console__pages,
+.access-admin-console__users {
+  padding: 1.15rem 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
+  box-shadow: 0 10px 24px rgba(96, 77, 48, 0.06);
+}
+
+.access-admin-console__eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--secondary);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.access-admin-console__intro h2,
+.access-admin-console__section-title {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  color: var(--dark);
+}
+
+.access-admin-console__intro p:last-child {
+  margin-bottom: 0;
+}
+
+.access-admin-console__status {
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  background: color-mix(in srgb, var(--light) 94%, var(--secondary) 6%);
+  color: var(--darkgray);
+}
+
+.access-admin-console__status[data-tone="error"] {
+  border-color: rgba(139, 76, 53, 0.25);
+  color: #8b4c35;
+}
+
+.access-admin-console__status[data-tone="success"] {
+  border-color: rgba(47, 92, 52, 0.25);
+  color: #2f5c34;
+}
+
+.access-admin-console__summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+}
+
+.access-admin-console__summary-card,
+.access-admin-console__page-card,
+.access-admin-console__user-card {
+  padding: 0.95rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.access-admin-console__summary-card strong,
+.access-admin-console__page-card h4,
+.access-admin-console__user-name {
+  color: var(--dark);
+}
+
+.access-admin-console__summary-card span,
+.access-admin-console__page-card p,
+.access-admin-console__user-meta,
+.access-admin-console__hint {
+  color: var(--darkgray);
+}
+
+.access-admin-console__stack {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.95rem;
+}
+
+.access-admin-console__page-head,
+.access-admin-console__user-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.access-admin-console__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.58rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  background: color-mix(in srgb, var(--light) 92%, var(--secondary) 8%);
+  color: var(--secondary);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.access-admin-console__slug {
+  margin-top: 0.18rem;
+  font-size: 0.82rem;
+}
+
+.access-admin-console__chooser {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.9rem;
+}
+
+.access-admin-console__checkboxes {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.access-admin-console__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.58rem 0.7rem;
+  border-radius: 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.access-admin-console__checkbox input,
+.access-admin-console__toggle input {
+  accent-color: var(--secondary);
+}
+
+.access-admin-console__checkbox-meta {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.access-admin-console__checkbox-meta strong,
+.access-admin-console__toggle strong {
+  color: var(--dark);
+}
+
+.access-admin-console__checkbox-meta span,
+.access-admin-console__toggle span {
+  color: var(--darkgray);
+  font-size: 0.82rem;
+}
+
+.access-admin-console__checkbox[data-blocked="true"] {
+  opacity: 0.6;
+}
+
+.access-admin-console__textarea {
+  min-height: 5.6rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--dark);
+  font: inherit;
+  resize: vertical;
+}
+
+.access-admin-console__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+}
+
+.access-admin-console__button {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--light) 90%, var(--secondary) 10%);
+  color: var(--dark);
+  padding: 0.52rem 0.92rem;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    background 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.access-admin-console__button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+  border-color: color-mix(in srgb, var(--secondary) 30%, var(--lightgray));
+}
+
+.access-admin-console__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.access-admin-console__inline-status {
+  font-size: 0.84rem;
+  color: var(--darkgray);
+}
+
+.access-admin-console__user-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+}
+
+.access-admin-console__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+:root[saved-theme="dark"] .access-admin-console__intro,
+:root[saved-theme="dark"] .access-admin-console__summary,
+:root[saved-theme="dark"] .access-admin-console__pages,
+:root[saved-theme="dark"] .access-admin-console__users,
+:root[saved-theme="dark"] .access-admin-console__summary-card,
+:root[saved-theme="dark"] .access-admin-console__page-card,
+:root[saved-theme="dark"] .access-admin-console__user-card,
+:root[saved-theme="dark"] .access-admin-console__checkbox,
+:root[saved-theme="dark"] .access-admin-console__textarea,
+:root[saved-theme="dark"] .access-admin-console__status {
+  background: linear-gradient(180deg, rgba(24, 26, 33, 0.96), rgba(15, 17, 22, 0.96));
+  border-color: rgba(194, 158, 92, 0.24);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+:root[saved-theme="dark"] .access-admin-console__intro h2,
+:root[saved-theme="dark"] .access-admin-console__section-title,
+:root[saved-theme="dark"] .access-admin-console__summary-card strong,
+:root[saved-theme="dark"] .access-admin-console__page-card h4,
+:root[saved-theme="dark"] .access-admin-console__user-name,
+:root[saved-theme="dark"] .access-admin-console__checkbox-meta strong,
+:root[saved-theme="dark"] .access-admin-console__toggle strong {
+  color: #f3ead8;
+}
+
+:root[saved-theme="dark"] .access-admin-console__intro p,
+:root[saved-theme="dark"] .access-admin-console__summary-card span,
+:root[saved-theme="dark"] .access-admin-console__page-card p,
+:root[saved-theme="dark"] .access-admin-console__user-meta,
+:root[saved-theme="dark"] .access-admin-console__hint,
+:root[saved-theme="dark"] .access-admin-console__inline-status,
+:root[saved-theme="dark"] .access-admin-console__checkbox-meta span,
+:root[saved-theme="dark"] .access-admin-console__toggle span,
+:root[saved-theme="dark"] .access-admin-console__textarea,
+:root[saved-theme="dark"] .access-admin-console__status {
+  color: #d6c8ae;
+}
+
+:root[saved-theme="dark"] .access-admin-console__badge,
+:root[saved-theme="dark"] .access-admin-console__button {
+  background: rgba(201, 164, 95, 0.08);
+  border-color: rgba(201, 164, 95, 0.24);
+  color: #efe4cf;
+}
+
+:root[saved-theme="dark"] .access-admin-console__button:hover:not(:disabled) {
+  background: rgba(201, 164, 95, 0.16);
+}
+
+@media (max-width: 800px) {
+  .access-admin-console__intro,
+  .access-admin-console__summary,
+  .access-admin-console__pages,
+  .access-admin-console__users {
+    padding: 1rem;
+  }
+}

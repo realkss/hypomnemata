@@ -38,6 +38,10 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug !== "index" && !isLanguageLanding(page.fileData.slug),
     }),
     Component.TagList(),
+    Component.ConditionalRender({
+      component: Component.AccessAdminConsole(),
+      condition: (page) => page.fileData.slug === "censorium-access-control",
+    }),
   ],
   left: [
     Component.PageTitle(),

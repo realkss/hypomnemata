@@ -42,6 +42,25 @@ function formatCrumb(displayName: string, baseSlug: FullSlug, currentSlug: Simpl
   }
 }
 
+function buildFallbackCrumbs(fileSlug: FullSlug, rootName: string): CrumbData[] {
+  const slugParts = fileSlug.split("/")
+
+  return slugParts.map((part, index) => {
+    const currentSlug = slugParts.slice(0, index + 1).join("/") as SimpleSlug
+    const crumb = formatCrumb(part, fileSlug, currentSlug)
+
+    if (index === 0) {
+      crumb.displayName = rootName
+    }
+
+    if (index === slugParts.length - 1) {
+      crumb.path = ""
+    }
+
+    return crumb
+  })
+}
+
 export default ((opts?: Partial<BreadcrumbOptions>) => {
   const options: BreadcrumbOptions = { ...defaultOptions, ...opts }
   const Breadcrumbs: QuartzComponent = ({
@@ -53,24 +72,20 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
     const trie = (ctx.trie ??= trieFromAllFiles(allFiles))
     const slugParts = fileData.slug!.split("/")
     const pathNodes = trie.ancestryChain(slugParts)
+    const crumbs: CrumbData[] = pathNodes
+      ? pathNodes.map((node, idx) => {
+          const crumb = formatCrumb(node.displayName, fileData.slug!, simplifySlug(node.slug))
+          if (idx === 0) {
+            crumb.displayName = options.rootName
+          }
 
-    if (!pathNodes) {
-      return null
-    }
+          if (idx === pathNodes.length - 1) {
+            crumb.path = ""
+          }
 
-    const crumbs: CrumbData[] = pathNodes.map((node, idx) => {
-      const crumb = formatCrumb(node.displayName, fileData.slug!, simplifySlug(node.slug))
-      if (idx === 0) {
-        crumb.displayName = options.rootName
-      }
-
-      // For last node (current page), set empty path
-      if (idx === pathNodes.length - 1) {
-        crumb.path = ""
-      }
-
-      return crumb
-    })
+          return crumb
+        })
+      : buildFallbackCrumbs(fileData.slug!, options.rootName)
 
     if (!options.showCurrentPage) {
       crumbs.pop()

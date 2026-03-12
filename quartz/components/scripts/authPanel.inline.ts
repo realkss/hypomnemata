@@ -1,7 +1,7 @@
-type Provider = "google" | "instagram"
+type AuthPanelProvider = "google" | "instagram"
 
 type AuthUser = {
-  provider: Provider
+  provider: AuthPanelProvider
   name: string
   email?: string
   username?: string
@@ -9,16 +9,18 @@ type AuthUser = {
 }
 
 type SessionResponse = {
-  configured: Record<Provider, boolean>
+  configured: Record<AuthPanelProvider, boolean>
   user: AuthUser | null
 }
 
 const authMessages: Record<string, string> = {
   access_denied: "Sign-in was cancelled.",
+  auth_required: "Sign in is required to view that page.",
   code_exchange_failed: "The sign-in could not be completed.",
   config_missing: "This provider is not configured yet.",
   missing_access_token: "The provider did not return an access token.",
   missing_code: "The provider did not return a login code.",
+  not_authorized: "Your account does not have access to that page.",
   profile_fetch_failed: "The profile could not be loaded.",
   profile_incomplete: "The provider did not return enough profile information.",
   state_mismatch: "This sign-in attempt expired.",
@@ -59,13 +61,26 @@ function getAuthNotice() {
 
 function buildReturnTo() {
   const currentUrl = new URL(window.location.toString())
+  const requestedReturnTo = currentUrl.searchParams.get("returnTo")
+
+  if (requestedReturnTo) {
+    try {
+      const target = new URL(requestedReturnTo, window.location.origin)
+      if (target.origin === window.location.origin) {
+        return `${target.pathname}${target.search}${target.hash}`
+      }
+    } catch {
+      // fall back to the current page if the provided returnTo is malformed
+    }
+  }
+
   currentUrl.searchParams.delete("auth_provider")
   currentUrl.searchParams.delete("auth_error")
   currentUrl.searchParams.delete("auth")
   return `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`
 }
 
-function providerLabel(provider: Provider) {
+function providerLabel(provider: AuthPanelProvider) {
   return provider === "google" ? "Google" : "Instagram"
 }
 
@@ -80,12 +95,12 @@ function setStatus(panel: HTMLElement, tone: "neutral" | "success" | "error", me
   status.textContent = message
 }
 
-function setButtonAvailability(panel: HTMLElement, configured: Record<Provider, boolean>) {
+function setButtonAvailability(panel: HTMLElement, configured: Record<AuthPanelProvider, boolean>) {
   const buttons = Array.from(panel.querySelectorAll("[data-auth-start]"))
 
   for (const buttonNode of buttons) {
     const button = buttonNode as HTMLButtonElement
-    const provider = button.dataset.provider as Provider | undefined
+    const provider = button.dataset.provider as AuthPanelProvider | undefined
     if (!provider) {
       continue
     }
@@ -199,7 +214,7 @@ async function renderPanel(panel: HTMLElement) {
 
   const configuredProviders = Object.entries(session.configured)
     .filter(([, enabled]) => enabled)
-    .map(([provider]) => providerLabel(provider as Provider))
+    .map(([provider]) => providerLabel(provider as AuthPanelProvider))
 
   if (notice) {
     setStatus(panel, notice.tone, notice.message)
@@ -221,7 +236,7 @@ async function setupPanel(panel: HTMLElement) {
   const loginButtons = Array.from(panel.querySelectorAll("[data-auth-start]"))
   for (const buttonNode of loginButtons) {
     const button = buttonNode as HTMLButtonElement
-    const provider = button.dataset.provider as Provider | undefined
+    const provider = button.dataset.provider as AuthPanelProvider | undefined
     if (!provider) {
       continue
     }

@@ -28,6 +28,7 @@ import Masthead from "./Masthead"
 import ChessPgnViewer from "./ChessPgnViewer"
 import TranslationBadge from "./TranslationBadge"
 import AuthPanel from "./AuthPanel"
+import AccessAdminConsole from "./AccessAdminConsole"
 
 export {
   ArticleTitle,
@@ -60,4 +61,5 @@ export {
   ChessPgnViewer,
   TranslationBadge,
   AuthPanel,
+  AccessAdminConsole,
 }

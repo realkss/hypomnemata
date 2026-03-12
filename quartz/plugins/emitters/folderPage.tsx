@@ -20,6 +20,7 @@ import { write } from "./helpers"
 import { i18n, TRANSLATIONS } from "../../i18n"
 import { BuildCtx } from "../../util/ctx"
 import { StaticResources } from "../../util/resources"
+import { filterPublicFiles } from "../../util/access"
 interface FolderPageOptions extends FullPageLayout {
   sort?: (f1: QuartzPluginData, f2: QuartzPluginData) => number
 }
@@ -129,7 +130,7 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
       ]
     },
     async *emit(ctx, content, resources) {
-      const allFiles = content.map((c) => c[1].data)
+      const allFiles = filterPublicFiles(content.map((c) => c[1].data))
       const cfg = ctx.cfg.configuration
 
       const folders: Set<SimpleSlug> = new Set(
@@ -146,7 +147,7 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
       yield* processFolderInfo(ctx, folderInfo, allFiles, opts, resources)
     },
     async *partialEmit(ctx, content, resources, changeEvents) {
-      const allFiles = content.map((c) => c[1].data)
+      const allFiles = filterPublicFiles(content.map((c) => c[1].data))
       const cfg = ctx.cfg.configuration
 
       // Find all folders that need to be updated based on changed files

@@ -7,6 +7,7 @@ import { QuartzEmitterPlugin } from "../types"
 import { toHtml } from "hast-util-to-html"
 import { write } from "./helpers"
 import { i18n } from "../../i18n"
+import { filterPublicFiles, isPublicFileData } from "../../util/access"
 
 export type ContentIndexMap = Map<FullSlug, ContentDetails>
 export type ContentDetails = {
@@ -98,8 +99,14 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
     name: "ContentIndex",
     async *emit(ctx, content) {
       const cfg = ctx.cfg.configuration
+      const publicFiles = filterPublicFiles(content.map(([, file]) => file.data))
+      const publicSlugs = new Set(publicFiles.map((file) => simplifySlug(file.slug!)))
       const linkIndex: ContentIndexMap = new Map()
       for (const [tree, file] of content) {
+        if (!isPublicFileData(file.data)) {
+          continue
+        }
+
         const slug = file.data.slug!
         const date = getDate(ctx.cfg.configuration, file.data) ?? new Date()
         if (opts?.includeEmptyFiles || (file.data.text && file.data.text !== "")) {
@@ -107,7 +114,7 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
             slug,
             filePath: file.data.relativePath!,
             title: file.data.frontmatter?.title!,
-            links: file.data.links ?? [],
+            links: (file.data.links ?? []).filter((link) => publicSlugs.has(link)),
             tags: file.data.frontmatter?.tags ?? [],
             content: file.data.text ?? "",
             richContent: opts?.rssFullHtml

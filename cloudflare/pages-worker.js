@@ -7,10 +7,13 @@ const INSTAGRAM_TOKEN_URL = "https://api.instagram.com/oauth/access_token"
 const INSTAGRAM_PROFILE_URL = "https://graph.instagram.com/me"
 const SESSION_COOKIE_NAME = "__Host-hypomnemata_session"
 const STATE_COOKIE_NAME = "__Host-hypomnemata_oauth_state"
+const ACCESS_CONTROL_INDEX_PATH = "/static/access-control-index.json"
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30
 const STATE_MAX_AGE_SECONDS = 60 * 10
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
+let accessControlIndexCache = null
+let accessControlIndexCacheAt = 0
 
 function json(body, init = {}) {
   const headers = new Headers(init.headers || {})
@@ -289,6 +292,349 @@ function clearSessionCookie() {
   return clearCookie(SESSION_COOKIE_NAME)
 }
 
+function normalizeIdentifier(value) {
+  if (typeof value !== "string") {
+    return null
+  }
+
+  const normalized = value.trim().toLowerCase()
+  if (!normalized) {
+    return null
+  }
+
+  if (normalized.startsWith("email:")) {
+    const emailValue = normalized.slice("email:".length).trim()
+    return emailValue || null
+  }
+
+  return normalized
+}
+
+function uniqueStrings(values) {
+  return Array.from(new Set(values.filter((value) => typeof value === "string" && value.length > 0)))
+}
+
+function getUserIdentityKeys(user) {
+  const identifiers = []
+
+  if (user?.email) {
+    identifiers.push(normalizeIdentifier(user.email))
+  }
+
+  if (user?.username) {
+    identifiers.push(normalizeIdentifier(`${user.provider}:${user.username}`))
+  }
+
+  if (user?.provider && user?.sub) {
+    identifiers.push(normalizeIdentifier(`${user.provider}:sub:${user.sub}`))
+  }
+
+  return uniqueStrings(identifiers.filter(Boolean))
+}
+
+function getPrimaryUserKey(user) {
+  return getUserIdentityKeys(user)[0] ?? null
+}
+
+function getOwnerIdentifiers(env) {
+  const envValues = [
+    env.ACCESS_OWNER_EMAIL,
+    env.ACCESS_OWNER_IDENTIFIERS,
+  ]
+
+  return uniqueStrings(
+    envValues
+      .flatMap((value) => (typeof value === "string" ? value.split(",") : []))
+      .map((value) => normalizeIdentifier(value))
+      .filter(Boolean),
+  )
+}
+
+function isOwnerUser(user, env) {
+  if (!user) {
+    return false
+  }
+
+  const ownerIdentifiers = new Set(getOwnerIdentifiers(env))
+  if (ownerIdentifiers.size === 0) {
+    return false
+  }
+
+  return getUserIdentityKeys(user).some((identifier) => ownerIdentifiers.has(identifier))
+}
+
+function getAccessControlKv(env) {
+  return env.ACCESS_CONTROL_KV ?? null
+}
+
+async function readJsonBody(request) {
+  try {
+    return await request.json()
+  } catch {
+    return null
+  }
+}
+
+async function getStoredUser(env, key) {
+  const kv = getAccessControlKv(env)
+  if (!kv || !key) {
+    return null
+  }
+
+  return (await kv.get(`user:${key}`, "json")) ?? null
+}
+
+async function registerKnownUser(env, user) {
+  const kv = getAccessControlKv(env)
+  const key = getPrimaryUserKey(user)
+  if (!kv || !key) {
+    return
+  }
+
+  const existing = (await getStoredUser(env, key)) ?? {}
+  const now = new Date().toISOString()
+  const next = {
+    ...existing,
+    key,
+    identities: getUserIdentityKeys(user),
+    provider: user.provider,
+    sub: user.sub,
+    name: user.name,
+    email: user.email,
+    username: user.username,
+    picture: user.picture,
+    blocked: Boolean(existing.blocked),
+    createdAt: existing.createdAt ?? now,
+    lastSeenAt: now,
+  }
+
+  await kv.put(`user:${key}`, JSON.stringify(next))
+}
+
+async function listKnownUsers(env) {
+  const kv = getAccessControlKv(env)
+  if (!kv) {
+    return []
+  }
+
+  const listing = await kv.list({ prefix: "user:" })
+  const users = await Promise.all(listing.keys.map((entry) => kv.get(entry.name, "json")))
+
+  return users
+    .filter(Boolean)
+    .sort((left, right) => {
+      const leftName = (left.name || left.key || "").toLowerCase()
+      const rightName = (right.name || right.key || "").toLowerCase()
+      return leftName.localeCompare(rightName)
+    })
+}
+
+function normalizeAllowedIdentifiers(values) {
+  if (!Array.isArray(values)) {
+    return []
+  }
+
+  return uniqueStrings(
+    values
+      .map((value) => normalizeIdentifier(value))
+      .filter(Boolean),
+  )
+}
+
+async function getStoredRule(env, slug) {
+  const kv = getAccessControlKv(env)
+  if (!kv || !slug) {
+    return null
+  }
+
+  const rule = (await kv.get(`rule:${slug}`, "json")) ?? null
+  if (!rule) {
+    return null
+  }
+
+  return {
+    slug,
+    allowedIdentifiers: normalizeAllowedIdentifiers(rule.allowedIdentifiers),
+    updatedAt: rule.updatedAt ?? null,
+  }
+}
+
+async function putStoredRule(env, slug, allowedIdentifiers) {
+  const kv = getAccessControlKv(env)
+  if (!kv) {
+    throw new Error("missing_kv")
+  }
+
+  await kv.put(
+    `rule:${slug}`,
+    JSON.stringify({
+      slug,
+      allowedIdentifiers: normalizeAllowedIdentifiers(allowedIdentifiers),
+      updatedAt: new Date().toISOString(),
+    }),
+  )
+}
+
+async function updateStoredUserBlockedState(env, key, blocked) {
+  const kv = getAccessControlKv(env)
+  if (!kv) {
+    throw new Error("missing_kv")
+  }
+
+  const existing = await getStoredUser(env, key)
+  if (!existing) {
+    return false
+  }
+
+  await kv.put(
+    `user:${key}`,
+    JSON.stringify({
+      ...existing,
+      blocked: Boolean(blocked),
+      updatedAt: new Date().toISOString(),
+    }),
+  )
+
+  return true
+}
+
+function canonicalizePageSlug(pathname) {
+  let normalizedPath = pathname
+
+  try {
+    normalizedPath = decodeURIComponent(pathname)
+  } catch {
+    normalizedPath = pathname
+  }
+
+  if (!normalizedPath || normalizedPath === "/") {
+    return "index"
+  }
+
+  if (normalizedPath.endsWith("/")) {
+    normalizedPath = `${normalizedPath}index`
+  }
+
+  normalizedPath = normalizedPath.replace(/^\/+/, "")
+  if (!normalizedPath) {
+    return "index"
+  }
+
+  if (normalizedPath.endsWith(".html")) {
+    normalizedPath = normalizedPath.slice(0, -".html".length)
+  } else {
+    const lastSegment = normalizedPath.split("/").at(-1) ?? ""
+    if (/\.[a-z0-9]+$/i.test(lastSegment)) {
+      return null
+    }
+  }
+
+  return normalizedPath || "index"
+}
+
+function buildAccessChallengeUrl(request, reason) {
+  const target = new URL("/", getOrigin(request))
+  target.searchParams.set("auth_error", reason)
+  target.searchParams.set("returnTo", `${new URL(request.url).pathname}${new URL(request.url).search}`)
+  return target.toString()
+}
+
+async function loadAccessControlIndex(env) {
+  const now = Date.now()
+  if (accessControlIndexCache && now - accessControlIndexCacheAt < 5000) {
+    return accessControlIndexCache
+  }
+
+  const request = new Request(`https://assets.local${ACCESS_CONTROL_INDEX_PATH}`)
+  const response = await env.ASSETS.fetch(request)
+  if (!response.ok) {
+    accessControlIndexCache = { pages: [] }
+    accessControlIndexCacheAt = now
+    return accessControlIndexCache
+  }
+
+  try {
+    accessControlIndexCache = await response.json()
+  } catch {
+    accessControlIndexCache = { pages: [] }
+  }
+
+  accessControlIndexCacheAt = now
+  return accessControlIndexCache
+}
+
+async function getProtectedPage(request, env) {
+  const slug = canonicalizePageSlug(new URL(request.url).pathname)
+  if (!slug) {
+    return null
+  }
+
+  const accessControlIndex = await loadAccessControlIndex(env)
+  return accessControlIndex.pages.find((page) => page.slug === slug) ?? null
+}
+
+async function canAccessProtectedPage(request, env, page) {
+  const user = await readSession(request, env)
+  if (user) {
+    await registerKnownUser(env, user)
+  }
+
+  if (isOwnerUser(user, env)) {
+    return { allowed: true, user }
+  }
+
+  if (page.access === "owner") {
+    return { allowed: false, user, reason: user ? "not_authorized" : "auth_required" }
+  }
+
+  if (!user) {
+    return { allowed: false, user: null, reason: "auth_required" }
+  }
+
+  const storedUser = await getStoredUser(env, getPrimaryUserKey(user))
+  if (storedUser?.blocked) {
+    return { allowed: false, user, reason: "not_authorized" }
+  }
+
+  const rule = await getStoredRule(env, page.slug)
+  const allowedIdentifiers = new Set(rule?.allowedIdentifiers ?? [])
+  const allowed = getUserIdentityKeys(user).some((identifier) => allowedIdentifiers.has(identifier))
+  return {
+    allowed,
+    user,
+    reason: allowed ? null : "not_authorized",
+  }
+}
+
+function withNoStore(response) {
+  const headers = new Headers(response.headers)
+  headers.set("cache-control", "private, no-store")
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+}
+
+async function requireOwner(request, env) {
+  const user = await readSession(request, env)
+  if (user) {
+    await registerKnownUser(env, user)
+  }
+
+  if (!isOwnerUser(user, env)) {
+    return {
+      ok: false,
+      user,
+    }
+  }
+
+  return {
+    ok: true,
+    user,
+  }
+}
+
 function failureRedirect(request, provider, returnTo, reason) {
   return redirect(
     buildAuthResultUrl(request, returnTo, {
@@ -335,10 +681,14 @@ async function handleChessMasters(request, env) {
 
 async function handleAuthSession(request, env) {
   const user = await readSession(request, env)
+  if (user) {
+    await registerKnownUser(env, user)
+  }
 
   return json({
     configured: getProviderAvailability(env),
     user,
+    owner: isOwnerUser(user, env),
   })
 }
 
@@ -470,6 +820,7 @@ async function handleGoogleCallback(request, env) {
     picture: profile.picture,
   }
 
+  await registerKnownUser(env, user)
   const sessionCookie = await issueSessionCookie(env, user)
 
   return redirect(
@@ -588,6 +939,7 @@ async function handleInstagramCallback(request, env) {
     username: profile.username,
   }
 
+  await registerKnownUser(env, user)
   const sessionCookie = await issueSessionCookie(env, user)
 
   return redirect(
@@ -597,6 +949,89 @@ async function handleInstagramCallback(request, env) {
     }),
     [clearAuthStateCookie(), sessionCookie],
   )
+}
+
+async function handleAccessAdminState(request, env) {
+  const owner = await requireOwner(request, env)
+  if (!owner.ok) {
+    return json({ error: "forbidden" }, { status: 403 })
+  }
+
+  const accessControlIndex = await loadAccessControlIndex(env)
+  const pages = await Promise.all(
+    accessControlIndex.pages.map(async (page) => {
+      const rule = await getStoredRule(env, page.slug)
+      return {
+        ...page,
+        allowedIdentifiers: page.access === "restricted" ? (rule?.allowedIdentifiers ?? []) : [],
+      }
+    }),
+  )
+
+  return json({
+    ok: true,
+    storage: {
+      configured: Boolean(getAccessControlKv(env)),
+    },
+    currentUser: {
+      name: owner.user.name,
+      provider: owner.user.provider,
+      email: owner.user.email,
+      username: owner.user.username,
+    },
+    users: await listKnownUsers(env),
+    pages,
+  })
+}
+
+async function handleAccessAdminRules(request, env) {
+  const owner = await requireOwner(request, env)
+  if (!owner.ok) {
+    return json({ error: "forbidden" }, { status: 403 })
+  }
+
+  if (!getAccessControlKv(env)) {
+    return json({ error: "storage_unavailable" }, { status: 503 })
+  }
+
+  const body = await readJsonBody(request)
+  const slug = typeof body?.slug === "string" ? body.slug : null
+  if (!slug) {
+    return json({ error: "invalid_slug" }, { status: 400 })
+  }
+
+  const accessControlIndex = await loadAccessControlIndex(env)
+  const page = accessControlIndex.pages.find((entry) => entry.slug === slug)
+  if (!page || page.access !== "restricted") {
+    return json({ error: "unknown_page" }, { status: 404 })
+  }
+
+  await putStoredRule(env, slug, body?.allowedIdentifiers)
+  return json({ ok: true })
+}
+
+async function handleAccessAdminUsers(request, env) {
+  const owner = await requireOwner(request, env)
+  if (!owner.ok) {
+    return json({ error: "forbidden" }, { status: 403 })
+  }
+
+  if (!getAccessControlKv(env)) {
+    return json({ error: "storage_unavailable" }, { status: 503 })
+  }
+
+  const body = await readJsonBody(request)
+  const key = normalizeIdentifier(body?.key)
+  if (!key || typeof body?.blocked !== "boolean") {
+    return json({ error: "invalid_user_update" }, { status: 400 })
+  }
+
+  const updated = await updateStoredUserBlockedState(env, key, body.blocked)
+  if (!updated) {
+    return json({ error: "unknown_user" }, { status: 404 })
+  }
+
+  return json({ ok: true })
 }
 
 export default {
@@ -632,6 +1067,39 @@ export default {
 
     if (url.pathname === "/api/auth/instagram/callback" && request.method === "GET") {
       return handleInstagramCallback(request, env)
+    }
+
+    if (url.pathname === "/api/access/admin" && request.method === "GET") {
+      return handleAccessAdminState(request, env)
+    }
+
+    if (url.pathname === "/api/access/admin/rules" && request.method === "POST") {
+      return handleAccessAdminRules(request, env)
+    }
+
+    if (url.pathname === "/api/access/admin/users" && request.method === "POST") {
+      return handleAccessAdminUsers(request, env)
+    }
+
+    if (url.pathname === ACCESS_CONTROL_INDEX_PATH) {
+      return new Response("Not found", {
+        status: 404,
+        headers: {
+          "cache-control": "no-store",
+        },
+      })
+    }
+
+    if (request.method === "GET" || request.method === "HEAD") {
+      const protectedPage = await getProtectedPage(request, env)
+      if (protectedPage) {
+        const access = await canAccessProtectedPage(request, env, protectedPage)
+        if (!access.allowed) {
+          return redirect(buildAccessChallengeUrl(request, access.reason ?? "not_authorized"))
+        }
+
+        return withNoStore(await env.ASSETS.fetch(request))
+      }
     }
 
     return env.ASSETS.fetch(request)
