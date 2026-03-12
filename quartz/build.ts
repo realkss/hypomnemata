@@ -87,8 +87,8 @@ async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
   await emitContent(ctx, filteredContent)
 
   try {
-    // Cloudflare Pages Functions need to be present in the published output tree.
-    await cp(path.resolve("functions"), path.join(output, "functions"), { recursive: true })
+    // Cloudflare Pages advanced mode expects `_worker.js` in the published output directory.
+    await cp(path.resolve("cloudflare", "pages-worker.js"), path.join(output, "_worker.js"))
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
       throw error
