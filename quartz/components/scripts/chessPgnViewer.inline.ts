@@ -335,6 +335,167 @@ function shouldDockBoardTabsWithControls() {
   return window.matchMedia("(min-width: 901px) and (hover: hover)").matches
 }
 
+function shouldUseDesktopMovePane() {
+  return window.matchMedia("(min-width: 901px) and (hover: hover)").matches
+}
+
+function getStackedMovePaneHeight(boardHeight: number) {
+  const preferred = boardHeight * 0.78
+  const viewportCap = window.innerHeight * 0.42
+  return Math.round(Math.max(180, Math.min(preferred, viewportCap, 360)))
+}
+
+function clearMovePaneSizing(enhancement: BoardEnhancement) {
+  const { node, mount } = enhancement
+  const side = mount.querySelector<HTMLElement>(".lpv__side")
+  const moves = mount.querySelector<HTMLElement>(".lpv__moves")
+
+  node.removeAttribute("data-training-move-pane")
+  node.style.removeProperty("--training-moves-pane-height")
+  node.style.removeProperty("--training-moves-list-height")
+  node.style.removeProperty("--training-stacked-moves-pane-height")
+  node.style.removeProperty("--training-stacked-moves-list-height")
+  mount.style.removeProperty("--training-moves-pane-height")
+  mount.style.removeProperty("--training-stacked-moves-pane-height")
+  side?.removeAttribute("data-training-move-pane")
+  moves?.removeAttribute("data-training-move-pane")
+  side?.style.removeProperty("align-self")
+  side?.style.removeProperty("box-sizing")
+  side?.style.removeProperty("height")
+  side?.style.removeProperty("max-height")
+  side?.style.removeProperty("overflow")
+  moves?.style.removeProperty("flex")
+  moves?.style.removeProperty("height")
+  moves?.style.removeProperty("max-height")
+  moves?.style.removeProperty("min-height")
+  moves?.style.removeProperty("overflow-y")
+  moves?.style.removeProperty("overscroll-behavior")
+  moves?.style.removeProperty("scrollbar-gutter")
+}
+
+function applyMovePaneSizing(
+  enhancement: BoardEnhancement,
+  side: HTMLElement,
+  moves: HTMLElement,
+  sideHeight: number,
+  movesHeight: number,
+  desktop: boolean,
+) {
+  const safeSideHeight = Math.max(Math.round(sideHeight), 0)
+  const safeMovesHeight = Math.max(Math.round(movesHeight), 0)
+
+  if (safeSideHeight <= 0 || safeMovesHeight <= 0) {
+    clearMovePaneSizing(enhancement)
+    return
+  }
+
+  if (desktop) {
+    enhancement.node.dataset.trainingMovePane = "desktop"
+    enhancement.node.style.setProperty("--training-moves-pane-height", `${safeSideHeight}px`)
+    enhancement.node.style.setProperty("--training-moves-list-height", `${safeMovesHeight}px`)
+    enhancement.node.style.removeProperty("--training-stacked-moves-pane-height")
+    enhancement.node.style.removeProperty("--training-stacked-moves-list-height")
+    enhancement.mount.style.setProperty("--training-moves-pane-height", `${safeSideHeight}px`)
+    enhancement.mount.style.removeProperty("--training-stacked-moves-pane-height")
+  } else {
+    enhancement.node.dataset.trainingMovePane = "stacked"
+    enhancement.node.style.removeProperty("--training-moves-pane-height")
+    enhancement.node.style.removeProperty("--training-moves-list-height")
+    enhancement.node.style.setProperty("--training-stacked-moves-pane-height", `${safeSideHeight}px`)
+    enhancement.node.style.setProperty("--training-stacked-moves-list-height", `${safeMovesHeight}px`)
+    enhancement.mount.style.removeProperty("--training-moves-pane-height")
+    enhancement.mount.style.setProperty("--training-stacked-moves-pane-height", `${safeSideHeight}px`)
+  }
+
+  side.dataset.trainingMovePane = "true"
+  moves.dataset.trainingMovePane = "true"
+  side.style.setProperty("align-self", desktop ? "start" : "stretch")
+  side.style.setProperty("box-sizing", "border-box")
+  side.style.setProperty("height", desktop ? `${safeSideHeight}px` : "auto")
+  side.style.setProperty("max-height", `${safeSideHeight}px`)
+  side.style.setProperty("overflow", "hidden")
+  moves.style.setProperty("flex", "0 1 auto")
+  moves.style.setProperty("height", `${safeMovesHeight}px`)
+  moves.style.setProperty("max-height", `${safeMovesHeight}px`)
+  moves.style.setProperty("min-height", "0")
+  moves.style.setProperty("overflow-y", "auto")
+  moves.style.setProperty("overscroll-behavior", "contain")
+  if (desktop) {
+    moves.style.setProperty("scrollbar-gutter", "stable")
+  } else {
+    moves.style.removeProperty("scrollbar-gutter")
+  }
+}
+
+function syncMovePane(enhancement: BoardEnhancement) {
+  const { mount } = enhancement
+  const side = mount.querySelector<HTMLElement>(".lpv__side")
+  const moves = mount.querySelector<HTMLElement>(".lpv__moves")
+  const board = mount.querySelector<HTMLElement>(".lpv__board .cg-wrap")
+  const controls = side?.querySelector<HTMLElement>(".lpv__controls")
+  const topPlayer = mount.querySelector<HTMLElement>(".lpv__player--top")
+  const bottomPlayer = mount.querySelector<HTMLElement>(".lpv__player--bottom")
+
+  if (!side || !moves || !board) {
+    clearMovePaneSizing(enhancement)
+    return
+  }
+
+  const boardHeight = board.getBoundingClientRect().height
+  if (!Number.isFinite(boardHeight) || boardHeight <= 0) {
+    clearMovePaneSizing(enhancement)
+    return
+  }
+
+  const controlsHeight = controls?.getBoundingClientRect().height ?? 0
+  const extraGap = 8
+  const desktop = shouldUseDesktopMovePane() && mount.classList.contains("lpv--moves-right")
+
+  if (!desktop) {
+    const sideHeight = getStackedMovePaneHeight(boardHeight)
+    const movesHeight = Math.max(sideHeight - controlsHeight - extraGap, 96)
+    applyMovePaneSizing(enhancement, side, moves, sideHeight, movesHeight, false)
+    return
+  }
+
+  const start = (topPlayer ?? board).getBoundingClientRect().top
+  const end = (bottomPlayer ?? board).getBoundingClientRect().bottom
+  const height = Math.max(board.getBoundingClientRect().height, end - start)
+
+  if (!Number.isFinite(height) || height <= 0) {
+    clearMovePaneSizing(enhancement)
+    return
+  }
+
+  const movesHeight = Math.max(height - controlsHeight - extraGap, 128)
+  applyMovePaneSizing(enhancement, side, moves, height, movesHeight, true)
+}
+
+function shouldHideBoardComments(section: HTMLElement) {
+  const paragraphs = Array.from(
+    section.querySelectorAll<HTMLElement>(".training-session-comments__paragraph"),
+  )
+    .map((paragraph) => paragraph.textContent?.replace(/\s+/g, " ").trim() ?? "")
+    .filter(Boolean)
+
+  return paragraphs.length === 0 || paragraphs.every((paragraph) => paragraph === "No comments yet.")
+}
+
+function syncBoardCommentsVisibility(node: HTMLElement) {
+  const commentsSection = node.nextElementSibling
+  if (!(commentsSection instanceof HTMLElement)) {
+    return
+  }
+
+  if (!commentsSection.matches(".training-session-comments--board")) {
+    return
+  }
+
+  const shouldHide = shouldHideBoardComments(commentsSection)
+  commentsSection.hidden = shouldHide
+  commentsSection.dataset.placeholder = shouldHide ? "true" : "false"
+}
+
 function syncPanelBarDock(enhancement: BoardEnhancement) {
   const { mount, panelContainer } = enhancement
   const { root, bar, body } = panelContainer
@@ -382,23 +543,32 @@ function syncPanelBarDock(enhancement: BoardEnhancement) {
 }
 
 function observePanelBarDock(enhancement: BoardEnhancement) {
-  const { mount } = enhancement
-  if (mount.dataset.panelDockObserved === "true") {
+  const { node } = enhancement
+  if (node.dataset.panelDockObserved === "true") {
     return
   }
 
-  mount.dataset.panelDockObserved = "true"
+  node.dataset.panelDockObserved = "true"
 
-  const resync = () => syncPanelBarDock(enhancement)
+  const resync = () => {
+    syncPanelBarDock(enhancement)
+    syncMovePane(enhancement)
+  }
   const observer = new MutationObserver(() => {
     resync()
   })
-  observer.observe(mount, {
+  observer.observe(node, {
     childList: true,
     subtree: true,
   })
 
   window.addEventListener("resize", resync, { passive: true })
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(() => {
+      resync()
+    })
+    resizeObserver.observe(node)
+  }
 
   window.setTimeout(resync, 0)
   window.setTimeout(resync, 180)
@@ -406,40 +576,8 @@ function observePanelBarDock(enhancement: BoardEnhancement) {
   window.setTimeout(resync, 1400)
 }
 
-function extractMovetextForFallback(pgn: string) {
-  const normalized = pgn.replace(/\r/g, "")
-  const parts = normalized.split(/\n\s*\n/)
-  const movetext = parts.length > 1 ? parts.slice(1).join("\n\n").trim() : normalized.trim()
-
-  return movetext || "Move text could not be parsed from this PGN."
-}
-
-function ensureMovePaneFallback(enhancement: BoardEnhancement) {
-  const { node, mount, pgnText } = enhancement
-  const side = mount.querySelector<HTMLElement>(".lpv__side")
-  const sideMoves = side?.querySelector<HTMLElement>(".lpv__moves, .lpv__pgn, .lpv__pgn__text")
-  const sideText = sideMoves?.textContent?.replace(/\s+/g, " ").trim() ?? ""
-  const sideLooksHealthy = Boolean(side && sideMoves && sideText.length > 24)
-  const existing = node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
-
-  if (sideLooksHealthy) {
-    node.dataset.pgnFallback = "false"
-    existing?.remove()
-    return
-  }
-
-  node.dataset.pgnFallback = "true"
-  if (existing) {
-    return
-  }
-
-  const fallback = makeElement("section", "training-board-move-fallback")
-  const title = makeElement("p", "training-board-move-fallback__title", "Moves & comments")
-  const body = makeElement("pre", "training-board-move-fallback__body", extractMovetextForFallback(pgnText))
-  fallback.append(title, body)
-
-  const panels = node.querySelector<HTMLElement>(":scope > .training-board-panels")
-  node.insertBefore(fallback, panels ?? null)
+function ensureMovePaneFallback(_enhancement: BoardEnhancement) {
+  // no-op: the fallback "Moves & comments" section was redundant with the interactive viewer
 }
 
 function createEnginePanel(): EngineController {
@@ -1210,21 +1348,29 @@ async function loadExplorer(enhancement: BoardEnhancement) {
 
 function syncEnhancement(enhancement: BoardEnhancement) {
   syncPanelBarDock(enhancement)
+  syncMovePane(enhancement)
+  syncBoardCommentsVisibility(enhancement.node)
   mountEvalBar(enhancement.mount, enhancement.engine)
   updateEnginePosition(enhancement)
   void loadExplorer(enhancement)
   window.setTimeout(() => {
     syncPanelBarDock(enhancement)
+    syncMovePane(enhancement)
+    syncBoardCommentsVisibility(enhancement.node)
     mountEvalBar(enhancement.mount, enhancement.engine)
     ensureMovePaneFallback(enhancement)
   }, 0)
   window.setTimeout(() => {
     syncPanelBarDock(enhancement)
+    syncMovePane(enhancement)
+    syncBoardCommentsVisibility(enhancement.node)
     mountEvalBar(enhancement.mount, enhancement.engine)
     ensureMovePaneFallback(enhancement)
   }, 180)
   window.setTimeout(() => {
     syncPanelBarDock(enhancement)
+    syncMovePane(enhancement)
+    syncBoardCommentsVisibility(enhancement.node)
     mountEvalBar(enhancement.mount, enhancement.engine)
     ensureMovePaneFallback(enhancement)
   }, 650)

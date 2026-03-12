@@ -46,6 +46,10 @@
   --c-lpv-move-hover: rgba(139, 107, 44, 0.14);
   --c-lpv-border: #d6cab7;
   --c-lpv-side-border: #e6dbc8;
+  --training-moves-pane-height: auto;
+  --training-moves-list-height: auto;
+  --training-stacked-moves-pane-height: clamp(12rem, 40vh, 18rem);
+  --training-stacked-moves-list-height: clamp(9rem, 30vh, 14rem);
 }
 
 .chess-training-board::before {
@@ -82,6 +86,7 @@
 
 .chess-training-board > .chess-training-board__mount.lpv--moves-right {
   grid-template-columns: minmax(0, 1fr) minmax(17.5rem, 19.75rem);
+  column-gap: 0.9rem;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
@@ -118,13 +123,16 @@
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--c-lpv-side-border));
+  border-radius: 0.92rem;
+  background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(244, 236, 224, 0.96));
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__moves {
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
-  padding: 0.2rem 0.2rem 0.28rem 0;
+  padding: 0.2rem 0.32rem 0.28rem 0.08rem;
   font-family: var(--bodyFont);
   font-size: 0.98rem;
   line-height: 1.62;
@@ -169,10 +177,56 @@
 .chess-training-board > .chess-training-board__mount.lpv .lpv__moves move.blunder { color: #df5353; }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__moves > comment,
-.chess-training-board > .chess-training-board__mount.lpv .lpv__moves > variation,
-.chess-training-board > .chess-training-board__mount.lpv .lpv__pgn__text {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__moves > variation {
+  display: block;
+  width: 100%;
+  margin: 0.16rem 0 0.52rem;
+  padding: 0.42rem 0.58rem;
+  border-left: 2px solid color-mix(in srgb, var(--secondary) 32%, transparent);
+  border-radius: 0.72rem;
+  background: color-mix(in srgb, var(--light) 88%, var(--secondary) 12%);
   font-size: 0.86rem;
   line-height: 1.5;
+  color: var(--darkgray);
+  overflow-wrap: anywhere;
+}
+
+.chess-training-board[data-training-move-pane="desktop"] > .chess-training-board__mount.lpv .lpv__side {
+  align-self: start;
+  height: var(--training-moves-pane-height) !important;
+  max-height: var(--training-moves-pane-height) !important;
+  overflow: hidden;
+}
+
+.chess-training-board[data-training-move-pane="desktop"] > .chess-training-board__mount.lpv .lpv__moves {
+  flex: 0 1 auto !important;
+  min-height: 0;
+  height: var(--training-moves-list-height) !important;
+  max-height: var(--training-moves-list-height) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.chess-training-board[data-training-move-pane="stacked"] > .chess-training-board__mount.lpv .lpv__side {
+  align-self: stretch;
+  height: auto !important;
+  max-height: var(--training-stacked-moves-pane-height) !important;
+  overflow: hidden;
+}
+
+.chess-training-board[data-training-move-pane="stacked"] > .chess-training-board__mount.lpv .lpv__moves {
+  flex: 0 1 auto !important;
+  min-height: 0;
+  height: var(--training-stacked-moves-list-height) !important;
+  max-height: var(--training-stacked-moves-list-height) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+.chess-training-board > .chess-training-board__mount.lpv .lpv__pgn,
+.chess-training-board > .chess-training-board__mount.lpv .lpv__pgn__text {
+  display: none !important;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__fbt {
@@ -246,6 +300,18 @@
   color: #dfd2bb;
 }
 
+:root[saved-theme="dark"] .chess-training-board > .chess-training-board__mount.lpv .lpv__side {
+  border-color: rgba(198, 161, 91, 0.22);
+  background: linear-gradient(180deg, rgba(35, 29, 22, 0.96), rgba(24, 20, 16, 0.96));
+}
+
+:root[saved-theme="dark"] .chess-training-board > .chess-training-board__mount.lpv .lpv__moves > comment,
+:root[saved-theme="dark"] .chess-training-board > .chess-training-board__mount.lpv .lpv__moves > variation {
+  border-left-color: rgba(208, 171, 99, 0.42);
+  background: rgba(255, 255, 255, 0.04);
+  color: #efe3cc;
+}
+
 @media (max-width: 900px) {
   .chess-training-board {
     padding: 0.85rem;
@@ -254,6 +320,17 @@
 
   .chess-training-board > .chess-training-board__mount.lpv--moves-right {
     grid-template-columns: 1fr;
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__side {
+    max-height: var(--training-stacked-moves-pane-height);
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__moves {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--c-lpv-accent) 28%, transparent) transparent;
   }
 }
 .training-session-openings {
@@ -347,7 +424,7 @@
 .training-master-list li {
   margin-bottom: 0.8rem;
   padding: 0.9rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
   border-radius: 1rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
   box-shadow: 0 10px 24px rgba(96, 77, 48, 0.05);
@@ -470,35 +547,6 @@
   color: #efe3cc;
 }
 
-.training-board-move-fallback {
-  display: grid;
-  gap: 0.45rem;
-  width: min(100%, 34rem);
-  margin: 0.55rem 0 0 auto;
-  padding: 0.72rem 0.82rem;
-  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
-  border-radius: 0.88rem;
-  background: linear-gradient(180deg, rgba(255, 253, 248, 0.94), rgba(247, 240, 228, 0.94));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-.training-board-move-fallback__title {
-  margin: 0;
-  font-family: var(--bodyFont);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--secondary);
-}
-
-.training-board-move-fallback__body {
-  margin: 0;
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-size: 0.77rem;
-  line-height: 1.45;
-  color: var(--dark);
-}
 
 .training-board-panels {
   display: grid;
@@ -506,11 +554,29 @@
   width: min(100%, 17.35rem);
   margin: 0 0 0 auto;
   padding-top: 0.18rem;
-  border-top: 1px solid color-mix(in srgb, var(--secondary) 8%, var(--lightgray));
+  border-top: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
   position: static;
 }
 
 @media (min-width: 901px) and (hover: hover) {
+  .chess-training-board > .chess-training-board__mount.lpv--moves-right {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 20.25rem);
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__side[data-training-move-pane="true"] {
+    align-self: start;
+    height: var(--training-moves-pane-height);
+    max-height: var(--training-moves-pane-height);
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__moves[data-training-move-pane="true"] {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] {
     display: flex;
     align-items: stretch;
@@ -629,7 +695,7 @@
   align-items: center;
   gap: 0.2rem;
   padding: 0.14rem;
-  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.5);
 }
@@ -894,7 +960,7 @@
   display: grid;
   gap: 0.24rem;
   padding: 0.38rem 0.44rem;
-  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
   border-radius: 0.6rem;
   background: rgba(255, 255, 255, 0.58);
 }
@@ -1003,14 +1069,12 @@
 :root[saved-theme="dark"] .training-board-panels,
 :root[saved-theme="dark"] .training-board-panels__tabs,
 :root[saved-theme="dark"] .training-session-comments,
-:root[saved-theme="dark"] .training-engine__bar-rail,
-:root[saved-theme="dark"] .training-board-move-fallback {
+:root[saved-theme="dark"] .training-engine__bar-rail {
   border-color: rgba(198, 161, 91, 0.26);
 }
 
 :root[saved-theme="dark"] .training-board-panels__tabs,
-:root[saved-theme="dark"] .training-session-comments,
-:root[saved-theme="dark"] .training-board-move-fallback {
+:root[saved-theme="dark"] .training-session-comments {
   background: linear-gradient(180deg, rgba(30, 25, 20, 0.96), rgba(20, 17, 14, 0.96));
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.24);
 }
@@ -1031,8 +1095,7 @@
 :root[saved-theme="dark"] .training-explorer__games-title,
 :root[saved-theme="dark"] .training-session-comments__summary,
 :root[saved-theme="dark"] .training-engine__score,
-:root[saved-theme="dark"] .training-explorer__opening,
-:root[saved-theme="dark"] .training-board-move-fallback__title {
+:root[saved-theme="dark"] .training-explorer__opening {
   color: #d5af63;
 }
 
@@ -1069,8 +1132,7 @@
 :root[saved-theme="dark"] .training-explorer__move-summary,
 :root[saved-theme="dark"] .training-explorer__games-title,
 :root[saved-theme="dark"] .training-explorer__game-players,
-:root[saved-theme="dark"] .training-session-comments__paragraph,
-:root[saved-theme="dark"] .training-board-move-fallback__body {
+:root[saved-theme="dark"] .training-session-comments__paragraph {
   color: #efe3cc;
 }
 
@@ -1093,6 +1155,12 @@
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
     width: 100%;
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__side[data-training-move-pane="true"],
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__moves[data-training-move-pane="true"] {
+    height: auto;
+    max-height: var(--training-stacked-moves-pane-height);
   }
 
   .training-board-panels__bar,
@@ -1120,12 +1188,6 @@
     max-width: none;
     margin-left: 0;
     margin-top: 0.4rem;
-  }
-
-  .training-board-move-fallback {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 0.5rem;
   }
 
   .training-explorer__content {
@@ -1156,6 +1218,7 @@
 @media (hover: none) and (orientation: landscape), (orientation: landscape) and (max-height: 720px) {
   .chess-training-board {
     display: block;
+    --training-stacked-moves-pane-height: clamp(10rem, 34vh, 15rem);
   }
 
   .chess-training-board > .chess-training-board__mount.lpv--moves-right {
@@ -1171,6 +1234,16 @@
     width: 100%;
   }
 
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__side {
+    max-height: var(--training-stacked-moves-pane-height);
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__side[data-training-move-pane="true"],
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__moves[data-training-move-pane="true"] {
+    height: auto;
+    max-height: var(--training-stacked-moves-pane-height);
+  }
+
   .training-board-panels {
     grid-column: 1;
     position: static;
@@ -1178,12 +1251,6 @@
     max-width: none;
     margin-left: 0;
     margin-top: 0.4rem;
-  }
-
-  .training-board-move-fallback {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 0.5rem;
   }
 
   .training-engine__bar-rail {

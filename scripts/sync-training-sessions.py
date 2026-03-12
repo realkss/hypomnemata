@@ -519,6 +519,9 @@ def render_comments_section(summary_label: str, comments_text: str) -> str:
     if not paragraphs:
         paragraphs = [DEFAULT_COMMENTS_TEXT]
 
+    if all(paragraph == DEFAULT_COMMENTS_TEXT for paragraph in paragraphs):
+        return ""
+
     body = "\n".join(
         f'  <p class="training-session-comments__paragraph">{html.escape(paragraph).replace(chr(10), "<br />")}</p>'
         for paragraph in paragraphs
@@ -542,6 +545,9 @@ def render_session_body(
     black_comments_text: str,
 ) -> str:
     session_date = render_iso_date(session.session_date)
+    white_comments_section = render_comments_section("Comments", white_comments_text)
+    black_comments_section = render_comments_section("Comments", black_comments_text)
+
     return "\n".join(
         [
             render_frontmatter(session),
@@ -559,16 +565,14 @@ def render_session_body(
             f'<p class="training-session-opening-note"><strong>Opening</strong><span>{html.escape(session.white.opening)}</span><em>{html.escape(session.white.eco)}</em></p>',
             "",
             '<div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>',
-            "",
-            render_comments_section("Comments", white_comments_text),
+            *(["", white_comments_section] if white_comments_section else []),
             "",
             "## Black Game",
             "",
             f'<p class="training-session-opening-note"><strong>Opening</strong><span>{html.escape(session.black.opening)}</span><em>{html.escape(session.black.eco)}</em></p>',
             "",
             '<div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>',
-            "",
-            render_comments_section("Comments", black_comments_text),
+            *(["", black_comments_section] if black_comments_section else []),
             "",
             render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
         ]
