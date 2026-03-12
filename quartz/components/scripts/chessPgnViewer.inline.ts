@@ -415,9 +415,31 @@ function extractMovetextForFallback(pgn: string) {
 }
 
 function ensureMovePaneFallback(enhancement: BoardEnhancement) {
-  const existing = enhancement.node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
-  enhancement.node.dataset.pgnFallback = "false"
-  existing?.remove()
+  const { node, mount, pgnText } = enhancement
+  const side = mount.querySelector<HTMLElement>(".lpv__side")
+  const sideMoves = side?.querySelector<HTMLElement>(".lpv__moves, .lpv__pgn, .lpv__pgn__text")
+  const sideText = sideMoves?.textContent?.replace(/\s+/g, " ").trim() ?? ""
+  const sideLooksHealthy = Boolean(side && sideMoves && sideText.length > 24)
+  const existing = node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
+
+  if (sideLooksHealthy) {
+    node.dataset.pgnFallback = "false"
+    existing?.remove()
+    return
+  }
+
+  node.dataset.pgnFallback = "true"
+  if (existing) {
+    return
+  }
+
+  const fallback = makeElement("section", "training-board-move-fallback")
+  const title = makeElement("p", "training-board-move-fallback__title", "Moves & comments")
+  const body = makeElement("pre", "training-board-move-fallback__body", extractMovetextForFallback(pgnText))
+  fallback.append(title, body)
+
+  const panels = node.querySelector<HTMLElement>(":scope > .training-board-panels")
+  node.insertBefore(fallback, panels ?? null)
 }
 
 function createEnginePanel(): EngineController {
