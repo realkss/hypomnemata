@@ -78,8 +78,7 @@
   align-items: start;
 }
 
-.chess-training-board > .chess-training-board__mount.lpv--moves-right,
-.chess-training-board > .chess-training-board__mount.lpv--moves-auto {
+.chess-training-board > .chess-training-board__mount.lpv--moves-right {
   grid-template-columns: minmax(0, 1fr) minmax(15.25rem, 16.75rem);
 }
 
@@ -196,8 +195,7 @@
     min-height: 16rem;
   }
 
-  .chess-training-board > .chess-training-board__mount.lpv--moves-right,
-  .chess-training-board > .chess-training-board__mount.lpv--moves-auto {
+  .chess-training-board > .chess-training-board__mount.lpv--moves-right {
     grid-template-columns: 1fr;
   }
 }
@@ -950,8 +948,7 @@
     display: block;
   }
 
-  .chess-training-board > .chess-training-board__mount.lpv--moves-right,
-  .chess-training-board > .chess-training-board__mount.lpv--moves-auto {
+  .chess-training-board > .chess-training-board__mount.lpv--moves-right {
     grid-template-columns: 1fr;
   }
 

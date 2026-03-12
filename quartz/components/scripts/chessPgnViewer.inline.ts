@@ -740,8 +740,14 @@ function firstMasterLink() {
   )
 }
 
-function preferredMovesLayout(): "auto" {
-  return "auto"
+function preferredMovesLayout(): "bottom" | "right" {
+  const compactViewport = window.matchMedia(
+    "(max-width: 900px), (hover: none) and (orientation: landscape), (orientation: landscape) and (max-height: 720px)",
+  ).matches
+
+  // Use explicit layouts instead of LPV's auto mode so desktop stays reliably
+  // right-sided while compact and foldable screens always stack the moves below.
+  return compactViewport ? "bottom" : "right"
 }
 
 async function discoverLocalMasterPgnUrls() {
