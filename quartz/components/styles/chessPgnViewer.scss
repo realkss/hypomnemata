@@ -86,17 +86,14 @@
   display: flex;
   gap: 0.5rem;
   align-items: stretch;
-  position: relative;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
   flex: 1 1 auto;
   min-width: 0;
   width: 100%;
-  position: relative;
-  padding-inline-start: 1.18rem;
   filter: brightness(1.06) saturate(0.92);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .chess-training-board > .chess-training-board__mount.lpv .lpv__player {
@@ -734,23 +731,19 @@
 }
 
 .training-engine__bar-rail {
-  position: absolute;
-  z-index: 3;
-  top: 0.18rem;
-  bottom: 0.18rem;
-  left: 0;
+  position: relative;
   display: flex;
   align-items: stretch;
-  width: 0.98rem;
-  min-width: 0.98rem;
-  padding: 0.08rem 0.06rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 0.98rem;
+  padding: 0.08rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 26%, var(--lightgray));
-  border-radius: 0.6rem;
+  border-radius: 999px;
   background: linear-gradient(180deg, rgba(255, 250, 242, 0.95), rgba(230, 220, 200, 0.92));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.66),
     0 0 0 1px rgba(139, 107, 44, 0.04);
-  pointer-events: none;
 }
 
 .training-engine__bar-rail[data-hidden="true"] {
@@ -764,9 +757,10 @@
 .training-engine__bar {
   display: flex;
   flex: 1 1 auto;
-  flex-direction: column-reverse;
+  flex-direction: row;
   width: 100%;
-  height: 100%;
+  min-height: 0.74rem;
+  height: 0.74rem;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(75, 59, 36, 0.16);
@@ -793,11 +787,10 @@
 .training-engine__bar-label {
   position: absolute;
   z-index: 1;
-  bottom: 0.3rem;
-  left: 50%;
-  transform: translateX(-50%) rotate(180deg);
-  writing-mode: vertical-rl;
-  font-size: 0.56rem;
+  top: 50%;
+  right: 0.42rem;
+  transform: translateY(-50%);
+  font-size: 0.62rem;
   font-weight: 700;
   line-height: 1;
   color: #3a3024;
@@ -1050,8 +1043,6 @@
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
     width: 100%;
-    padding-inline-start: 0;
-    padding-block-end: 1.12rem;
   }
 
   .training-board-panels__bar,
@@ -1092,18 +1083,18 @@
   }
 
   .training-engine__bar-rail {
+    position: relative;
     top: auto;
-    right: 0.18rem;
-    bottom: 0;
-    left: 0.18rem;
-    width: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
     min-width: 0;
     min-height: 0.9rem;
-    padding: 0.06rem 0.08rem;
+    padding: 0.08rem;
   }
 
   .training-engine__bar {
-    flex-direction: row;
     min-height: 0.74rem;
   }
 
@@ -1128,8 +1119,6 @@
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
     width: 100%;
-    padding-inline-start: 0;
-    padding-block-end: 1.12rem;
   }
 
   .training-board-panels {
@@ -1148,18 +1137,18 @@
   }
 
   .training-engine__bar-rail {
+    position: relative;
     top: auto;
-    right: 0.18rem;
-    bottom: 0;
-    left: 0.18rem;
-    width: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
     min-width: 0;
     min-height: 0.9rem;
-    padding: 0.06rem 0.08rem;
+    padding: 0.08rem;
   }
 
   .training-engine__bar {
-    flex-direction: row;
     min-height: 0.74rem;
   }
 
