@@ -72,58 +72,58 @@
   margin: 0;
 }
 
-.chess-training-board.lpv {
+.chess-training-board > .chess-training-board__mount.lpv {
   max-width: 66rem;
 }
 
-.chess-training-board.lpv--moves-right,
-.chess-training-board.lpv--moves-auto {
+.chess-training-board > .chess-training-board__mount.lpv--moves-right,
+.chess-training-board > .chess-training-board__mount.lpv--moves-auto {
   grid-template-columns: minmax(0, 1fr) minmax(16.5rem, 18.75rem);
 }
 
-.chess-training-board.lpv .lpv__board {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__board {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.65rem;
   align-items: stretch;
 }
 
-.chess-training-board.lpv .lpv__board .cg-wrap {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__board .cg-wrap {
   min-width: 0;
   width: 100%;
   filter: brightness(1.06) saturate(0.92);
 }
 
-.chess-training-board.lpv .lpv__player {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__player {
   padding: 0 1.15rem;
   font-size: 0.78rem;
   letter-spacing: 0.01em;
 }
 
-.chess-training-board.lpv .lpv__player__title {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__player__title {
   letter-spacing: 0.03em;
 }
 
-.chess-training-board.lpv .lpv__moves {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__moves {
   min-width: 0;
   line-height: 1.58;
 }
 
-.chess-training-board.lpv .lpv__moves > move {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__moves > move {
   font-size: 1rem;
 }
 
-.chess-training-board.lpv .lpv__moves > comment,
-.chess-training-board.lpv .lpv__moves > variation,
-.chess-training-board.lpv .lpv__pgn__text {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__moves > comment,
+.chess-training-board > .chess-training-board__mount.lpv .lpv__moves > variation,
+.chess-training-board > .chess-training-board__mount.lpv .lpv__pgn__text {
   font-size: 0.88rem;
 }
 
-.chess-training-board.lpv .lpv__controls .lpv__fbt {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__controls .lpv__fbt {
   font-size: 1.15rem;
 }
 
-.chess-training-board.lpv .lpv__controls__menu.lpv__fbt {
+.chess-training-board > .chess-training-board__mount.lpv .lpv__controls__menu.lpv__fbt {
   font-size: 1rem;
 }
 
@@ -188,8 +188,8 @@
     min-height: 16rem;
   }
 
-  .chess-training-board.lpv--moves-right,
-  .chess-training-board.lpv--moves-auto {
+  .chess-training-board > .chess-training-board__mount.lpv--moves-right,
+  .chess-training-board > .chess-training-board__mount.lpv--moves-auto {
     grid-template-columns: 1fr;
   }
 }
@@ -773,7 +773,7 @@
 }
 
 @media (max-width: 900px) {
-  .chess-training-board.lpv .lpv__board {
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
     grid-template-columns: minmax(0, 1fr);
   }
 

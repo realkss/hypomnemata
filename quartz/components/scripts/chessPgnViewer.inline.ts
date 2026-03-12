@@ -105,6 +105,7 @@ type ExplorerController = {
 
 type BoardEnhancement = {
   node: HTMLElement
+  mount: HTMLElement
   viewer: ViewerApi
   engine: EngineController
   explorer: ExplorerController
@@ -489,8 +490,8 @@ function setEvalBarVisible(controller: EngineController, visible: boolean) {
   controller.evalBarButton.textContent = visible ? "Hide Eval Bar" : "Show Eval Bar"
 }
 
-function mountEvalBar(node: HTMLElement, controller: EngineController) {
-  const board = node.querySelector<HTMLElement>(".lpv__board")
+function mountEvalBar(mount: HTMLElement, controller: EngineController) {
+  const board = mount.querySelector<HTMLElement>(".lpv__board")
   if (!board) {
     return
   }
@@ -688,7 +689,7 @@ function patchViewerLifecycle(enhancement: BoardEnhancement) {
   }
 }
 
-function enhanceBoard(node: HTMLElement, viewer: ViewerApi) {
+function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) {
   if (node.dataset.viewerEnhanced === "true") {
     return
   }
@@ -702,12 +703,13 @@ function enhanceBoard(node: HTMLElement, viewer: ViewerApi) {
 
   const enhancement: BoardEnhancement = {
     node,
+    mount,
     viewer,
     engine,
     explorer,
   }
 
-  mountEvalBar(node, engine)
+  mountEvalBar(mount, engine)
   engine.toggleButton.addEventListener("click", () => {
     toggleEngine(enhancement)
   })
@@ -758,6 +760,9 @@ async function mountBoard(node: HTMLElement) {
     const pgn = await response.text()
     node.innerHTML = ""
 
+    const mount = makeElement("div", "chess-training-board__mount")
+    node.appendChild(mount)
+
     const config: Record<string, unknown> = {
       pgn,
       showClocks: false,
@@ -770,8 +775,8 @@ async function mountBoard(node: HTMLElement) {
       config.orientation = orientation
     }
 
-    const viewer = viewerFactory(node, config)
-    enhanceBoard(node, viewer)
+    const viewer = viewerFactory(mount, config)
+    enhanceBoard(node, mount, viewer)
     node.dataset.viewerState = "ready"
   } catch (error) {
     console.error(error)
