@@ -381,6 +381,31 @@ function syncPanelBarDock(enhancement: BoardEnhancement) {
   root.dataset.controlsDocked = "true"
 }
 
+function observePanelBarDock(enhancement: BoardEnhancement) {
+  const { mount } = enhancement
+  if (mount.dataset.panelDockObserved === "true") {
+    return
+  }
+
+  mount.dataset.panelDockObserved = "true"
+
+  const resync = () => syncPanelBarDock(enhancement)
+  const observer = new MutationObserver(() => {
+    resync()
+  })
+  observer.observe(mount, {
+    childList: true,
+    subtree: true,
+  })
+
+  window.addEventListener("resize", resync, { passive: true })
+
+  window.setTimeout(resync, 0)
+  window.setTimeout(resync, 180)
+  window.setTimeout(resync, 650)
+  window.setTimeout(resync, 1400)
+}
+
 function extractMovetextForFallback(pgn: string) {
   const normalized = pgn.replace(/\r/g, "")
   const parts = normalized.split(/\n\s*\n/)
@@ -390,31 +415,9 @@ function extractMovetextForFallback(pgn: string) {
 }
 
 function ensureMovePaneFallback(enhancement: BoardEnhancement) {
-  const { node, mount, pgnText } = enhancement
-  const side = mount.querySelector<HTMLElement>(".lpv__side")
-  const sideMoves = side?.querySelector<HTMLElement>(".lpv__moves, .lpv__pgn, .lpv__pgn__text")
-  const sideText = sideMoves?.textContent?.replace(/\s+/g, " ").trim() ?? ""
-  const sideLooksHealthy = Boolean(side && sideMoves && sideText.length > 24)
-  const existing = node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
-
-  if (sideLooksHealthy) {
-    node.dataset.pgnFallback = "false"
-    existing?.remove()
-    return
-  }
-
-  node.dataset.pgnFallback = "true"
-  if (existing) {
-    return
-  }
-
-  const fallback = makeElement("section", "training-board-move-fallback")
-  const title = makeElement("p", "training-board-move-fallback__title", "Moves & comments")
-  const body = makeElement("pre", "training-board-move-fallback__body", extractMovetextForFallback(pgnText))
-  fallback.append(title, body)
-
-  const panels = node.querySelector<HTMLElement>(":scope > .training-board-panels")
-  node.insertBefore(fallback, panels ?? null)
+  const existing = enhancement.node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
+  enhancement.node.dataset.pgnFallback = "false"
+  existing?.remove()
 }
 
 function createEnginePanel(): EngineController {
@@ -458,7 +461,7 @@ function createEnginePanel(): EngineController {
   scoreRow.append(score, meta)
   summary.append(scoreRow, status)
   header.append(summary, toolbar)
-  body.append(header, pv)
+  body.append(header, barRail, pv)
   panel.append(body)
 
   return {
@@ -734,17 +737,15 @@ function setEvalBarVisible(controller: EngineController, visible: boolean) {
 }
 
 function mountEvalBar(mount: HTMLElement, controller: EngineController) {
-  const board = mount.querySelector<HTMLElement>(".lpv__board")
-  if (!board) {
+  const body = controller.panel.querySelector<HTMLElement>(".training-engine")
+  if (!body) {
     return
   }
 
-  if (
-    controller.barRail.parentElement !== board ||
-    board.firstElementChild !== controller.barRail
-  ) {
+  const pv = body.querySelector<HTMLElement>(".training-engine__pv")
+  if (controller.barRail.parentElement !== body) {
     controller.barRail.remove()
-    board.insertBefore(controller.barRail, board.firstChild)
+    body.insertBefore(controller.barRail, pv ?? body.lastChild)
   }
 }
 
@@ -1245,6 +1246,7 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi, 
     pgnText,
   }
 
+  observePanelBarDock(enhancement)
   mountEvalBar(mount, engine)
   engine.toggleButton.addEventListener("click", () => {
     setActiveBoardPanel(panelContainer, "engine")
