@@ -641,7 +641,7 @@ function setEvalBarVisible(controller: EngineController, visible: boolean) {
 }
 
 function mountEvalBar(mount: HTMLElement, controller: EngineController) {
-  const board = mount.querySelector<HTMLElement>(".lpv__board")
+  const board = mount.querySelector<HTMLElement>(".cg-wrap")
   if (!board) {
     return
   }
@@ -706,7 +706,10 @@ function ratio(value: number, total: number) {
 }
 
 function normalizeFen(fen: string) {
-  return fen.trim().split(/\s+/).slice(0, 4).join(" ")
+  // The viewer and the local PGN parser can disagree on auxiliary FEN fields
+  // like castling rights or en-passant targets for equivalent opening positions.
+  // For the local fallback, matching piece placement + side to move is robust enough.
+  return fen.trim().split(/\s+/).slice(0, 2).join(" ")
 }
 
 function resultToWinner(result: string | undefined): "white" | "black" | undefined {
