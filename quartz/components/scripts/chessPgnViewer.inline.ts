@@ -3,6 +3,18 @@ const CSS_URLS = [
   "https://cdn.jsdelivr.net/npm/@lichess-org/pgn-viewer@2.4.7/dist/lichess-pgn-viewer.css",
   "https://cdn.jsdelivr.net/npm/lichess-pgn-viewer@2.4.5/lichess-pgn-viewer.css",
 ]
+const CHESSOPS_PGN_URLS = [
+  "https://cdn.jsdelivr.net/npm/chessops@0.14.2/+esm",
+  "https://esm.sh/chessops@0.14.2/pgn",
+]
+const CHESSOPS_SAN_URLS = [
+  "https://cdn.jsdelivr.net/npm/chessops@0.14.2/san/+esm",
+  "https://esm.sh/chessops@0.14.2/san",
+]
+const CHESSOPS_FEN_URLS = [
+  "https://cdn.jsdelivr.net/npm/chessops@0.14.2/fen/+esm",
+  "https://esm.sh/chessops@0.14.2/fen",
+]
 
 let STOCKFISH_WORKER_URL: string
 try {
@@ -103,6 +115,37 @@ type ExplorerController = {
   requestId: number
 }
 
+type LocalExplorerGame = {
+  id: string
+  winner?: "white" | "black"
+  white?: ExplorerGameSide
+  black?: ExplorerGameSide
+  year?: number
+  eco?: string
+  annotator?: string
+  moves: Array<{
+    fen: string
+    san: string
+  }>
+}
+
+type ChessOpsModule = {
+  parsePgn: (pgn: string) => Array<{
+    headers: Map<string, string>
+    moves: {
+      mainline: () => Iterable<{ san: string }>
+    }
+  }>
+  startingPosition: (headers: Map<string, string>) => {
+    unwrap: () => {
+      toSetup: () => unknown
+      play: (move: unknown) => void
+    }
+  }
+  parseSan: (pos: unknown, san: string) => unknown
+  makeFen: (setup: unknown) => string
+}
+
 type BoardPanelKey = "engine" | "explorer"
 
 type PanelContainer = {
@@ -126,7 +169,22 @@ declare global {
 }
 
 let viewerModulePromise: Promise<ViewerFactory> | undefined
+let chessOpsModulePromise: Promise<ChessOpsModule> | undefined
 const activeEngines = new Set<EngineController>()
+const localMasterIndexCache = new Map<string, Promise<LocalExplorerGame[]>>()
+
+async function importFirst<T>(urls: string[]) {
+  let lastError: unknown
+  for (const url of urls) {
+    try {
+      return (await import(url)) as T
+    } catch (error) {
+      lastError = error
+    }
+  }
+
+  throw lastError ?? new Error("Dynamic import failed.")
+}
 
 function ensureViewerStyles() {
   if (document.getElementById(CSS_LINK_ID)) {
@@ -156,6 +214,26 @@ async function loadViewer() {
   return viewerModulePromise
 }
 
+async function loadChessOps() {
+  if (!chessOpsModulePromise) {
+    chessOpsModulePromise = Promise.all([
+      importFirst<{
+        parsePgn: ChessOpsModule["parsePgn"]
+        startingPosition: ChessOpsModule["startingPosition"]
+      }>(CHESSOPS_PGN_URLS),
+      importFirst<{ parseSan: ChessOpsModule["parseSan"] }>(CHESSOPS_SAN_URLS),
+      importFirst<{ makeFen: ChessOpsModule["makeFen"] }>(CHESSOPS_FEN_URLS),
+    ]).then(([pgn, san, fen]) => ({
+      parsePgn: pgn.parsePgn,
+      startingPosition: pgn.startingPosition,
+      parseSan: san.parseSan,
+      makeFen: fen.makeFen,
+    }))
+  }
+
+  return chessOpsModulePromise
+}
+
 function makeElement<K extends keyof HTMLElementTagNameMap>(
   tagName: K,
   className?: string,
@@ -174,7 +252,9 @@ function makeElement<K extends keyof HTMLElementTagNameMap>(
 function setActiveBoardPanel(container: PanelContainer, panel: BoardPanelKey) {
   container.root.dataset.activePanel = panel
 
-  for (const [key, button] of Object.entries(container.tabs) as Array<[BoardPanelKey, HTMLButtonElement]>) {
+  for (const [key, button] of Object.entries(container.tabs) as Array<
+    [BoardPanelKey, HTMLButtonElement]
+  >) {
     const active = key === panel
     button.dataset.active = active ? "true" : "false"
     button.setAttribute("aria-selected", active ? "true" : "false")
@@ -198,8 +278,10 @@ function ensurePanelContainer(node: HTMLElement) {
       root: existing,
       body: existing.querySelector<HTMLElement>(".training-board-panels__body") ?? existing,
       tabs: {
-        engine: tabs.find((button) => button.dataset.panelTarget === "engine") ?? makeElement("button"),
-        explorer: tabs.find((button) => button.dataset.panelTarget === "explorer") ?? makeElement("button"),
+        engine:
+          tabs.find((button) => button.dataset.panelTarget === "engine") ?? makeElement("button"),
+        explorer:
+          tabs.find((button) => button.dataset.panelTarget === "explorer") ?? makeElement("button"),
       },
     } satisfies PanelContainer
   }
@@ -251,7 +333,11 @@ function createEnginePanel(): EngineController {
   const toolbar = makeElement("div", "training-engine__toolbar")
   const toggleButton = makeElement("button", "training-board-button", "Turn On Stockfish")
   toggleButton.type = "button"
-  const evalBarButton = makeElement("button", "training-board-button training-board-button--ghost", "Hide Eval Bar")
+  const evalBarButton = makeElement(
+    "button",
+    "training-board-button training-board-button--ghost",
+    "Hide Eval Bar",
+  )
   evalBarButton.type = "button"
 
   const status = makeElement("p", "training-engine__status", "Stockfish is off.")
@@ -269,7 +355,11 @@ function createEnginePanel(): EngineController {
   const barLabel = makeElement("span", "training-engine__bar-label")
   barRail.appendChild(barLabel)
 
-  const pv = makeElement("p", "training-engine__pv", "Best line will appear here once the engine starts.")
+  const pv = makeElement(
+    "p",
+    "training-engine__pv",
+    "Best line will appear here once the engine starts.",
+  )
 
   toolbar.append(toggleButton, evalBarButton)
   scoreRow.append(score, meta)
@@ -388,11 +478,7 @@ function parseEngineLine(line: string) {
   }
 }
 
-function toWhitePerspective(
-  turn: "white" | "black",
-  cp: number | null,
-  mate: number | null,
-) {
+function toWhitePerspective(turn: "white" | "black", cp: number | null, mate: number | null) {
   const sign = turn === "white" ? 1 : -1
   return {
     cp: cp == null ? null : cp * sign,
@@ -410,7 +496,8 @@ function renderEngineState(
   const evalText = formatEval(score, mate)
   controller.score.textContent = evalText
   controller.meta.textContent = depth == null ? "Depth --" : `Depth ${depth}`
-  controller.pv.textContent = pv.length > 0 ? `PV: ${pv.join(" ")}` : "Best line will appear here once the engine starts."
+  controller.pv.textContent =
+    pv.length > 0 ? `PV: ${pv.join(" ")}` : "Best line will appear here once the engine starts."
 
   const whiteShare = whiteShareFromEval(score, mate)
   controller.barWhite.style.width = `${whiteShare}%`
@@ -618,6 +705,221 @@ function ratio(value: number, total: number) {
   return Math.round((value / total) * 100)
 }
 
+function normalizeFen(fen: string) {
+  return fen.trim().split(/\s+/).slice(0, 4).join(" ")
+}
+
+function resultToWinner(result: string | undefined): "white" | "black" | undefined {
+  if (result === "1-0") {
+    return "white"
+  }
+
+  if (result === "0-1") {
+    return "black"
+  }
+
+  return undefined
+}
+
+function yearFromDate(value: string | undefined) {
+  const match = value?.match(/\d{4}/)
+  return match ? Number(match[0]) : undefined
+}
+
+function firstMasterLink() {
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("a[href]"))
+  return (
+    links.find((link) => (link.textContent ?? "").trim() === "Master Games") ??
+    links.find((link) => /master-games\/?$/i.test(link.href))
+  )
+}
+
+async function discoverLocalMasterPgnUrls() {
+  const directUrls = Array.from(
+    document.querySelectorAll<HTMLElement>(".chess-training-board[data-pgn-src]"),
+  )
+    .map((element) => element.dataset.pgnSrc)
+    .filter((value): value is string => Boolean(value))
+    .filter((value) => /reference-\d+\.pgn$/i.test(value))
+    .map((value) => new URL(value, document.baseURI).toString())
+
+  if (directUrls.length > 0) {
+    return directUrls
+  }
+
+  const masterLink = firstMasterLink()
+  const masterIndexUrl = new URL(masterLink?.href ?? "Master-Games/index.html", document.baseURI)
+  if (!/index\.html$/i.test(masterIndexUrl.pathname)) {
+    masterIndexUrl.pathname = `${masterIndexUrl.pathname.replace(/\/?$/, "/")}index.html`
+  }
+
+  const response = await fetch(masterIndexUrl.toString())
+  if (!response.ok) {
+    throw new Error(`Failed to fetch local master index (${response.status})`)
+  }
+
+  const html = await response.text()
+  const documentFragment = new DOMParser().parseFromString(html, "text/html")
+  return Array.from(
+    documentFragment.querySelectorAll<HTMLElement>(".chess-training-board[data-pgn-src]"),
+  )
+    .map((element) => element.dataset.pgnSrc)
+    .filter((value): value is string => Boolean(value))
+    .filter((value) => /reference-\d+\.pgn$/i.test(value))
+    .map((value) => new URL(value, masterIndexUrl).toString())
+}
+
+async function parseLocalExplorerGames() {
+  const cacheKey = document.baseURI
+  const cached = localMasterIndexCache.get(cacheKey)
+  if (cached) {
+    return cached
+  }
+
+  const promise = (async () => {
+    const [chessops, urls] = await Promise.all([loadChessOps(), discoverLocalMasterPgnUrls()])
+    if (urls.length === 0) {
+      return []
+    }
+
+    const responses = await Promise.all(urls.map((url) => fetch(url)))
+    const texts = await Promise.all(
+      responses.map(async (response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch local master PGN (${response.status})`)
+        }
+        return response.text()
+      }),
+    )
+
+    const games: LocalExplorerGame[] = []
+    for (const [index, pgn] of texts.entries()) {
+      for (const game of chessops.parsePgn(pgn)) {
+        const headers = game.headers
+        const position = chessops.startingPosition(headers).unwrap()
+        const moves: LocalExplorerGame["moves"] = []
+
+        for (const node of game.moves.mainline()) {
+          const move = chessops.parseSan(position, node.san)
+          if (!move) {
+            break
+          }
+
+          moves.push({
+            fen: normalizeFen(chessops.makeFen(position.toSetup())),
+            san: node.san,
+          })
+          position.play(move)
+        }
+
+        games.push({
+          id: `${urls[index]}#${games.length}`,
+          winner: resultToWinner(headers.get("Result")),
+          white: {
+            name: headers.get("White") ?? undefined,
+            rating: headers.get("WhiteElo") ? Number(headers.get("WhiteElo")) : undefined,
+          },
+          black: {
+            name: headers.get("Black") ?? undefined,
+            rating: headers.get("BlackElo") ? Number(headers.get("BlackElo")) : undefined,
+          },
+          year: yearFromDate(headers.get("Date")),
+          eco: headers.get("ECO") ?? undefined,
+          annotator: headers.get("Annotator") ?? undefined,
+          moves,
+        })
+      }
+    }
+
+    return games
+  })()
+
+  localMasterIndexCache.set(cacheKey, promise)
+  return promise
+}
+
+async function loadLocalExplorerData(fen: string): Promise<ExplorerResponse | null> {
+  const games = await parseLocalExplorerGames()
+  const moveTable = new Map<string, ExplorerMove>()
+  const matchingGames: ExplorerGame[] = []
+  const normalizedFen = normalizeFen(fen)
+  let white = 0
+  let black = 0
+  let draws = 0
+  const ecoCounts = new Map<string, number>()
+
+  for (const game of games) {
+    const nextMove = game.moves.find((move) => move.fen === normalizedFen)
+    if (!nextMove) {
+      continue
+    }
+
+    if (game.winner === "white") {
+      white += 1
+    } else if (game.winner === "black") {
+      black += 1
+    } else {
+      draws += 1
+    }
+
+    if (game.eco) {
+      ecoCounts.set(game.eco, (ecoCounts.get(game.eco) ?? 0) + 1)
+    }
+
+    const existing = moveTable.get(nextMove.san) ?? {
+      san: nextMove.san,
+      white: 0,
+      draws: 0,
+      black: 0,
+    }
+
+    if (game.winner === "white") {
+      existing.white = (existing.white ?? 0) + 1
+    } else if (game.winner === "black") {
+      existing.black = (existing.black ?? 0) + 1
+    } else {
+      existing.draws = (existing.draws ?? 0) + 1
+    }
+
+    moveTable.set(nextMove.san, existing)
+    matchingGames.push({
+      id: game.id,
+      winner: game.winner,
+      white: game.white,
+      black: game.black,
+      year: game.year,
+    })
+  }
+
+  const total = white + black + draws
+  if (!total) {
+    return null
+  }
+
+  const openingEco = Array.from(ecoCounts.entries()).sort(
+    (left, right) => right[1] - left[1],
+  )[0]?.[0]
+  const moves = Array.from(moveTable.values()).sort((left, right) => {
+    const leftTotal = (left.white ?? 0) + (left.draws ?? 0) + (left.black ?? 0)
+    const rightTotal = (right.white ?? 0) + (right.draws ?? 0) + (right.black ?? 0)
+    return rightTotal - leftTotal || (left.san ?? "").localeCompare(right.san ?? "")
+  })
+
+  return {
+    white,
+    black,
+    draws,
+    opening: openingEco
+      ? {
+          eco: openingEco,
+          name: "Local master references",
+        }
+      : undefined,
+    moves,
+    topGames: matchingGames.sort((left, right) => (right.year ?? 0) - (left.year ?? 0)),
+  }
+}
+
 function renderExplorerData(controller: ExplorerController, data: ExplorerResponse) {
   const total = (data.white ?? 0) + (data.draws ?? 0) + (data.black ?? 0)
   controller.status.textContent = total
@@ -725,10 +1027,29 @@ async function loadExplorer(enhancement: BoardEnhancement) {
     renderExplorerData(controller, parseExplorerPayload(payload))
   } catch (error) {
     console.error(error)
+    if (requestId !== controller.requestId || !controller.enabled) {
+      return
+    }
+
+    try {
+      const localData = await loadLocalExplorerData(currentFen)
+      if (requestId !== controller.requestId || !controller.enabled) {
+        return
+      }
+
+      if (localData) {
+        renderExplorerData(controller, localData)
+        controller.status.textContent += " (from local cited master references)"
+        return
+      }
+    } catch (localError) {
+      console.error(localError)
+    }
+
     const message = String(error)
     clearExplorer(controller)
     controller.status.textContent = message.includes("401")
-      ? "The official Lichess masters endpoint now needs an authenticated proxy. Configure window.__CHESS_MASTERS_ENDPOINT__ to your own proxy to enable live data here."
+      ? "The official Lichess masters endpoint needs authentication, and no local master references matched this position."
       : "The live masters database could not be loaded right now."
   }
 }
