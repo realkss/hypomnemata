@@ -1087,7 +1087,7 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi) 
 
   node.dataset.viewerEnhanced = "true"
 
-  const panelContainer = ensurePanelContainer(mount)
+  const panelContainer = ensurePanelContainer(node)
   const engine = createEnginePanel()
   const explorer = createExplorerPanel()
   panelContainer.body.append(engine.panel, explorer.panel)

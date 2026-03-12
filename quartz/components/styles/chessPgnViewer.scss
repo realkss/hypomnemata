@@ -18,6 +18,11 @@
 .chess-training-board {
   position: relative;
   min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15.5rem, 17.35rem);
+  column-gap: 0.95rem;
+  row-gap: 0.55rem;
+  align-items: start;
   margin: 1rem 0 1.75rem;
   padding: 0.95rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
@@ -49,6 +54,7 @@
 .chess-training-board::before {
   content: attr(data-label);
   display: block;
+  grid-column: 1 / -1;
   margin-bottom: 0.9rem;
   font-family: "Cinzel", serif;
   font-size: 0.86rem;
@@ -60,11 +66,13 @@
 .chess-training-board[data-viewer-state="loading"]::after {
   content: "Loading interactive board...";
   display: block;
+  grid-column: 1 / -1;
   color: var(--darkgray);
 }
 
 .chess-training-board__fallback {
   display: grid;
+  grid-column: 1 / -1;
   gap: 0.5rem;
 }
 
@@ -73,6 +81,8 @@
 }
 
 .chess-training-board > .chess-training-board__mount.lpv {
+  grid-column: 1;
+  min-width: 0;
   max-width: 64rem;
   row-gap: 0.55rem;
   align-items: start;
@@ -881,6 +891,10 @@
 }
 
 @media (max-width: 900px) {
+  .chess-training-board {
+    display: block;
+  }
+
   .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -943,6 +957,10 @@
 }
 
 @media (hover: none) and (orientation: landscape), (orientation: landscape) and (max-height: 720px) {
+  .chess-training-board {
+    display: block;
+  }
+
   .chess-training-board > .chess-training-board__mount.lpv--moves-right,
   .chess-training-board > .chess-training-board__mount.lpv--moves-auto {
     grid-template-columns: 1fr;
