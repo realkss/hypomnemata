@@ -20,7 +20,7 @@ const config: QuartzConfig = {
 
     // IMPORTANT: no protocol here. This should match the GitHub Pages path.
     // (owner.github.io/repo)
-    baseUrl: "realkss.github.io/hypomnemata",
+    baseUrl: "hypomnemata-b8t.pages.dev",
 
     // UX
     enableSPA: true,
