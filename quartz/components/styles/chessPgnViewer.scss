@@ -422,6 +422,59 @@
   position: static;
 }
 
+@media (min-width: 901px) and (hover: hover) {
+  .training-board-panels {
+    width: 100%;
+    max-width: none;
+    margin: 0.55rem 0 0;
+    padding-top: 0.42rem;
+    gap: 0.52rem;
+  }
+
+  .training-board-panels__tabs {
+    padding: 0.18rem;
+  }
+
+  .training-board-tab {
+    min-height: 1.9rem;
+    padding-inline: 0.9rem;
+  }
+
+  .training-board-panel__body {
+    padding: 0.78rem 0.88rem;
+  }
+
+  .training-engine__header,
+  .training-explorer__header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  .training-engine__summary,
+  .training-explorer__summary {
+    flex: 1 1 auto;
+  }
+
+  .training-engine__toolbar,
+  .training-explorer__toolbar {
+    width: auto;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+
+  .training-explorer__content {
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+    align-items: start;
+    gap: 0.6rem;
+  }
+
+  .training-explorer__status {
+    max-width: 32ch;
+  }
+}
+
 .training-board-panels__bar {
   display: flex;
   flex-wrap: nowrap;
