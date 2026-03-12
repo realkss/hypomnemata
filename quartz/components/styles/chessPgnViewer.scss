@@ -82,14 +82,6 @@
   grid-template-columns: minmax(0, 1fr) minmax(17.5rem, 19.75rem);
 }
 
-.chess-training-board[data-pgn-fallback="true"] > .chess-training-board__mount.lpv--moves-right {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.chess-training-board[data-pgn-fallback="true"] > .chess-training-board__mount.lpv .lpv__side {
-  display: none;
-}
-
 .chess-training-board > .chess-training-board__mount.lpv .lpv__board {
   display: flex;
   gap: 0.5rem;

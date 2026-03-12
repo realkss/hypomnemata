@@ -392,22 +392,9 @@ function extractMovetextForFallback(pgn: string) {
 function ensureMovePaneFallback(enhancement: BoardEnhancement) {
   const { node, mount, pgnText } = enhancement
   const side = mount.querySelector<HTMLElement>(".lpv__side")
-  const sideMoves = side?.querySelector<HTMLElement>(".lpv__moves")
-  const moveNodeCount =
-    sideMoves?.querySelectorAll("move, comment, variation, index").length ?? 0
+  const sideMoves = side?.querySelector<HTMLElement>(".lpv__moves, .lpv__pgn, .lpv__pgn__text")
   const sideText = sideMoves?.textContent?.replace(/\s+/g, " ").trim() ?? ""
-  const sideRect = sideMoves?.getBoundingClientRect()
-  const sideStyle = sideMoves ? window.getComputedStyle(sideMoves) : null
-  const sideLooksHealthy = Boolean(
-    sideMoves &&
-    sideStyle &&
-    sideStyle.display !== "none" &&
-    sideStyle.visibility !== "hidden" &&
-    (sideRect?.width ?? 0) > 140 &&
-    (sideRect?.height ?? 0) > 120 &&
-    moveNodeCount > 8 &&
-    sideText.length > 24,
-  )
+  const sideLooksHealthy = Boolean(side && sideMoves && sideText.length > 24)
   const existing = node.querySelector<HTMLElement>(":scope > .training-board-move-fallback")
 
   if (sideLooksHealthy) {
