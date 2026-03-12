@@ -740,8 +740,8 @@ function firstMasterLink() {
   )
 }
 
-function preferredMovesLayout(): "right" {
-  return "right"
+function preferredMovesLayout(): "auto" {
+  return "auto"
 }
 
 async function discoverLocalMasterPgnUrls() {
