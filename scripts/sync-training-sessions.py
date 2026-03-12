@@ -560,7 +560,7 @@ def render_session_body(
             "",
             '<div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>',
             "",
-            render_comments_section("Sessions", white_comments_text),
+            render_comments_section("Comments", white_comments_text),
             "",
             "## Black Game",
             "",
@@ -568,7 +568,7 @@ def render_session_body(
             "",
             '<div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>',
             "",
-            render_comments_section("Sessions", black_comments_text),
+            render_comments_section("Comments", black_comments_text),
             "",
             render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
         ]
