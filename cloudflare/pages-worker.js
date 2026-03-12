@@ -1,4 +1,4 @@
-const LICHESS_MASTERS_URL = "https://explorer.lichess.ovh/master"
+const LICHESS_MASTERS_URL = "https://explorer.lichess.ovh/masters"
 
 function json(body, init = {}) {
   return new Response(JSON.stringify(body), {

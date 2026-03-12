@@ -1,4 +1,4 @@
-const LICHESS_MASTERS_URL = "https://explorer.lichess.ovh/master"
+const LICHESS_MASTERS_URL = "https://explorer.lichess.ovh/masters"
 
 type PagesContext = {
   request: Request
