@@ -50,6 +50,8 @@ export default (() => {
         pageBaseUrl = undefined
       }
     }
+    const chessMastersEndpointScript =
+      'window.__CHESS_MASTERS_ENDPOINT__ = window.__CHESS_MASTERS_ENDPOINT__ || new URL("/api/chess/masters", window.location.origin).toString()'
 
     return (
       <head>
@@ -101,6 +103,7 @@ export default (() => {
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        <script dangerouslySetInnerHTML={{ __html: chessMastersEndpointScript }} />
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
