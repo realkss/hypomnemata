@@ -27,6 +27,7 @@ import LanguageSwitcher from "./LanguageSwitcher"
 import Masthead from "./Masthead"
 import ChessPgnViewer from "./ChessPgnViewer"
 import TranslationBadge from "./TranslationBadge"
+import AuthPanel from "./AuthPanel"
 
 export {
   ArticleTitle,
@@ -58,4 +59,5 @@ export {
   Masthead,
   ChessPgnViewer,
   TranslationBadge,
+  AuthPanel,
 }

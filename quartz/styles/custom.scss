@@ -215,6 +215,20 @@ h6,
   border-color: var(--secondary);
 }
 
+.wiki-lang-button::after {
+  content: "";
+  width: 0.58rem;
+  height: 0.58rem;
+  flex: 0 0 auto;
+  border-right: 2px solid var(--secondary);
+  border-bottom: 2px solid var(--secondary);
+  transform: rotate(45deg) translateY(-0.12rem);
+}
+
+.wiki-lang-switcher[open] .wiki-lang-button::after {
+  transform: rotate(-135deg) translateY(-0.04rem);
+}
+
 .wiki-lang-menu {
   display: grid;
   gap: 0.2rem;
@@ -705,6 +719,11 @@ article hr {
 [saved-theme="dark"] .toc,
 [saved-theme="dark"] .landing-inscription {
   backdrop-filter: blur(3px);
+}
+
+[saved-theme="dark"] .wiki-lang-button::after {
+  border-right-color: #c9a45f;
+  border-bottom-color: #c9a45f;
 }
 
 [saved-theme="dark"] .site-masthead__nav a {
