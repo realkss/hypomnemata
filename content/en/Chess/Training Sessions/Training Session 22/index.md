@@ -26,7 +26,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 <div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>
 
 <details class="training-session-comments training-session-comments--board">
-  <summary class="training-session-comments__summary">White Comments</summary>
+  <summary class="training-session-comments__summary">Sessions</summary>
   <p class="training-session-comments__owner">Only Jwipo can add or revise these notes through the site repository.</p>
   <p class="training-session-comments__paragraph">No comments yet.</p>
 </details>
@@ -38,7 +38,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 
 <details class="training-session-comments training-session-comments--board">
-  <summary class="training-session-comments__summary">Black Comments</summary>
+  <summary class="training-session-comments__summary">Sessions</summary>
   <p class="training-session-comments__owner">Only Jwipo can add or revise these notes through the site repository.</p>
   <p class="training-session-comments__paragraph">No comments yet.</p>
 </details>
