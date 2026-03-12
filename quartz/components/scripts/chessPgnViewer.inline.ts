@@ -3,10 +3,17 @@ const CSS_URLS = [
   "https://cdn.jsdelivr.net/npm/@lichess-org/pgn-viewer@2.4.7/dist/lichess-pgn-viewer.css",
   "https://cdn.jsdelivr.net/npm/lichess-pgn-viewer@2.4.5/lichess-pgn-viewer.css",
 ]
-const STOCKFISH_WORKER_URL = new URL(
-  "./static/chess/stockfish/stockfish-18-lite-single.js",
-  import.meta.url,
-).toString()
+
+let STOCKFISH_WORKER_URL: string
+try {
+  STOCKFISH_WORKER_URL = new URL(
+    "./static/chess/stockfish/stockfish-18-lite-single.js",
+    import.meta.url,
+  ).toString()
+} catch (e) {
+  console.error("Failed to resolve Stockfish worker URL", e)
+  STOCKFISH_WORKER_URL = "/static/chess/stockfish/stockfish-18-lite-single.js"
+}
 const DEFAULT_MASTERS_ENDPOINT = "https://explorer.lichess.ovh/masters"
 const ENGINE_DEPTH = 14
 const ENGINE_HASH_MB = 16
@@ -26,7 +33,7 @@ type ViewerApi = {
 type ViewerFactory = (node: HTMLElement, config: Record<string, unknown>) => ViewerApi
 
 type EngineController = {
-  details: HTMLDetailsElement
+  panel: HTMLElement
   toggleButton: HTMLButtonElement
   evalBarButton: HTMLButtonElement
   status: HTMLElement
@@ -37,6 +44,7 @@ type EngineController = {
   bar: HTMLElement
   barWhite: HTMLElement
   barBlack: HTMLElement
+  barLabel: HTMLElement
   worker: Worker | null
   ready: boolean
   enabled: boolean
@@ -84,11 +92,13 @@ type ExplorerResponse = {
 }
 
 type ExplorerController = {
-  details: HTMLDetailsElement
+  panel: HTMLElement
+  toggleButton: HTMLButtonElement
   status: HTMLElement
   opening: HTMLElement
   moves: HTMLElement
   games: HTMLElement
+  enabled: boolean
   currentFen: string | null
   requestId: number
 }
@@ -152,36 +162,36 @@ function makeElement<K extends keyof HTMLElementTagNameMap>(
   return element
 }
 
-function ensureBoardShell(node: HTMLElement) {
-  let shell = node.parentElement
-  if (!shell || !shell.classList.contains("training-board-shell")) {
-    shell = makeElement("section", "training-board-shell")
-    node.parentNode?.insertBefore(shell, node)
-    shell.appendChild(node)
+function ensurePanelContainer(node: HTMLElement) {
+  // Panels MUST be placed outside the .lpv container because
+  // the Lichess PGN viewer uses explicit grid-template-areas and
+  // overflow:hidden, which swallows any extra children.
+  // Walk up to the outermost .chess-training-board wrapper if needed.
+  let anchor = node
+  while (anchor.parentElement && anchor.parentElement.classList.contains("chess-training-board")) {
+    anchor = anchor.parentElement
   }
 
-  let sidebar = shell.querySelector<HTMLElement>(":scope > .training-board-sidebar")
-  if (!sidebar) {
-    sidebar = makeElement("aside", "training-board-sidebar")
-    shell.appendChild(sidebar)
+  let container = anchor.nextElementSibling as HTMLElement | null
+  if (!container || !container.classList.contains("training-board-panels")) {
+    container = makeElement("div", "training-board-panels")
+    anchor.after(container)
   }
-
-  return { shell, sidebar }
+  return container
 }
 
-function createPanelSummary(title: string, subtitle: string) {
-  const summary = makeElement("summary", "training-board-panel__summary")
+function createPanelHeader(title: string, subtitle: string) {
+  const header = makeElement("div", "training-board-panel__header")
+  const heading = makeElement("div", "training-board-panel__heading")
   const titleSpan = makeElement("span", "training-board-panel__title", title)
   const subtitleSpan = makeElement("span", "training-board-panel__subtitle", subtitle)
-  summary.append(titleSpan, subtitleSpan)
-  return summary
+  heading.append(titleSpan, subtitleSpan)
+  header.appendChild(heading)
+  return header
 }
 
 function createEnginePanel(): EngineController {
-  const details = makeElement("details", "training-board-panel training-board-panel--engine")
-  details.open = true
-  details.appendChild(createPanelSummary("Engine", "Stockfish, eval bar, and PV"))
-
+  const panel = makeElement("section", "training-board-panel training-board-panel--engine")
   const body = makeElement("div", "training-board-panel__body training-engine")
   const toolbar = makeElement("div", "training-engine__toolbar")
   const toggleButton = makeElement("button", "training-board-button", "Turn On Stockfish")
@@ -201,15 +211,18 @@ function createEnginePanel(): EngineController {
   bar.append(barWhite, barBlack)
   barRail.appendChild(bar)
 
+  const barLabel = makeElement("span", "training-engine__bar-label")
+  barRail.appendChild(barLabel)
+
   const pv = makeElement("p", "training-engine__pv", "Best line will appear here once the engine starts.")
 
   toolbar.append(toggleButton, evalBarButton)
   scoreRow.append(score, meta)
   body.append(toolbar, status, scoreRow, pv)
-  details.appendChild(body)
+  panel.append(createPanelHeader("Engine", "Stockfish, eval bar, and PV"), body)
 
   return {
-    details,
+    panel,
     toggleButton,
     evalBarButton,
     status,
@@ -220,6 +233,7 @@ function createEnginePanel(): EngineController {
     bar,
     barWhite,
     barBlack,
+    barLabel,
     worker: null,
     ready: false,
     enabled: false,
@@ -231,29 +245,32 @@ function createEnginePanel(): EngineController {
 }
 
 function createExplorerPanel(): ExplorerController {
-  const details = makeElement("details", "training-board-panel training-board-panel--explorer")
-  details.open = true
-  details.appendChild(createPanelSummary("Masters Database", "Opening table and top games"))
-
+  const panel = makeElement("section", "training-board-panel training-board-panel--explorer")
   const body = makeElement("div", "training-board-panel__body training-explorer")
+  const toolbar = makeElement("div", "training-explorer__toolbar")
+  const toggleButton = makeElement("button", "training-board-button", "Turn On Database")
+  toggleButton.type = "button"
   const status = makeElement(
     "p",
     "training-explorer__status",
-    "Open this panel to load master-game statistics for the current position.",
+    "Masters database is off. Turn it on to fetch opening statistics for the current position.",
   )
   const opening = makeElement("p", "training-explorer__opening")
   const moves = makeElement("div", "training-explorer__moves")
   const games = makeElement("div", "training-explorer__games")
 
-  body.append(status, opening, moves, games)
-  details.appendChild(body)
+  toolbar.appendChild(toggleButton)
+  body.append(toolbar, status, opening, moves, games)
+  panel.append(createPanelHeader("Masters Database", "Opening table and top games"), body)
 
   return {
-    details,
+    panel,
+    toggleButton,
     status,
     opening,
     moves,
     games,
+    enabled: false,
     currentFen: null,
     requestId: 0,
   }
@@ -326,7 +343,8 @@ function renderEngineState(
   depth: number | null,
   pv: string[],
 ) {
-  controller.score.textContent = formatEval(score, mate)
+  const evalText = formatEval(score, mate)
+  controller.score.textContent = evalText
   controller.meta.textContent = depth == null ? "Depth --" : `Depth ${depth}`
   controller.pv.textContent = pv.length > 0 ? `PV: ${pv.join(" ")}` : "Best line will appear here once the engine starts."
 
@@ -335,6 +353,7 @@ function renderEngineState(
   controller.barBlack.style.width = `${100 - whiteShare}%`
   controller.barWhite.style.height = `${whiteShare}%`
   controller.barBlack.style.height = `${100 - whiteShare}%`
+  controller.barLabel.textContent = evalText
 }
 
 function stopEngineSearch(controller: EngineController) {
@@ -359,6 +378,12 @@ function teardownEngine(controller: EngineController) {
   controller.score.textContent = "--"
   controller.meta.textContent = "Depth --"
   controller.pv.textContent = "Best line will appear here once the engine starts."
+  controller.barLabel.textContent = ""
+  controller.barWhite.style.width = "50%"
+  controller.barBlack.style.width = "50%"
+  controller.barWhite.style.height = "50%"
+  controller.barBlack.style.height = "50%"
+  controller.barRail.dataset.disabled = "true"
   controller.bar.dataset.hidden = controller.evalBarVisible ? "false" : "true"
   activeEngines.delete(controller)
 }
@@ -391,6 +416,7 @@ function ensureEngineStarted(enhancement: BoardEnhancement) {
     const worker = new Worker(STOCKFISH_WORKER_URL)
     controller.worker = worker
     controller.enabled = true
+    controller.barRail.dataset.disabled = "false"
     controller.toggleButton.textContent = "Turn Off Stockfish"
     controller.status.textContent = "Starting Stockfish 18 lite..."
     activeEngines.add(controller)
@@ -477,6 +503,25 @@ function mountEvalBar(node: HTMLElement, controller: EngineController) {
 
 function getMastersEndpoint() {
   return window.__CHESS_MASTERS_ENDPOINT__ || DEFAULT_MASTERS_ENDPOINT
+}
+
+function clearExplorer(controller: ExplorerController) {
+  controller.opening.textContent = ""
+  controller.moves.replaceChildren()
+  controller.games.replaceChildren()
+}
+
+function setExplorerEnabled(controller: ExplorerController, enabled: boolean) {
+  controller.enabled = enabled
+  controller.currentFen = null
+  controller.requestId += 1
+  controller.toggleButton.textContent = enabled ? "Turn Off Database" : "Turn On Database"
+
+  if (!enabled) {
+    clearExplorer(controller)
+    controller.status.textContent =
+      "Masters database is off. Turn it on to fetch opening statistics for the current position."
+  }
 }
 
 function parseExplorerPayload(payload: string): ExplorerResponse {
@@ -580,7 +625,7 @@ function renderExplorerData(controller: ExplorerController, data: ExplorerRespon
 
 async function loadExplorer(enhancement: BoardEnhancement) {
   const controller = enhancement.explorer
-  if (!controller.details.open) {
+  if (!controller.enabled) {
     return
   }
 
@@ -592,9 +637,7 @@ async function loadExplorer(enhancement: BoardEnhancement) {
   controller.currentFen = currentFen
   const requestId = ++controller.requestId
   controller.status.textContent = "Loading live masters database..."
-  controller.opening.textContent = ""
-  controller.moves.replaceChildren()
-  controller.games.replaceChildren()
+  clearExplorer(controller)
 
   try {
     const endpoint = getMastersEndpoint()
@@ -610,7 +653,7 @@ async function loadExplorer(enhancement: BoardEnhancement) {
     }
 
     const payload = await response.text()
-    if (requestId !== controller.requestId) {
+    if (requestId !== controller.requestId || !controller.enabled) {
       return
     }
 
@@ -618,9 +661,7 @@ async function loadExplorer(enhancement: BoardEnhancement) {
   } catch (error) {
     console.error(error)
     const message = String(error)
-    controller.moves.replaceChildren()
-    controller.games.replaceChildren()
-    controller.opening.textContent = ""
+    clearExplorer(controller)
     controller.status.textContent = message.includes("401")
       ? "The official Lichess masters endpoint now needs an authenticated proxy. Configure window.__CHESS_MASTERS_ENDPOINT__ to your own proxy to enable live data here."
       : "The live masters database could not be loaded right now."
@@ -653,10 +694,11 @@ function enhanceBoard(node: HTMLElement, viewer: ViewerApi) {
   }
 
   node.dataset.viewerEnhanced = "true"
-  const { sidebar } = ensureBoardShell(node)
+
+  const panelContainer = ensurePanelContainer(node)
   const engine = createEnginePanel()
   const explorer = createExplorerPanel()
-  sidebar.append(engine.details, explorer.details)
+  panelContainer.append(engine.panel, explorer.panel)
 
   const enhancement: BoardEnhancement = {
     node,
@@ -673,10 +715,17 @@ function enhanceBoard(node: HTMLElement, viewer: ViewerApi) {
     setEvalBarVisible(engine, !engine.evalBarVisible)
   })
   setEvalBarVisible(engine, true)
+  engine.barRail.dataset.disabled = "true"
+  engine.barWhite.style.width = "50%"
+  engine.barBlack.style.width = "50%"
+  engine.barWhite.style.height = "50%"
+  engine.barBlack.style.height = "50%"
 
-  explorer.details.addEventListener("toggle", () => {
+  explorer.toggleButton.addEventListener("click", () => {
+    setExplorerEnabled(explorer, !explorer.enabled)
     void loadExplorer(enhancement)
   })
+  setExplorerEnabled(explorer, false)
 
   patchViewerLifecycle(enhancement)
   syncEnhancement(enhancement)

@@ -406,49 +406,36 @@
 :root[saved-theme="dark"] .training-master-caption span {
   color: #efe3cc;
 }
-.training-board-shell {
-  display: grid;
-  gap: 0.85rem;
-  margin: 0 0 0.85rem;
-}
-
-.training-board-shell > .chess-training-board {
-  min-width: 0;
-  margin: 0;
-}
-
-.training-board-sidebar {
+.training-board-panels {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
-  align-self: start;
+  gap: 0.65rem;
+  margin: 0.5rem 0 1.5rem;
 }
 
 .training-board-panel {
-  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
-  border-radius: 1rem;
-  background: linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(247, 240, 228, 0.96));
-  box-shadow: 0 12px 28px rgba(96, 77, 48, 0.06);
+  display: grid;
+  gap: 0;
+  border: 1px solid color-mix(in srgb, var(--secondary) 28%, var(--lightgray));
+  border-left: 3px solid var(--secondary);
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(247, 240, 228, 0.98));
+  box-shadow: 0 12px 28px rgba(96, 77, 48, 0.08);
   overflow: hidden;
 }
 
-.training-board-panel[open] {
-  box-shadow: 0 16px 34px rgba(96, 77, 48, 0.09);
-}
-
-.training-board-panel__summary {
+.training-board-panel__header {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 0.8rem;
-  min-height: 3.4rem;
-  padding: 0.85rem 1rem;
-  cursor: pointer;
-  list-style: none;
+  padding: 0.9rem 1rem 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
 }
 
-.training-board-panel__summary::-webkit-details-marker {
-  display: none;
+.training-board-panel__heading {
+  display: grid;
+  gap: 0.24rem;
 }
 
 .training-board-panel__title {
@@ -462,14 +449,13 @@
 .training-board-panel__subtitle {
   color: var(--darkgray);
   font-size: 0.8rem;
-  text-align: right;
+  line-height: 1.4;
 }
 
 .training-board-panel__body {
   display: grid;
   gap: 0.9rem;
-  padding: 0 1rem 1rem;
-  border-top: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  padding: 1rem;
 }
 
 .training-board-button {
@@ -496,11 +482,11 @@
   background: transparent;
 }
 
-.training-engine__toolbar {
+.training-engine__toolbar,
+.training-explorer__toolbar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
-  padding-top: 0.9rem;
 }
 
 .training-engine__status,
@@ -542,19 +528,24 @@
 }
 
 .training-engine__bar-rail {
+  position: relative;
   display: flex;
   align-items: stretch;
-  width: 0.9rem;
-  min-width: 0.9rem;
+  width: 1.3rem;
+  min-width: 1.3rem;
   padding: 0.08rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
-  border-radius: 999px;
+  border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.56);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .training-engine__bar-rail[data-hidden="true"] {
   display: none;
+}
+
+.training-engine__bar-rail[data-disabled="true"] {
+  opacity: 0.45;
 }
 
 .training-engine__bar {
@@ -578,6 +569,28 @@
 
 .training-engine__bar-black {
   background: linear-gradient(180deg, #625448, #2d251f);
+}
+
+.training-engine__bar-white,
+.training-engine__bar-black {
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.training-engine__bar-label {
+  position: absolute;
+  z-index: 1;
+  bottom: 0.3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-size: 0.56rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #3a3024;
+  pointer-events: none;
+  text-shadow: 0 0 4px rgba(255, 252, 240, 0.95);
+  letter-spacing: 0.02em;
 }
 
 .training-engine__pv {
@@ -702,6 +715,11 @@
   padding-bottom: 1rem;
 }
 
+:root[saved-theme="dark"] .training-engine__bar-label {
+  color: #efe3cc;
+  text-shadow: 0 0 4px rgba(20, 16, 12, 0.95);
+}
+
 :root[saved-theme="dark"] .training-board-panel,
 :root[saved-theme="dark"] .training-session-comments,
 :root[saved-theme="dark"] .training-engine__bar-rail {
@@ -754,15 +772,13 @@
   color: #efe3cc;
 }
 
-@media (max-width: 980px) {
-  .training-board-sidebar {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 900px) {
   .chess-training-board.lpv .lpv__board {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .training-board-panels {
+    grid-template-columns: 1fr;
   }
 
   .training-engine__bar-rail {
@@ -776,7 +792,11 @@
     min-height: 0.74rem;
   }
 
-  .training-board-panel__summary,
+  .training-engine__bar-label {
+    display: none;
+  }
+
+  .training-board-panel__header,
   .training-engine__score-row,
   .training-explorer__move-head,
   .training-explorer__game-row {
