@@ -708,6 +708,18 @@ function ratio(value: number, total: number) {
   return Math.round((value / total) * 100)
 }
 
+function explorerGameHref(game: ExplorerGame) {
+  if (!game.id) {
+    return null
+  }
+
+  try {
+    return new URL(`/${game.id}`, "https://lichess.org").toString()
+  } catch {
+    return null
+  }
+}
+
 function normalizeFen(fen: string) {
   // The viewer and the local PGN parser can disagree on auxiliary FEN fields
   // like castling rights or en-passant targets for equivalent opening positions.
@@ -987,7 +999,17 @@ function renderExplorerData(controller: ExplorerController, data: ExplorerRespon
     const list = makeElement("div", "training-explorer__game-list")
 
     for (const game of games) {
-      const row = makeElement("div", "training-explorer__game-row")
+      const href = explorerGameHref(game)
+      const row = href
+        ? makeElement("a", "training-explorer__game-row")
+        : makeElement("div", "training-explorer__game-row")
+      if (row instanceof HTMLAnchorElement) {
+        row.href = href
+        row.style.color = "inherit"
+        row.style.textDecoration = "none"
+        row.title = "Open this game on Lichess"
+        row.setAttribute("aria-label", "Open this game on Lichess")
+      }
       const players = makeElement(
         "span",
         "training-explorer__game-players",
