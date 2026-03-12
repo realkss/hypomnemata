@@ -22,7 +22,11 @@ export default (() => {
 
     const { css, js, additionalHead } = externalResources
 
-    const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`)
+    const configuredBaseUrl = cfg.baseUrl ?? "example.com"
+    const normalizedBaseUrl = /^https?:\/\//i.test(configuredBaseUrl)
+      ? configuredBaseUrl
+      : `https://${configuredBaseUrl}`
+    const url = new URL(normalizedBaseUrl)
     const path = url.pathname as FullSlug
     const baseDir = fileData.slug === "404" ? path : pathToRoot(fileData.slug!)
     const iconPath = joinSegments(baseDir, "static/icon.png")
@@ -37,9 +41,15 @@ export default (() => {
     const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
     const isFolderIndexPage =
       fileData.slug != null && (fileData.slug === "index" || fileData.slug.endsWith("/index"))
-    const pageBaseUrl = isFolderIndexPage
-      ? new URL(joinSegments(url.pathname, simplifySlug(fileData.slug!), "/"), url.origin).toString()
-      : undefined
+    let pageBaseUrl: string | undefined
+    if (isFolderIndexPage) {
+      try {
+        const folderPath = joinSegments(url.pathname || "/", simplifySlug(fileData.slug!))
+        pageBaseUrl = new URL(`${folderPath.replace(/\/?$/, "/")}`, `${url.origin}/`).toString()
+      } catch {
+        pageBaseUrl = undefined
+      }
+    }
 
     return (
       <head>

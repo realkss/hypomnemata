@@ -740,12 +740,8 @@ function firstMasterLink() {
   )
 }
 
-function preferredMovesLayout(): "right" | "bottom" {
-  const compactWidth = window.matchMedia("(max-width: 900px)").matches
-  const shortLandscape = window.matchMedia("(orientation: landscape) and (max-height: 720px)").matches
-  const touchLandscape = window.matchMedia("(hover: none) and (orientation: landscape)").matches
-
-  return compactWidth || shortLandscape || touchLandscape ? "bottom" : "right"
+function preferredMovesLayout(): "right" {
+  return "right"
 }
 
 async function discoverLocalMasterPgnUrls() {
