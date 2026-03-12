@@ -1,7 +1,6 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { joinSegments } from "../util/path"
 
-const BASE_PATH = "/hypomnemata"
 const NON_ENGLISH = ["ko", "fr", "de", "la", "ru"] as const
 const ROOT_SHARED_PAGES = new Set(["keeper", "lexicon", "map"])
 
@@ -42,15 +41,21 @@ function candidateSlug(lang: string, rest: string) {
   return rest === "" ? lang : ROOT_SHARED_PAGES.has(rest) ? rest : `${lang}/${rest}`
 }
 
-function hrefFromSlug(slug: string) {
-  if (slug === "index") return `${BASE_PATH}/`
-  return joinSegments(BASE_PATH, slug)
+function hrefFromSlug(slug: string, basePath: string) {
+  if (slug === "index") {
+    return basePath || "/"
+  }
+
+  return basePath ? joinSegments(basePath, slug) : joinSegments("/", slug)
 }
 
-const LanguageSwitcher: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
+const LanguageSwitcher: QuartzComponent = ({ fileData, allFiles, cfg }: QuartzComponentProps) => {
   const { current, rest } = parseSlug(fileData.slug)
   const currentLanguage = LANGS.find((lang) => lang.code === current)?.label ?? "English"
   const available = new Set(allFiles.map((file) => file.slug).filter(Boolean))
+  const basePath = cfg.baseUrl
+    ? new URL(`https://${cfg.baseUrl}`).pathname.replace(/\/+$/, "")
+    : ""
 
   return (
     <details class="wiki-lang-switcher">
@@ -62,7 +67,7 @@ const LanguageSwitcher: QuartzComponent = ({ fileData, allFiles }: QuartzCompone
           const target = available.has(exact) ? exact : fallback
 
           return (
-            <a href={hrefFromSlug(target)} class={current === lang.code ? "active" : ""}>
+            <a href={hrefFromSlug(target, basePath)} class={current === lang.code ? "active" : ""}>
               {lang.label}
             </a>
           )

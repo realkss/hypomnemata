@@ -17,7 +17,7 @@ tags:
   <li>Black game: 2025.08.24 (1-0)</li>
 </ul>
 
-The cited model games from the annotations are collected on the [Master Games](https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-01/Master-Games/) subpage.
+The cited model games from the annotations are collected on the [Master Games](./Master-Games/) subpage.
 
 ## White Game
 
@@ -45,7 +45,7 @@ The cited model games from the annotations are collected on the [Master Games](h
 
 <nav class="training-session-nav" aria-label="Session navigation">
   <span class="training-session-nav__text">Prev Session</span>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/">All Sessions</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-01/Master-Games/">Master Games</a>
-  <a class="training-session-nav__link" href="https://realkss.github.io/hypomnemata/en/Chess/Training-Sessions/Training-Session-02/">Next Session</a>
+  <a class="training-session-nav__link" href="../">All Sessions</a>
+  <a class="training-session-nav__link" href="./Master-Games/">Master Games</a>
+  <a class="training-session-nav__link" href="../Training-Session-02/">Next Session</a>
 </nav>
