@@ -48,7 +48,7 @@ OPENING_NAMES: dict[str, str] = {
     "D87": "Grünfeld Defense: Exchange Variation",
     "E01": "Catalan Opening",
     "E16": "Queen's Indian Defense",
-    "E81": "King's Indian Defense: Saemisch Variation",
+    "E81": "King's Indian Defense: Sämisch Variation",
 }
 
 
@@ -241,7 +241,7 @@ def infer_opening(moves: list[str], header_eco: str) -> tuple[str, str]:
         return ("Grünfeld Defense", "D85")
 
     if has_prefix(moves, ["d4", "Nf6", "c4", "g6", "Nc3", "Bg7", "e4", "d6", "f3"]):
-        return ("King's Indian Defense: Saemisch Variation", "E81")
+        return ("King's Indian Defense: Sämisch Variation", "E81")
 
     if has_prefix(moves, ["d4", "d5", "Nf3", "e6", "c4", "c5"]):
         return ("Queen's Gambit Declined: Tarrasch Defense", "D32")
@@ -560,7 +560,7 @@ def render_session_body(
             "",
             '<div class="chess-training-board" data-label="White Game" data-orientation="white" data-pgn-src="./white.pgn"></div>',
             "",
-            render_comments_section("White Comments", white_comments_text),
+            render_comments_section("Sessions", white_comments_text),
             "",
             "## Black Game",
             "",
@@ -568,7 +568,7 @@ def render_session_body(
             "",
             '<div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>',
             "",
-            render_comments_section("Black Comments", black_comments_text),
+            render_comments_section("Sessions", black_comments_text),
             "",
             render_session_nav(prev_url, f"{SITE_ROOT}/", session.master_url, next_url),
         ]

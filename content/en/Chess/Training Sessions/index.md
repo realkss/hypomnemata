@@ -119,7 +119,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Nov 22, 2025</span>
     <span class="training-session-row__title">Training Session #10</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: King&#x27;s Indian Defense: Saemisch Variation</span>
+      <span class="training-session-row__chip">White: King&#x27;s Indian Defense: Sämisch Variation</span>
       <span class="training-session-row__chip">Black: Caro-Kann Defense: Classical Variation</span>
     </span>
   </a>
@@ -159,7 +159,7 @@ The archive below now surfaces the opening pair for each session and links onwar
     <span class="training-session-row__date">Sep 25, 2025</span>
     <span class="training-session-row__title">Training Session #5</span>
     <span class="training-session-row__summary">
-      <span class="training-session-row__chip">White: King&#x27;s Indian Defense: Saemisch Variation</span>
+      <span class="training-session-row__chip">White: King&#x27;s Indian Defense: Sämisch Variation</span>
       <span class="training-session-row__chip">Black: Vienna Game</span>
     </span>
   </a>
