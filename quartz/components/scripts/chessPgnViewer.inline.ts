@@ -545,16 +545,29 @@ function syncPanelBarDock(enhancement: BoardEnhancement) {
     controls.removeAttribute("data-training-panel-dock")
   }
 
-  if (!controls || !shouldDock) {
-    const controlsMain = controls?.querySelector<HTMLElement>(
-      ":scope > .training-board-controls__main",
-    )
-    if (controlsMain) {
-      for (const child of Array.from(controlsMain.children)) {
-        controls.insertBefore(child, controlsMain)
-      }
-      controlsMain.remove()
+  const unwrapControlsMain = () => {
+    if (!controls) {
+      return
     }
+
+    const controlsMain = controls.querySelector<HTMLElement>(":scope > .training-board-controls__main")
+    if (!controlsMain) {
+      return
+    }
+
+    const referenceNode = controlsMain.parentElement === controls ? controlsMain : null
+    for (const child of Array.from(controlsMain.children)) {
+      if (referenceNode) {
+        controls.insertBefore(child, referenceNode)
+      } else {
+        controls.appendChild(child)
+      }
+    }
+    controlsMain.remove()
+  }
+
+  if (!controls || !shouldDock) {
+    unwrapControlsMain()
     if (bar.parentElement !== root || bar.nextElementSibling !== body) {
       root.insertBefore(bar, body)
     }
@@ -562,17 +575,7 @@ function syncPanelBarDock(enhancement: BoardEnhancement) {
     return
   }
 
-  let controlsMain = controls.querySelector<HTMLElement>(":scope > .training-board-controls__main")
-  if (!controlsMain) {
-    controlsMain = makeElement("div", "training-board-controls__main")
-    controls.prepend(controlsMain)
-    for (const child of Array.from(controls.children)) {
-      if (child === controlsMain || child === bar) {
-        continue
-      }
-      controlsMain.appendChild(child)
-    }
-  }
+  unwrapControlsMain()
 
   if (bar.parentElement !== controls) {
     controls.appendChild(bar)
