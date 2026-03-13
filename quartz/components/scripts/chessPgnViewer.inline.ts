@@ -340,9 +340,10 @@ function shouldUseDesktopMovePane() {
 }
 
 function getStackedMovePaneHeight(boardHeight: number) {
-  const preferred = boardHeight * 0.78
-  const viewportCap = window.innerHeight * 0.42
-  return Math.round(Math.max(180, Math.min(preferred, viewportCap, 360)))
+  const preferred = boardHeight * 0.96
+  const viewportCap = window.innerHeight * 0.54
+  const absoluteCap = window.innerWidth <= 480 ? 340 : 460
+  return Math.round(Math.max(220, Math.min(preferred, viewportCap, absoluteCap)))
 }
 
 function getActiveMount(enhancement: BoardEnhancement) {
