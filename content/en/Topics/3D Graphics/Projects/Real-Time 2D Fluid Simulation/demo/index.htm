@@ -8,26 +8,34 @@
   </head>
   <body>
     <main class="app-shell">
-      <section class="hero-panel">
-        <p class="hero-panel__eyebrow">Fluid study</p>
+      <header class="hero-panel">
+        <p class="hero-panel__eyebrow">Simulation study</p>
         <div class="hero-panel__copy">
           <div>
             <h1>Real-Time 2D Fluid Simulation</h1>
             <p>
-              A presentable browser mini-project rebuilt from an older graphics assignment.
-              Use the presets and controls below, then drag through the water to perturb the flow.
+              A restrained browser demo for inspecting a dam-break scene, particle density, and
+              obstacle interaction without the coursework framing.
             </p>
           </div>
-          <div class="hero-panel__badges" aria-label="Project highlights">
-            <span>Particle solver</span>
-            <span>Spatial hash</span>
-            <span>Interactive scene</span>
-          </div>
+          <p class="hero-panel__meta">Particle solver / spatial hash / direct manipulation</p>
         </div>
-      </section>
+      </header>
 
       <section class="app-layout">
         <div class="stage-panel">
+          <div class="stage-panel__head">
+            <div>
+              <p class="stage-panel__eyebrow">Dam-break scene</p>
+              <h2>Reservoir release with downstream obstacle</h2>
+            </div>
+
+            <div class="toolbar-actions">
+              <button id="toggle-button" class="ui-button" type="button">Pause</button>
+              <button id="reset-button" class="ui-button ui-button--secondary" type="button">Reset</button>
+            </div>
+          </div>
+
           <div class="stage-toolbar">
             <div class="stat-row" aria-label="Simulation stats">
               <div class="stat-pill">
@@ -43,11 +51,7 @@
                 <strong id="stat-fps">0</strong>
               </div>
             </div>
-
-            <div class="toolbar-actions">
-              <button id="toggle-button" class="ui-button" type="button">Pause</button>
-              <button id="reset-button" class="ui-button ui-button--secondary" type="button">Reset scene</button>
-            </div>
+            <p class="stage-toolbar__hint">Drag through the fluid field to inject momentum.</p>
           </div>
 
           <div class="canvas-shell">
@@ -55,15 +59,16 @@
           </div>
 
           <div class="stage-notes">
-            <p><strong>Interaction</strong> Drag across the fluid to inject motion into the particle field.</p>
-            <p><strong>Scene</strong> The retaining wall and house obstacle make the dam-break path easy to read.</p>
+            <p><span>Barrier</span> Height is adjustable so the release threshold stays visible.</p>
+            <p><span>Structure</span> The house volume keeps the downstream consequence legible.</p>
           </div>
         </div>
 
         <aside class="control-panel">
           <section class="control-card">
-            <h2>Density presets</h2>
-            <p>Switch between lighter and heavier particle counts without leaving the page.</p>
+            <p class="control-card__eyebrow">Presets</p>
+            <h2>Particle density</h2>
+            <p>Switch the scene between lighter and heavier loads without leaving the page.</p>
             <div class="preset-grid" role="group" aria-label="Particle presets">
               <button class="preset-button is-active" data-preset="gallery" type="button">Gallery</button>
               <button class="preset-button" data-preset="study" type="button">Study</button>
@@ -72,6 +77,7 @@
           </section>
 
           <section class="control-card">
+            <p class="control-card__eyebrow">Parameters</p>
             <h2>Solver controls</h2>
             <label class="control-field" for="substeps-input">
               <span>Substeps</span>
@@ -93,11 +99,12 @@
           </section>
 
           <section class="control-card control-card--notes">
-            <h2>Why it reads better now</h2>
+            <p class="control-card__eyebrow">Notes</p>
+            <h2>Reading the scene</h2>
             <ul>
-              <li>The interface foregrounds the algorithmic levers that actually matter.</li>
-              <li>The simulation is organized as a mini-project instead of a single throwaway assignment file.</li>
-              <li>The canvas, controls, and stats now feel designed to be looked at by other people.</li>
+              <li>The wall is the critical threshold: small changes there alter the release visibly.</li>
+              <li>Higher substeps improve stability, especially in the denser presets.</li>
+              <li>Collision damping tempers rebounds so the motion stays readable rather than bouncy.</li>
             </ul>
           </section>
         </aside>

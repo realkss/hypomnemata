@@ -16,97 +16,95 @@ tags:
 
 <style>
 .fluid-project-hero {
-  margin: 1rem 0 1.5rem;
-  padding: 1.35rem 1.4rem;
+  margin: 1rem 0 1.3rem;
+  padding: 1.05rem 1.15rem 1.1rem;
   border: 1px solid var(--lightgray);
-  border-radius: 1.5rem;
-  background:
-    linear-gradient(135deg, var(--highlight), transparent 62%),
-    var(--light);
-  box-shadow: 0 20px 42px rgba(31, 27, 22, 0.08);
+  border-left: 3px solid var(--secondary);
+  border-radius: 0.8rem;
+  background: rgba(248, 245, 239, 0.72);
 }
 
 .fluid-project-kicker {
   margin: 0 0 0.4rem;
   color: var(--secondary);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
+  font-family: var(--codeFont);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .fluid-project-hero h2 {
   margin: 0;
-  font-size: clamp(1.55rem, 3vw, 2.25rem);
-  line-height: 1.12;
+  font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+  line-height: 1.15;
 }
 
 .fluid-project-summary {
-  margin: 0.9rem 0 0;
-  max-width: 56rem;
-  font-size: 1.06rem;
+  margin: 0.75rem 0 0;
+  max-width: 52rem;
+  font-size: 1rem;
 }
 
 .fluid-project-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1rem;
+  gap: 0.9rem;
+  margin-top: 0.8rem;
+  font-family: var(--codeFont);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
 }
 
 .fluid-project-meta span {
   display: inline-flex;
   align-items: center;
-  padding: 0.38rem 0.72rem;
-  border: 1px solid var(--lightgray);
-  border-radius: 999px;
-  background: rgba(248, 245, 239, 0.82);
-  font-size: 0.88rem;
 }
 
 .fluid-project-frame {
-  margin: 1.4rem 0 0.65rem;
-  padding: 0.7rem;
+  margin: 1.2rem 0 0.55rem;
+  padding: 0.55rem;
   border: 1px solid var(--lightgray);
-  border-radius: 1.6rem;
-  background: var(--light);
-  box-shadow: 0 24px 50px rgba(31, 27, 22, 0.08);
+  border-radius: 0.9rem;
+  background: rgba(248, 245, 239, 0.76);
 }
 
 .fluid-project-frame iframe {
   width: 100%;
   min-height: 59rem;
   border: 0;
-  border-radius: 1rem;
+  border-radius: 0.65rem;
   background: #111;
 }
 
 .fluid-project-links {
-  margin: 0.35rem 0 1.8rem;
-  font-size: 0.96rem;
+  margin: 0.25rem 0 1.35rem;
+  font-size: 0.92rem;
 }
 
 .fluid-project-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 1.45rem 0 1.75rem;
+  gap: 0.8rem;
+  margin: 1rem 0 1.55rem;
 }
 
 .fluid-project-card {
-  padding: 1rem 1.05rem;
+  padding: 0.85rem 0.9rem;
   border: 1px solid var(--lightgray);
-  border-radius: 1rem;
-  background: rgba(248, 245, 239, 0.72);
+  border-radius: 0.75rem;
+  background: rgba(248, 245, 239, 0.48);
 }
 
 .fluid-project-card h3 {
-  margin: 0 0 0.45rem;
-  font-size: 1rem;
+  margin: 0 0 0.35rem;
+  font-size: 0.98rem;
 }
 
 .fluid-project-card p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
 }
 
 @media (max-width: 960px) {
@@ -121,25 +119,25 @@ tags:
 
 @media (max-width: 640px) {
   .fluid-project-hero {
-    padding: 1.05rem;
+    padding: 0.95rem 1rem;
   }
 
   .fluid-project-frame {
     padding: 0.45rem;
-    border-radius: 1.1rem;
+    border-radius: 0.75rem;
   }
 
   .fluid-project-frame iframe {
     min-height: 78rem;
-    border-radius: 0.8rem;
+    border-radius: 0.55rem;
   }
 }
 </style>
 
 <div class="fluid-project-hero">
   <p class="fluid-project-kicker">Project Study</p>
-  <h2>A browser-based dam-break simulation rebuilt as a cleaner, more presentable mini-project.</h2>
-  <p class="fluid-project-summary">Originally developed in 2023 for an advanced graphics course, this portfolio pass keeps the strongest idea from the work, particle-based fluid motion with fast neighborhood queries, and reframes it as an interactive case study rather than a class submission.</p>
+  <h2>A browser-based dam-break simulation reframed as a cleaner technical case study.</h2>
+  <p class="fluid-project-summary">Originally developed in 2023 for an advanced graphics course, this revision keeps the strongest idea from the work, particle-based fluid motion with accelerated neighborhood queries, and presents it with a calmer, more inspectable interface.</p>
   <div class="fluid-project-meta">
     <span>JavaScript + Canvas</span>
     <span>Particle fluid solver</span>
@@ -156,16 +154,16 @@ tags:
 
 <div class="fluid-project-grid">
   <div class="fluid-project-card">
-    <h3>Problem</h3>
-    <p>Turn an older assignment-based fluid simulation into something that communicates engineering judgment, not just coursework completion.</p>
+    <h3>Scope</h3>
+    <p>Rework an older assignment into something that reads as simulation work rather than a course submission.</p>
   </div>
   <div class="fluid-project-card">
-    <h3>Approach</h3>
-    <p>Keep the dam-break setup, preserve spatial hashing for local particle queries, and rebuild the presentation around controls, stats, and cleaner structure.</p>
+    <h3>Method</h3>
+    <p>Keep the dam-break setup, preserve local spatial hashing, and rebuild the presentation around inspection and control.</p>
   </div>
   <div class="fluid-project-card">
-    <h3>Result</h3>
-    <p>A standalone browser demo that lets viewers inspect solver tradeoffs, restart the scene, and actively stir the flow instead of passively watching it.</p>
+    <h3>Outcome</h3>
+    <p>A standalone browser demo that lets viewers compare presets, tune solver parameters, and disturb the flow directly.</p>
   </div>
 </div>
 
