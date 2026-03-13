@@ -117,6 +117,7 @@ function setSignedInState(panel: HTMLElement, user: AuthUser) {
   const signedOut = panel.querySelector("[data-auth-signed-out]") as HTMLElement | null
   const signedIn = panel.querySelector("[data-auth-signed-in]") as HTMLElement | null
   const name = panel.querySelector("[data-auth-name]") as HTMLElement | null
+  const provider = panel.querySelector("[data-auth-provider]") as HTMLElement | null
   const detail = panel.querySelector("[data-auth-detail]") as HTMLElement | null
   const avatarImage = panel.querySelector("[data-auth-avatar-image]") as HTMLImageElement | null
   const avatarFallback = panel.querySelector("[data-auth-avatar-fallback]") as HTMLElement | null
@@ -133,16 +134,19 @@ function setSignedInState(panel: HTMLElement, user: AuthUser) {
     name.textContent = user.name
   }
 
+  if (provider) {
+    provider.textContent = `Signed in with ${providerLabel(user.provider)}`
+  }
+
   if (detail) {
-    const detailParts = [`Signed in with ${providerLabel(user.provider)}`]
-
     if (user.email) {
-      detailParts.push(user.email)
+      detail.textContent = user.email
     } else if (user.username) {
-      detailParts.push(`@${user.username}`)
+      detail.textContent = `@${user.username}`
+    } else {
+      detail.textContent = ""
     }
-
-    detail.textContent = detailParts.join(" | ")
+    detail.hidden = detail.textContent.trim().length === 0
   }
 
   if (avatarFallback) {

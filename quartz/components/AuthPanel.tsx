@@ -99,7 +99,10 @@ const AuthPanel: QuartzComponent = () => {
           </div>
           <div class="auth-panel__identity-copy">
             <strong data-auth-name>Hypomnemata reader</strong>
-            <span data-auth-detail></span>
+            <span class="auth-panel__identity-provider" data-auth-provider>
+              Signed in with Google
+            </span>
+            <span class="auth-panel__identity-detail" data-auth-detail></span>
           </div>
         </div>
         <button class="auth-panel__logout" type="button" data-auth-logout>
