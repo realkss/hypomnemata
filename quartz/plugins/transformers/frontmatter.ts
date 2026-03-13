@@ -148,6 +148,7 @@ declare module "vfile" {
         cssclasses: string[]
         socialImage: string
         comments: boolean | string
+        order: number | string
         sourceLanguage: string
         translatedFrom: string
         translationStatus: "original" | "ai-translated" | "reviewed"

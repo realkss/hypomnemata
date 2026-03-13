@@ -7,6 +7,8 @@ translationStatus: original
 
 This branch gathers built work: experiments, tools, prototypes, and longer implementation studies where 3D ideas are tested through actual scenes, code, or interfaces.
 
+Current feature: [Real-Time 2D Fluid Simulation](/en/Topics/3D-Graphics/Projects/Real-Time-2D-Fluid-Simulation/), a browser-based dam-break study rebuilt into a cleaner portfolio mini-project.
+
 ## What belongs here
 
 - renderer prototypes and shader studies
