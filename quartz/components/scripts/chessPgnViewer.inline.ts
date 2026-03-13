@@ -165,6 +165,8 @@ type BoardEnhancement = {
   pgnText: string
 }
 
+const boardEnhancements = new WeakMap<HTMLElement, BoardEnhancement>()
+
 declare global {
   interface Window {
     __CHESS_MASTERS_ENDPOINT__?: string
@@ -345,8 +347,22 @@ function getStackedMovePaneHeight(boardHeight: number) {
   return Math.round(Math.max(180, Math.min(preferred, viewportCap, 360)))
 }
 
+function getActiveMount(enhancement: BoardEnhancement) {
+  const currentMount = enhancement.node.querySelector<HTMLElement>(
+    ":scope > .chess-training-board__mount",
+  )
+
+  if (currentMount) {
+    enhancement.mount = currentMount
+    return currentMount
+  }
+
+  return enhancement.mount
+}
+
 function clearMovePaneSizing(enhancement: BoardEnhancement) {
-  const { node, mount } = enhancement
+  const node = enhancement.node
+  const mount = getActiveMount(enhancement)
   const side = mount.querySelector<HTMLElement>(".lpv__side")
   const moves = mount.querySelector<HTMLElement>(".lpv__moves")
 
@@ -373,6 +389,29 @@ function clearMovePaneSizing(enhancement: BoardEnhancement) {
   moves?.style.removeProperty("scrollbar-gutter")
 }
 
+function hasMovePaneSizing(enhancement: BoardEnhancement) {
+  const node = enhancement.node
+  const mount = getActiveMount(enhancement)
+  const side = mount.querySelector<HTMLElement>(".lpv__side")
+  const moves = mount.querySelector<HTMLElement>(".lpv__moves")
+
+  return (
+    node.hasAttribute("data-training-move-pane") ||
+    side?.dataset.trainingMovePane === "true" ||
+    moves?.dataset.trainingMovePane === "true" ||
+    Boolean(side?.style.maxHeight) ||
+    Boolean(moves?.style.maxHeight)
+  )
+}
+
+function preserveOrClearMovePane(enhancement: BoardEnhancement) {
+  if (hasMovePaneSizing(enhancement)) {
+    return
+  }
+
+  clearMovePaneSizing(enhancement)
+}
+
 function applyMovePaneSizing(
   enhancement: BoardEnhancement,
   side: HTMLElement,
@@ -381,11 +420,12 @@ function applyMovePaneSizing(
   movesHeight: number,
   desktop: boolean,
 ) {
+  const mount = getActiveMount(enhancement)
   const safeSideHeight = Math.max(Math.round(sideHeight), 0)
   const safeMovesHeight = Math.max(Math.round(movesHeight), 0)
 
   if (safeSideHeight <= 0 || safeMovesHeight <= 0) {
-    clearMovePaneSizing(enhancement)
+    preserveOrClearMovePane(enhancement)
     return
   }
 
@@ -395,23 +435,23 @@ function applyMovePaneSizing(
     enhancement.node.style.setProperty("--training-moves-list-height", `${safeMovesHeight}px`)
     enhancement.node.style.removeProperty("--training-stacked-moves-pane-height")
     enhancement.node.style.removeProperty("--training-stacked-moves-list-height")
-    enhancement.mount.style.setProperty("--training-moves-pane-height", `${safeSideHeight}px`)
-    enhancement.mount.style.removeProperty("--training-stacked-moves-pane-height")
+    mount.style.setProperty("--training-moves-pane-height", `${safeSideHeight}px`)
+    mount.style.removeProperty("--training-stacked-moves-pane-height")
   } else {
     enhancement.node.dataset.trainingMovePane = "stacked"
     enhancement.node.style.removeProperty("--training-moves-pane-height")
     enhancement.node.style.removeProperty("--training-moves-list-height")
     enhancement.node.style.setProperty("--training-stacked-moves-pane-height", `${safeSideHeight}px`)
     enhancement.node.style.setProperty("--training-stacked-moves-list-height", `${safeMovesHeight}px`)
-    enhancement.mount.style.removeProperty("--training-moves-pane-height")
-    enhancement.mount.style.setProperty("--training-stacked-moves-pane-height", `${safeSideHeight}px`)
+    mount.style.removeProperty("--training-moves-pane-height")
+    mount.style.setProperty("--training-stacked-moves-pane-height", `${safeSideHeight}px`)
   }
 
   side.dataset.trainingMovePane = "true"
   moves.dataset.trainingMovePane = "true"
   side.style.setProperty("align-self", desktop ? "start" : "stretch")
   side.style.setProperty("box-sizing", "border-box")
-  side.style.setProperty("height", desktop ? `${safeSideHeight}px` : "auto")
+  side.style.setProperty("height", `${safeSideHeight}px`)
   side.style.setProperty("max-height", `${safeSideHeight}px`)
   side.style.setProperty("overflow", "hidden")
   moves.style.setProperty("flex", "0 1 auto")
@@ -428,32 +468,30 @@ function applyMovePaneSizing(
 }
 
 function syncMovePane(enhancement: BoardEnhancement) {
-  const { mount } = enhancement
+  const mount = getActiveMount(enhancement)
   const side = mount.querySelector<HTMLElement>(".lpv__side")
   const moves = mount.querySelector<HTMLElement>(".lpv__moves")
   const board = mount.querySelector<HTMLElement>(".lpv__board .cg-wrap")
-  const controls = side?.querySelector<HTMLElement>(".lpv__controls")
   const topPlayer = mount.querySelector<HTMLElement>(".lpv__player--top")
   const bottomPlayer = mount.querySelector<HTMLElement>(".lpv__player--bottom")
 
   if (!side || !moves || !board) {
-    clearMovePaneSizing(enhancement)
+    preserveOrClearMovePane(enhancement)
     return
   }
 
   const boardHeight = board.getBoundingClientRect().height
   if (!Number.isFinite(boardHeight) || boardHeight <= 0) {
-    clearMovePaneSizing(enhancement)
+    preserveOrClearMovePane(enhancement)
     return
   }
 
-  const controlsHeight = controls?.getBoundingClientRect().height ?? 0
   const extraGap = 8
   const desktop = shouldUseDesktopMovePane() && mount.classList.contains("lpv--moves-right")
 
   if (!desktop) {
     const sideHeight = getStackedMovePaneHeight(boardHeight)
-    const movesHeight = Math.max(sideHeight - controlsHeight - extraGap, 96)
+    const movesHeight = Math.max(sideHeight - extraGap, 96)
     applyMovePaneSizing(enhancement, side, moves, sideHeight, movesHeight, false)
     return
   }
@@ -463,11 +501,11 @@ function syncMovePane(enhancement: BoardEnhancement) {
   const height = Math.max(board.getBoundingClientRect().height, end - start)
 
   if (!Number.isFinite(height) || height <= 0) {
-    clearMovePaneSizing(enhancement)
+    preserveOrClearMovePane(enhancement)
     return
   }
 
-  const movesHeight = Math.max(height - controlsHeight - extraGap, 128)
+  const movesHeight = Math.max(height - extraGap, 128)
   applyMovePaneSizing(enhancement, side, moves, height, movesHeight, true)
 }
 
@@ -497,7 +535,8 @@ function syncBoardCommentsVisibility(node: HTMLElement) {
 }
 
 function syncPanelBarDock(enhancement: BoardEnhancement) {
-  const { mount, panelContainer } = enhancement
+  const mount = getActiveMount(enhancement)
+  const { panelContainer } = enhancement
   const { root, bar, body } = panelContainer
   const controls = mount.querySelector<HTMLElement>(".lpv__controls")
   const shouldDock = shouldDockBoardTabsWithControls() && Boolean(controls)
@@ -562,18 +601,92 @@ function observePanelBarDock(enhancement: BoardEnhancement) {
     subtree: true,
   })
 
+  const timeoutIds = [
+    window.setTimeout(resync, 0),
+    window.setTimeout(resync, 180),
+    window.setTimeout(resync, 650),
+    window.setTimeout(resync, 1400),
+  ]
+
   window.addEventListener("resize", resync, { passive: true })
+  let resizeObserver: ResizeObserver | null = null
   if ("ResizeObserver" in window) {
-    const resizeObserver = new ResizeObserver(() => {
+    resizeObserver = new ResizeObserver(() => {
       resync()
     })
     resizeObserver.observe(node)
   }
+  window.addCleanup(() => {
+    node.removeAttribute("data-panel-dock-observed")
+    observer.disconnect()
+    resizeObserver?.disconnect()
+    for (const timeoutId of timeoutIds) {
+      window.clearTimeout(timeoutId)
+    }
+    window.removeEventListener("resize", resync)
+  })
+}
 
-  window.setTimeout(resync, 0)
-  window.setTimeout(resync, 180)
-  window.setTimeout(resync, 650)
-  window.setTimeout(resync, 1400)
+function observeMovePaneSizing(enhancement: BoardEnhancement) {
+  const { node, mount } = enhancement
+  if (node.dataset.movePaneObserved === "true") {
+    return
+  }
+
+  node.dataset.movePaneObserved = "true"
+
+  const sync = () => {
+    syncMovePane(enhancement)
+  }
+  const delayedSync = () => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(sync)
+    })
+  }
+
+  const mutationObserver = new MutationObserver(() => {
+    sync()
+  })
+  mutationObserver.observe(mount, {
+    childList: true,
+    subtree: true,
+  })
+
+  let resizeObserver: ResizeObserver | null = null
+  if ("ResizeObserver" in window) {
+    resizeObserver = new ResizeObserver(() => {
+      sync()
+    })
+    resizeObserver.observe(mount)
+    resizeObserver.observe(node)
+  }
+
+  const intervalId = window.setInterval(sync, 400)
+  const timeoutIds = [
+    window.setTimeout(sync, 0),
+    window.setTimeout(sync, 180),
+    window.setTimeout(sync, 650),
+    window.setTimeout(sync, 1400),
+    window.setTimeout(sync, 2600),
+  ]
+  const intervalStopId = window.setTimeout(() => {
+    window.clearInterval(intervalId)
+  }, 5000)
+
+  window.addEventListener("resize", sync, { passive: true })
+  delayedSync()
+
+  window.addCleanup(() => {
+    node.removeAttribute("data-move-pane-observed")
+    mutationObserver.disconnect()
+    resizeObserver?.disconnect()
+    window.clearInterval(intervalId)
+    window.clearTimeout(intervalStopId)
+    for (const timeoutId of timeoutIds) {
+      window.clearTimeout(timeoutId)
+    }
+    window.removeEventListener("resize", sync)
+  })
 }
 
 function ensureMovePaneFallback(_enhancement: BoardEnhancement) {
@@ -1414,7 +1527,9 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi, 
     pgnText,
   }
 
+  boardEnhancements.set(node, enhancement)
   observePanelBarDock(enhancement)
+  observeMovePaneSizing(enhancement)
   mountEvalBar(mount, engine)
   engine.toggleButton.addEventListener("click", () => {
     setActiveBoardPanel(panelContainer, "engine")
@@ -1444,6 +1559,12 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi, 
 
 async function mountBoard(node: HTMLElement) {
   if (node.dataset.viewerMounted === "true") {
+    const enhancement = boardEnhancements.get(node)
+    if (enhancement) {
+      observePanelBarDock(enhancement)
+      observeMovePaneSizing(enhancement)
+      syncEnhancement(enhancement)
+    }
     return
   }
 
