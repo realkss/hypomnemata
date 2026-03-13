@@ -58,10 +58,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.LanguageSwitcher(),
     Component.DesktopOnly(Component.TableOfContents()),
-    Component.ConditionalRender({
-      component: Component.AuthPanel(),
-      condition: (page) => page.fileData.slug === "index",
-    }),
+    Component.AuthPanel(),
   ],
   right: [
     Component.ConditionalRender({
@@ -123,6 +120,7 @@ export const defaultListPageLayout: PageLayout = {
     }),
     Component.LanguageSwitcher(),
     Component.DesktopOnly(Component.TableOfContents()),
+    Component.AuthPanel(),
   ],
   right: [],
 }
