@@ -704,11 +704,26 @@
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 20.25rem);
+    display: flex;
     align-items: stretch;
-    column-gap: 0.9rem;
+    justify-content: flex-start;
+    gap: 0;
     --training-controls-button-width: 3.65rem;
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"]::before,
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"]::after {
+    content: "";
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"]::before {
+    order: 0;
+  }
+
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"]::after {
+    order: 2;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto,
@@ -722,41 +737,41 @@
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--first {
-    grid-column: 1;
+    order: 1;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--prev,
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__menu,
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--next {
-    grid-column: 1;
+    order: 1;
+    flex: 0 0 var(--training-controls-button-width);
     width: var(--training-controls-button-width);
-    justify-self: center;
     padding-inline: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transform: none;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--prev {
-    transform: translateX(calc(-1 * var(--training-controls-button-width)));
     border-left: 0;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__menu {
-    transform: translateX(0);
+    border-left: 1px solid var(--c-lpv-border, hsl(0, 0%, 25%));
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--next {
-    transform: translateX(var(--training-controls-button-width));
+    border-left: 1px solid var(--c-lpv-border, hsl(0, 0%, 25%));
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .training-board-panels__bar {
-    grid-column: 2;
+    order: 3;
     align-self: stretch;
-    justify-self: stretch;
-    width: 100%;
-    min-width: 0;
-    margin-left: 0;
+    flex: 0 0 clamp(18rem, 28vw, 20.25rem);
+    width: clamp(18rem, 28vw, 20.25rem);
+    min-width: 18rem;
+    margin-left: 0.9rem;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .training-board-panels__bar .training-board-panels__tabs {
