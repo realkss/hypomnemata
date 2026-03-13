@@ -47,7 +47,6 @@ type ViewerFactory = (node: HTMLElement, config: Record<string, unknown>) => Vie
 type EngineController = {
   panel: HTMLElement
   toggleButton: HTMLButtonElement
-  evalBarButton: HTMLButtonElement
   status: HTMLElement
   score: HTMLElement
   meta: HTMLElement
@@ -60,7 +59,6 @@ type EngineController = {
   worker: Worker | null
   ready: boolean
   enabled: boolean
-  evalBarVisible: boolean
   pendingFen: string | null
   pendingTurn: "white" | "black"
   debounceId: number | null
@@ -705,12 +703,6 @@ function createEnginePanel(): EngineController {
   const toolbar = makeElement("div", "training-engine__toolbar")
   const toggleButton = makeElement("button", "training-board-button", "Turn On Stockfish")
   toggleButton.type = "button"
-  const evalBarButton = makeElement(
-    "button",
-    "training-board-button training-board-button--ghost",
-    "Hide Eval Bar",
-  )
-  evalBarButton.type = "button"
 
   const status = makeElement("p", "training-engine__status", "Stockfish is off.")
   const scoreRow = makeElement("div", "training-engine__score-row")
@@ -733,7 +725,7 @@ function createEnginePanel(): EngineController {
     "Best line will appear here once the engine starts.",
   )
 
-  toolbar.append(toggleButton, evalBarButton)
+  toolbar.appendChild(toggleButton)
   scoreRow.append(score, meta)
   summary.append(scoreRow, status)
   header.append(summary, toolbar)
@@ -743,7 +735,6 @@ function createEnginePanel(): EngineController {
   return {
     panel,
     toggleButton,
-    evalBarButton,
     status,
     score,
     meta,
@@ -756,7 +747,6 @@ function createEnginePanel(): EngineController {
     worker: null,
     ready: false,
     enabled: false,
-    evalBarVisible: true,
     pendingFen: null,
     pendingTurn: "white",
     debounceId: null,
@@ -907,7 +897,7 @@ function teardownEngine(controller: EngineController) {
   controller.barWhite.style.height = "50%"
   controller.barBlack.style.height = "50%"
   controller.barRail.dataset.disabled = "true"
-  controller.bar.dataset.hidden = controller.evalBarVisible ? "false" : "true"
+  setEvalBarVisible(controller, false)
   activeEngines.delete(controller)
 }
 
@@ -939,6 +929,7 @@ function ensureEngineStarted(enhancement: BoardEnhancement) {
     const worker = new Worker(STOCKFISH_WORKER_URL)
     controller.worker = worker
     controller.enabled = true
+    setEvalBarVisible(controller, true)
     controller.barRail.dataset.disabled = "false"
     controller.toggleButton.textContent = "Turn Off Stockfish"
     controller.status.textContent = "Starting Stockfish 18 lite..."
@@ -1006,10 +997,8 @@ function updateEnginePosition(enhancement: BoardEnhancement) {
 }
 
 function setEvalBarVisible(controller: EngineController, visible: boolean) {
-  controller.evalBarVisible = visible
   controller.barRail.dataset.hidden = visible ? "false" : "true"
   controller.bar.dataset.hidden = visible ? "false" : "true"
-  controller.evalBarButton.textContent = visible ? "Hide Eval Bar" : "Show Eval Bar"
 }
 
 function mountEvalBar(mount: HTMLElement, controller: EngineController) {
@@ -1538,11 +1527,7 @@ function enhanceBoard(node: HTMLElement, mount: HTMLElement, viewer: ViewerApi, 
     setActiveBoardPanel(panelContainer, "engine")
     toggleEngine(enhancement)
   })
-  engine.evalBarButton.addEventListener("click", () => {
-    setActiveBoardPanel(panelContainer, "engine")
-    setEvalBarVisible(engine, !engine.evalBarVisible)
-  })
-  setEvalBarVisible(engine, true)
+  setEvalBarVisible(engine, false)
   engine.barRail.dataset.disabled = "true"
   engine.barWhite.style.width = "50%"
   engine.barBlack.style.width = "50%"
