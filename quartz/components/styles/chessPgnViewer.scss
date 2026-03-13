@@ -705,9 +705,10 @@
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 4rem 3.4rem 4rem minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 20.25rem);
     align-items: stretch;
-    gap: 0;
+    column-gap: 0.9rem;
+    --training-controls-button-width: 3.65rem;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto,
@@ -724,27 +725,38 @@
     grid-column: 1;
   }
 
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--prev,
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__menu,
+  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--next {
+    grid-column: 1;
+    width: var(--training-controls-button-width);
+    justify-self: center;
+    padding-inline: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--prev {
-    grid-column: 2;
+    transform: translateX(calc(-1 * var(--training-controls-button-width)));
+    border-left: 0;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__menu {
-    grid-column: 3;
+    transform: translateX(0);
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--next {
-    grid-column: 4;
-  }
-
-  .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .lpv__controls__goto--last {
-    grid-column: 5;
+    transform: translateX(var(--training-controls-button-width));
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .training-board-panels__bar {
-    grid-column: 6;
+    grid-column: 2;
     align-self: stretch;
-    min-width: 10rem;
-    margin-left: 0.34rem;
+    justify-self: stretch;
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
   }
 
   .chess-training-board > .chess-training-board__mount.lpv .lpv__controls[data-training-panel-dock="true"] > .training-board-panels__bar .training-board-panels__tabs {
