@@ -10,16 +10,16 @@ translationStatus: original
 
 3D graphics belongs here because it joins geometry, rendering, simulation, and representation. It is one of the places where abstract mathematics becomes visible and where computational technique becomes a mode of thought.
 
-Within this notebook, the topic now divides into two connected branches: one for theory and one for projects. The theory pages gather the concepts worth returning to; the project pages hold the concrete things built from them.
+Within this notebook, the topic now splits between reusable theory notes and concrete project studies. The theory pages gather the concepts worth returning to; the project work is where those ideas are tested in code, scenes, and simulations.
 
 <div class="landing-grid landing-grid--reference">
   <a class="landing-card" href="/en/Topics/3D-Graphics/Theory/">
     <strong>Theory</strong>
     <span>Rendering, geometry, simulation, and the mathematical structure behind visual computation.</span>
   </a>
-  <a class="landing-card" href="/en/Topics/3D-Graphics/Projects/">
-    <strong>Projects</strong>
-    <span>Renderers, shader studies, tools, experiments, and implementation work tied to actual builds.</span>
+  <a class="landing-card" href="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/">
+    <strong>Project Study</strong>
+    <span>Real-Time 2D Fluid Simulation, a browser-based dam-break study rebuilt as a cleaner technical case.</span>
   </a>
 </div>
 
@@ -32,15 +32,15 @@ This branch is for reusable notes: light transport, transforms, spatial structur
 - simulation and physically based modeling
 - visual explanation as a form of inquiry
 
-## Projects
+## Project Study
 
-This branch is for concrete work: prototypes, small engines, visual essays, shader experiments, and other artifacts where ideas are tested in visible form.
+The current concrete build here is a browser-based fluid simulation project: a dam-break setup rebuilt into a clearer interactive study with live controls and inspectable behavior.
 
-- renderer and shader experiments
-- visualization tools and scene studies
-- geometry or simulation prototypes
-- implementation notes attached to working code
+- particle-based fluid motion in the browser
+- spatial hashing for local neighbor queries
+- interactive controls for presets and disturbances
+- implementation notes attached to a working demo
 
 ## Relation
 
-The two branches are meant to remain in contact. Theory should sharpen what gets built; projects should return pressure to the theory by revealing where an idea is incomplete, awkward, or especially fruitful.
+Theory should sharpen what gets built; project work should return pressure to the theory by revealing where an idea is incomplete, awkward, or especially fruitful.

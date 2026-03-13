@@ -5,6 +5,8 @@ sourceLanguage: en
 translationStatus: original
 date: 2026-03-13
 description: A browser-based dam-break simulation rebuilt as a polished portfolio mini-project with spatial hashing, interactive controls, and a cleaner presentation pass.
+aliases:
+  - en/Topics/3D-Graphics/Projects/Real-Time-2D-Fluid-Simulation
 order: 1
 hideFolderListing: true
 tags:
@@ -147,10 +149,10 @@ tags:
 </div>
 
 <div class="fluid-project-frame">
-  <iframe src="/en/Topics/3D-Graphics/Projects/Real-Time-2D-Fluid-Simulation/demo/index.htm?v=20260313b" title="Real-Time 2D Fluid Simulation demo" loading="lazy"></iframe>
+  <iframe src="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/demo/index.htm?v=20260313b" title="Real-Time 2D Fluid Simulation demo" loading="lazy"></iframe>
 </div>
 
-<p class="fluid-project-links"><a href="/en/Topics/3D-Graphics/Projects/Real-Time-2D-Fluid-Simulation/demo/index.htm?v=20260313b">Open the demo on its own</a> for a roomier view.</p>
+<p class="fluid-project-links"><a href="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/demo/index.htm?v=20260313b">Open the demo on its own</a> for a roomier view.</p>
 
 <div class="fluid-project-grid">
   <div class="fluid-project-card">
