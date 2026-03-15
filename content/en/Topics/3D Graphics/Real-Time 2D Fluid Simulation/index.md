@@ -149,10 +149,10 @@ tags:
 </div>
 
 <div class="fluid-project-frame">
-  <iframe src="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/demo/index.htm?v=20260313b" title="Real-Time 2D Fluid Simulation demo" loading="lazy"></iframe>
+  <iframe src="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/demo/viewer.htm" title="Real-Time 2D Fluid Simulation demo" loading="lazy"></iframe>
 </div>
 
-<p class="fluid-project-links"><a href="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/demo/index.htm?v=20260313b">Open the demo on its own</a> for a roomier view.</p>
+<p class="fluid-project-links"><a href="/en/Topics/3D-Graphics/Real-Time-2D-Fluid-Simulation/demo/viewer.htm">Open the demo on its own</a> for a roomier view.</p>
 
 <div class="fluid-project-grid">
   <div class="fluid-project-card">
