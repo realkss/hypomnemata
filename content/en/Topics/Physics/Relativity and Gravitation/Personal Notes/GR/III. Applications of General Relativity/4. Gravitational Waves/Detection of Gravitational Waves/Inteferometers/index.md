@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: The interferometric logic behind modern gravitational-wave detection.
+hideFolderCount: true
 ---
 
-This subsection is reserved for interferometric detection methods: arm-length comparison, laser stability, mirror control, and the instrumental architecture behind observatories such as LIGO, Virgo, and KAGRA. It is the most concrete point at which gravitational-wave theory meets laboratory design.
+This subsection focuses on the interferometric logic behind modern gravitational-wave detection.
+
+This branch is kept as a stable entry point for future notes, derivations, and references in this part of the notebook.

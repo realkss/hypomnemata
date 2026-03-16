@@ -4,8 +4,11 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Stellar structure, collapse, exact black-hole geometries, and horizon physics.
+hideFolderCount: true
 ---
 
-This section follows the path from stellar equilibrium to gravitational collapse and the global structure of black-hole spacetimes. Classical solution theory, singularity questions, rotating black holes, and horizon processes are all gathered here in one line of development.
+This section focuses on stellar structure, collapse, exact black-hole geometries, and horizon physics.
 
-It now also serves as the local bridge into semiclassical gravity through the Hawking-radiation branch nested inside this folder.
+Use the sequence below as the local map for this section. The notes are meant to be read as a connected line of study, with the listing serving as a working sequence rather than a file dump.
+
+## Sequence

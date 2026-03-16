@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: The standard relativistic model of cosmological expansion and content.
+hideFolderCount: true
 ---
 
-This section is devoted to the standard cosmological model: FLRW geometry, Friedmann dynamics, matter and radiation sectors, dark components, and the assumptions under which the benchmark model earns its explanatory reach.
+This section focuses on the standard relativistic model of cosmological expansion and content.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

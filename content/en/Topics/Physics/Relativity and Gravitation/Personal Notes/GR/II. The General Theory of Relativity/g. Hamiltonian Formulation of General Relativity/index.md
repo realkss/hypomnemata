@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Canonical variables, constraints, and the Hamiltonian structure of the theory.
+hideFolderCount: true
 ---
 
-This section reorganizes the theory into canonical form. It is the place for foliations, constraint equations, phase-space variables, and the structures that later matter for quantization, conserved quantities, and dynamical evolution.
+This section focuses on canonical variables, constraints, and the Hamiltonian structure of the theory.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

@@ -4,8 +4,11 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: The conceptual, geometric, and variational core of general relativity.
+hideFolderCount: true
 ---
 
-This chapter develops the general theory itself. It moves from the equivalence principle and general covariance to Einstein's field equations, then expands outward into curvature, observable effects, and action-based formulations.
+This chapter focuses on the conceptual, geometric, and variational core of general relativity.
 
-The point is to keep the theory unified: physical heuristics, geometric structure, and formal derivation should remain part of one continuous argument rather than breaking apart into separate technical topics.
+Use the sequence below as the chapter map. The ordering is meant to preserve continuity from one branch to the next instead of flattening the material into a generic archive.
+
+## Sequence

@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Thermodynamic and statistical viewpoints on spacetime and gravitation.
+hideFolderCount: true
 ---
 
-This section groups approaches that treat gravitation through entropy, coarse-graining, horizon thermodynamics, or emergent statistical structure. The guiding question is how much of geometry might reflect collective behavior rather than microscopic first principles.
+This section focuses on thermodynamic and statistical viewpoints on spacetime and gravitation.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

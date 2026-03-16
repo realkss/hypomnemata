@@ -4,6 +4,11 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Exact solutions of Einstein's equations used as working laboratories.
+hideFolderCount: true
 ---
 
-This section develops exact solutions of Einstein's field equations as structured examples. Static and spherically symmetric metrics appear here not only as solved models, but as the first serious arenas in which geometry, causality, and matter content can be studied concretely.
+This section focuses on exact solutions of Einstein's equations used as working laboratories.
+
+Use the sequence below as the local map for this section. The notes are meant to be read as a connected line of study, with the listing serving as a working sequence rather than a file dump.
+
+## Sequence

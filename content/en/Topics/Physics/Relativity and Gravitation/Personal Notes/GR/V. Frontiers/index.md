@@ -4,6 +4,11 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Quantum, statistical, and alternative geometric directions beyond the classical core.
+hideFolderCount: true
 ---
 
-This chapter gathers the places where the classical theory becomes insufficient, suggestive, or reformulated. Quantum gravity, statistical viewpoints on gravitation, and teleparallel alternatives each ask in different ways what should remain fundamental once Einstein's original framework is pushed to its limits.
+This chapter focuses on quantum, statistical, and alternative geometric directions beyond the classical core.
+
+Use the sequence below as the chapter map. The ordering is meant to preserve continuity from one branch to the next instead of flattening the material into a generic archive.
+
+## Sequence

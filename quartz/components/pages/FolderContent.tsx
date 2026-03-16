@@ -107,6 +107,17 @@ export default ((opts?: Partial<FolderContentOptions>) => {
     const hideFolderListing =
       fileData.frontmatter?.hideFolderListing === true ||
       fileData.frontmatter?.hideFolderListing === "true"
+    const isGRNotebookPage =
+      (fileData.slug?.startsWith("en/Topics/Physics/Relativity-and-Gravitation/Personal-Notes/GR") ??
+        false) ||
+      (fileData.filePath?.startsWith(
+        "content/en/Topics/Physics/Relativity and Gravitation/Personal Notes/GR",
+      ) ??
+        false)
+    const hideFolderCount =
+      fileData.frontmatter?.hideFolderCount === true ||
+      fileData.frontmatter?.hideFolderCount === "true" ||
+      isGRNotebookPage
     const hasPagesToList = allPagesInFolder.length > 0 && !hideFolderListing
 
     return (
@@ -114,7 +125,7 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         <article class={classes}>{content}</article>
         {hasPagesToList && (
           <div class="page-listing">
-            {options.showFolderCount && (
+            {options.showFolderCount && !hideFolderCount && (
               <p>
                 {i18n(cfg.locale).pages.folderContent.itemsUnderFolder({
                   count: allPagesInFolder.length,

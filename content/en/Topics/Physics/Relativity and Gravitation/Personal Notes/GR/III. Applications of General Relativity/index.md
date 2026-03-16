@@ -4,8 +4,11 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Exact solutions, astrophysical structure, collapse, waves, and black-hole physics.
+hideFolderCount: true
 ---
 
-This chapter turns from formal structure to consequence. It gathers the classic tests of the theory, exact solutions of Einstein's equations, stellar structure, collapse, black holes, and gravitational radiation.
+This chapter focuses on exact solutions, astrophysical structure, collapse, waves, and black-hole physics.
 
-The emphasis is on application without losing geometry. Exact solutions are treated as worked laboratories in which the formal theory becomes physically legible.
+Use the sequence below as the chapter map. The ordering is meant to preserve continuity from one branch to the next instead of flattening the material into a generic archive.
+
+## Sequence

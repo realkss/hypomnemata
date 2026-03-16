@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Historical background from earlier theories of motion to universal gravitation.
+hideFolderCount: true
 ---
 
-This subsection is reserved for the historical arc that runs from older cosmological and mechanical pictures into Newtonian gravitation and its later difficulties. The purpose is not antiquarian detail for its own sake, but a clear view of the conceptual pressures that made a deeper theory necessary.
+This subsection focuses on historical background from earlier theories of motion to universal gravitation.
+
+This branch is kept as a stable entry point for future notes, derivations, and references in this part of the notebook.

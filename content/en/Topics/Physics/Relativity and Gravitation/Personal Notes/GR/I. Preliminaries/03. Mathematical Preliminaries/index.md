@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Core geometric and tensorial language for the rest of the sequence.
+hideFolderCount: true
 ---
 
-This section gathers the mathematical language used throughout the later chapters: manifolds, tensors, differential forms, coordinate systems, and the local-versus-global distinctions that make geometry workable in physics. It is meant as scaffolding for the theory rather than as a detached mathematics appendix.
+This section focuses on core geometric and tensorial language for the rest of the sequence.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

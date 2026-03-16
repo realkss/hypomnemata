@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Kinematic description of cosmic expansion and observational distance measures.
+hideFolderCount: true
 ---
 
-This section is for the observational and kinematic language of cosmology before detailed dynamics are imposed. Distance measures, Hubble expansion, redshift relations, and the basic parametrization of large-scale expansion belong here.
+This section focuses on kinematic description of cosmic expansion and observational distance measures.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

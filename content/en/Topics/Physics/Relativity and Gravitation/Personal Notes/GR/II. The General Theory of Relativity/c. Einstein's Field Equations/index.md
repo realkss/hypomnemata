@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: The relation between spacetime geometry and stress-energy.
+hideFolderCount: true
 ---
 
-This section develops Einstein's field equations and the logic behind them. The central task is to understand how curvature is tied to matter and energy, what conservation means in this setting, and why the resulting equations have the form they do.
+This section focuses on the relation between spacetime geometry and stress-energy.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

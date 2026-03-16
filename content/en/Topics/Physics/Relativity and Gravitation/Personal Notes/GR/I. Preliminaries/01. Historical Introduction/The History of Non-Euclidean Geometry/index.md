@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: The geometric background that made curved spacetime thinkable.
+hideFolderCount: true
 ---
 
-This subsection gathers the mathematical story behind non-Euclidean geometry. It follows the break with the uniqueness of Euclidean space and prepares the conceptual setting in which spacetime could later be understood as a geometric object rather than a passive container.
+This subsection focuses on the geometric background that made curved spacetime thinkable.
+
+This branch is kept as a stable entry point for future notes, derivations, and references in this part of the notebook.

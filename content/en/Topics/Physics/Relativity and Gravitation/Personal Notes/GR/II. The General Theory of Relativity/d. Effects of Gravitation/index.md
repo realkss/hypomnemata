@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Observable physical consequences of curved spacetime.
+hideFolderCount: true
 ---
 
-This section gathers the concrete effects of gravitation as geometry: redshift, time dilation, bending, precession, and related operational consequences. It keeps the theory accountable to measurement by showing how curvature enters experience and experiment.
+This section focuses on observable physical consequences of curved spacetime.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

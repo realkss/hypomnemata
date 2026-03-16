@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: The heuristic bridge from inertial physics to gravitation as geometry.
+hideFolderCount: true
 ---
 
-This section centers on the equivalence principle: universality of free fall, local inertial frames, and the reasoning that turns gravitation from a force into a statement about spacetime structure. It is the conceptual hinge between special relativity and the full geometric theory.
+This section focuses on the heuristic bridge from inertial physics to gravitation as geometry.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.

@@ -4,6 +4,9 @@ lang: en
 sourceLanguage: en
 translationStatus: original
 description: Curvature tensors and their physical interpretation.
+hideFolderCount: true
 ---
 
-This section develops the geometric content of curvature itself: the Riemann tensor, Ricci contraction, scalar curvature, and geodesic deviation. The aim is to connect formal tensor expressions with the physical statement that gravitation is encoded in how spacetime bends and how nearby trajectories separate.
+This section focuses on curvature tensors and their physical interpretation.
+
+This section landing page is kept in place so future notes, derivations, and references can be added here without losing the structure of the notebook.
