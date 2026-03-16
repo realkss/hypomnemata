@@ -25,6 +25,11 @@ interface FolderPageOptions extends FullPageLayout {
   sort?: (f1: QuartzPluginData, f2: QuartzPluginData) => number
 }
 
+function fallbackFolderTitle(folder: SimpleSlug) {
+  const lastSegment = folder.split("/").at(-1) ?? folder
+  return lastSegment.replace(/-/g, " ").trim() || folder
+}
+
 async function* processFolderInfo(
   ctx: BuildCtx,
   folderInfo: Record<SimpleSlug, ProcessedContent>,
@@ -72,7 +77,7 @@ function computeFolderInfo(
       defaultProcessedContent({
         slug: joinSegments(folder, "index") as FullSlug,
         frontmatter: {
-          title: `${i18n(locale).pages.folderContent.folder}: ${folder}`,
+          title: fallbackFolderTitle(folder),
           tags: [],
         },
       }),
