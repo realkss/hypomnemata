@@ -636,26 +636,28 @@
 
 .training-master-caption {
   display: grid;
-  gap: 0.28rem;
-  margin: 0 0 0.75rem;
+  gap: 0.35rem;
+  margin: 0 0 0.9rem;
 }
 
 .training-master-caption strong {
-  font-family: var(--bodyFont);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-family: var(--headerFont);
+  font-size: clamp(1.28rem, 1.12rem + 0.72vw, 1.72rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.08;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--dark);
 }
 
 .training-master-caption span {
   color: var(--dark);
-  font-size: 0.97rem;
+  font-size: 1rem;
   line-height: 1.45;
 }
 
 :root[saved-theme="dark"] .training-master-caption strong {
-  color: #d5af63;
+  color: #efe3cc;
 }
 
 :root[saved-theme="dark"] .training-master-caption span {

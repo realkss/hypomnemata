@@ -14,14 +14,10 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>White reference 1</strong><span>1-0 (30) Grischuk,A (2777)-Harikrishna,P (2719) chess24.com INT 2020 CBM 197 [Edouard,Romain]</span></p>
   <div class="chess-training-board" data-label="White Reference 1" data-orientation="white" data-pgn-src="./white-reference-01.pgn"></div>
 </section>
-
-## Black Game References
 
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>Black reference 1</strong><span>0-1 (25) Liang,A (2572)-Mamedyarov,S (2804) Chess.com INT 2018</span></p>

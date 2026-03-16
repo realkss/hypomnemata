@@ -14,14 +14,10 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>White reference 1</strong><span>1-0 (37) Popov,I (2604)-Kovacevic,A (2480) Subotica 2019</span></p>
   <div class="chess-training-board" data-label="White Reference 1" data-orientation="white" data-pgn-src="./white-reference-01.pgn"></div>
 </section>
-
-## Black Game References
 
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>Black reference 1</strong><span>0-1 (46) Najer,E (2687)-Caruana,F (2810) Dortmund 2016 CBM 174 [Sumets,A]</span></p>

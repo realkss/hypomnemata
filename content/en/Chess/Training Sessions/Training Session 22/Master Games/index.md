@@ -14,14 +14,10 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>White reference 1</strong><span>1-0 (48) Grischuk,A (2777)-Vachier Lagrave,M (2767) Ekaterinburg 2021 CBM 202 exf5 Bxf5 11. Nge2 O-O-O 12. O-O-O) 10... fxe4 11. Bxe4 Nxe4 12. Nxe4 Qxd2+ 13. Nxd2 ({better choice</span></p>
   <div class="chess-training-board" data-label="White Reference 1" data-orientation="white" data-pgn-src="./white-reference-01.pgn"></div>
 </section>
-
-## Black Game References
 
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>Black reference 1</strong><span>0-1 (46) Najer,E (2687)-Caruana,F (2810) Dortmund 2016 CBM 174 [Sumets,A]</span></p>

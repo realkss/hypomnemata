@@ -14,14 +14,10 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>White reference 1</strong><span>1-0 (37) Matlakov,M (2730)-Can,E (2604) Heraklion 2017 CBM 182 to stop White&#x27;s b4 push</span></p>
   <div class="chess-training-board" data-label="White Reference 1" data-orientation="white" data-pgn-src="./white-reference-01.pgn"></div>
 </section>
-
-## Black Game References
 
 <p class="training-session-note">No cited master examples were found in these annotations.</p>
 

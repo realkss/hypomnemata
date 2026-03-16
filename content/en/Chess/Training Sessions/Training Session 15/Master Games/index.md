@@ -14,14 +14,10 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>White reference 1</strong><span>1-0 (43) Jakovenko,D (2733)-Rydstrom,T (2292) Caleta 2015</span></p>
   <div class="chess-training-board" data-label="White Reference 1" data-orientation="white" data-pgn-src="./white-reference-01.pgn"></div>
 </section>
-
-## Black Game References
 
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>Black reference 1</strong><span>1-0 (34) Matlakov,M (2685)-Riazantsev,A (2628) Sochi 2020</span></p>

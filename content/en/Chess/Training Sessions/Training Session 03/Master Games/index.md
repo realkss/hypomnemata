@@ -14,8 +14,6 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>White reference 1</strong><span>1-0 (26) Czebe,A (2463)-Nguyen,T (2349) Budapest 2015</span></p>
   <div class="chess-training-board" data-label="White Reference 1" data-orientation="white" data-pgn-src="./white-reference-01.pgn"></div>
@@ -24,8 +22,6 @@ These boards replay the cited master-game lines embedded in the session annotati
   <p class="training-master-caption"><strong>White reference 2</strong><span>1-0 (53) Short,N (2660)-Oll,L (2645) Tallinn/Parnu 1998 CBM 066 [Short,N]</span></p>
   <div class="chess-training-board" data-label="White Reference 2" data-orientation="white" data-pgn-src="./white-reference-02.pgn"></div>
 </section>
-
-## Black Game References
 
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>Black reference 1</strong><span>0-1 (36) Adhiban,B (2655)-Carlsen,M (2834) Wijk aan Zee 2018 CBM 183 [Fernandez,D]</span></p>

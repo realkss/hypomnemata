@@ -14,11 +14,7 @@ tags:
 
 These boards replay the cited master-game lines embedded in the session annotations.
 
-## White Game References
-
 <p class="training-session-note">No cited master examples were found in these annotations.</p>
-
-## Black Game References
 
 <section class="training-master-entry">
   <p class="training-master-caption"><strong>Black reference 1</strong><span>1/2-1/2 (62) Santos Latasa,J (2549)-Kuzubov,Y (2689) Batumi 2018</span></p>
