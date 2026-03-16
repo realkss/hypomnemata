@@ -394,10 +394,12 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
       removeAllChildren(preview)
     } else {
       // focus on first result, then also dispatch preview immediately
-      const firstChild = results.firstElementChild as HTMLElement
-      firstChild.classList.add("focus")
-      currentHover = firstChild as HTMLInputElement
-      await displayPreview(firstChild)
+      const firstChild = results.querySelector(".result-card") as HTMLElement
+      if (firstChild) {
+        firstChild.classList.add("focus")
+        currentHover = firstChild as HTMLInputElement
+        await displayPreview(firstChild)
+      }
     }
   }
 
