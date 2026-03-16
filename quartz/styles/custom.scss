@@ -382,6 +382,7 @@ article hr {
     linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
   box-shadow: 0 8px 22px rgba(96, 77, 48, 0.05);
   color: var(--dark);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .landing-card strong {
@@ -395,8 +396,9 @@ article hr {
 }
 
 .landing-card:hover {
-  transform: translateY(-1px);
+  transform: translateY(-3px);
   background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+  box-shadow: 0 14px 32px rgba(96, 77, 48, 0.1);
 }
 
 .graph {
@@ -1080,4 +1082,93 @@ body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags 
 .training-session-row .external-icon,
 .training-session-nav__link .external-icon {
   display: none;
+}
+
+/* ── Skip-to-content link ────────────────────────────── */
+.skip-to-content {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: var(--secondary);
+  color: var(--light);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* ── Reading progress bar ────────────────────────────── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--secondary), var(--tertiary));
+  z-index: 9998;
+  transition: width 80ms linear;
+  pointer-events: none;
+}
+
+/* ── Page transition ─────────────────────────────────── */
+.page-enter {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Focus-visible styles ────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Search result count ─────────────────────────────── */
+.search-result-count {
+  padding: 0.5em 1em;
+  font-size: 0.82rem;
+  color: var(--gray);
+  border-bottom: 1px solid var(--lightgray);
+  letter-spacing: 0.04em;
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+
+  .landing-card {
+    transition: none;
+  }
+
+  .reading-progress {
+    transition: none;
+  }
+
+  .graph svg circle {
+    animation: none;
+  }
 }

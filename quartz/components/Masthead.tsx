@@ -10,7 +10,9 @@ const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
   const greekTitle = "\u1f51\u03c0\u03bf\u03bc\u03bd\u03ae\u03bc\u03b1\u03c4\u03b1"
 
   return (
-    <div class="site-masthead">
+    <>
+    <a href="#quartz-body" class="skip-to-content">Skip to content</a>
+    <div class="site-masthead" role="banner">
       <div class="site-masthead__ornament" aria-hidden="true">
         <span></span>
         <span></span>
@@ -34,6 +36,7 @@ const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

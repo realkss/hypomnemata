@@ -53,6 +53,19 @@ export default (() => {
     const chessMastersEndpointScript =
       'window.__CHESS_MASTERS_ENDPOINT__ = window.__CHESS_MASTERS_ENDPOINT__ || new URL("/api/chess/masters", window.location.origin).toString()'
 
+    const jsonLd = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: title,
+      description,
+      url: socialUrl,
+      isPartOf: {
+        "@type": "WebSite",
+        name: cfg.pageTitle,
+        url: `https://${cfg.baseUrl}`,
+      },
+    })
+
     return (
       <head>
         <title>{title}</title>
@@ -60,7 +73,7 @@ export default (() => {
         {cfg.theme.cdnCaching && cfg.theme.fontOrigin === "googleFonts" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             <link rel="stylesheet" href={googleFontHref(cfg.theme)} />
             {cfg.theme.typography.title && (
               <link rel="stylesheet" href={googleFontSubsetHref(cfg.theme, cfg.pageTitle)} />
@@ -103,6 +116,11 @@ export default (() => {
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        <link rel="canonical" href={socialUrl} />
+        <meta name="theme-color" content="#f7f1e3" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0f1117" media="(prefers-color-scheme: dark)" />
+        <meta property="og:locale" content={cfg.locale} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
         <script dangerouslySetInnerHTML={{ __html: chessMastersEndpointScript }} />
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}

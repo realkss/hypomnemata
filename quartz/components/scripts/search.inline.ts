@@ -381,7 +381,12 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
           <p>Try another search term?</p>
       </a>`
     } else {
-      results.append(...finalResults.map(resultToHTML))
+      const countEl = document.createElement("div")
+      countEl.className = "search-result-count"
+      countEl.setAttribute("role", "status")
+      countEl.setAttribute("aria-live", "polite")
+      countEl.textContent = `${finalResults.length} result${finalResults.length === 1 ? "" : "s"}`
+      results.append(countEl, ...finalResults.map(resultToHTML))
     }
 
     if (finalResults.length === 0 && preview) {

@@ -104,6 +104,20 @@ async function _navigate(url: URL, isBack: boolean = false) {
   // morph body
   await micromorph(document.body, html.body)
 
+  // re-create reading progress bar after morph
+  ensureReadingProgressBar()
+
+  // page transition
+  const pageArticle = document.querySelector(".center > article") as HTMLElement
+  if (pageArticle) {
+    pageArticle.classList.add("page-enter")
+    pageArticle.addEventListener(
+      "animationend",
+      () => pageArticle.classList.remove("page-enter"),
+      { once: true },
+    )
+  }
+
   // scroll into place and add history
   if (!isBack) {
     if (url.hash) {
@@ -189,6 +203,57 @@ function createRouter() {
 
 createRouter()
 notifyNav(getFullSlug(window))
+
+// Reading progress bar
+function ensureReadingProgressBar() {
+  if (document.body && !document.querySelector(".reading-progress")) {
+    const bar = document.createElement("div")
+    bar.className = "reading-progress"
+    bar.setAttribute("aria-hidden", "true")
+    document.body.prepend(bar)
+  }
+}
+
+function updateReadingProgress() {
+  const bar = document.querySelector(".reading-progress") as HTMLElement
+  if (!bar) return
+  const article = document.querySelector(".center > article") as HTMLElement
+  if (!article) {
+    bar.style.width = "0"
+    return
+  }
+  const scrollY = window.scrollY
+  const articleTop = article.offsetTop
+  const articleHeight = article.offsetHeight
+  const viewportHeight = window.innerHeight
+  if (articleHeight <= viewportHeight) {
+    bar.style.width = scrollY > articleTop ? "100%" : "0"
+    return
+  }
+  const end = articleTop + articleHeight - viewportHeight
+  const pct = Math.min(Math.max((scrollY - articleTop) / (end - articleTop), 0), 1)
+  bar.style.width = `${pct * 100}%`
+}
+
+let rpRaf = 0
+window.addEventListener(
+  "scroll",
+  () => {
+    cancelAnimationFrame(rpRaf)
+    rpRaf = requestAnimationFrame(updateReadingProgress)
+  },
+  { passive: true },
+)
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    ensureReadingProgressBar()
+    updateReadingProgress()
+  })
+} else {
+  ensureReadingProgressBar()
+  updateReadingProgress()
+}
 
 if (!customElements.get("route-announcer")) {
   const attrs = {
