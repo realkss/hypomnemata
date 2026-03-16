@@ -1,7 +1,7 @@
 ﻿import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
 
 import style from "../styles/listPage.scss"
-import { PageList, SortFn } from "../PageList"
+import { PageList, SortFn, byOrderAndStructure } from "../PageList"
 import { Root } from "hast"
 import { htmlToJsx } from "../../util/jsx"
 import { i18n } from "../../i18n"
@@ -90,9 +90,11 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         .filter((page) => page !== undefined) ?? []
     const cssClasses: string[] = fileData.frontmatter?.cssclasses ?? []
     const classes = cssClasses.join(" ")
+    const isPhysicsNotebook = fileData.slug?.startsWith("en/Topics/Physics/") ?? false
+    const effectiveSort = options.sort ?? (isPhysicsNotebook ? byOrderAndStructure() : undefined)
     const listProps = {
       ...props,
-      sort: options.sort,
+      sort: effectiveSort,
       allFiles: allPagesInFolder,
     }
 

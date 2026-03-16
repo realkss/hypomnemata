@@ -23,6 +23,19 @@ function getSortOrder(file: QuartzPluginData): number | undefined {
   return undefined
 }
 
+function getStructureSortKey(file: QuartzPluginData): string {
+  const slug = file.slug ?? ""
+  const segments = slug.split("/").filter((segment) => segment.length > 0)
+  const lastSegment = segments.at(-1)
+  const keySegment = lastSegment === "index" ? segments.at(-2) : lastSegment
+
+  if (keySegment && keySegment.length > 0) {
+    return keySegment.toLowerCase()
+  }
+
+  return file.frontmatter?.title.toLowerCase() ?? ""
+}
+
 export function byDateAndAlphabetical(cfg: GlobalConfiguration): SortFn {
   return (f1, f2) => {
     const f1Order = getSortOrder(f1)
@@ -83,6 +96,32 @@ export function byDateAndAlphabeticalFolderFirst(cfg: GlobalConfiguration): Sort
     }
 
     // otherwise, sort lexographically by title
+    const f1Title = f1.frontmatter?.title.toLowerCase() ?? ""
+    const f2Title = f2.frontmatter?.title.toLowerCase() ?? ""
+    return f1Title.localeCompare(f2Title)
+  }
+}
+
+export function byOrderAndStructure(): SortFn {
+  return (f1, f2) => {
+    const f1Order = getSortOrder(f1)
+    const f2Order = getSortOrder(f2)
+    if (f1Order !== undefined && f2Order !== undefined && f1Order !== f2Order) {
+      return f1Order - f2Order
+    } else if (f1Order !== undefined) {
+      return -1
+    } else if (f2Order !== undefined) {
+      return 1
+    }
+
+    const structureCompare = getStructureSortKey(f1).localeCompare(getStructureSortKey(f2), undefined, {
+      numeric: true,
+      sensitivity: "base",
+    })
+    if (structureCompare !== 0) {
+      return structureCompare
+    }
+
     const f1Title = f1.frontmatter?.title.toLowerCase() ?? ""
     const f2Title = f2.frontmatter?.title.toLowerCase() ?? ""
     return f1Title.localeCompare(f2Title)
