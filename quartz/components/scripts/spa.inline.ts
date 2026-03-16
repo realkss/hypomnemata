@@ -104,8 +104,9 @@ async function _navigate(url: URL, isBack: boolean = false) {
   // morph body
   await micromorph(document.body, html.body)
 
-  // re-create reading progress bar after morph
+  // re-create persistent UI after morph
   ensureReadingProgressBar()
+  ensureBackToTop()
 
   // page transition
   const pageArticle = document.querySelector(".center > article") as HTMLElement
@@ -117,6 +118,9 @@ async function _navigate(url: URL, isBack: boolean = false) {
       { once: true },
     )
   }
+
+  // re-init scroll reveal for new page
+  initScrollReveal()
 
   // scroll into place and add history
   if (!isBack) {
@@ -235,12 +239,104 @@ function updateReadingProgress() {
   bar.style.width = `${pct * 100}%`
 }
 
+// Back-to-top button
+function ensureBackToTop() {
+  if (document.body && !document.querySelector(".back-to-top")) {
+    const btn = document.createElement("button")
+    btn.className = "back-to-top"
+    btn.setAttribute("aria-label", "Back to top")
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>'
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    })
+    document.body.appendChild(btn)
+  }
+}
+
+function updateBackToTop() {
+  const btn = document.querySelector(".back-to-top") as HTMLElement
+  if (!btn) return
+  btn.classList.toggle("visible", window.scrollY > 400)
+}
+
+// Scroll-reveal for landing page elements
+function initScrollReveal() {
+  const elements = document.querySelectorAll(
+    ".landing-card:not(.scroll-reveal), .landing-inscription:not(.scroll-reveal)",
+  )
+  if (elements.length === 0) return
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed")
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+  )
+
+  elements.forEach((el, i) => {
+    el.classList.add("scroll-reveal")
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.08}s`
+    observer.observe(el)
+  })
+}
+
+// Image lightbox (event delegation — only needs to be called once)
+let lightboxInitialized = false
+function initLightbox() {
+  if (lightboxInitialized) return
+  lightboxInitialized = true
+
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement
+    if (
+      target.tagName === "IMG" &&
+      target.closest("article") &&
+      !target.classList.contains("no-lightbox") &&
+      !target.closest("a")
+    ) {
+      const overlay = document.createElement("div")
+      overlay.className = "lightbox-overlay"
+      const img = document.createElement("img")
+      img.src = (target as HTMLImageElement).src
+      img.alt = (target as HTMLImageElement).alt
+      overlay.appendChild(img)
+      document.body.appendChild(overlay)
+
+      requestAnimationFrame(() => overlay.classList.add("active"))
+
+      function closeLightbox() {
+        overlay.classList.remove("active")
+        overlay.addEventListener("transitionend", () => overlay.remove(), { once: true })
+      }
+
+      overlay.addEventListener("click", closeLightbox)
+      document.addEventListener(
+        "keydown",
+        function onEsc(e) {
+          if (e.key === "Escape") {
+            closeLightbox()
+            document.removeEventListener("keydown", onEsc)
+          }
+        },
+      )
+    }
+  })
+}
+
 let rpRaf = 0
 window.addEventListener(
   "scroll",
   () => {
     cancelAnimationFrame(rpRaf)
-    rpRaf = requestAnimationFrame(updateReadingProgress)
+    rpRaf = requestAnimationFrame(() => {
+      updateReadingProgress()
+      updateBackToTop()
+    })
   },
   { passive: true },
 )
@@ -248,11 +344,19 @@ window.addEventListener(
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     ensureReadingProgressBar()
+    ensureBackToTop()
     updateReadingProgress()
+    updateBackToTop()
+    initScrollReveal()
+    initLightbox()
   })
 } else {
   ensureReadingProgressBar()
+  ensureBackToTop()
   updateReadingProgress()
+  updateBackToTop()
+  initScrollReveal()
+  initLightbox()
 }
 
 if (!customElements.get("route-announcer")) {
