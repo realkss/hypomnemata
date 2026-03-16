@@ -723,11 +723,22 @@ article hr {
 [saved-theme="dark"] .page-title a,
 [saved-theme="dark"] .landing-card strong,
 [saved-theme="dark"] article h2,
-[saved-theme="dark"] article h3,
 [saved-theme="dark"] .toc .toc-header,
 [saved-theme="dark"] footer,
 [saved-theme="dark"] footer a {
   color: #f3ead8;
+}
+
+[saved-theme="dark"] article h3 {
+  color: #e8d5b0;
+}
+
+[saved-theme="dark"] article h2::after {
+  background: linear-gradient(90deg, #c9a45f, transparent);
+}
+
+[saved-theme="dark"] article > p:first-of-type::first-letter {
+  color: #c9a45f;
 }
 
 [saved-theme="dark"] .site-masthead__subtitle,
@@ -1082,6 +1093,149 @@ body[data-slug^="en/Chess/Training-Sessions/Training-Session-"] article > .tags 
 .training-session-row .external-icon,
 .training-session-nav__link .external-icon {
   display: none;
+}
+
+/* ── Typography: Drop cap ────────────────────────────── */
+body:not([data-slug="index"]):not([data-slug$="/index"]) article > p:first-of-type::first-letter {
+  float: left;
+  font-family: "Cinzel", serif;
+  font-size: 3.4em;
+  line-height: 0.78;
+  padding-right: 0.1em;
+  padding-top: 0.04em;
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+/* ── Typography: H2 decorative underline ─────────────── */
+article h2 {
+  position: relative;
+  padding-bottom: 0.65rem;
+}
+
+article h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--secondary), transparent);
+  border-radius: 1px;
+}
+
+/* ── Typography: H3 small accent ─────────────────────── */
+article h3 {
+  color: color-mix(in srgb, var(--dark) 85%, var(--secondary));
+}
+
+/* ── Card watermark icons ────────────────────────────── */
+.landing-card[data-icon] {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-card[data-icon]::before {
+  content: attr(data-icon);
+  position: absolute;
+  right: -0.15rem;
+  bottom: -0.45rem;
+  font-size: 5rem;
+  line-height: 1;
+  opacity: 0.06;
+  pointer-events: none;
+  color: var(--secondary);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.landing-card[data-icon]:hover::before {
+  opacity: 0.12;
+  transform: scale(1.08);
+}
+
+[saved-theme="dark"] .landing-card[data-icon]::before {
+  opacity: 0.08;
+}
+
+[saved-theme="dark"] .landing-card[data-icon]:hover::before {
+  opacity: 0.18;
+}
+
+/* ── Landing inscription enhancement ─────────────────── */
+.landing-inscription {
+  text-align: center;
+  position: relative;
+}
+
+.landing-inscription::before,
+.landing-inscription::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  margin: 0 auto;
+  background: color-mix(in srgb, var(--secondary) 50%, transparent);
+}
+
+.landing-inscription::before {
+  margin-bottom: 0.85rem;
+}
+
+.landing-inscription::after {
+  margin-top: 0.85rem;
+}
+
+/* ── Footer enhancement ──────────────────────────────── */
+footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  position: relative;
+}
+
+footer::before {
+  content: "※";
+  position: absolute;
+  top: -0.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--light);
+  padding: 0 0.75rem;
+  color: var(--secondary);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+}
+
+[saved-theme="dark"] footer::before {
+  background: #0f1117;
+  color: #c9a45f;
+}
+
+[saved-theme="dark"] footer {
+  border-top-color: rgba(194, 158, 92, 0.2);
+}
+
+/* ── Mobile improvements ─────────────────────────────── */
+@media (max-width: 800px) {
+  /* Larger touch targets for nav */
+  .site-masthead__nav a {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+  }
+
+  /* Better mobile article readability */
+  article {
+    line-height: 1.78;
+  }
+
+  /* Drop cap smaller on mobile */
+  body:not([data-slug="index"]):not([data-slug$="/index"]) article > p:first-of-type::first-letter {
+    font-size: 2.8em;
+  }
+
+  /* Better card icon size on mobile */
+  .landing-card[data-icon]::before {
+    font-size: 3.8rem;
+  }
 }
 
 /* ── Skip-to-content link ────────────────────────────── */
