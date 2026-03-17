@@ -367,6 +367,15 @@ function getAccessControlKv(env) {
   return env.ACCESS_CONTROL_KV ?? null
 }
 
+async function getKvJson(kv, key) {
+  try {
+    return await kv.get(key, "json")
+  } catch (error) {
+    console.error(`Failed to parse KV JSON for ${key}`, error)
+    return null
+  }
+}
+
 async function readJsonBody(request) {
   try {
     return await request.json()
@@ -381,35 +390,39 @@ async function getStoredUser(env, key) {
     return null
   }
 
-  return (await kv.get(`user:${key}`, "json")) ?? null
+  return (await getKvJson(kv, `user:${key}`)) ?? null
 }
 
 async function registerKnownUser(env, user) {
-  const kv = getAccessControlKv(env)
-  const key = getPrimaryUserKey(user)
-  if (!kv || !key) {
-    return
-  }
+  try {
+    const kv = getAccessControlKv(env)
+    const key = getPrimaryUserKey(user)
+    if (!kv || !key) {
+      return
+    }
 
-  const existing = (await getStoredUser(env, key)) ?? {}
-  const now = new Date().toISOString()
-  const next = {
-    ...existing,
-    key,
-    identities: getUserIdentityKeys(user),
-    provider: user.provider,
-    sub: user.sub,
-    name: user.name,
-    email: user.email,
-    username: user.username,
-    picture: user.picture,
-    blocked: Boolean(existing.blocked),
-    verified: Boolean(existing.verified),
-    createdAt: existing.createdAt ?? now,
-    lastSeenAt: now,
-  }
+    const existing = (await getStoredUser(env, key)) ?? {}
+    const now = new Date().toISOString()
+    const next = {
+      ...existing,
+      key,
+      identities: getUserIdentityKeys(user),
+      provider: user.provider,
+      sub: user.sub,
+      name: user.name,
+      email: user.email,
+      username: user.username,
+      picture: user.picture,
+      blocked: Boolean(existing.blocked),
+      verified: Boolean(existing.verified),
+      createdAt: existing.createdAt ?? now,
+      lastSeenAt: now,
+    }
 
-  await kv.put(`user:${key}`, JSON.stringify(next))
+    await kv.put(`user:${key}`, JSON.stringify(next))
+  } catch (error) {
+    console.error("Failed to register known user", error)
+  }
 }
 
 async function listKnownUsers(env) {
@@ -419,7 +432,7 @@ async function listKnownUsers(env) {
   }
 
   const listing = await kv.list({ prefix: "user:" })
-  const users = await Promise.all(listing.keys.map((entry) => kv.get(entry.name, "json")))
+  const users = await Promise.all(listing.keys.map((entry) => getKvJson(kv, entry.name)))
 
   return users
     .filter(Boolean)
@@ -448,7 +461,7 @@ async function getStoredRule(env, slug) {
     return null
   }
 
-  const rule = (await kv.get(`rule:${slug}`, "json")) ?? null
+  const rule = (await getKvJson(kv, `rule:${slug}`)) ?? null
   if (!rule) {
     return null
   }

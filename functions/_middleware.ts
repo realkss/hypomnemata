@@ -32,6 +32,15 @@ type Env = AuthEnv & {
   ASSETS: { fetch: (request: Request | string) => Promise<Response> }
 }
 
+async function getStoredRule(kv: KVNamespace, accessKey: string): Promise<StoredRule | null> {
+  try {
+    return await kv.get<StoredRule>(`rule:${accessKey}`, "json")
+  } catch (error) {
+    console.error(`Failed to parse access rule for ${accessKey}`, error)
+    return null
+  }
+}
+
 function decodePathname(pathname: string): string {
   try {
     return decodeURIComponent(pathname)
@@ -183,7 +192,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     return Response.redirect(redirectUrl.toString(), 302)
   }
 
-  const rule = await kv.get<StoredRule>(`rule:${protectedEntry.accessKey}`, "json")
+  const rule = await getStoredRule(kv, protectedEntry.accessKey)
   if (!rule) {
     const redirectUrl = new URL("/", url.origin)
     redirectUrl.searchParams.set("auth_error", "not_authorized")

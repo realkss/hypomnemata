@@ -25,13 +25,22 @@ export async function getOwnerKey(kv: KVNamespace): Promise<string | null> {
   return kv.get("config:owner")
 }
 
+async function getStoredJson<T>(kv: KVNamespace, key: string): Promise<T | null> {
+  try {
+    return await kv.get<T>(key, "json")
+  } catch (error) {
+    console.error(`Failed to parse KV JSON for ${key}`, error)
+    return null
+  }
+}
+
 export async function getStoredUser(kv: KVNamespace, key: string): Promise<StoredUser | null> {
-  return kv.get<StoredUser>(`user:${key}`, "json")
+  return getStoredJson<StoredUser>(kv, `user:${key}`)
 }
 
 export async function listStoredUsers(kv: KVNamespace): Promise<StoredUser[]> {
   const userList = await kv.list({ prefix: "user:" })
-  const userPromises = userList.keys.map(async (entry) => kv.get<StoredUser>(entry.name, "json"))
+  const userPromises = userList.keys.map(async (entry) => getStoredJson<StoredUser>(kv, entry.name))
   const userResults = await Promise.all(userPromises)
   return userResults.filter((user): user is StoredUser => user !== null)
 }
@@ -39,7 +48,7 @@ export async function listStoredUsers(kv: KVNamespace): Promise<StoredUser[]> {
 export async function recordStoredUserVisit(kv: KVNamespace, user: AuthUser): Promise<void> {
   const key = `user:${userKey(user)}`
   const now = new Date().toISOString()
-  const existing = await kv.get<StoredUser>(key, "json")
+  const existing = await getStoredJson<StoredUser>(kv, key)
 
   if (existing) {
     existing.lastSeenAt = now

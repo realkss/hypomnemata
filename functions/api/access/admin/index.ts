@@ -17,6 +17,15 @@ type Env = AuthEnv & {
   ASSETS: { fetch: (request: Request | string) => Promise<Response> }
 }
 
+async function getStoredRule(kv: KVNamespace, slug: string): Promise<StoredRule | null> {
+  try {
+    return await kv.get<StoredRule>(`rule:${slug}`, "json")
+  } catch (error) {
+    console.error(`Failed to parse access rule for ${slug}`, error)
+    return null
+  }
+}
+
 export const onRequestGet: PagesFunction<Env> = async (context) => {
   const user = await readSession(context.request, context.env)
   if (!user) {
@@ -71,7 +80,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
     // Load rules for each page
     for (const page of manifestPages) {
-      const rule = await kv.get<StoredRule>(`rule:${page.slug}`, "json")
+      const rule = await getStoredRule(kv, page.slug)
       pages.push({
         slug: page.slug,
         title: page.title,

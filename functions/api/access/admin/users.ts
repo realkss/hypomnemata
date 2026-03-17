@@ -1,5 +1,5 @@
 import { readSession, json, type AuthEnv } from "../../auth/_lib"
-import { getOwnerKey, type StoredUser, userKey } from "../../../lib/access"
+import { getOwnerKey, getStoredUser, userKey } from "../../../lib/access"
 
 type Env = AuthEnv & {
   ACCESS_CONTROL_KV?: KVNamespace
@@ -47,7 +47,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const kvKey = `user:${key}`
-  const existing = await kv.get<StoredUser>(kvKey, "json")
+  const existing = await getStoredUser(kv, key)
   if (!existing) {
     return json({ ok: false, error: "user_not_found" }, { status: 404 })
   }
