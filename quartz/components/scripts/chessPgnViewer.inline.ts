@@ -509,16 +509,6 @@ function syncMovePane(enhancement: BoardEnhancement) {
   applyMovePaneSizing(enhancement, side, moves, height, movesHeight, true)
 }
 
-function shouldHideBoardComments(section: HTMLElement) {
-  const paragraphs = Array.from(
-    section.querySelectorAll<HTMLElement>(".training-session-comments__paragraph"),
-  )
-    .map((paragraph) => paragraph.textContent?.replace(/\s+/g, " ").trim() ?? "")
-    .filter(Boolean)
-
-  return paragraphs.length === 0 || paragraphs.every((paragraph) => paragraph === "No comments yet.")
-}
-
 function syncBoardCommentsVisibility(node: HTMLElement) {
   const commentsSection = node.nextElementSibling
   if (!(commentsSection instanceof HTMLElement)) {
@@ -529,9 +519,8 @@ function syncBoardCommentsVisibility(node: HTMLElement) {
     return
   }
 
-  const shouldHide = shouldHideBoardComments(commentsSection)
-  commentsSection.hidden = shouldHide
-  commentsSection.dataset.placeholder = shouldHide ? "true" : "false"
+  commentsSection.hidden = false
+  delete commentsSection.dataset.placeholder
 }
 
 function syncPanelBarDock(enhancement: BoardEnhancement) {

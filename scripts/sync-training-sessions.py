@@ -519,9 +519,6 @@ def render_comments_section(summary_label: str, comments_text: str) -> str:
     if not paragraphs:
         paragraphs = [DEFAULT_COMMENTS_TEXT]
 
-    if all(paragraph == DEFAULT_COMMENTS_TEXT for paragraph in paragraphs):
-        return ""
-
     body = "\n".join(
         f'  <p class="training-session-comments__paragraph">{html.escape(paragraph).replace(chr(10), "<br />")}</p>'
         for paragraph in paragraphs
