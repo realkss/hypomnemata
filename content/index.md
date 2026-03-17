@@ -62,6 +62,10 @@ The notebook therefore remains deliberately broad. Its materials may include tec
     <strong>Map of the Notebook</strong>
     <span>A larger graph view for tracing clusters, bridges, and the shape of the archive as a whole.</span>
   </a>
+  <a class="landing-card" href="./en/Topics/Physics/Quantum-Computing/VIII.-Projects/" data-icon="Q">
+    <strong>Quantum Projects</strong>
+    <span>A direct path to the public projects overview, including the verified-reader QIQC archive.</span>
+  </a>
 </div>
 
 ## Method

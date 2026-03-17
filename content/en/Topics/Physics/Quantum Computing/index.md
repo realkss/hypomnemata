@@ -53,7 +53,7 @@ These notes are arranged as a study sequence rather than a loose archive. The ch
   </a>
   <a class="landing-card" href="/en/Topics/Physics/Quantum-Computing/VIII.-Projects/" data-icon="VIII">
     <strong>VIII. Projects</strong>
-    <span>Longer-form implementations and investigations that turn the notes into working practice.</span>
+    <span>Public project overview with a protected QIQC archive for verified readers.</span>
   </a>
 </div>
 

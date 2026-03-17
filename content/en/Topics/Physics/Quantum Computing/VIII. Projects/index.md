@@ -3,42 +3,35 @@ title: VIII. Projects
 lang: en
 sourceLanguage: en
 translationStatus: original
-description: Restricted QIQC course archive with notebooks, assignment files, and midterm materials.
+description: Public overview of longer-form quantum-computing work, including a verified-reader QIQC archive.
 hideFolderCount: true
 hideFolderListing: true
-access: restricted
 ---
 
-This page now serves as the protected archive for the QIQC course materials. Only signed-in readers who have been granted access through the notebook access controls can open the files below.
+This chapter gathers longer-form implementations, course-based exercises, and working investigations that sit closer to practice than to lecture notes. Some materials remain public as orientation and overview; others are gated when they contain working exports, course submissions, or files intended only for verified readers.
 
-## Qiskit Class Notebooks
+<div class="landing-grid landing-grid--reference">
+  <a class="landing-card" href="/en/Topics/Physics/Quantum-Computing/VIII.-Projects/QIQC-Course-Archive/" data-icon="Q">
+    <strong>QIQC Course Archive</strong>
+    <span>Homework, Qiskit notebooks, and midterm materials from the course. Verified readers with access only.</span>
+  </a>
+</div>
 
-- [Measurement with Qiskit notebook](<./Measurement_with_Qiskit_2025 QC class.ipynb>)
-- [Superposition with Qiskit notebook](<./Superposition_with_Qiskit_2025 QC class.ipynb>)
+## Current Project Thread
 
-## Homework 1
+The current project shelf is organized around QIQC course work and implementation practice in Qiskit. The public page stays light and navigational, while the underlying archive remains protected so that course exports and supporting files are not exposed broadly.
 
-- [Homework prompt PDF](<./QIQC HW1.pdf>)
-- [Worked notebook (.ipynb)](./qc_hw1.ipynb)
-- [Notebook HTML export](./qc_hw1.html)
-- [Rendered homework PDF](./qc_hw1.pdf)
+## What Is Public Here
 
-## Midterm
+- The existence and scope of the project archive
+- The general theme of the work: Qiskit, measurement, superposition, homework, and midterm exercises
+- The route into the protected archive for readers who already have verified access
 
-### Problem 1
+## What Is Restricted
 
-- [Notebook (.ipynb)](./qiqc_midterm_problem1_b.ipynb)
-- [Notebook HTML export](./qiqc_midterm_problem1_b.html)
-
-### Problem 2
-
-- [C++ source](./qiqc_midterm_problem2.cpp)
-- [Compiled executable](./qiqc_midterm_problem2.exe)
-
-### Problem 3
-
-- [Notebook (.ipynb)](./qiqc_midterm_problem3.ipynb)
-- [Notebook HTML export](./qiqc_midterm_problem3.html)
+- Downloadable notebooks and rendered exports
+- Assignment PDFs and midterm artifacts
+- Local source and executable files tied to the course work
 
 > [!warning]
-> This archive includes a compiled executable. Download or run local binaries only if you trust the source and intend to inspect or use them yourself.
+> The protected archive includes a compiled executable. Download or run local binaries only if you trust the source and intend to inspect or use them yourself.
