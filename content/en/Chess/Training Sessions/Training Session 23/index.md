@@ -35,5 +35,5 @@ The cited model games from the annotations are collected on the [Master Games](e
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-22/">Prev Session</a>
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/">All Sessions</a>
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-23/Master-Games/">Master Games</a>
-  <span class="training-session-nav__text">Next Session</span>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-24/">Next Session</a>
 </nav>

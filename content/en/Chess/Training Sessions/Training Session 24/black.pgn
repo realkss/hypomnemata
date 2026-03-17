@@ -1,0 +1,39 @@
+[Event "Training game"]
+[Site "?"]
+[Date "2026.03.16"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwibo"]
+[Result "1-0"]
+[ECO "B11"]
+[PlyCount "69"]
+[EventDate "2026.??.??"]
+
+1. e4 c6 2. Nc3 d5 3. Nf3 dxe4 (3... Bg4) 4. Nxe4 Bf5 {not very popular and
+good line} ({better choice} 4... Nf6 5. Nxf6+ exf6) 5. Ng3 Bg6 $6 (5... Bg4 6.
+h3 Bxf3 7. Qxf3 Nf6 8. Bc4 e6 9. c3 Bd6 10. d4 {[%csl Gc1,Gc4,Gd4] White has
+space and 2 bishops advantage}) 6. h4 h6 7. Ne5 Qd6 8. Nxg6 Qxg6 9. d4 {[%csl
+Gc1,Gd4,Gf1] White is better} Nd7 10. Bd3 Qd6 11. Nf5 Qc7 12. Qf3 (12. Bd2 e6
+13. Ne3 Ngf6 14. Qf3 Be7 15. O-O-O {White has advantage}) 12... e6 13. Ng3 (13.
+Ne3 Qd6 $1 14. c3 Ne5 15. dxe5 Qxd3) 13... Bd6 ({it is good to attack the
+centre with c5} 13... Ngf6 14. Bd2 c5 $11) 14. Ne4 Ngf6 15. Nxd6+ Qxd6 16. Be3
+$6 ({the right way to protect d4 pawn} 16. c3 O-O 17. Be3 e5 18. O-O-O) 16...
+b5 $2 {this move is waste of time} (16... Qb4+ 17. c3 Qxb2 18. Rc1 Qxa2 19. O-O
+Qd5 {Black is 2 pawns up and White has not enough compensation}) 17. O-O-O (17.
+c3 Rd8 (17... O-O 18. g4) 18. Rh3 {[%cal Gh3g3]} O-O 19. Rg3 {White has
+advantage}) 17... O-O ({trading queens gives black better chances for equality
+} 17... Qd5 18. Qxd5 Nxd5) 18. g4 ({also good} 18. Rh3 {[%cal Gh3g3]}) 18...
+Qd5 19. Qh3 {White has promising attack on the kingside} Ne4 (19... Qxa2 20. g5
+Nd5 21. gxh6 Qa1+ 22. Kd2 Qxb2 23. Rdg1 g6 24. h5 {White has winning attack})
+20. g5 h5 {nice defensive move. Only way to slow down White's attack} 21. Qf3
+$6 ({stronger} 21. Rhe1 Nb6 22. Qf3 Nc3 23. Qxh5) 21... f5 (21... Nc3 $1 {Nice
+way to trade the queens} 22. Qxh5 (22. Qxd5 Nxd5) 22... Nf6 $1 {[%csl Gh5]
+White queen is trapped}) 22. Qxh5 $6 (22. gxf6 Nexf6 23. Qxd5 Nxd5 24. Rde1
+Nxe3 25. Rxe3 Rxf2 26. Rxe6 {[%csl Gc6,Gd3,Gd7] White is much better in the
+endgame. Black pawns are weak, The bishop is stronger than the knight}) 22...
+Qxa2 23. Bxe4 fxe4 24. Qg6 (24. g6 Nf6 25. Qc5 Nd5 26. h5 Qa1+ 27. Kd2 Qa5+ 28.
+Ke2 Qc7 $13 {complicated position}) 24... Nb6 25. b3 Rae8 26. h5 Nc4 $2 {the
+knight sacrifice doesn't work} ({right way to equalize} 26... Nd5 27. h6 Qa1+
+28. Kd2 Qc3+ 29. Kc1 Qa1+ $11) 27. bxc4 bxc4 28. h6 {winning for white} Re7 29.
+hxg7 Rxg7 30. Qxe6+ Rgf7 31. g6 Qa3+ 32. Kd2 c3+ 33. Ke1 Qe7 34. gxf7+ Qxf7 35.
+Rg1+ 1-0

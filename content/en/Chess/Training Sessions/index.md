@@ -11,6 +11,14 @@ These sessions pair one White game and one Black game from the archive so each p
 The archive below now surfaces the opening pair for each session and links onward to the cited master-game references.
 
 <div class="training-session-catalog">
+  <a class="training-session-row" href="en/Chess/Training-Sessions/Training-Session-24/">
+    <span class="training-session-row__date">Mar 16, 2026</span>
+    <span class="training-session-row__title">Training Session #24</span>
+    <span class="training-session-row__summary">
+      <span class="training-session-row__chip">White: Sicilian Defense: Grand Prix Attack</span>
+      <span class="training-session-row__chip">Black: Caro-Kann Defense: Two Knights Attack</span>
+    </span>
+  </a>
   <a class="training-session-row" href="en/Chess/Training-Sessions/Training-Session-23/">
     <span class="training-session-row__date">Mar 05, 2026</span>
     <span class="training-session-row__title">Training Session #23</span>
