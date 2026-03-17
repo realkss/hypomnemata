@@ -16,18 +16,19 @@ const AccessAdminConsole: QuartzComponent = ({ fileData }: QuartzComponentProps)
         <p class="access-admin-console__eyebrow">Owner Console</p>
         <h2>Access control</h2>
         <p>
-          Restricted pages are managed here. Mark a note with <code>access: restricted</code> in
-          frontmatter to make it show up below.
+          Restricted pages are managed here, and verified-member notes can be published to the
+          private library at <code>/censorium</code>.
         </p>
       </div>
 
       <div class="access-admin-console__status" data-access-admin-status>
-        Loading access rules...
+        Loading access rules and member library...
       </div>
 
       <div class="access-admin-console__summary" data-access-admin-summary hidden></div>
       <div class="access-admin-console__pages" data-access-admin-pages hidden></div>
       <div class="access-admin-console__users" data-access-admin-users hidden></div>
+      <div class="access-admin-console__library" data-access-admin-library hidden></div>
     </section>
   )
 }

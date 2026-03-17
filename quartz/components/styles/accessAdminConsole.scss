@@ -7,7 +7,8 @@
 .access-admin-console__intro,
 .access-admin-console__summary,
 .access-admin-console__pages,
-.access-admin-console__users {
+.access-admin-console__users,
+.access-admin-console__library {
   padding: 1.15rem 1.2rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
   border-radius: 1rem;
@@ -61,7 +62,9 @@
 
 .access-admin-console__summary-card,
 .access-admin-console__page-card,
-.access-admin-console__user-card {
+.access-admin-console__user-card,
+.access-admin-console__entry-card,
+.access-admin-console__entry-editor {
   padding: 0.95rem 1rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
   border-radius: 0.95rem;
@@ -70,14 +73,20 @@
 
 .access-admin-console__summary-card strong,
 .access-admin-console__page-card h4,
-.access-admin-console__user-name {
+.access-admin-console__user-name,
+.access-admin-console__entry-card h4,
+.access-admin-console__field strong,
+.access-admin-console__editor-title {
   color: var(--dark);
 }
 
 .access-admin-console__summary-card span,
 .access-admin-console__page-card p,
 .access-admin-console__user-meta,
-.access-admin-console__hint {
+.access-admin-console__hint,
+.access-admin-console__entry-summary,
+.access-admin-console__entry-meta,
+.access-admin-console__file-help {
   color: var(--darkgray);
 }
 
@@ -140,6 +149,17 @@
   accent-color: var(--secondary);
 }
 
+.access-admin-console__toggle {
+  display: inline-flex;
+  align-items: start;
+  gap: 0.55rem;
+}
+
+.access-admin-console__toggle-copy {
+  display: grid;
+  gap: 0.08rem;
+}
+
 .access-admin-console__checkbox-meta {
   display: grid;
   gap: 0.1rem;
@@ -161,14 +181,28 @@
   opacity: 0.6;
 }
 
+.access-admin-console__input,
+.access-admin-console__select,
+.access-admin-console__file,
 .access-admin-console__textarea {
-  min-height: 5.6rem;
   padding: 0.8rem 0.9rem;
   border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
   border-radius: 0.85rem;
   background: rgba(255, 255, 255, 0.62);
   color: var(--dark);
   font: inherit;
+}
+
+.access-admin-console__select {
+  appearance: none;
+}
+
+.access-admin-console__file {
+  padding-block: 0.65rem;
+}
+
+.access-admin-console__textarea {
+  min-height: 5.6rem;
   resize: vertical;
 }
 
@@ -182,6 +216,9 @@
 
 .access-admin-console__button {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
   border-radius: 999px;
   background: color-mix(in srgb, var(--light) 90%, var(--secondary) 10%);
@@ -189,6 +226,7 @@
   padding: 0.52rem 0.92rem;
   font: inherit;
   cursor: pointer;
+  text-decoration: none;
   transition:
     transform 0.16s ease,
     background 0.16s ease,
@@ -206,6 +244,21 @@
   opacity: 0.55;
 }
 
+.access-admin-console__button--danger {
+  border-color: rgba(139, 76, 53, 0.24);
+  color: #8b4c35;
+  background: color-mix(in srgb, var(--light) 90%, rgba(139, 76, 53, 0.1));
+}
+
+.access-admin-console__button--danger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--light) 84%, rgba(139, 76, 53, 0.16));
+  border-color: rgba(139, 76, 53, 0.3);
+}
+
+.access-admin-console__button--ghost {
+  background: transparent;
+}
+
 .access-admin-console__inline-status {
   font-size: 0.84rem;
   color: var(--darkgray);
@@ -217,20 +270,76 @@
   margin-top: 0.95rem;
 }
 
-.access-admin-console__toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+.access-admin-console__entry-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+}
+
+.access-admin-console__entry-card,
+.access-admin-console__entry-editor {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.access-admin-console__entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+}
+
+.access-admin-console__entry-summary {
+  margin: 0;
+}
+
+.access-admin-console__form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.access-admin-console__split {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.access-admin-console__field {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.access-admin-console__field strong {
+  font-size: 0.95rem;
+}
+
+.access-admin-console__editor-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.access-admin-console__file-help {
+  font-size: 0.82rem;
+}
+
+.access-admin-console__textarea--body {
+  min-height: 14rem;
 }
 
 :root[saved-theme="dark"] .access-admin-console__intro,
 :root[saved-theme="dark"] .access-admin-console__summary,
 :root[saved-theme="dark"] .access-admin-console__pages,
 :root[saved-theme="dark"] .access-admin-console__users,
+:root[saved-theme="dark"] .access-admin-console__library,
 :root[saved-theme="dark"] .access-admin-console__summary-card,
 :root[saved-theme="dark"] .access-admin-console__page-card,
 :root[saved-theme="dark"] .access-admin-console__user-card,
+:root[saved-theme="dark"] .access-admin-console__entry-card,
+:root[saved-theme="dark"] .access-admin-console__entry-editor,
 :root[saved-theme="dark"] .access-admin-console__checkbox,
+:root[saved-theme="dark"] .access-admin-console__input,
+:root[saved-theme="dark"] .access-admin-console__select,
+:root[saved-theme="dark"] .access-admin-console__file,
 :root[saved-theme="dark"] .access-admin-console__textarea,
 :root[saved-theme="dark"] .access-admin-console__status {
   background: linear-gradient(180deg, rgba(24, 26, 33, 0.96), rgba(15, 17, 22, 0.96));
@@ -243,8 +352,11 @@
 :root[saved-theme="dark"] .access-admin-console__summary-card strong,
 :root[saved-theme="dark"] .access-admin-console__page-card h4,
 :root[saved-theme="dark"] .access-admin-console__user-name,
+:root[saved-theme="dark"] .access-admin-console__entry-card h4,
 :root[saved-theme="dark"] .access-admin-console__checkbox-meta strong,
-:root[saved-theme="dark"] .access-admin-console__toggle strong {
+:root[saved-theme="dark"] .access-admin-console__toggle strong,
+:root[saved-theme="dark"] .access-admin-console__field strong,
+:root[saved-theme="dark"] .access-admin-console__editor-title {
   color: #f3ead8;
 }
 
@@ -253,9 +365,15 @@
 :root[saved-theme="dark"] .access-admin-console__page-card p,
 :root[saved-theme="dark"] .access-admin-console__user-meta,
 :root[saved-theme="dark"] .access-admin-console__hint,
+:root[saved-theme="dark"] .access-admin-console__entry-summary,
+:root[saved-theme="dark"] .access-admin-console__entry-meta,
+:root[saved-theme="dark"] .access-admin-console__file-help,
 :root[saved-theme="dark"] .access-admin-console__inline-status,
 :root[saved-theme="dark"] .access-admin-console__checkbox-meta span,
 :root[saved-theme="dark"] .access-admin-console__toggle span,
+:root[saved-theme="dark"] .access-admin-console__input,
+:root[saved-theme="dark"] .access-admin-console__select,
+:root[saved-theme="dark"] .access-admin-console__file,
 :root[saved-theme="dark"] .access-admin-console__textarea,
 :root[saved-theme="dark"] .access-admin-console__status {
   color: #d6c8ae;
@@ -272,11 +390,22 @@
   background: rgba(201, 164, 95, 0.16);
 }
 
+:root[saved-theme="dark"] .access-admin-console__button--danger {
+  color: #f1c0b4;
+  border-color: rgba(232, 143, 121, 0.28);
+  background: rgba(129, 52, 35, 0.24);
+}
+
+:root[saved-theme="dark"] .access-admin-console__button--danger:hover:not(:disabled) {
+  background: rgba(129, 52, 35, 0.34);
+}
+
 @media (max-width: 800px) {
   .access-admin-console__intro,
   .access-admin-console__summary,
   .access-admin-console__pages,
-  .access-admin-console__users {
+  .access-admin-console__users,
+  .access-admin-console__library {
     padding: 1rem;
   }
 }

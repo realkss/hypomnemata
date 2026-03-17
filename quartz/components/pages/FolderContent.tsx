@@ -114,10 +114,14 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         "content/en/Topics/Physics/Relativity and Gravitation/Personal Notes/GR",
       ) ??
         false)
+    const isQuantumComputingNotebookPage =
+      (fileData.slug?.startsWith("en/Topics/Physics/Quantum-Computing") ?? false) ||
+      (fileData.filePath?.startsWith("content/en/Topics/Physics/Quantum Computing") ?? false)
     const hideFolderCount =
       fileData.frontmatter?.hideFolderCount === true ||
       fileData.frontmatter?.hideFolderCount === "true" ||
-      isGRNotebookPage
+      isGRNotebookPage ||
+      isQuantumComputingNotebookPage
     const hasPagesToList = allPagesInFolder.length > 0 && !hideFolderListing
 
     return (

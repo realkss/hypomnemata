@@ -1,16 +1,6 @@
-import { readSession, json, type AuthEnv, type AuthUser } from "../../auth/_lib"
-
-type StoredUser = {
-  key: string
-  name: string
-  provider: "google" | "instagram"
-  email?: string
-  username?: string
-  picture?: string
-  blocked: boolean
-  createdAt: string
-  lastSeenAt: string
-}
+import { readSession, json, type AuthEnv } from "../../auth/_lib"
+import { getOwnerKey, listStoredUsers, userKey, type StoredUser } from "../../../lib/access"
+import { listMemberContentEntries, type StoredMemberContent } from "../../../lib/memberContent"
 
 type AccessManifestPage = {
   slug: string
@@ -25,14 +15,6 @@ type StoredRule = {
 type Env = AuthEnv & {
   ACCESS_CONTROL_KV?: KVNamespace
   ASSETS: { fetch: (request: Request | string) => Promise<Response> }
-}
-
-function userKey(user: AuthUser): string {
-  return `${user.provider}:${user.sub}`
-}
-
-async function getOwnerKey(kv: KVNamespace): Promise<string | null> {
-  return kv.get("config:owner")
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
@@ -75,6 +57,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
   // Load rules and users from KV
   let users: StoredUser[] = []
+  let libraryEntries: StoredMemberContent[] = []
   const pages: Array<{
     slug: string
     title: string
@@ -83,14 +66,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   }> = []
 
   if (kv) {
-    // List all users
-    const userList = await kv.list({ prefix: "user:" })
-    const userPromises = userList.keys.map(async (entry) => {
-      const value = await kv.get<StoredUser>(entry.name, "json")
-      return value
-    })
-    const userResults = await Promise.all(userPromises)
-    users = userResults.filter((u): u is StoredUser => u !== null)
+    users = await listStoredUsers(kv)
+    libraryEntries = await listMemberContentEntries(kv)
 
     // Load rules for each page
     for (const page of manifestPages) {
@@ -118,6 +95,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     ok: true,
     storage: { configured: kvConfigured },
     currentUser: {
+      key,
       name: user.name,
       provider: user.provider,
       email: user.email,
@@ -125,5 +103,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     },
     users,
     pages,
+    library: {
+      entries: libraryEntries,
+    },
   })
 }

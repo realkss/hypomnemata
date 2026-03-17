@@ -1,11 +1,8 @@
-import { readSession, json, type AuthEnv, type AuthUser } from "../../auth/_lib"
+import { readSession, json, type AuthEnv } from "../../auth/_lib"
+import { getOwnerKey, userKey } from "../../../lib/access"
 
 type Env = AuthEnv & {
   ACCESS_CONTROL_KV?: KVNamespace
-}
-
-function userKey(user: AuthUser): string {
-  return `${user.provider}:${user.sub}`
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
@@ -19,7 +16,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return json({ ok: false, error: "kv_not_configured" }, { status: 503 })
   }
 
-  const ownerKey = await kv.get("config:owner")
+  const ownerKey = await getOwnerKey(kv)
   if (ownerKey !== userKey(user)) {
     return json({ ok: false, error: "forbidden" }, { status: 403 })
   }

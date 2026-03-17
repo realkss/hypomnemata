@@ -9,6 +9,17 @@ export type AccessManifestEntry = {
   access: Exclude<AccessLevel, "public">
 }
 
+export type AccessManifestAsset = {
+  slug: FullSlug
+  pageSlug: FullSlug
+  access: Exclude<AccessLevel, "public">
+}
+
+export type AccessManifest = {
+  pages: AccessManifestEntry[]
+  assets: AccessManifestAsset[]
+}
+
 function normalizeAccessValue(value: unknown): string {
   return typeof value === "string" ? value.trim().toLowerCase() : ""
 }

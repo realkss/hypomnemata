@@ -1,16 +1,5 @@
-import { readSession, type AuthEnv, type AuthUser } from "./api/auth/_lib"
-
-type StoredUser = {
-  key: string
-  name: string
-  provider: "google" | "instagram"
-  email?: string
-  username?: string
-  picture?: string
-  blocked: boolean
-  createdAt: string
-  lastSeenAt: string
-}
+import { readSession, type AuthEnv } from "./api/auth/_lib"
+import { getOwnerKey, getStoredUser, recordStoredUserVisit, userKey } from "./lib/access"
 
 type StoredRule = {
   allowedIdentifiers: string[]
@@ -22,30 +11,103 @@ type AccessManifestPage = {
   access: "restricted" | "owner"
 }
 
+type AccessManifestAsset = {
+  slug: string
+  pageSlug: string
+  access: "restricted" | "owner"
+}
+
+type AccessManifest = {
+  pages: AccessManifestPage[]
+  assets: AccessManifestAsset[]
+}
+
+type ProtectedRequestEntry = {
+  accessKey: string
+  access: "restricted" | "owner"
+}
+
 type Env = AuthEnv & {
   ACCESS_CONTROL_KV?: KVNamespace
   ASSETS: { fetch: (request: Request | string) => Promise<Response> }
 }
 
-function userKey(user: AuthUser): string {
-  return `${user.provider}:${user.sub}`
+function decodePathname(pathname: string): string {
+  try {
+    return decodeURIComponent(pathname)
+  } catch {
+    return pathname
+  }
 }
 
-function slugFromPath(pathname: string): string {
-  // Remove leading slash and trailing slash
-  let slug = pathname.replace(/^\/+/, "").replace(/\/+$/, "")
-  // Remove trailing /index or .html
-  slug = slug.replace(/\/index$/, "").replace(/\.html$/, "")
-  // Root path -> "index"
+function pageSlugFromPath(pathname: string): string {
+  let slug = decodePathname(pathname)
+
+  if (!slug || slug === "/") {
+    return "index"
+  }
+
+  if (slug.endsWith("/")) {
+    slug = `${slug}index`
+  }
+
+  slug = slug.replace(/^\/+/, "")
+
+  if (slug.endsWith(".html")) {
+    slug = slug.slice(0, -".html".length)
+  }
+
   return slug || "index"
 }
 
-// Cache the access manifest per request context to avoid repeated fetches
-let cachedManifest: AccessManifestPage[] | null = null
+function assetSlugFromPath(pathname: string): string | null {
+  let slug = decodePathname(pathname)
+
+  if (!slug || slug === "/" || slug.endsWith("/")) {
+    return null
+  }
+
+  slug = slug.replace(/^\/+/, "")
+  return slug || null
+}
+
+function getProtectedRequestEntry(
+  manifest: AccessManifest,
+  pathname: string,
+): ProtectedRequestEntry | null {
+  const pageSlug = pageSlugFromPath(pathname)
+  const pageEntry =
+    manifest.pages.find((page) => page.slug === pageSlug) ??
+    manifest.pages.find((page) => page.slug === `${pageSlug}/index`)
+
+  if (pageEntry) {
+    return {
+      accessKey: pageEntry.slug,
+      access: pageEntry.access,
+    }
+  }
+
+  const assetSlug = assetSlugFromPath(pathname)
+  if (!assetSlug) {
+    return null
+  }
+
+  const assetEntry = manifest.assets.find((asset) => asset.slug === assetSlug)
+  if (!assetEntry) {
+    return null
+  }
+
+  return {
+    accessKey: assetEntry.pageSlug,
+    access: assetEntry.access,
+  }
+}
+
+let cachedManifest: AccessManifest | null = null
 let cachedManifestTimestamp = 0
 const MANIFEST_CACHE_MS = 60_000
 
-async function getAccessManifest(env: Env, requestUrl: string): Promise<AccessManifestPage[]> {
+async function getAccessManifest(env: Env, requestUrl: string): Promise<AccessManifest> {
   const now = Date.now()
   if (cachedManifest && now - cachedManifestTimestamp < MANIFEST_CACHE_MS) {
     return cachedManifest
@@ -55,8 +117,11 @@ async function getAccessManifest(env: Env, requestUrl: string): Promise<AccessMa
     const manifestUrl = new URL("/static/access-control-index.json", requestUrl)
     const response = await env.ASSETS.fetch(manifestUrl.toString())
     if (response.ok) {
-      const data = (await response.json()) as { pages: AccessManifestPage[] }
-      cachedManifest = data.pages ?? []
+      const data = (await response.json()) as AccessManifest
+      cachedManifest = {
+        pages: data.pages ?? [],
+        assets: data.assets ?? [],
+      }
       cachedManifestTimestamp = now
       return cachedManifest
     }
@@ -64,35 +129,9 @@ async function getAccessManifest(env: Env, requestUrl: string): Promise<AccessMa
     // ignore
   }
 
-  return []
-}
-
-async function recordUser(kv: KVNamespace, user: AuthUser): Promise<void> {
-  const key = `user:${userKey(user)}`
-  const now = new Date().toISOString()
-  const existing = await kv.get<StoredUser>(key, "json")
-
-  if (existing) {
-    // Update last seen and any changed profile fields
-    existing.lastSeenAt = now
-    existing.name = user.name
-    if (user.email) existing.email = user.email
-    if (user.username) existing.username = user.username
-    if (user.picture) existing.picture = user.picture
-    await kv.put(key, JSON.stringify(existing))
-  } else {
-    const newUser: StoredUser = {
-      key: userKey(user),
-      name: user.name,
-      provider: user.provider,
-      email: user.email,
-      username: user.username,
-      picture: user.picture,
-      blocked: false,
-      createdAt: now,
-      lastSeenAt: now,
-    }
-    await kv.put(key, JSON.stringify(newUser))
+  return {
+    pages: [],
+    assets: [],
   }
 }
 
@@ -100,73 +139,65 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env, next } = context
   const url = new URL(request.url)
 
-  // Skip non-GET requests, API routes, and static assets
-  if (request.method !== "GET") return next()
+  if (request.method !== "GET" && request.method !== "HEAD") return next()
   if (url.pathname.startsWith("/api/")) return next()
   if (url.pathname.startsWith("/static/")) return next()
-  if (url.pathname.match(/\.(css|js|json|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|webp|avif|mp4|webm)$/)) {
-    return next()
-  }
 
   const kv = env.ACCESS_CONTROL_KV
   if (!kv) return next()
 
-  // Read session (non-blocking for public pages)
   const user = await readSession(request, env)
-
-  // Record user visit in background
   if (user) {
-    context.waitUntil(recordUser(kv, user))
+    context.waitUntil(recordStoredUserVisit(kv, user))
   }
 
-  // Check if the requested page is access-controlled
   const manifest = await getAccessManifest(env, request.url)
-  const slug = slugFromPath(url.pathname)
+  const protectedEntry = getProtectedRequestEntry(manifest, url.pathname)
 
-  // Find matching manifest entry (try exact slug, then with /index suffix)
-  const pageEntry =
-    manifest.find((p) => p.slug === slug) ??
-    manifest.find((p) => p.slug === `${slug}/index`)
+  if (!protectedEntry) return next()
 
-  // Page is not in the access manifest — it's public
-  if (!pageEntry) return next()
-
-  // Page requires access control
   if (!user) {
-    // Redirect to home with a hint to sign in
-    return Response.redirect(new URL(`/?auth_required=${encodeURIComponent(url.pathname)}`, url.origin).toString(), 302)
+    const redirectUrl = new URL("/", url.origin)
+    redirectUrl.searchParams.set("auth_error", "auth_required")
+    redirectUrl.searchParams.set("returnTo", `${url.pathname}${url.search}${url.hash}`)
+    return Response.redirect(redirectUrl.toString(), 302)
   }
 
   const key = userKey(user)
-  const ownerKey = await kv.get("config:owner")
+  const ownerKey = await getOwnerKey(kv)
 
-  // Owner always has access
   if (ownerKey === key) return next()
 
-  // Owner-only pages reject everyone else
-  if (pageEntry.access === "owner") {
-    return Response.redirect(new URL("/", url.origin).toString(), 302)
+  if (protectedEntry.access === "owner") {
+    const redirectUrl = new URL("/", url.origin)
+    redirectUrl.searchParams.set("auth_error", "not_authorized")
+    redirectUrl.searchParams.set("returnTo", `${url.pathname}${url.search}${url.hash}`)
+    return Response.redirect(redirectUrl.toString(), 302)
   }
 
-  // Check if user is blocked
-  const storedUser = await kv.get<StoredUser>(`user:${key}`, "json")
+  const storedUser = await getStoredUser(kv, key)
   if (storedUser?.blocked) {
-    return Response.redirect(new URL("/", url.origin).toString(), 302)
+    const redirectUrl = new URL("/", url.origin)
+    redirectUrl.searchParams.set("auth_error", "not_authorized")
+    redirectUrl.searchParams.set("returnTo", `${url.pathname}${url.search}${url.hash}`)
+    return Response.redirect(redirectUrl.toString(), 302)
   }
 
-  // Check page-specific rules
-  const rule = await kv.get<StoredRule>(`rule:${pageEntry.slug}`, "json")
+  const rule = await kv.get<StoredRule>(`rule:${protectedEntry.accessKey}`, "json")
   if (!rule) {
-    // No rule configured — restricted page with no grants, deny
-    return Response.redirect(new URL("/", url.origin).toString(), 302)
+    const redirectUrl = new URL("/", url.origin)
+    redirectUrl.searchParams.set("auth_error", "not_authorized")
+    redirectUrl.searchParams.set("returnTo", `${url.pathname}${url.search}${url.hash}`)
+    return Response.redirect(redirectUrl.toString(), 302)
   }
 
-  // Check if user's key, email, or username matches any allowed identifier
   const identifiers = new Set(rule.allowedIdentifiers)
   if (identifiers.has(key)) return next()
   if (user.email && identifiers.has(user.email)) return next()
   if (user.username && identifiers.has(`instagram:${user.username}`)) return next()
 
-  // No match — deny
-  return Response.redirect(new URL("/", url.origin).toString(), 302)
+  const redirectUrl = new URL("/", url.origin)
+  redirectUrl.searchParams.set("auth_error", "not_authorized")
+  redirectUrl.searchParams.set("returnTo", `${url.pathname}${url.search}${url.hash}`)
+  return Response.redirect(redirectUrl.toString(), 302)
 }

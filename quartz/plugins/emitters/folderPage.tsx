@@ -17,7 +17,6 @@ import {
 import { defaultListPageLayout, sharedPageComponents } from "../../../quartz.layout"
 import { FolderContent } from "../../components"
 import { write } from "./helpers"
-import { i18n, TRANSLATIONS } from "../../i18n"
 import { BuildCtx } from "../../util/ctx"
 import { StaticResources } from "../../util/resources"
 import { filterPublicFiles } from "../../util/access"
@@ -68,7 +67,6 @@ async function* processFolderInfo(
 function computeFolderInfo(
   folders: Set<SimpleSlug>,
   content: ProcessedContent[],
-  locale: keyof typeof TRANSLATIONS,
 ): Record<SimpleSlug, ProcessedContent> {
   // Create default folder descriptions
   const folderInfo: Record<SimpleSlug, ProcessedContent> = Object.fromEntries(
@@ -137,18 +135,34 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
     async *emit(ctx, content, resources) {
       const allFiles = filterPublicFiles(content.map((c) => c[1].data))
       const cfg = ctx.cfg.configuration
+      const explicitFolders = content.flatMap(([, file]) => {
+        const slug = file.data.slug
+        if (!slug?.endsWith("/index")) {
+          return []
+        }
+
+        const folder = stripSlashes(simplifySlug(slug)) as SimpleSlug
+        if (folder === "" || folder === "/" || folder === "tags") {
+          return []
+        }
+
+        return [folder]
+      })
 
       const folders: Set<SimpleSlug> = new Set(
-        allFiles.flatMap((data) => {
-          return data.slug
-            ? _getFolders(data.slug).filter(
-                (folderName) => folderName !== "." && folderName !== "tags",
-              )
-            : []
-        }),
+        [
+          ...allFiles.flatMap((data) => {
+            return data.slug
+              ? _getFolders(data.slug).filter(
+                  (folderName) => folderName !== "." && folderName !== "tags",
+                )
+              : []
+          }),
+          ...explicitFolders,
+        ],
       )
 
-      const folderInfo = computeFolderInfo(folders, content, cfg.locale)
+      const folderInfo = computeFolderInfo(folders, content)
       yield* processFolderInfo(ctx, folderInfo, allFiles, opts, resources)
     },
     async *partialEmit(ctx, content, resources, changeEvents) {
@@ -168,7 +182,7 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
 
       // If there are affected folders, rebuild their pages
       if (affectedFolders.size > 0) {
-        const folderInfo = computeFolderInfo(affectedFolders, content, cfg.locale)
+        const folderInfo = computeFolderInfo(affectedFolders, content)
         yield* processFolderInfo(ctx, folderInfo, allFiles, opts, resources)
       }
     },

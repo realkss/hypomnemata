@@ -18,6 +18,7 @@ const authMessages: Record<string, string> = {
   auth_required: "Sign in is required to view that page.",
   code_exchange_failed: "The sign-in could not be completed.",
   config_missing: "This provider is not configured yet.",
+  member_verification_required: "This page is only available to verified members.",
   missing_access_token: "The provider did not return an access token.",
   missing_code: "The provider did not return a login code.",
   not_authorized: "Your account does not have access to that page.",

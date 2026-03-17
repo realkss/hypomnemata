@@ -404,6 +404,7 @@ async function registerKnownUser(env, user) {
     username: user.username,
     picture: user.picture,
     blocked: Boolean(existing.blocked),
+    verified: Boolean(existing.verified),
     createdAt: existing.createdAt ?? now,
     lastSeenAt: now,
   }
@@ -475,7 +476,7 @@ async function putStoredRule(env, slug, allowedIdentifiers) {
   )
 }
 
-async function updateStoredUserBlockedState(env, key, blocked) {
+async function updateStoredUserAccessState(env, key, blocked, verified) {
   const kv = getAccessControlKv(env)
   if (!kv) {
     throw new Error("missing_kv")
@@ -491,6 +492,7 @@ async function updateStoredUserBlockedState(env, key, blocked) {
     JSON.stringify({
       ...existing,
       blocked: Boolean(blocked),
+      verified: Boolean(verified),
       updatedAt: new Date().toISOString(),
     }),
   )
@@ -498,14 +500,16 @@ async function updateStoredUserBlockedState(env, key, blocked) {
   return true
 }
 
-function canonicalizePageSlug(pathname) {
-  let normalizedPath = pathname
-
+function decodePathname(pathname) {
   try {
-    normalizedPath = decodeURIComponent(pathname)
+    return decodeURIComponent(pathname)
   } catch {
-    normalizedPath = pathname
+    return pathname
   }
+}
+
+function canonicalizePageSlug(pathname) {
+  let normalizedPath = decodePathname(pathname)
 
   if (!normalizedPath || normalizedPath === "/") {
     return "index"
@@ -532,6 +536,17 @@ function canonicalizePageSlug(pathname) {
   return normalizedPath || "index"
 }
 
+function canonicalizeAssetSlug(pathname) {
+  let normalizedPath = decodePathname(pathname)
+
+  if (!normalizedPath || normalizedPath === "/" || normalizedPath.endsWith("/")) {
+    return null
+  }
+
+  normalizedPath = normalizedPath.replace(/^\/+/, "")
+  return normalizedPath || null
+}
+
 function buildAccessChallengeUrl(request, reason) {
   const target = new URL("/", getOrigin(request))
   target.searchParams.set("auth_error", reason)
@@ -548,7 +563,7 @@ async function loadAccessControlIndex(env) {
   const request = new Request(`https://assets.local${ACCESS_CONTROL_INDEX_PATH}`)
   const response = await env.ASSETS.fetch(request)
   if (!response.ok) {
-    accessControlIndexCache = { pages: [] }
+    accessControlIndexCache = { pages: [], assets: [] }
     accessControlIndexCacheAt = now
     return accessControlIndexCache
   }
@@ -556,7 +571,7 @@ async function loadAccessControlIndex(env) {
   try {
     accessControlIndexCache = await response.json()
   } catch {
-    accessControlIndexCache = { pages: [] }
+    accessControlIndexCache = { pages: [], assets: [] }
   }
 
   accessControlIndexCacheAt = now
@@ -573,7 +588,17 @@ async function getProtectedPage(request, env) {
   return accessControlIndex.pages.find((page) => page.slug === slug) ?? null
 }
 
-async function canAccessProtectedPage(request, env, page) {
+async function getProtectedAsset(request, env) {
+  const slug = canonicalizeAssetSlug(new URL(request.url).pathname)
+  if (!slug) {
+    return null
+  }
+
+  const accessControlIndex = await loadAccessControlIndex(env)
+  return accessControlIndex.assets.find((asset) => asset.slug === slug) ?? null
+}
+
+async function canAccessProtectedEntry(request, env, entry) {
   const user = await readSession(request, env)
   if (user) {
     await registerKnownUser(env, user)
@@ -583,7 +608,7 @@ async function canAccessProtectedPage(request, env, page) {
     return { allowed: true, user }
   }
 
-  if (page.access === "owner") {
+  if (entry.access === "owner") {
     return { allowed: false, user, reason: user ? "not_authorized" : "auth_required" }
   }
 
@@ -592,11 +617,11 @@ async function canAccessProtectedPage(request, env, page) {
   }
 
   const storedUser = await getStoredUser(env, getPrimaryUserKey(user))
-  if (storedUser?.blocked) {
+  if (!storedUser || storedUser.blocked || !storedUser.verified) {
     return { allowed: false, user, reason: "not_authorized" }
   }
 
-  const rule = await getStoredRule(env, page.slug)
+  const rule = await getStoredRule(env, entry.pageSlug ?? entry.slug)
   const allowedIdentifiers = new Set(rule?.allowedIdentifiers ?? [])
   const allowed = getUserIdentityKeys(user).some((identifier) => allowedIdentifiers.has(identifier))
   return {
@@ -1022,11 +1047,11 @@ async function handleAccessAdminUsers(request, env) {
 
   const body = await readJsonBody(request)
   const key = normalizeIdentifier(body?.key)
-  if (!key || typeof body?.blocked !== "boolean") {
+  if (!key || typeof body?.blocked !== "boolean" || typeof body?.verified !== "boolean") {
     return json({ error: "invalid_user_update" }, { status: 400 })
   }
 
-  const updated = await updateStoredUserBlockedState(env, key, body.blocked)
+  const updated = await updateStoredUserAccessState(env, key, body.blocked, body.verified)
   if (!updated) {
     return json({ error: "unknown_user" }, { status: 404 })
   }
@@ -1093,7 +1118,17 @@ export default {
     if (request.method === "GET" || request.method === "HEAD") {
       const protectedPage = await getProtectedPage(request, env)
       if (protectedPage) {
-        const access = await canAccessProtectedPage(request, env, protectedPage)
+        const access = await canAccessProtectedEntry(request, env, protectedPage)
+        if (!access.allowed) {
+          return redirect(buildAccessChallengeUrl(request, access.reason ?? "not_authorized"))
+        }
+
+        return withNoStore(await env.ASSETS.fetch(request))
+      }
+
+      const protectedAsset = await getProtectedAsset(request, env)
+      if (protectedAsset) {
+        const access = await canAccessProtectedEntry(request, env, protectedAsset)
         if (!access.allowed) {
           return redirect(buildAccessChallengeUrl(request, access.reason ?? "not_authorized"))
         }

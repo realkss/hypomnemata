@@ -1,23 +1,8 @@
-import { readSession, json, type AuthEnv, type AuthUser } from "../../auth/_lib"
-
-type StoredUser = {
-  key: string
-  name: string
-  provider: "google" | "instagram"
-  email?: string
-  username?: string
-  picture?: string
-  blocked: boolean
-  createdAt: string
-  lastSeenAt: string
-}
+import { readSession, json, type AuthEnv } from "../../auth/_lib"
+import { getOwnerKey, type StoredUser, userKey } from "../../../lib/access"
 
 type Env = AuthEnv & {
   ACCESS_CONTROL_KV?: KVNamespace
-}
-
-function userKey(user: AuthUser): string {
-  return `${user.provider}:${user.sub}`
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
@@ -31,25 +16,29 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return json({ ok: false, error: "kv_not_configured" }, { status: 503 })
   }
 
-  const ownerKey = await kv.get("config:owner")
+  const ownerKey = await getOwnerKey(kv)
   if (ownerKey !== userKey(user)) {
     return json({ ok: false, error: "forbidden" }, { status: 403 })
   }
 
-  let body: { key?: string; blocked?: boolean }
+  let body: { key?: string; blocked?: boolean; verified?: boolean }
   try {
     body = await context.request.json()
   } catch {
     return json({ ok: false, error: "invalid_body" }, { status: 400 })
   }
 
-  const { key, blocked } = body
+  const { key, blocked, verified } = body
   if (typeof key !== "string" || !key.trim()) {
     return json({ ok: false, error: "missing_key" }, { status: 400 })
   }
 
   if (typeof blocked !== "boolean") {
     return json({ ok: false, error: "missing_blocked" }, { status: 400 })
+  }
+
+  if (typeof verified !== "boolean") {
+    return json({ ok: false, error: "missing_verified" }, { status: 400 })
   }
 
   // Prevent owner from blocking themselves
@@ -64,6 +53,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   existing.blocked = blocked
+  existing.verified = verified
   await kv.put(kvKey, JSON.stringify(existing))
 
   return json({ ok: true })
