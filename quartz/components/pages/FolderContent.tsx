@@ -31,13 +31,11 @@ export default ((opts?: Partial<FolderContentOptions>) => {
     const { tree, fileData, allFiles, cfg } = props
 
     const trie = (props.ctx.trie ??= trieFromAllFiles(allFiles))
-    const folder = trie.findNode(fileData.slug!.split("/"))
-    if (!folder) {
-      return null
-    }
+    const folderSlug = fileData.slug?.replace(/\/index$/, "") ?? fileData.slug ?? ""
+    const folder = trie.findNode(folderSlug.split("/")) ?? trie.findNode(fileData.slug!.split("/"))
 
     const allPagesInFolder: QuartzPluginData[] =
-      folder.children
+      folder?.children
         .map((node) => {
           // regular file, proceed
           if (node.data) {
