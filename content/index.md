@@ -64,7 +64,8 @@ The notebook therefore remains deliberately broad. Its materials may include tec
   </a>
   <a class="landing-card" href="./en/Topics/Physics/Quantum-Computing/VIII.-Projects/" data-icon="Q">
     <strong>Quantum Projects</strong>
-    <span>A direct path to the public projects overview, including the verified-reader QIQC archive.</span>
+    <span>A direct path to the public projects overview, including the protected QIQC archive.</span>
+    <span>Use the Session panel after opening it if you need the verified-only course materials.</span>
   </a>
 </div>
 

@@ -113,6 +113,17 @@
   min-height: 1.05rem;
 }
 
+.auth-panel__help {
+  margin: 0;
+  padding: 0.68rem 0.78rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--darkgray);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
 .auth-panel__status::before {
   content: "";
   display: inline-block;
@@ -249,7 +260,8 @@
 
 :root[saved-theme="dark"] .auth-panel__caption,
 :root[saved-theme="dark"] .auth-panel__status,
-:root[saved-theme="dark"] .auth-panel__identity-copy span {
+:root[saved-theme="dark"] .auth-panel__identity-copy span,
+:root[saved-theme="dark"] .auth-panel__help {
   color: #d6c8ae;
 }
 
@@ -259,7 +271,8 @@
 
 :root[saved-theme="dark"] .auth-provider,
 :root[saved-theme="dark"] .auth-panel__identity,
-:root[saved-theme="dark"] .auth-panel__logout {
+:root[saved-theme="dark"] .auth-panel__logout,
+:root[saved-theme="dark"] .auth-panel__help {
   background: rgba(201, 164, 95, 0.08);
   border-color: rgba(201, 164, 95, 0.22);
   color: #efe4cf;

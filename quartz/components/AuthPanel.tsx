@@ -5,7 +5,7 @@ import script from "./scripts/authPanel.inline"
 
 const AuthPanel: QuartzComponent = () => {
   return (
-    <section class="auth-panel" data-auth-panel aria-live="polite">
+    <section id="session-access" class="auth-panel" data-auth-panel aria-live="polite">
       <div class="auth-panel__heading">
         <p class="auth-panel__eyebrow">Session</p>
         <p class="auth-panel__caption">Notebook access</p>
@@ -109,6 +109,10 @@ const AuthPanel: QuartzComponent = () => {
           Sign out
         </button>
       </div>
+
+      <p class="auth-panel__help" data-auth-help>
+        Use this panel to sign in before opening verified-only archives.
+      </p>
 
       <p class="auth-panel__status" data-auth-status data-tone="neutral">
         Checking sign-in status...

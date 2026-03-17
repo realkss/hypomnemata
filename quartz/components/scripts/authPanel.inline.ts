@@ -96,6 +96,15 @@ function setStatus(panel: HTMLElement, tone: "neutral" | "success" | "error", me
   status.textContent = message
 }
 
+function setHelpText(panel: HTMLElement, message: string) {
+  const help = panel.querySelector("[data-auth-help]") as HTMLElement | null
+  if (!help) {
+    return
+  }
+
+  help.textContent = message
+}
+
 function setButtonAvailability(panel: HTMLElement, configured: Record<AuthPanelProvider, boolean>) {
   const buttons = Array.from(panel.querySelectorAll("[data-auth-start]"))
 
@@ -169,6 +178,11 @@ function setSignedInState(panel: HTMLElement, user: AuthUser) {
       }
     }
   }
+
+  setHelpText(
+    panel,
+    "Signed in. Verified-only archives still require account verification and a page-specific grant.",
+  )
 }
 
 function setSignedOutState(panel: HTMLElement) {
@@ -182,6 +196,11 @@ function setSignedOutState(panel: HTMLElement) {
   if (signedIn) {
     signedIn.hidden = true
   }
+
+  setHelpText(
+    panel,
+    "Use Google or Instagram here, then return to the archive after your account has been verified and granted access.",
+  )
 }
 
 async function loadSession(): Promise<SessionResponse> {
