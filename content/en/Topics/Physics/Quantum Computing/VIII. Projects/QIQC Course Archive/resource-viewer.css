@@ -1,0 +1,150 @@
+:root {
+  --rv-bg: #f7f0de;
+  --rv-card: rgba(255, 252, 245, 0.86);
+  --rv-card-strong: rgba(255, 255, 255, 0.94);
+  --rv-ink: #23180d;
+  --rv-muted: #6c5637;
+  --rv-accent: #a17a3d;
+  --rv-line: rgba(122, 94, 49, 0.22);
+  --rv-shadow: 0 16px 40px rgba(76, 51, 20, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--rv-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+  background:
+    radial-gradient(circle at top left, rgba(210, 177, 120, 0.22), transparent 34%),
+    radial-gradient(circle at top right, rgba(189, 162, 116, 0.18), transparent 28%),
+    linear-gradient(180deg, #fbf7ee 0%, var(--rv-bg) 100%);
+}
+
+main {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.back-link,
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--rv-ink);
+  background: var(--rv-card);
+  border: 1px solid var(--rv-line);
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.back-link:hover,
+.actions a:hover {
+  background: var(--rv-card-strong);
+  border-color: rgba(122, 94, 49, 0.4);
+  transform: translateY(-1px);
+}
+
+.hero,
+.note,
+.warning,
+.viewer-wrap {
+  background: var(--rv-card);
+  border: 1px solid var(--rv-line);
+  border-radius: 24px;
+  box-shadow: var(--rv-shadow);
+}
+
+.hero {
+  margin-top: 1rem;
+  padding: 1.5rem 1.6rem 1.2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--rv-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.05;
+}
+
+.lede {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--rv-muted);
+  font-size: 1.08rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.note,
+.warning {
+  padding: 1rem 1.15rem;
+  margin: 0 0 1.5rem;
+}
+
+.warning {
+  background: rgba(255, 245, 225, 0.92);
+}
+
+.warning strong,
+.note strong {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.viewer-wrap {
+  overflow: hidden;
+  padding: 0;
+}
+
+.viewer {
+  width: 100%;
+  min-height: 76vh;
+  border: 0;
+  display: block;
+  background: #fff;
+}
+
+@media (max-width: 720px) {
+  main {
+    width: min(100% - 1rem, 1180px);
+    padding-top: 1rem;
+  }
+
+  .hero,
+  .note,
+  .warning {
+    padding: 1.1rem 1rem;
+  }
+
+  .viewer {
+    min-height: 62vh;
+  }
+}

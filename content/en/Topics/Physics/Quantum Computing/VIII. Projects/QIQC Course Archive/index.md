@@ -11,34 +11,31 @@ access: restricted
 
 This page serves as the protected archive for the QIQC course materials. Only signed-in readers who are verified and have been granted access through the notebook access controls can open the files below.
 
+Each archive entry now opens a viewer page where you can preview the material when possible and download the original file set from the same place.
+
 ## Qiskit Class Notebooks
 
-- [Measurement with Qiskit notebook](<./Measurement_with_Qiskit_2025 QC class.ipynb>)
-- [Superposition with Qiskit notebook](<./Superposition_with_Qiskit_2025 QC class.ipynb>)
+- [Measurement with Qiskit notebook viewer](./measurement-with-qiskit-notebook-view.html)
+- [Superposition with Qiskit notebook viewer](./superposition-with-qiskit-notebook-view.html)
 
 ## Homework 1
 
-- [Homework prompt PDF](<./QIQC HW1.pdf>)
-- [Worked notebook (.ipynb)](./qc_hw1.ipynb)
-- [Notebook HTML export](./qc_hw1.html)
-- [Rendered homework PDF](./qc_hw1.pdf)
+- [Homework prompt viewer](./homework-1-prompt-view.html)
+- [Worked notebook package](./homework-1-worked-notebook-view.html)
 
 ## Midterm
 
 ### Problem 1
 
-- [Notebook (.ipynb)](./qiqc_midterm_problem1_b.ipynb)
-- [Notebook HTML export](./qiqc_midterm_problem1_b.html)
+- [Notebook package](./midterm-problem-1-notebook-view.html)
 
 ### Problem 2
 
-- [C++ source](./qiqc_midterm_problem2.cpp)
-- [Compiled executable](./qiqc_midterm_problem2.exe)
+- [Source and executable package](./midterm-problem-2-materials-view.html)
 
 ### Problem 3
 
-- [Notebook (.ipynb)](./qiqc_midterm_problem3.ipynb)
-- [Notebook HTML export](./qiqc_midterm_problem3.html)
+- [Notebook package](./midterm-problem-3-notebook-view.html)
 
 > [!warning]
 > This archive includes a compiled executable. Download or run local binaries only if you trust the source and intend to inspect or use them yourself.
