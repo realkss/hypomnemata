@@ -20,3 +20,7 @@ Mathematics appears here as both instrument and independent object of study: a l
 ## Use
 
 This section gathers definitions, short lemmas, worked examples, and links outward into physics, graphics, and computation.
+
+## Current Tracks
+
+- [Abstract Algebra](./Abstract%20Algebra/): a Fraleigh 7e study track with chapter notes, counterexamples, a commuting-friendly flashcard deck, and a dated midterm sprint.

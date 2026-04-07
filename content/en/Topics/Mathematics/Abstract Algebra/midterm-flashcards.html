@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fraleigh 7e Midterm Flashcards</title>
+  <style>
+    :root {
+      --bg: #f4efe8;
+      --panel: #fffdf9;
+      --panel-2: #f8f3eb;
+      --ink: #221d19;
+      --muted: #6c625a;
+      --accent: #9b4d27;
+      --accent-soft: #ecd7c9;
+      --border: #d7c8bc;
+      --shadow: 0 12px 26px rgba(48, 34, 24, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Palatino Linotype", serif;
+      background:
+        radial-gradient(circle at top left, rgba(155,77,39,0.08), transparent 24%),
+        linear-gradient(180deg, #f7f2ea 0%, #efe7dc 100%);
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .hero,
+    .panel {
+      background: rgba(255, 253, 249, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 840px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sidebar,
+    .main {
+      padding: 16px;
+    }
+
+    .controls {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 11px 12px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .stat .value {
+      margin-top: 4px;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .toolbar button {
+      width: auto;
+    }
+
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+
+    .flashcard {
+      perspective: 1000px;
+      min-height: 205px;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 205px;
+      transform-style: preserve-3d;
+      transition: transform 0.45s ease;
+    }
+
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: var(--panel-2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      background: #fbf6ef;
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .prompt {
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .answer {
+      line-height: 1.55;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 0.9rem;
+    }
+
+    .empty {
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Fraleigh 7e Midterm Deck</h1>
+      <p>Built for Chapters 1 through 15 of the 7th edition. Use it as the fast commuting layer: definitions, theorem statements, and famous counterexamples. For full notes, go back to the chapter pages, theorem glossary, and terminology glossary in the Abstract Algebra section.</p>
+    </header>
+
+    <div class="layout">
+      <aside class="panel sidebar">
+        <div class="controls">
+          <input id="search" type="text" placeholder="Search definition, theorem, counterexample..." />
+          <select id="chapterFilter">
+            <option value="all">All chapters</option>
+          </select>
+          <select id="typeFilter">
+            <option value="all">All card types</option>
+            <option value="Definition">Definition</option>
+            <option value="Theorem">Theorem</option>
+            <option value="Counterexample">Counterexample</option>
+            <option value="Example">Example</option>
+          </select>
+          <button id="showAll">Show all</button>
+          <button id="showCounterexamples">Counterexamples only</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="label">Visible</div>
+            <div id="visibleCount" class="value">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Total</div>
+            <div id="totalCount" class="value">0</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="panel main">
+        <div class="toolbar">
+          <button id="flipAll">Flip visible cards</button>
+          <button id="resetCards">Reset flips</button>
+        </div>
+        <div id="flashcards" class="flashcard-grid"></div>
+        <div id="emptyState" class="empty" style="display:none;">No cards match the current filters.</div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const cards = [
+      { chapter: 1, type: "Definition", front: "What is an algebraic structure in this course?", back: "A set together with one or more operations and the laws those operations satisfy." },
+      { chapter: 1, type: "Counterexample", front: "Why is M_2(R) under multiplication not a group?", back: "Because singular matrices are not invertible." },
+      { chapter: 2, type: "Definition", front: "What is a binary operation on S?", back: "A function from S x S to S." },
+      { chapter: 2, type: "Theorem", front: "Why is a two-sided identity unique?", back: "If e and f are identities, then e = e*f = f." },
+      { chapter: 2, type: "Counterexample", front: "What is the standard warning example for closure without associativity?", back: "Subtraction on Z is closed but not associative." },
+      { chapter: 3, type: "Definition", front: "What is an isomorphism of binary structures?", back: "A bijection preserving the operation." },
+      { chapter: 3, type: "Counterexample", front: "Why are Z_4 and V_4 not isomorphic?", back: "Z_4 has an element of order 4, but V_4 does not." },
+      { chapter: 4, type: "Definition", front: "State the group axioms.", back: "Closure, associativity, identity, and inverses." },
+      { chapter: 4, type: "Theorem", front: "How do you solve ax = b in a group?", back: "x = a^{-1}b." },
+      { chapter: 5, type: "Theorem", front: "State the subgroup test.", back: "A nonempty subset H is a subgroup iff xy^{-1} is in H for all x,y in H." },
+      { chapter: 5, type: "Counterexample", front: "What is the standard false statement about unions of subgroups?", back: "The union of two subgroups is usually not a subgroup." },
+      { chapter: 6, type: "Definition", front: "What does G = <g> mean?", back: "Every element of G is a power of g." },
+      { chapter: 6, type: "Theorem", front: "What is ord(g^k) in a cyclic group of order n?", back: "n / gcd(n,k)." },
+      { chapter: 6, type: "Counterexample", front: "What is the standard abelian but noncyclic group?", back: "V_4 = Z_2 x Z_2." },
+      { chapter: 7, type: "Definition", front: "What does it mean for S to generate G?", back: "Every element of G is a finite word in elements of S and their inverses." },
+      { chapter: 7, type: "Counterexample", front: "Which standard additive group is not finitely generated?", back: "(Q,+)." },
+      { chapter: 8, type: "Theorem", front: "State Cayley's theorem.", back: "Every group is isomorphic to a subgroup of a symmetric group." },
+      { chapter: 8, type: "Counterexample", front: "When do cycles fail to commute?", back: "When they are not disjoint." },
+      { chapter: 9, type: "Definition", front: "What is an even permutation?", back: "A permutation expressible as a product of an even number of transpositions." },
+      { chapter: 9, type: "Theorem", front: "What is |A_n|?", back: "n!/2." },
+      { chapter: 9, type: "Counterexample", front: "Give an even permutation that is not a single cycle.", back: "(1 2)(3 4)." },
+      { chapter: 10, type: "Definition", front: "What is a left coset of H in G?", back: "A set of the form gH." },
+      { chapter: 10, type: "Theorem", front: "State Lagrange's theorem.", back: "If G is finite and H <= G, then |H| divides |G| and |G| = [G:H]|H|." },
+      { chapter: 10, type: "Counterexample", front: "What is the classic converse-to-Lagrange failure?", back: "A_4 has order 12 but no subgroup of order 6." },
+      { chapter: 11, type: "Definition", front: "What is the direct product G x H?", back: "The set of ordered pairs with componentwise multiplication." },
+      { chapter: 11, type: "Theorem", front: "State the structure theorem for finitely generated abelian groups.", back: "Every such group is isomorphic to Z^r x Z_{n1} x ... x Z_{nk} with n1 | ... | nk." },
+      { chapter: 11, type: "Counterexample", front: "Why is Z_2 x Z_2 a useful warning?", back: "It is a direct product of cyclic groups but is not cyclic." },
+      { chapter: 12, type: "Definition", front: "Name the four plane isometry types.", back: "Translation, rotation, reflection, and glide reflection." },
+      { chapter: 12, type: "Theorem", front: "What do two reflections compose to?", back: "A translation if their axes are parallel and a rotation if they intersect." },
+      { chapter: 13, type: "Definition", front: "What is a homomorphism?", back: "A map phi with phi(ab) = phi(a)phi(b)." },
+      { chapter: 13, type: "Definition", front: "What is the kernel of a homomorphism?", back: "The set of elements mapped to the identity." },
+      { chapter: 13, type: "Theorem", front: "When is a homomorphism injective?", back: "Exactly when its kernel is trivial." },
+      { chapter: 13, type: "Counterexample", front: "What is the warning about bijections between groups?", back: "A bijection need not be a homomorphism." },
+      { chapter: 14, type: "Definition", front: "When is a subgroup normal?", back: "When gN = Ng for every g in G." },
+      { chapter: 14, type: "Theorem", front: "When does coset multiplication define a quotient group?", back: "Exactly when the subgroup is normal." },
+      { chapter: 14, type: "Counterexample", front: "Why can you not quotient by any subgroup?", back: "If the subgroup is not normal, coset multiplication can depend on representatives." },
+      { chapter: 15, type: "Definition", front: "What is a simple group?", back: "A group whose only normal subgroups are the trivial subgroup and the whole group." },
+      { chapter: 15, type: "Theorem", front: "Why is Z_p simple for prime p?", back: "Its only subgroups have orders 1 or p, so its only normal subgroups are trivial and whole." },
+      { chapter: 15, type: "Counterexample", front: "What is the standard not-simple example from this range?", back: "A_4 is not simple because it has a normal Klein four subgroup." }
+    ];
+
+    const flashcardsEl = document.getElementById("flashcards");
+    const searchEl = document.getElementById("search");
+    const chapterFilterEl = document.getElementById("chapterFilter");
+    const typeFilterEl = document.getElementById("typeFilter");
+    const visibleCountEl = document.getElementById("visibleCount");
+    const totalCountEl = document.getElementById("totalCount");
+    const emptyStateEl = document.getElementById("emptyState");
+
+    totalCountEl.textContent = cards.length;
+
+    for (let i = 1; i <= 15; i += 1) {
+      const option = document.createElement("option");
+      option.value = String(i);
+      option.textContent = `Chapter ${String(i).padStart(2, "0")}`;
+      chapterFilterEl.appendChild(option);
+    }
+
+    function renderCards() {
+      const q = searchEl.value.trim().toLowerCase();
+      const chapter = chapterFilterEl.value;
+      const type = typeFilterEl.value;
+
+      const filtered = cards.filter((card) => {
+        const haystack = [card.front, card.back, card.type, `chapter ${card.chapter}`].join(" ").toLowerCase();
+        const matchesQuery = !q || haystack.includes(q);
+        const matchesChapter = chapter === "all" || String(card.chapter) === chapter;
+        const matchesType = type === "all" || card.type === type;
+        return matchesQuery && matchesChapter && matchesType;
+      });
+
+      visibleCountEl.textContent = filtered.length;
+      emptyStateEl.style.display = filtered.length ? "none" : "block";
+
+      flashcardsEl.innerHTML = filtered.map((card, idx) => `
+        <article class="flashcard" data-idx="${idx}">
+          <div class="flashcard-inner">
+            <div class="face front">
+              <div>
+                <div class="tag">Chapter ${card.chapter} · ${card.type}</div>
+                <div class="prompt">${card.front}</div>
+              </div>
+              <div class="muted small">Tap to reveal</div>
+            </div>
+            <div class="face back">
+              <div>
+                <div class="tag">Answer</div>
+                <div class="answer">${card.back}</div>
+              </div>
+              <div class="muted small">Tap to turn back</div>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      document.querySelectorAll(".flashcard").forEach((card) => {
+        card.addEventListener("click", () => {
+          card.classList.toggle("flipped");
+        });
+      });
+    }
+
+    searchEl.addEventListener("input", renderCards);
+    chapterFilterEl.addEventListener("change", renderCards);
+    typeFilterEl.addEventListener("change", renderCards);
+
+    document.getElementById("showAll").addEventListener("click", () => {
+      searchEl.value = "";
+      chapterFilterEl.value = "all";
+      typeFilterEl.value = "all";
+      renderCards();
+    });
+
+    document.getElementById("showCounterexamples").addEventListener("click", () => {
+      typeFilterEl.value = "Counterexample";
+      renderCards();
+    });
+
+    document.getElementById("flipAll").addEventListener("click", () => {
+      document.querySelectorAll(".flashcard").forEach((card) => card.classList.add("flipped"));
+    });
+
+    document.getElementById("resetCards").addEventListener("click", () => {
+      document.querySelectorAll(".flashcard").forEach((card) => card.classList.remove("flipped"));
+    });
+
+    renderCards();
+  </script>
+</body>
+</html>
