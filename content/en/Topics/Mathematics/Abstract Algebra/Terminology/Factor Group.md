@@ -1,10 +1,10 @@
-A **factor group** or **quotient group** `G/N` is formed from the cosets of a normal subgroup `N`.
+A **factor group** or **quotient group** $G/N$ is formed from the cosets of a normal subgroup $N$.
 
 Its multiplication is defined by
 
-`(gN)(hN) = ghN`.
+$(gN)(hN) = ghN$.
 
-This definition works precisely because `N` is normal.
+This definition works precisely because $N$ is normal.
 
 ## One-line intuition
 

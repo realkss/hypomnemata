@@ -1,8 +1,8 @@
 Every finitely generated abelian group is isomorphic to
 
-`Z^r x Z_{n1} x ... x Z_{nk}`
+$\mathbb{Z}^r \times \mathbb{Z}_{n_1} \times \cdots \times \mathbb{Z}_{n_k}$
 
-with `n1 | n2 | ... | nk`.
+with $n_1 \mid n_2 \mid \cdots \mid n_k$.
 
 ## Why it matters
 

@@ -1,8 +1,8 @@
-A **homomorphism** is a map `phi: G -> H` between groups such that
+A **homomorphism** is a map $\varphi: G \to H$ between groups such that
 
-`phi(ab) = phi(a)phi(b)`
+$\varphi(ab) = \varphi(a)\varphi(b)$
 
-for all `a,b in G`.
+for all $a,b \in G$.
 
 It preserves the group structure: identity, inverses, and products.
 

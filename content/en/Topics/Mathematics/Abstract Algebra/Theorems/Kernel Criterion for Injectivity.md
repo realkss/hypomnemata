@@ -1,6 +1,6 @@
-If `phi: G -> H` is a group homomorphism, then `phi` is injective if and only if
+If $\varphi: G \to H$ is a group homomorphism, then $\varphi$ is injective if and only if
 
-`ker(phi) = {e_G}`.
+$\ker(\varphi) = \{e_G\}$.
 
 ## Why it matters
 

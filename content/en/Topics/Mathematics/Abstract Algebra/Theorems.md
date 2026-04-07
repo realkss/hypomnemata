@@ -10,7 +10,7 @@ This page tracks the theorem statements you want to be able to recall cleanly un
 
 ## Current Entries
 
-- [Subgroup Test](./Theorems/Subgroup%20Test.md): the `xy^{-1}` criterion for subgroup membership.
+- [Subgroup Test](./Theorems/Subgroup%20Test.md): the $xy^{-1}$ criterion for subgroup membership.
 - [Cayley's Theorem](./Theorems/Cayley%27s%20Theorem.md): every group embeds into a symmetric group.
 - [Lagrange's Theorem](./Theorems/Lagrange%27s%20Theorem.md): subgroup order divides group order in the finite case.
 - [Structure Theorem for Finitely Generated Abelian Groups](./Theorems/Structure%20Theorem%20for%20Finitely%20Generated%20Abelian%20Groups.md): classification by free rank and cyclic torsion factors.

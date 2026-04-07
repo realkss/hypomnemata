@@ -1,8 +1,8 @@
-A **binary operation** on a set `S` is a function
+A **binary operation** on a set $S$ is a function
 
-`*: S x S -> S`.
+$\ast: S \times S \to S$.
 
-The critical point is closure: whenever `a` and `b` lie in `S`, the product `a*b` must also lie in `S`.
+The critical point is closure: whenever $a$ and $b$ lie in $S$, the product $a \ast b$ must also lie in $S$.
 
 Binary operations may or may not be associative, commutative, or possess identities and inverses. Those are extra properties, not part of the bare definition.
 

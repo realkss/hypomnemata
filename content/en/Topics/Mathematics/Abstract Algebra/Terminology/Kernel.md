@@ -1,6 +1,6 @@
-If `phi: G -> H` is a group homomorphism, the **kernel** is
+If $\varphi: G \to H$ is a group homomorphism, the **kernel** is
 
-`ker(phi) = {g in G : phi(g) = e_H}`.
+$\ker(\varphi) = \{g \in G : \varphi(g) = e_H\}$.
 
 The kernel measures how much information the map collapses.
 

@@ -9,33 +9,65 @@ Homomorphisms are the correct structure-preserving maps between groups.
 
 ## Core definition
 
-A map `phi: G -> H` is a **homomorphism** if
+A map $\varphi: G \to H$ is a **homomorphism** if
 
-`phi(ab) = phi(a)phi(b)` for all `a,b in G`.
+$\varphi(ab) = \varphi(a)\varphi(b)$ for all $a,b \in G$.
 
 ## Fundamental objects
 
-- **kernel**: `ker(phi) = {g in G : phi(g)=e_H}`
-- **image**: `im(phi) = {phi(g) : g in G}`
+- **kernel**: $\ker(\varphi) = \{g \in G : \varphi(g) = e_H\}$
+- **image**: $\operatorname{im}(\varphi) = \{\varphi(g) : g \in G\}$
 
 ## Key theorems
 
-- `phi(e_G)=e_H`
-- `phi(a^{-1}) = phi(a)^{-1}`
-- `ker(phi)` is a subgroup of `G`
-- `im(phi)` is a subgroup of `H`
-- `phi` is injective iff `ker(phi) = {e_G}`
+- $\varphi(e_G)=e_H$
+- $\varphi(a^{-1}) = \varphi(a)^{-1}$
+- $\ker(\varphi)$ is a subgroup of $G$
+- $\operatorname{im}(\varphi)$ is a subgroup of $H$
+- $\varphi$ is injective iff $\ker(\varphi) = \{e_G\}$
 
 ## Counterexamples worth remembering
 
 - A bijection need not be a homomorphism.
-- The map `g -> g^2` is not automatically a homomorphism in a nonabelian group.
+- The map $g \mapsto g^2$ is not automatically a homomorphism in a nonabelian group.
+
+## Toggleable proofs
+
+<details>
+<summary>Proof that the kernel is a subgroup</summary>
+
+Let $\varphi:G \to H$ be a homomorphism. We prove that $\ker(\varphi)$ is a subgroup of $G$ using the subgroup test. The kernel is nonempty because
+$$
+\varphi(e_G)=e_H,
+$$
+so $e_G \in \ker(\varphi)$. Now take $x,y \in \ker(\varphi)$. Then $\varphi(x)=e_H$ and $\varphi(y)=e_H$. Hence
+$$
+\varphi(xy^{-1})=\varphi(x)\varphi(y^{-1})=\varphi(x)\varphi(y)^{-1}=e_H e_H^{-1}=e_H.
+$$
+So $xy^{-1} \in \ker(\varphi)$. By the subgroup test, $\ker(\varphi)$ is a subgroup of $G$.
+</details>
+
+<details>
+<summary>Proof that $\varphi$ is injective iff $\ker(\varphi)=\{e_G\}$</summary>
+
+Assume first that $\varphi$ is injective. If $x \in \ker(\varphi)$, then
+$$
+\varphi(x)=e_H=\varphi(e_G).
+$$
+Injectivity gives $x=e_G$. So the kernel is exactly $\{e_G\}$.
+
+Conversely, assume $\ker(\varphi)=\{e_G\}$ and suppose $\varphi(x)=\varphi(y)$. Then
+$$
+e_H=\varphi(y)^{-1}\varphi(x)=\varphi(y^{-1}x),
+$$
+so $y^{-1}x \in \ker(\varphi)$. Hence $y^{-1}x=e_G$, and therefore $x=y$. Thus $\varphi$ is injective.
+</details>
 
 ## Companion exercises
 
-1. Compute the kernel and image of `phi: Z -> Z_6`.
+1. Compute the kernel and image of $\varphi: \mathbb{Z} \to \mathbb{Z}_6$.
 2. Prove that a homomorphism sends inverses to inverses.
-3. Show that `phi: (Z,+) -> (Z_n,+)` defined by reduction mod `n` is a homomorphism.
+3. Show that $\varphi: (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$ defined by reduction mod $n$ is a homomorphism.
 
 ## Textbook drill in your copy of Fraleigh 7e
 

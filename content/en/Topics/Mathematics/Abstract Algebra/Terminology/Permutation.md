@@ -1,6 +1,6 @@
-A **permutation** of a set `X` is a bijection from `X` to itself.
+A **permutation** of a set $X$ is a bijection from $X$ to itself.
 
-Permutations form groups under composition, and for a finite set with `n` elements the full permutation group is `S_n`.
+Permutations form groups under composition, and for a finite set with $n$ elements the full permutation group is $S_n$.
 
 Cycle notation records how a permutation moves elements around.
 

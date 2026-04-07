@@ -5,14 +5,14 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-A binary operation on `S` is a map `*: S x S -> S`. Closure comes first, but closure alone says nothing about associativity, identity, or inverses.
+A binary operation on $S$ is a map $\ast: S \times S \to S$. Closure comes first, but closure alone says nothing about associativity, identity, or inverses.
 
 ## Core definitions
 
-- **Closure**: `a*b in S` for all `a,b in S`.
-- **Associativity**: `(a*b)*c = a*(b*c)`.
-- **Identity**: `e*a = a*e = a`.
-- **Inverse**: `a*b = b*a = e`.
+- **Closure**: $a \ast b \in S$ for all $a,b \in S$.
+- **Associativity**: $(a \ast b) \ast c = a \ast (b \ast c)$.
+- **Identity**: $e \ast a = a \ast e = a$.
+- **Inverse**: $a \ast b = b \ast a = e$.
 
 ## Rigorous facts
 
@@ -21,9 +21,33 @@ A binary operation on `S` is a map `*: S x S -> S`. Closure comes first, but clo
 
 ## Counterexamples worth remembering
 
-- Subtraction on `Z` is closed but not associative.
-- Division on `Z` is not a binary operation because closure fails.
-- The rule `x*y = x` on a set with at least two elements is closed but has no two-sided identity.
+- Subtraction on $\mathbb{Z}$ is closed but not associative.
+- Division on $\mathbb{Z}$ is not a binary operation because closure fails.
+- The rule $x \ast y = x$ on a set with at least two elements is closed but has no two-sided identity.
+
+## Toggleable proofs
+
+<details>
+<summary>Proof that a two-sided identity is unique</summary>
+
+Assume $e$ and $f$ are both two-sided identities for the same binary operation on $S$. Because $e$ is an identity, $e \ast f = f$. Because $f$ is an identity, $e \ast f = e$. Hence $e=f$. So a two-sided identity, if it exists, is unique.
+</details>
+
+<details>
+<summary>Proof that inverses are unique once the identity is fixed</summary>
+
+Fix an identity element $e$ and let $a \in S$. Suppose $b$ and $c$ are both two-sided inverses of $a$, so
+$$
+a \ast b=b \ast a=e
+\quad\text{and}\quad
+a \ast c=c \ast a=e.
+$$
+Then
+$$
+b=b \ast e=b \ast (a \ast c)=(b \ast a) \ast c=e \ast c=c.
+$$
+Thus $b=c$. Therefore an element cannot have two different two-sided inverses.
+</details>
 
 ## Companion exercises
 

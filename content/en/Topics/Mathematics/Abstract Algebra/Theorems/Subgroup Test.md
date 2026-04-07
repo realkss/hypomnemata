@@ -1,8 +1,8 @@
-If `H` is a nonempty subset of a group `G`, then `H` is a subgroup of `G` if and only if
+If $H$ is a nonempty subset of a group $G$, then $H$ is a subgroup of $G$ if and only if
 
-`xy^{-1} in H`
+$xy^{-1} \in H$
 
-for all `x,y in H`.
+for all $x,y \in H$.
 
 ## Why it matters
 

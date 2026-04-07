@@ -1,8 +1,8 @@
-If `G` is a finite group and `H <= G`, then
+If $G$ is a finite group and $H \le G$, then
 
-`|G| = [G:H] |H|`.
+$|G| = [G:H]\,|H|$.
 
-In particular, `|H|` divides `|G|`.
+In particular, $|H|$ divides $|G|$.
 
 ## Corollaries
 

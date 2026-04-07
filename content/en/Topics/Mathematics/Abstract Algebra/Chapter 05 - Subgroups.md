@@ -9,7 +9,7 @@ Subgroups are groups inside groups, using the same operation.
 
 ## Core criterion
 
-A nonempty subset `H` of `G` is a subgroup if and only if `xy^{-1} in H` for all `x,y in H`.
+A nonempty subset $H$ of $G$ is a subgroup if and only if $xy^{-1} \in H$ for all $x,y \in H$.
 
 ## Standard facts
 
@@ -19,12 +19,51 @@ A nonempty subset `H` of `G` is a subgroup if and only if `xy^{-1} in H` for all
 ## Counterexamples worth remembering
 
 - The union of two subgroups is usually not a subgroup.
-- Closure alone is not enough: the nonnegative integers are closed under addition but are not a subgroup of `(Z,+)`.
+- Closure alone is not enough: the nonnegative integers are closed under addition but are not a subgroup of $(\mathbb{Z}, +)$.
+
+## Toggleable proofs
+
+<details>
+<summary>Proof of the subgroup test</summary>
+
+Suppose first that $H$ is a subgroup of $G$. Then $H$ is nonempty, and if $x,y \in H$, then $y^{-1} \in H$ because $H$ is a group, so closure in $H$ gives
+$$
+xy^{-1} \in H.
+$$
+
+Conversely, assume $H$ is nonempty and satisfies $xy^{-1} \in H$ for all $x,y \in H$. Pick $h \in H$. Taking $x=h$ and $y=h$ gives
+$$
+hh^{-1}=e \in H.
+$$
+Now if $x \in H$, use $e,x \in H$ to obtain
+$$
+ex^{-1}=x^{-1} \in H.
+$$
+Finally, if $x,y \in H$, then $y^{-1} \in H$, so using $x$ and $y^{-1}$ in the hypothesis gives
+$$
+x(y^{-1})^{-1}=xy \in H.
+$$
+Thus $H$ contains the identity, is closed under inverses, and is closed under the group operation. Therefore $H$ is a subgroup of $G$.
+</details>
+
+<details>
+<summary>Proof that intersections of subgroups are subgroups</summary>
+
+Let $\{H_i\}_{i \in I}$ be a family of subgroups of $G$, and set
+$$
+H=\bigcap_{i \in I} H_i.
+$$
+Because each $H_i$ contains the identity, $e \in H$, so $H$ is nonempty. Now take $x,y \in H$. Then $x,y \in H_i$ for every $i \in I$. Since each $H_i$ is a subgroup, we have $xy^{-1} \in H_i$ for every $i$. Hence $xy^{-1}$ lies in the intersection:
+$$
+xy^{-1} \in \bigcap_{i \in I} H_i = H.
+$$
+By the subgroup test, $H$ is a subgroup of $G$.
+</details>
 
 ## Companion exercises
 
-1. Prove that `nZ` is a subgroup of `(Z,+)`.
-2. Show that the diagonal invertible `2 x 2` matrices form a subgroup of `GL_2(R)`.
+1. Prove that $n\mathbb{Z}$ is a subgroup of $(\mathbb{Z}, +)$.
+2. Show that the diagonal invertible $2 \times 2$ matrices form a subgroup of $GL_2(\mathbb{R})$.
 3. Give a subset that contains the identity and is closed under the operation but is not a subgroup.
 
 ## Textbook drill in your copy of Fraleigh 7e

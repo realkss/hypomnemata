@@ -1,8 +1,8 @@
-A subgroup `N` of `G` is **normal** if
+A subgroup $N$ of $G$ is **normal** if
 
-`gN = Ng`
+$gN = Ng$
 
-for every `g` in `G`.
+for every $g$ in $G$.
 
 Normal subgroups are exactly the subgroups that can be used to form quotient groups.
 
