@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Algebra 1 — Homework 1 Solutions</title>
+<link rel="icon" href="data:,">
+<script>
+window.MathJax = {
+  tex: {
+    packages: {'[+]': ['ams', 'amscd']},
+    tags: 'none',
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    macros: {
+      Z: '\\mathbb{Z}',
+      id: '\\mathrm{id}',
+      Fix: '\\mathrm{Fix}',
+      Grp: '\\mathbf{Grp}'
+    }
+  },
+  loader: {load: ['[tex]/amscd']},
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        document.body.style.opacity = '1';
+      });
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inconsolata&display=swap');
+
+  body {
+    font-family: 'Libre Baskerville', 'Georgia', 'Times New Roman', serif;
+    max-width: 780px;
+    margin: 50px auto;
+    padding: 0 30px;
+    line-height: 1.75;
+    color: #1a1a1a;
+    background: #fdfdfd;
+    opacity: 1;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.7em;
+    margin-bottom: 0.15em;
+    letter-spacing: 0.02em;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 2.5em;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 2.5em 0;
+  }
+
+  .problem {
+    margin-bottom: 2.5em;
+  }
+
+  .problem-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 0.7em;
+    color: #222;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.2em;
+  }
+
+  .claim, .theorem {
+    background: #f5f5f0;
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 18px;
+    margin: 1em 0;
+    font-style: italic;
+  }
+
+  .claim strong, .theorem strong {
+    font-style: normal;
+    color: #4a6fa5;
+  }
+
+  .theorem {
+    border-left-color: #8b5e3c;
+  }
+
+  .theorem strong {
+    color: #8b5e3c;
+  }
+
+  .proof {
+    margin: 1em 0 1.5em 0;
+  }
+
+  .proof-head {
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 0.3em;
+  }
+
+  .qed {
+    float: right;
+    font-size: 1.1em;
+    margin-top: -0.3em;
+  }
+
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .remark {
+    background: #f0f4f8;
+    border-left: 4px solid #7a9cc6;
+    padding: 12px 18px;
+    margin: 1.2em 0;
+    font-size: 0.93em;
+  }
+
+  .remark strong {
+    color: #4a6fa5;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 1.2em auto;
+    font-size: 0.92em;
+  }
+
+  th, td {
+    border: 1px solid #bbb;
+    padding: 8px 14px;
+    text-align: center;
+  }
+
+  th {
+    background: #eee;
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) {
+    background: #fafafa;
+  }
+
+  .diagram-container {
+    text-align: center;
+    margin: 1.5em 0;
+  }
+
+  .diagram-caption {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 0.5em;
+    font-style: italic;
+  }
+
+  svg text {
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  .case-head {
+    font-weight: 700;
+    margin-top: 0.8em;
+  }
+
+  .step-head {
+    font-weight: 700;
+    color: #333;
+  }
+
+  .checkmark {
+    color: #2a7d2a;
+    font-weight: bold;
+  }
+
+  .crossmark {
+    color: #c0392b;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<h1>Modern Algebra 1 &mdash; Homework 1 Solutions</h1>
+<div class="subtitle">Spring 2026 &nbsp;|&nbsp; Due: April 7</div>
+<div class="subtitle" style="margin-top: -1.5em;">KIM S&uuml;ngsoo &nbsp;&middot;&nbsp; 2022-14643</div>
+
+<hr>
+
+<!-- ═══════════════ PROBLEM 1 ═══════════════ -->
+<div class="problem">
+<div class="problem-title">Problem 1</div>
+
+<div class="claim">
+  <strong>Claim.</strong> If $G$ is a finite group with identity $e$ and $|G|$ is even,
+  then there exists $a \neq e$ in $G$ such that $a * a = e$.
+</div>
+
+<div class="proof clearfix">
+<p class="proof-head">Proof.</p>
+
+<p>
+Define the <em>inversion map</em> $\iota : G \to G$ by $\iota(a) = a^{-1}$.
+Since $(a^{-1})^{-1} = a$ for every $a \in G$, this map is an involution:
+$\iota^2 = \id_G$.
+</p>
+
+<p>
+The involution $\iota$ partitions $G$ into orbits under the action of
+$\langle \iota \rangle \cong \Z_2$. Each orbit has size 1 or 2:
+</p>
+
+<ul>
+  <li><strong>Fixed points</strong> (size-1 orbits): elements $a \in G$ with $\iota(a) = a$,
+      i.e.&nbsp;$a^{-1} = a$, equivalently $a^2 = e$.
+      Let $F = \Fix(\iota) = \{ a \in G : a^2 = e \}$.</li>
+  <li><strong>Free orbits</strong> (size-2 orbits): pairs $\{a, a^{-1}\}$ with $a \neq a^{-1}$.</li>
+</ul>
+
+<div class="diagram-container">
+<svg width="520" height="180" viewBox="0 0 520 180">
+  <!-- Group G background -->
+  <rect x="10" y="10" width="500" height="160" rx="18" fill="#f7f7f2" stroke="#aaa" stroke-width="1.5"/>
+  <text x="260" y="32" text-anchor="middle" font-size="15" fill="#888" font-style="italic">G</text>
+
+  <!-- Fixed points F region -->
+  <rect x="30" y="50" width="170" height="100" rx="12" fill="#e8f0e8" stroke="#5a9a5a" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="115" y="72" text-anchor="middle" font-size="13" fill="#3a7a3a" font-weight="bold">F = Fix(&#x03B9;)</text>
+
+  <circle cx="60" cy="105" r="16" fill="#b5d8b5" stroke="#3a7a3a" stroke-width="1.5"/>
+  <text x="60" y="110" text-anchor="middle" font-size="14" font-style="italic" fill="#1a1a1a">e</text>
+
+  <circle cx="115" cy="105" r="16" fill="#b5d8b5" stroke="#3a7a3a" stroke-width="1.5"/>
+  <text x="115" y="110" text-anchor="middle" font-size="14" font-style="italic" fill="#1a1a1a">a</text>
+
+  <circle cx="168" cy="105" r="16" fill="#b5d8b5" stroke="#3a7a3a" stroke-width="1.5"/>
+  <text x="168" y="110" text-anchor="middle" font-size="13" fill="#1a1a1a">&#x22ef;</text>
+
+  <text x="115" y="142" text-anchor="middle" font-size="12" fill="#3a7a3a">|F| is even</text>
+
+  <!-- Free orbits region -->
+  <rect x="230" y="50" width="260" height="100" rx="12" fill="#f0eee8" stroke="#a08050" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="360" y="72" text-anchor="middle" font-size="13" fill="#806030" font-weight="bold">Free orbits (size 2)</text>
+
+  <!-- Pair 1 -->
+  <circle cx="270" cy="108" r="15" fill="#f0dcc0" stroke="#a08050" stroke-width="1.5"/>
+  <text x="270" y="113" text-anchor="middle" font-size="13" font-style="italic">b</text>
+  <circle cx="330" cy="108" r="15" fill="#f0dcc0" stroke="#a08050" stroke-width="1.5"/>
+  <text x="330" y="112" text-anchor="middle" font-size="11" font-style="italic">b&#x207b;&#xb9;</text>
+  <path d="M 287 102 C 300 85 313 85 326 102" fill="none" stroke="#a08050" stroke-width="1.3" marker-end="url(#arrowOrange)"/>
+  <path d="M 313 114 C 300 131 287 131 274 114" fill="none" stroke="#a08050" stroke-width="1.3" marker-end="url(#arrowOrange)"/>
+
+  <!-- Pair 2 -->
+  <circle cx="390" cy="108" r="15" fill="#f0dcc0" stroke="#a08050" stroke-width="1.5"/>
+  <text x="390" y="113" text-anchor="middle" font-size="13" font-style="italic">c</text>
+  <circle cx="450" cy="108" r="15" fill="#f0dcc0" stroke="#a08050" stroke-width="1.5"/>
+  <text x="450" y="112" text-anchor="middle" font-size="11" font-style="italic">c&#x207b;&#xb9;</text>
+  <path d="M 407 102 C 420 85 433 85 446 102" fill="none" stroke="#a08050" stroke-width="1.3" marker-end="url(#arrowOrange)"/>
+  <path d="M 433 114 C 420 131 407 131 394 114" fill="none" stroke="#a08050" stroke-width="1.3" marker-end="url(#arrowOrange)"/>
+
+  <text x="360" y="142" text-anchor="middle" font-size="12" fill="#806030">contributes even count</text>
+
+  <defs>
+    <marker id="arrowOrange" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#a08050"/>
+    </marker>
+  </defs>
+</svg>
+<div class="diagram-caption">Figure 1. Partition of $G$ under the inversion involution $\iota: a \mapsto a^{-1}$.</div>
+</div>
+
+<p>
+Since every element lies in exactly one orbit, we have the orbit-counting equation:
+$$|G| \;=\; |F| \;+\; 2k$$
+for some non-negative integer $k$ (the number of free orbits).
+Because $|G|$ is even and $2k$ is even, $|F|$ must also be <strong>even</strong>.
+</p>
+
+<p>
+Now $e \in F$ (since $e^2 = e$), so $|F| \geq 1$. But $|F|$ is even, which forces
+$|F| \geq 2$. Therefore there exists some $a \in F$ with $a \neq e$, meaning $a^2 = e$.
+</p>
+
+<span class="qed">$\blacksquare$</span>
+</div>
+
+<div class="remark">
+<strong>Remark (categorical perspective).</strong>
+The existence of an element of order $2$ is equivalent to the existence of a
+non-trivial group homomorphism $\Z_2 \to G$. In the category $\Grp$, this is
+encoded by the following commutative diagram, where $\varphi(\bar{1}) = a$ with $a^2 = e$:
+
+$$\begin{CD}
+\Z_2 @>{\exists\;\varphi \,\neq\, 0}>> G \\
+@V{\id}VV @VV{\iota}V \\
+\Z_2 @>>{\varphi}> G
+\end{CD}$$
+
+The diagram commutes because $\iota(\varphi(\bar{1})) = a^{-1} = a = \varphi(\bar{1})$, i.e.&nbsp;$\varphi$ maps into the fixed-point set of $\iota$.
+This problem is essentially the $p = 2$ case of Cauchy's theorem.
+</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ PROBLEM 2 ═══════════════ -->
+<div class="problem">
+<div class="problem-title">Problem 2</div>
+
+<div class="claim">
+  <strong>Claim.</strong> The number of cycles $\sigma$ in $S_5$ such that $\sigma^2$ is also a cycle
+  (counting the identity as a cycle) is $\mathbf{55}$.
+</div>
+
+<div class="proof clearfix">
+<p class="proof-head">Proof.</p>
+
+<p>
+<strong>Definition.</strong> A <em>$k$-cycle</em> in $S_n$ is a permutation $\sigma$ of the form
+$\sigma = (a_1 \; a_2 \; \cdots \; a_k)$, meaning $\sigma(a_i) = a_{i+1}$ for
+$1 \leq i \leq k-1$, $\;\sigma(a_k) = a_1$, and $\sigma$ fixes all elements
+outside $\{a_1, \ldots, a_k\}$. A $1$-cycle is the identity, and a $2$-cycle is
+a transposition.
+</p>
+
+<div class="claim" style="border-left-color: #666;">
+<strong>Lemma.</strong> Let $\sigma = (a_1 \; a_2 \; \cdots \; a_k)$ be a $k$-cycle. Then
+$\sigma^2$ consists of exactly $d = \gcd(2, k)$ disjoint cycles, each of length $k/d$.
+In particular, $\sigma^2$ is a cycle if and only if $\gcd(2, k) = 1$ (i.e., $k$ is odd)
+or $k \leq 2$.
+</div>
+
+<div class="proof clearfix" style="margin-bottom: 1em;">
+<p class="proof-head">Proof of Lemma.</p>
+
+<p>
+By definition, $\sigma(a_i) = a_{i+1 \pmod{k}}$, so $\sigma^2(a_i) = a_{i+2 \pmod{k}}$.
+Thus $\sigma^2$ acts on the index set $\Z / k\Z$ by the map $i \mapsto i + 2$.
+The orbit of index $i$ under this map is $\{i, \; i+2, \; i+4, \; \ldots\}$ taken modulo $k$.
+</p>
+
+<p>
+The size of this orbit equals the order of $\bar{2}$ in $\Z / k\Z$,
+which is $k / \gcd(2, k)$. The number of distinct orbits is $\gcd(2, k)$, since
+$|\Z / k\Z|$ = (number of orbits) $\times$ (orbit size). Concretely:
+</p>
+
+<ul>
+  <li><strong>$k$ odd</strong> ($\gcd(2,k) = 1$): the single orbit $\{0, 2, 4, \ldots, k-1, 1, 3, \ldots\}$
+    visits every index, so $\sigma^2$ is a $k$-cycle.</li>
+  <li><strong>$k$ even</strong> ($\gcd(2,k) = 2$): there are two orbits &mdash;
+    the even indices $\{0, 2, 4, \ldots, k-2\}$ and the odd indices $\{1, 3, 5, \ldots, k-1\}$ &mdash;
+    each of size $k/2$. So $\sigma^2$ is a product of two disjoint $(k/2)$-cycles.</li>
+</ul>
+
+<p>
+Hence $\sigma^2$ is a single cycle precisely when $k$ is odd (giving a $k$-cycle)
+or $k \leq 2$ (where $\sigma^2 = \id$, which we count as a cycle).
+</p>
+<span class="qed">$\blacksquare$</span>
+</div>
+
+<p>
+Applying the lemma, $\sigma^2$ is a cycle for $k \in \{1, 2, 3, 5\}$ and fails to be
+a cycle for $k = 4$ (where $\sigma^2$ splits into two transpositions).
+</p>
+
+<p>
+We now enumerate each case in $S_5$. Recall that the number of $k$-cycles in $S_n$ is
+$\displaystyle\binom{n}{k} \cdot (k-1)!\,$.
+</p>
+
+<table>
+  <tr>
+    <th>Length $k$</th>
+    <th>$\sigma^2$ structure</th>
+    <th>$\sigma^2$ a cycle?</th>
+    <th>Count in $S_5$</th>
+  </tr>
+  <tr>
+    <td>$1$ (identity)</td>
+    <td>identity</td>
+    <td>Yes</td>
+    <td>$1$</td>
+  </tr>
+  <tr>
+    <td>$2$ (transposition)</td>
+    <td>identity</td>
+    <td>Yes</td>
+    <td>$\displaystyle\binom{5}{2}\cdot 1! = 10$</td>
+  </tr>
+  <tr>
+    <td>$3$</td>
+    <td>$3$-cycle</td>
+    <td>Yes</td>
+    <td>$\displaystyle\binom{5}{3}\cdot 2! = 20$</td>
+  </tr>
+  <tr>
+    <td>$4$</td>
+    <td>product of two $2$-cycles</td>
+    <td><strong>No</strong></td>
+    <td>$0$ (excluded)</td>
+  </tr>
+  <tr>
+    <td>$5$</td>
+    <td>$5$-cycle</td>
+    <td>Yes</td>
+    <td>$\displaystyle\binom{5}{5}\cdot 4! = 24$</td>
+  </tr>
+</table>
+
+<p class="case-head">Verification for $k = 3$:</p>
+<p>
+Let $\sigma = (1\;2\;3)$. Then $\sigma^2(1) = 3$, $\sigma^2(3) = 2$, $\sigma^2(2) = 1$, giving
+$\sigma^2 = (1\;3\;2)$, which is indeed a $3$-cycle.
+</p>
+
+<p class="case-head">Verification for $k = 4$:</p>
+<p>
+Let $\sigma = (1\;2\;3\;4)$. Then $\sigma^2(1) = 3$, $\sigma^2(3) = 1$, $\sigma^2(2) = 4$, $\sigma^2(4) = 2$, giving $\sigma^2 = (1\;3)(2\;4)$, which is <em>not</em> a single cycle.
+</p>
+
+<p class="case-head">Verification for $k = 5$:</p>
+<p>
+Let $\sigma = (1\;2\;3\;4\;5)$. Then:
+$$\sigma^2(1) = 3, \quad \sigma^2(3) = 5, \quad \sigma^2(5) = 2, \quad \sigma^2(2) = 4, \quad \sigma^2(4) = 1,$$
+giving $\sigma^2 = (1\;3\;5\;2\;4)$, which is indeed a $5$-cycle.
+</p>
+
+<div class="diagram-container">
+<svg width="540" height="260" viewBox="0 0 540 260">
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3a6fa8"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <!-- Pentagon vertices: center (220, 130), radius 95 -->
+  <!-- v1 (top): (220, 35) -->
+  <!-- v2 (upper-right): (310.4, 85.5) -->
+  <!-- v3 (lower-right): (275.8, 185.5) -->
+  <!-- v4 (lower-left): (164.2, 185.5) -->
+  <!-- v5 (upper-left): (129.6, 85.5) -->
+
+  <!-- Blue arrows: σ = (1 2 3 4 5) along pentagon edges -->
+  <!-- 1 → 2 -->
+  <line x1="233" y1="42" x2="298" y2="80" stroke="#3a6fa8" stroke-width="2.2" marker-end="url(#arrowBlue)" opacity="0.7"/>
+  <!-- 2 → 3 -->
+  <line x1="312" y1="100" x2="283" y2="175" stroke="#3a6fa8" stroke-width="2.2" marker-end="url(#arrowBlue)" opacity="0.7"/>
+  <!-- 3 → 4 -->
+  <line x1="264" y1="189" x2="178" y2="189" stroke="#3a6fa8" stroke-width="2.2" marker-end="url(#arrowBlue)" opacity="0.7"/>
+  <!-- 4 → 5 -->
+  <line x1="156" y1="177" x2="135" y2="100" stroke="#3a6fa8" stroke-width="2.2" marker-end="url(#arrowBlue)" opacity="0.7"/>
+  <!-- 5 → 1 -->
+  <line x1="140" y1="78" x2="210" y2="42" stroke="#3a6fa8" stroke-width="2.2" marker-end="url(#arrowBlue)" opacity="0.7"/>
+
+  <!-- Red arrows: σ² = (1 3 5 2 4) along pentagram star -->
+  <!-- 1 → 3 -->
+  <line x1="228" y1="50" x2="273" y2="173" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arrowRed)" stroke-dasharray="6,3"/>
+  <!-- 3 → 5 -->
+  <line x1="263" y1="186" x2="143" y2="92" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arrowRed)" stroke-dasharray="6,3"/>
+  <!-- 5 → 2 -->
+  <line x1="143" y1="82" x2="298" y2="82" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arrowRed)" stroke-dasharray="6,3"/>
+  <!-- 2 → 4 -->
+  <line x1="300" y1="93" x2="175" y2="182" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arrowRed)" stroke-dasharray="6,3"/>
+  <!-- 4 → 1 -->
+  <line x1="166" y1="175" x2="217" y2="48" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arrowRed)" stroke-dasharray="6,3"/>
+
+  <!-- Vertex circles and labels -->
+  <circle cx="220" cy="35" r="18" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="220" y="41" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">1</text>
+
+  <circle cx="310" cy="86" r="18" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="310" y="92" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">2</text>
+
+  <circle cx="276" cy="186" r="18" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="276" y="192" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">3</text>
+
+  <circle cx="164" cy="186" r="18" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="164" y="192" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">4</text>
+
+  <circle cx="130" cy="86" r="18" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="130" y="92" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">5</text>
+
+  <!-- Legend -->
+  <line x1="340" y1="220" x2="370" y2="220" stroke="#3a6fa8" stroke-width="2.2"/>
+  <text x="378" y="225" font-size="13" fill="#3a6fa8">&#x03C3; = (1 2 3 4 5)</text>
+
+  <line x1="340" y1="242" x2="370" y2="242" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="6,3"/>
+  <text x="378" y="247" font-size="13" fill="#c0392b">&#x03C3;&#xB2; = (1 3 5 2 4)</text>
+</svg>
+<div class="diagram-caption">Figure 2. Pentagon vs. pentagram: $\sigma$ traverses edges (blue, connected), $\sigma^2$ traverses the star (red, still connected &mdash; a single cycle).</div>
+</div>
+
+<p>
+<strong>Total:</strong>
+$$1 + 10 + 20 + 0 + 24 \;=\; \boxed{55}$$
+</p>
+
+<span class="qed">$\blacksquare$</span>
+</div>
+
+<div class="remark">
+<strong>Remark (generalization).</strong>
+The lemma generalizes: for a $k$-cycle $\sigma$ and any positive integer $m$,
+the permutation $\sigma^m$ consists of $\gcd(m, k)$ disjoint cycles each of length
+$k / \gcd(m, k)$. In particular, $\sigma^m$ is again a cycle if and only if
+$\gcd(m, k) = 1$ or $k \mid m$ (where $\sigma^m = \id$). The proof is identical &mdash; $\sigma^m$ acts on indices by
+$i \mapsto i + m \pmod{k}$, and the orbit size of this map is
+$k / \gcd(m, k)$.
+<br><br>
+For the present problem ($m = 2$), this reduces to: $\sigma^2$ is a cycle
+iff $k$ is odd (or $k \leq 2$ trivially). One could therefore bypass
+the case analysis entirely and write: the qualifying cycles are precisely
+those of odd length, plus the transpositions. This gives
+$$\underbrace{1}_{\id} \;+\; \underbrace{\binom{5}{2} \cdot 1!}_{k=2} \;+\;
+  \underbrace{\binom{5}{3} \cdot 2!}_{k=3} \;+\;
+  \underbrace{\binom{5}{5} \cdot 4!}_{k=5} \;=\; 1 + 10 + 20 + 24 = 55.$$
+</div>
+
+</div>
+
+<hr>
+
+<!-- ═══════════════ PROBLEM 3 ═══════════════ -->
+<div class="problem">
+<div class="problem-title">Problem 3</div>
+
+<div class="theorem">
+  <strong>Theorem (Fundamental Theorem of Finitely Generated Abelian Groups).</strong>
+  Every finitely generated abelian group $G$ is isomorphic to
+  $$G \;\cong\; \Z^{\,r} \times \Z_{n_1} \times \Z_{n_2} \times \cdots \times \Z_{n_s}$$
+  where $r \geq 0$ and $n_1 \mid n_2 \mid \cdots \mid n_s$ with each $n_i > 1$.
+  The integer $r$ (the <em>free rank</em>) and the integers $n_1, \ldots, n_s$
+  (the <em>invariant factors</em>) are uniquely determined by $G$.
+  <br><br>
+  Equivalently, $G$ can be decomposed into <em>elementary divisors</em>
+  (prime-power cyclic factors), and the two decompositions determine each other.
+</div>
+
+<div class="claim">
+  <strong>Claim.</strong> The invariant factor decomposition of
+  $\Z_6 \times \Z_{12} \times \Z_{20}$ is
+  $\;\Z_2 \times \Z_{12} \times \Z_{60}$,
+  <br>i.e., $m_1 = 2$, $m_2 = 12$, $m_3 = 60$.
+</div>
+
+<div class="proof clearfix">
+<p class="proof-head">Proof.</p>
+
+<p class="step-head">Step 1: Primary (elementary divisor) decomposition via the Chinese Remainder Theorem.</p>
+
+<p>
+We use the following form of the CRT for cyclic groups:
+</p>
+
+<div class="theorem" style="border-left-color: #666;">
+<strong>Chinese Remainder Theorem.</strong>
+If $n = p_1^{a_1} p_2^{a_2} \cdots p_s^{a_s}$ is the prime factorization of $n$, then
+$$\Z_n \;\cong\; \Z_{p_1^{a_1}} \times \Z_{p_2^{a_2}} \times \cdots \times \Z_{p_s^{a_s}}.$$
+The isomorphism is given by the map $\;[x]_n \;\mapsto\; \bigl([x]_{p_1^{a_1}},\; [x]_{p_2^{a_2}},\; \ldots,\; [x]_{p_s^{a_s}}\bigr)$,
+which is well-defined because $p_i^{a_i} \mid n$ for each $i$.
+This is an isomorphism precisely because $\gcd(p_i^{a_i}, p_j^{a_j}) = 1$ for $i \neq j$.
+</div>
+
+<p>
+We apply this to each factor. First, the prime factorizations:
+$$6 = 2 \cdot 3, \qquad 12 = 2^2 \cdot 3, \qquad 20 = 2^2 \cdot 5.$$
+</p>
+
+<p>
+Applying the CRT to each:
+</p>
+
+<ul>
+  <li>$\Z_6 \cong \Z_2 \times \Z_3 \quad$ (since $\gcd(2, 3) = 1$)</li>
+  <li>$\Z_{12} \cong \Z_{2^2} \times \Z_3 = \Z_4 \times \Z_3 \quad$ (since $\gcd(4, 3) = 1$)</li>
+  <li>$\Z_{20} \cong \Z_{2^2} \times \Z_5 = \Z_4 \times \Z_5 \quad$ (since $\gcd(4, 5) = 1$)</li>
+</ul>
+
+<p>
+Now substitute into the original product and rearrange by prime:
+</p>
+
+$$\Z_6 \times \Z_{12} \times \Z_{20}
+  \;\cong\;
+  (\Z_2 \times \Z_3) \times (\Z_4 \times \Z_3) \times (\Z_4 \times \Z_5)$$
+
+$$=\;
+  \underbrace{\Z_2 \times \Z_4 \times \Z_4}_{2\text{-primary component } G_2}
+  \;\times\;
+  \underbrace{\Z_3 \times \Z_3}_{3\text{-primary component } G_3}
+  \;\times\;
+  \underbrace{\Z_5}_{5\text{-primary component } G_5}.$$
+
+<p>
+This uses associativity and commutativity of the direct product (valid in the
+category of abelian groups). The <em>elementary divisors</em> of the group are exactly
+these prime-power factors: $2, 4, 4, 3, 3, 5$.
+</p>
+
+<p>The overall decomposition pipeline is:</p>
+
+$$\begin{CD}
+\Z_6 \times \Z_{12} \times \Z_{20} @>{\text{CRT per factor}}>>
+G_2 \times G_3 \times G_5 @>{\text{recombine columns}}>>
+\Z_{m_1} \times \Z_{m_2} \times \Z_{m_3}
+\end{CD}$$
+
+<p class="step-head">Step 2: From elementary divisors to invariant factors.</p>
+
+<p>
+The passage from elementary divisors to invariant factors works as follows.
+For each prime $p$, list the $p$-power elementary divisors in non-decreasing order.
+Since different primes may contribute different numbers of factors, pad the
+shorter lists on the <em>left</em> with $1$'s so all lists reach the same length $r$
+(the maximum). Then the $j$-th invariant factor $m_j$ is the product of the $j$-th
+entries across all primes. Because we padded on the left and each column's entries
+are coprime (one entry per prime), the CRT guarantees
+$\Z_{m_j} \cong \prod_p \Z_{p\text{-entry in column }j}$, and the divisibility
+$m_j \mid m_{j+1}$ follows from the non-decreasing arrangement within each row.
+</p>
+
+<p>
+In our case, $r = 3$ (the $2$-primary component has $3$ factors, the most of any prime):
+</p>
+
+<table>
+  <tr>
+    <th>Prime $p$</th>
+    <th>Column 1 (smallest)</th>
+    <th>Column 2</th>
+    <th>Column 3 (largest)</th>
+  </tr>
+  <tr>
+    <td>$p = 2$: &ensp; $\Z_2 \times \Z_4 \times \Z_4$</td>
+    <td>$2^1 = 2$</td>
+    <td>$2^2 = 4$</td>
+    <td>$2^2 = 4$</td>
+  </tr>
+  <tr>
+    <td>$p = 3$: &ensp; $\Z_3 \times \Z_3$</td>
+    <td>$3^0 = 1$ (pad)</td>
+    <td>$3^1 = 3$</td>
+    <td>$3^1 = 3$</td>
+  </tr>
+  <tr>
+    <td>$p = 5$: &ensp; $\Z_5$</td>
+    <td>$5^0 = 1$ (pad)</td>
+    <td>$5^0 = 1$ (pad)</td>
+    <td>$5^1 = 5$</td>
+  </tr>
+  <tr style="background: #e8f0e8; font-weight: bold;">
+    <td>Invariant factor $m_j = \prod_p$</td>
+    <td>$m_1 = 2 \cdot 1 \cdot 1 = 2$</td>
+    <td>$m_2 = 4 \cdot 3 \cdot 1 = 12$</td>
+    <td>$m_3 = 4 \cdot 3 \cdot 5 = 60$</td>
+  </tr>
+</table>
+
+<p>
+Each invariant factor recombines via CRT:
+$$m_1 = 2, \qquad m_2 = 4 \cdot 3 = 12, \qquad m_3 = 4 \cdot 3 \cdot 5 = 60.$$
+Equivalently: $\;\Z_2 \cong \Z_2$, $\;\Z_{12} \cong \Z_4 \times \Z_3$, $\;\Z_{60} \cong \Z_4 \times \Z_3 \times \Z_5$.
+</p>
+
+<p class="step-head">Step 3: Verification.</p>
+
+<p>
+We verify the divisibility chain: $m_1 \mid m_2$ since $2 \mid 12$, and $m_2 \mid m_3$ since $12 \mid 60$, as required.
+The product $m_1 \cdot m_2 \cdot m_3 = 2 \cdot 12 \cdot 60 = 1440 = 6 \cdot 12 \cdot 20 = |G|$ confirms the order is preserved.
+</p>
+
+<p>
+As a consistency check, we reverse the process and recover the elementary divisors:
+$$\Z_2 \times \Z_{12} \times \Z_{60}
+    \;\overset{\text{CRT}}{\cong}\;
+    \Z_2 \times (\Z_4 \times \Z_3) \times (\Z_4 \times \Z_3 \times \Z_5)
+    \;=\;
+    \Z_2 \times \Z_4 \times \Z_4 \times \Z_3 \times \Z_3 \times \Z_5$$
+which agrees with the primary decomposition obtained in Step 1.
+By uniqueness of the invariant factor decomposition (guaranteed by the Fundamental Theorem),
+this is the only valid decomposition with $m_i > 1$ and $m_i \mid m_{i+1}$.
+</p>
+
+<p>
+Therefore: $\;\boxed{m_1 = 2, \quad m_2 = 12, \quad m_3 = 60.}$
+</p>
+
+<span class="qed">$\blacksquare$</span>
+</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ PROBLEM 4 ═══════════════ -->
+<div class="problem">
+<div class="problem-title">Problem 4</div>
+
+<div class="claim">
+  <strong>Claim.</strong> Let $H, K$ be subgroups of a group $G$ satisfying:
+  <br>(a) every element of $G$ is of the form $hk$ for some $h \in H$, $k \in K$;
+  <br>(b) $hk = kh$ for all $h \in H$, $k \in K$;
+  <br>(c) $H \cap K = \{e\}$.
+  <br>Then $G \cong H \times K$.
+</div>
+
+<div class="proof clearfix">
+<p class="proof-head">Proof.</p>
+
+<p>Define the map</p>
+$$\varphi : H \times K \longrightarrow G, \qquad \varphi(h, k) = hk.$$
+
+<p>The key structures are captured by the following commutative diagram, where
+$\iota_H : H \hookrightarrow G$ and $\iota_K : K \hookrightarrow G$ are the
+inclusion homomorphisms and $j_H(h) = (h, e)$, $j_K(k) = (e, k)$ are the
+canonical embeddings:</p>
+
+$$\begin{CD}
+H @>{j_H}>> H \times K @<{j_K}<< K \\
+@| @VV{\varphi}V @| \\
+H @>>{\iota_H}> G @<<{\iota_K}< K
+\end{CD}$$
+
+<p>We show that $\varphi$ is an isomorphism by verifying the three required properties.</p>
+
+<p class="step-head">Step 1: $\varphi$ is a homomorphism.</p>
+<p>
+Let $(h_1, k_1),\, (h_2, k_2) \in H \times K$. On one hand:
+$$\varphi\bigl((h_1, k_1)(h_2, k_2)\bigr)
+  = \varphi(h_1 h_2,\, k_1 k_2)
+  = h_1 h_2 \cdot k_1 k_2.$$
+On the other hand:
+$$\varphi(h_1, k_1) \cdot \varphi(h_2, k_2)
+  = h_1 k_1 \cdot h_2 k_2
+  = h_1 \underbrace{(k_1 h_2)}_{\overset{(b)}{=}\; h_2 k_1} k_2
+  = h_1 h_2 \cdot k_1 k_2.$$
+The two expressions agree, so $\varphi$ is a homomorphism.
+</p>
+
+<p class="step-head">Step 2: $\varphi$ is surjective.</p>
+<p>
+By condition (a), every $g \in G$ can be written as $g = hk$ for some $h \in H$,
+$k \in K$. Thus $g = \varphi(h, k)$, so $\varphi$ is surjective.
+</p>
+
+<p class="step-head">Step 3: $\varphi$ is injective.</p>
+<p>
+Suppose $\varphi(h, k) = e_G$, i.e., $hk = e$. Then:
+$$h = k^{-1}.$$
+Now $h \in H$ and $k^{-1} \in K$ (since $K$ is a subgroup, closed under inverses).
+Therefore:
+$$h = k^{-1} \in H \cap K \;\overset{(c)}{=}\; \{e\}.$$
+This forces $h = e$ and $k = e$, so $\ker \varphi = \{(e, e)\}$,
+meaning $\varphi$ is injective.
+</p>
+
+<p class="step-head">Conclusion.</p>
+<p>
+Since $\varphi$ is a bijective homomorphism, it is an isomorphism:
+$$\boxed{G \;\cong\; H \times K.}$$
+</p>
+
+<span class="qed">$\blacksquare$</span>
+</div>
+
+<div class="remark">
+<strong>Remark (universal property of the direct product in $\Grp$).</strong>
+In the category $\Grp$, the direct product $H \times K$ satisfies the following
+universal property: for any group $X$ with homomorphisms $f : X \to H$ and
+$g : X \to K$, there exists a unique homomorphism $(f, g) : X \to H \times K$
+making the diagram commute.
+
+$$\begin{CD}
+@. X \\
+@. @V{(f,\,g)}VV \\
+H @<<{\pi_H}< H \times K @>>{\pi_K}> K \\
+@. @VV{\varphi\;\cong}V \\
+@. G
+\end{CD}$$
+
+Conditions (a)&ndash;(c) assert precisely that $G$ realizes this universal property
+<em>internally</em>: the multiplication map $\varphi(h,k) = hk$ is the canonical
+comparison morphism, and the three conditions force it to be an isomorphism.
+This is a special case of the general principle that a group is an internal
+direct product if and only if the canonical map from the corresponding external
+direct product is an isomorphism.
+</div>
+
+<div class="remark">
+<strong>Remark (alternative proof via uniqueness of representation).</strong>
+One can also prove the isomorphism by working from $G$ to $H \times K$, rather than
+the other direction. By (a), every $g \in G$ admits a factorization $g = hk$. We first
+show this factorization is <em>unique</em>: if $h_1 k_1 = h_2 k_2$ with $h_i \in H$, $k_i \in K$,
+then $h_2^{-1} h_1 = k_2 k_1^{-1}$. The left side lies in $H$ and the right in $K$,
+so both lie in $H \cap K = \{e\}$ by (c), giving $h_1 = h_2$ and $k_1 = k_2$.
+<br><br>
+Now define $\psi : G \to H \times K$ by $\psi(g) = (h, k)$ where $g = hk$ is the
+unique factorization. This is well-defined by uniqueness, and is evidently the
+inverse of $\varphi$. To see that $\psi$ is a homomorphism (equivalently, that
+$\varphi$ is), one uses condition (b) exactly as in Step 1 above.
+This approach has the advantage of making the bijection between $G$ and $H \times K$
+manifest before verifying the algebraic structure.
+</div>
+
+</div>
+
+<hr>
+<div style="text-align: center; color: #999; font-size: 0.85em; margin: 2em 0;">
+&mdash; End of Solutions &mdash;
+</div>
+
+</body>
+</html>
