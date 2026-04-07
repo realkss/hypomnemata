@@ -28,21 +28,17 @@ This opening chapter teaches the habit of seeing algebraic objects as **sets equ
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof that $(\mathbb{Z}, +)$ is a group</summary>
+> [!info]- Proof that (Z, +) is a group
+>
+> Let $m,n,k \in \mathbb{Z}$. Since the integers are closed under addition, $m+n \in \mathbb{Z}$. Associativity holds because ordinary integer addition satisfies $(m+n)+k = m+(n+k)$. The element $0$ is an identity because $m+0=0+m=m$ for every $m \in \mathbb{Z}$. Finally, each $m \in \mathbb{Z}$ has inverse $-m$, since $m+(-m)=(-m)+m=0$. Thus $(\mathbb{Z}, +)$ satisfies closure, associativity, identity, and inverses, so it is a group. It is abelian because $m+n=n+m$ for all integers $m,n$.
 
-Let $m,n,k \in \mathbb{Z}$. Since the integers are closed under addition, $m+n \in \mathbb{Z}$. Associativity holds because ordinary integer addition satisfies $(m+n)+k = m+(n+k)$. The element $0$ is an identity because $m+0=0+m=m$ for every $m \in \mathbb{Z}$. Finally, each $m \in \mathbb{Z}$ has inverse $-m$, since $m+(-m)=(-m)+m=0$. Thus $(\mathbb{Z}, +)$ satisfies closure, associativity, identity, and inverses, so it is a group. It is abelian because $m+n=n+m$ for all integers $m,n$.
-</details>
-
-<details>
-<summary>Why $M_n(\mathbb{R})$ under multiplication is not a group</summary>
-
-Closure and associativity do hold for matrix multiplication, and the identity matrix $I_n$ lies in $M_n(\mathbb{R})$. The failure is invertibility. Take any singular matrix $A \in M_n(\mathbb{R})$, for example the zero matrix. If $A$ had a multiplicative inverse $B$, then $AB=I_n$. Taking determinants would give
-$$
-\det(A)\det(B)=\det(I_n)=1.
-$$
-But $\det(A)=0$ for a singular matrix, so the left-hand side would be $0$, a contradiction. Therefore not every element of $M_n(\mathbb{R})$ is invertible, so $M_n(\mathbb{R})$ is not a group under multiplication.
-</details>
+> [!info]- Why M_n(R) under multiplication is not a group
+>
+> Closure and associativity do hold for matrix multiplication, and the identity matrix $I_n$ lies in $M_n(\mathbb{R})$. The failure is invertibility. Take any singular matrix $A \in M_n(\mathbb{R})$, for example the zero matrix. If $A$ had a multiplicative inverse $B$, then $AB=I_n$. Taking determinants would give
+> $$
+> \det(A)\det(B)=\det(I_n)=1.
+> $$
+> But $\det(A)=0$ for a singular matrix, so the left-hand side would be $0$, a contradiction. Therefore not every element of $M_n(\mathbb{R})$ is invertible, so $M_n(\mathbb{R})$ is not a group under multiplication.
 
 ## Companion exercises
 

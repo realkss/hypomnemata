@@ -23,42 +23,38 @@ A nonempty subset $H$ of $G$ is a subgroup if and only if $xy^{-1} \in H$ for al
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof of the subgroup test</summary>
+> [!info]- Proof of the subgroup test
+>
+> Suppose first that $H$ is a subgroup of $G$. Then $H$ is nonempty, and if $x,y \in H$, then $y^{-1} \in H$ because $H$ is a group, so closure in $H$ gives
+> $$
+> xy^{-1} \in H.
+> $$
+>
+> Conversely, assume $H$ is nonempty and satisfies $xy^{-1} \in H$ for all $x,y \in H$. Pick $h \in H$. Taking $x=h$ and $y=h$ gives
+> $$
+> hh^{-1}=e \in H.
+> $$
+> Now if $x \in H$, use $e,x \in H$ to obtain
+> $$
+> ex^{-1}=x^{-1} \in H.
+> $$
+> Finally, if $x,y \in H$, then $y^{-1} \in H$, so using $x$ and $y^{-1}$ in the hypothesis gives
+> $$
+> x(y^{-1})^{-1}=xy \in H.
+> $$
+> Thus $H$ contains the identity, is closed under inverses, and is closed under the group operation. Therefore $H$ is a subgroup of $G$.
 
-Suppose first that $H$ is a subgroup of $G$. Then $H$ is nonempty, and if $x,y \in H$, then $y^{-1} \in H$ because $H$ is a group, so closure in $H$ gives
-$$
-xy^{-1} \in H.
-$$
-
-Conversely, assume $H$ is nonempty and satisfies $xy^{-1} \in H$ for all $x,y \in H$. Pick $h \in H$. Taking $x=h$ and $y=h$ gives
-$$
-hh^{-1}=e \in H.
-$$
-Now if $x \in H$, use $e,x \in H$ to obtain
-$$
-ex^{-1}=x^{-1} \in H.
-$$
-Finally, if $x,y \in H$, then $y^{-1} \in H$, so using $x$ and $y^{-1}$ in the hypothesis gives
-$$
-x(y^{-1})^{-1}=xy \in H.
-$$
-Thus $H$ contains the identity, is closed under inverses, and is closed under the group operation. Therefore $H$ is a subgroup of $G$.
-</details>
-
-<details>
-<summary>Proof that intersections of subgroups are subgroups</summary>
-
-Let $\{H_i\}_{i \in I}$ be a family of subgroups of $G$, and set
-$$
-H=\bigcap_{i \in I} H_i.
-$$
-Because each $H_i$ contains the identity, $e \in H$, so $H$ is nonempty. Now take $x,y \in H$. Then $x,y \in H_i$ for every $i \in I$. Since each $H_i$ is a subgroup, we have $xy^{-1} \in H_i$ for every $i$. Hence $xy^{-1}$ lies in the intersection:
-$$
-xy^{-1} \in \bigcap_{i \in I} H_i = H.
-$$
-By the subgroup test, $H$ is a subgroup of $G$.
-</details>
+> [!info]- Proof that intersections of subgroups are subgroups
+>
+> Let $\{H_i\}_{i \in I}$ be a family of subgroups of $G$, and set
+> $$
+> H=\bigcap_{i \in I} H_i.
+> $$
+> Because each $H_i$ contains the identity, $e \in H$, so $H$ is nonempty. Now take $x,y \in H$. Then $x,y \in H_i$ for every $i \in I$. Since each $H_i$ is a subgroup, we have $xy^{-1} \in H_i$ for every $i$. Hence $xy^{-1}$ lies in the intersection:
+> $$
+> xy^{-1} \in \bigcap_{i \in I} H_i = H.
+> $$
+> By the subgroup test, $H$ is a subgroup of $G$.
 
 ## Companion exercises
 

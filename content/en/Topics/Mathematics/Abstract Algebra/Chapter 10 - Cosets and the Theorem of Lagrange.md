@@ -30,41 +30,37 @@ Cosets partition a group into translated copies of a subgroup, and Lagrange's th
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof that left cosets partition the group</summary>
+> [!info]- Proof that left cosets partition the group
+>
+> Let $H \le G$. Every element $g \in G$ belongs to the left coset $gH$, so the union of all left cosets is all of $G$. It remains to show that two left cosets are either equal or disjoint.
+>
+> Suppose $g_1H$ and $g_2H$ have a common element $x$. Then
+> $$
+> x=g_1h_1=g_2h_2
+> $$
+> for some $h_1,h_2 \in H$. Rearranging gives
+> $$
+> g_2^{-1}g_1=h_2h_1^{-1} \in H.
+> $$
+> Now if $y \in g_1H$, say $y=g_1h$, then
+> $$
+> y=g_2(g_2^{-1}g_1)h.
+> $$
+> Since $g_2^{-1}g_1 \in H$ and $h \in H$, the product $(g_2^{-1}g_1)h$ lies in $H$, so $y \in g_2H$. Thus $g_1H \subseteq g_2H$. By symmetry, $g_2H \subseteq g_1H$, so the cosets are equal. Therefore left cosets form a partition of $G$.
 
-Let $H \le G$. Every element $g \in G$ belongs to the left coset $gH$, so the union of all left cosets is all of $G$. It remains to show that two left cosets are either equal or disjoint.
-
-Suppose $g_1H$ and $g_2H$ have a common element $x$. Then
-$$
-x=g_1h_1=g_2h_2
-$$
-for some $h_1,h_2 \in H$. Rearranging gives
-$$
-g_2^{-1}g_1=h_2h_1^{-1} \in H.
-$$
-Now if $y \in g_1H$, say $y=g_1h$, then
-$$
-y=g_2(g_2^{-1}g_1)h.
-$$
-Since $g_2^{-1}g_1 \in H$ and $h \in H$, the product $(g_2^{-1}g_1)h$ lies in $H$, so $y \in g_2H$. Thus $g_1H \subseteq g_2H$. By symmetry, $g_2H \subseteq g_1H$, so the cosets are equal. Therefore left cosets form a partition of $G$.
-</details>
-
-<details>
-<summary>Proof of Lagrange's theorem</summary>
-
-Assume $G$ is finite and $H \le G$. By the previous result, the left cosets of $H$ partition $G$. If $gH$ is any left coset, the map
-$$
-H \to gH,\qquad h \mapsto gh
-$$
-is bijective: it is injective by cancellation, and surjective by definition of the coset. Therefore every left coset has exactly $|H|$ elements.
-
-If there are $[G:H]$ distinct left cosets, and each has size $|H|$, then the partition gives
-$$
-|G|=[G:H]\cdot |H|.
-$$
-Hence $|H|$ divides $|G|$. This is Lagrange's theorem.
-</details>
+> [!info]- Proof of Lagrange's theorem
+>
+> Assume $G$ is finite and $H \le G$. By the previous result, the left cosets of $H$ partition $G$. If $gH$ is any left coset, the map
+> $$
+> H \to gH,\qquad h \mapsto gh
+> $$
+> is bijective: it is injective by cancellation, and surjective by definition of the coset. Therefore every left coset has exactly $|H|$ elements.
+>
+> If there are $[G:H]$ distinct left cosets, and each has size $|H|$, then the partition gives
+> $$
+> |G|=[G:H]\cdot |H|.
+> $$
+> Hence $|H|$ divides $|G|$. This is Lagrange's theorem.
 
 ## Companion exercises
 

@@ -30,39 +30,35 @@ Coset multiplication is well defined **if and only if** the subgroup is normal.
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof that every subgroup of an abelian group is normal</summary>
+> [!info]- Proof that every subgroup of an abelian group is normal
+>
+> Let $G$ be abelian and let $N \le G$. For any $g \in G$ and $n \in N$, commutativity gives
+> $$
+> gn=ng.
+> $$
+> Thus every element of the left coset $gN$ already lies in the right coset $Ng$, so $gN \subseteq Ng$. The same argument in reverse shows $Ng \subseteq gN$. Therefore $gN=Ng$ for every $g \in G$, and $N$ is normal.
 
-Let $G$ be abelian and let $N \le G$. For any $g \in G$ and $n \in N$, commutativity gives
-$$
-gn=ng.
-$$
-Thus every element of the left coset $gN$ already lies in the right coset $Ng$, so $gN \subseteq Ng$. The same argument in reverse shows $Ng \subseteq gN$. Therefore $gN=Ng$ for every $g \in G$, and $N$ is normal.
-</details>
-
-<details>
-<summary>Proof that coset multiplication is well defined iff the subgroup is normal</summary>
-
-Assume first that $N \trianglelefteq G$. Suppose $gN=g'N$ and $hN=h'N$. Then $g'=gn_1$ and $h'=hn_2$ for some $n_1,n_2 \in N$. Hence
-$$
-g'h'N=(gn_1)(hn_2)N.
-$$
-Because $N$ is normal, $n_1h=hn_3$ for some $n_3 \in N$. Therefore
-$$
-(gn_1)(hn_2)N=g(hn_3)n_2N=gh(n_3n_2)N=ghN.
-$$
-So the product of cosets does not depend on the chosen representatives.
-
-Conversely, assume the rule $(gN)(hN)=ghN$ is well defined on cosets. Fix $g \in G$ and let $n \in N$. Since $gnN=gN$, well-definedness of multiplication with $g^{-1}N$ gives
-$$
-(gnN)(g^{-1}N)=(gN)(g^{-1}N).
-$$
-Evaluating both sides,
-$$
-gng^{-1}N=gg^{-1}N=N.
-$$
-Thus $gng^{-1} \in N$ for every $n \in N$, so $gNg^{-1}\subseteq N$. Replacing $g$ by $g^{-1}$ yields the reverse inclusion, hence $gNg^{-1}=N$. Therefore $N$ is normal.
-</details>
+> [!info]- Proof that coset multiplication is well defined iff the subgroup is normal
+>
+> Assume first that $N \trianglelefteq G$. Suppose $gN=g'N$ and $hN=h'N$. Then $g'=gn_1$ and $h'=hn_2$ for some $n_1,n_2 \in N$. Hence
+> $$
+> g'h'N=(gn_1)(hn_2)N.
+> $$
+> Because $N$ is normal, $n_1h=hn_3$ for some $n_3 \in N$. Therefore
+> $$
+> (gn_1)(hn_2)N=g(hn_3)n_2N=gh(n_3n_2)N=ghN.
+> $$
+> So the product of cosets does not depend on the chosen representatives.
+>
+> Conversely, assume the rule $(gN)(hN)=ghN$ is well defined on cosets. Fix $g \in G$ and let $n \in N$. Since $gnN=gN$, well-definedness of multiplication with $g^{-1}N$ gives
+> $$
+> (gnN)(g^{-1}N)=(gN)(g^{-1}N).
+> $$
+> Evaluating both sides,
+> $$
+> gng^{-1}N=gg^{-1}N=N.
+> $$
+> Thus $gng^{-1} \in N$ for every $n \in N$, so $gNg^{-1}\subseteq N$. Replacing $g$ by $g^{-1}$ yields the reverse inclusion, hence $gNg^{-1}=N$. Therefore $N$ is normal.
 
 ## Companion exercises
 

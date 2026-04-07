@@ -28,48 +28,47 @@ Direct products build new groups from old ones, and finitely generated abelian g
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof that $G \times H$ is a group</summary>
+> [!info]- Proof that the direct product is a group
+>
+> Define the operation on $G \times H$ by
+> $$
+> (g_1,h_1)(g_2,h_2)=(g_1g_2,h_1h_2).
+> $$
+> Closure holds because $g_1g_2 \in G$ and $h_1h_2 \in H$. Associativity follows componentwise:
+> $$
+> \begin{aligned}
+> \bigl((g_1,h_1)(g_2,h_2)\bigr)(g_3,h_3)
+> &=((g_1g_2)g_3,(h_1h_2)h_3) \\
+> &=(g_1(g_2g_3),h_1(h_2h_3)) \\
+> &=(g_1,h_1)\bigl((g_2,h_2)(g_3,h_3)\bigr).
+> \end{aligned}
+> $$
+> The identity is $(e_G,e_H)$, since
+> $$
+> (g,h)(e_G,e_H)=(ge_G,he_H)=(g,h).
+> $$
+> The same computation on the other side gives $(e_G,e_H)(g,h)=(g,h)$. Finally, the inverse of $(g,h)$ is $(g^{-1},h^{-1})$, because
+> $$
+> (g,h)(g^{-1},h^{-1})=(gg^{-1},hh^{-1})=(e_G,e_H).
+> $$
+> Therefore $G \times H$ is a group.
 
-Define the operation on $G \times H$ by
-$$
-(g_1,h_1)(g_2,h_2)=(g_1g_2,h_1h_2).
-$$
-Closure holds because $g_1g_2 \in G$ and $h_1h_2 \in H$. Associativity follows componentwise:
-$$
-\bigl((g_1,h_1)(g_2,h_2)\bigr)(g_3,h_3)
-=((g_1g_2)g_3,(h_1h_2)h_3)
-=(g_1(g_2g_3),h_1(h_2h_3))
-=(g_1,h_1)\bigl((g_2,h_2)(g_3,h_3)\bigr).
-$$
-The identity is $(e_G,e_H)$, since
-$$
-(g,h)(e_G,e_H)=(ge_G,he_H)=(g,h)
-$$
-and similarly on the other side. Finally, the inverse of $(g,h)$ is $(g^{-1},h^{-1})$, because
-$$
-(g,h)(g^{-1},h^{-1})=(gg^{-1},hh^{-1})=(e_G,e_H).
-$$
-Therefore $G \times H$ is a group.
-</details>
-
-<details>
-<summary>Proof that $\mathbb{Z}_m \times \mathbb{Z}_n$ is cyclic iff $\gcd(m,n)=1$</summary>
-
-First assume $\gcd(m,n)=1$. Consider the element $(\overline{1},\overline{1})$. Its order is the least positive integer $r$ such that
-$$
-r\overline{1}=\overline{0}\text{ in }\mathbb{Z}_m
-\quad\text{and}\quad
-r\overline{1}=\overline{0}\text{ in }\mathbb{Z}_n.
-$$
-So $r$ must be a common multiple of $m$ and $n$, and the least such $r$ is $\operatorname{lcm}(m,n)=mn$ because $\gcd(m,n)=1$. Since the group itself has $mn$ elements, the element $(\overline{1},\overline{1})$ generates the whole group.
-
-Conversely, assume $\gcd(m,n)=d>1$. For any element $(\overline{a},\overline{b})$, its order is
-$$
-\operatorname{lcm}\bigl(\operatorname{ord}(\overline{a}),\operatorname{ord}(\overline{b})\bigr),
-$$
-which divides $\operatorname{lcm}(m,n)=mn/d$. Because $d>1$, we have $mn/d<mn=|\mathbb{Z}_m \times \mathbb{Z}_n|$. So no element has order equal to the size of the group, and therefore the group cannot be cyclic.
-</details>
+> [!info]- Criterion for when Z_m x Z_n is cyclic
+>
+> First assume $\gcd(m,n)=1$. Consider the element $(\overline{1},\overline{1})$. Its order is the least positive integer $r$ such that
+> $$
+> \begin{aligned}
+> r\overline{1}&=\overline{0}\text{ in }\mathbb{Z}_m, \\
+> r\overline{1}&=\overline{0}\text{ in }\mathbb{Z}_n.
+> \end{aligned}
+> $$
+> So $r$ must be a common multiple of $m$ and $n$, and the least such $r$ is $\operatorname{lcm}(m,n)=mn$ because $\gcd(m,n)=1$. Since the group itself has $mn$ elements, the element $(\overline{1},\overline{1})$ generates the whole group.
+>
+> Conversely, assume $\gcd(m,n)=d>1$. For any element $(\overline{a},\overline{b})$, its order is
+> $$
+> \operatorname{lcm}\bigl(\operatorname{ord}(\overline{a}),\operatorname{ord}(\overline{b})\bigr),
+> $$
+> which divides $\operatorname{lcm}(m,n)=mn/d$. Because $d>1$, we have $mn/d<mn=|\mathbb{Z}_m \times \mathbb{Z}_n|$. So no element has order equal to the size of the group, and therefore the group cannot be cyclic.
 
 ## Companion exercises
 

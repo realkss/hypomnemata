@@ -27,27 +27,23 @@ A binary operation on $S$ is a map $\ast: S \times S \to S$. Closure comes first
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof that a two-sided identity is unique</summary>
+> [!info]- Proof that a two-sided identity is unique
+>
+> Assume $e$ and $f$ are both two-sided identities for the same binary operation on $S$. Because $e$ is an identity, $e \ast f = f$. Because $f$ is an identity, $e \ast f = e$. Hence $e=f$. So a two-sided identity, if it exists, is unique.
 
-Assume $e$ and $f$ are both two-sided identities for the same binary operation on $S$. Because $e$ is an identity, $e \ast f = f$. Because $f$ is an identity, $e \ast f = e$. Hence $e=f$. So a two-sided identity, if it exists, is unique.
-</details>
-
-<details>
-<summary>Proof that inverses are unique once the identity is fixed</summary>
-
-Fix an identity element $e$ and let $a \in S$. Suppose $b$ and $c$ are both two-sided inverses of $a$, so
-$$
-a \ast b=b \ast a=e
-\quad\text{and}\quad
-a \ast c=c \ast a=e.
-$$
-Then
-$$
-b=b \ast e=b \ast (a \ast c)=(b \ast a) \ast c=e \ast c=c.
-$$
-Thus $b=c$. Therefore an element cannot have two different two-sided inverses.
-</details>
+> [!info]- Proof that inverses are unique once the identity is fixed
+>
+> Fix an identity element $e$ and let $a \in S$. Suppose $b$ and $c$ are both two-sided inverses of $a$, so
+> $$
+> a \ast b=b \ast a=e
+> \quad\text{and}\quad
+> a \ast c=c \ast a=e.
+> $$
+> Then
+> $$
+> b=b \ast e=b \ast (a \ast c)=(b \ast a) \ast c=e \ast c=c.
+> $$
+> Thus $b=c$. Therefore an element cannot have two different two-sided inverses.
 
 ## Companion exercises
 

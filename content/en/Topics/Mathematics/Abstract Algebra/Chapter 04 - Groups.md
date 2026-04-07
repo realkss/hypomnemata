@@ -31,29 +31,25 @@ If also $ab = ba$ for all $a,b$, the group is **abelian**.
 
 ## Toggleable proofs
 
-<details>
-<summary>Proof of the cancellation laws</summary>
+> [!info]- Proof of the cancellation laws
+>
+> Let $G$ be a group and suppose $ax=ay$. Multiply on the left by $a^{-1}$:
+> $$
+> a^{-1}(ax)=a^{-1}(ay).
+> $$
+> By associativity,
+> $$
+> (a^{-1}a)x=(a^{-1}a)y,
+> $$
+> so $ex=ey$, hence $x=y$. This proves left cancellation. The proof of right cancellation is analogous: if $xa=ya$, multiply on the right by $a^{-1}$ to obtain $x=y$.
 
-Let $G$ be a group and suppose $ax=ay$. Multiply on the left by $a^{-1}$:
-$$
-a^{-1}(ax)=a^{-1}(ay).
-$$
-By associativity,
-$$
-(a^{-1}a)x=(a^{-1}a)y,
-$$
-so $ex=ey$, hence $x=y$. This proves left cancellation. The proof of right cancellation is analogous: if $xa=ya$, multiply on the right by $a^{-1}$ to obtain $x=y$.
-</details>
-
-<details>
-<summary>Why the equation $ax=b$ has a unique solution</summary>
-
-Existence: multiply $ax=b$ on the left by $a^{-1}$. Then
-$$
-x=a^{-1}b.
-$$
-So $x=a^{-1}b$ is a solution. Uniqueness: if $x_1$ and $x_2$ both satisfy $ax=b$, then $ax_1=ax_2$. By the cancellation law, $x_1=x_2$. Therefore the solution is unique.
-</details>
+> [!info]- Why the equation ax=b has a unique solution
+>
+> Existence: multiply $ax=b$ on the left by $a^{-1}$. Then
+> $$
+> x=a^{-1}b.
+> $$
+> So $x=a^{-1}b$ is a solution. Uniqueness: if $x_1$ and $x_2$ both satisfy $ax=b$, then $ax_1=ax_2$. By the cancellation law, $x_1=x_2$. Therefore the solution is unique.
 
 ## Companion exercises
 
