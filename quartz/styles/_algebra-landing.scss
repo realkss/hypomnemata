@@ -1,0 +1,500 @@
+
+/* Algebra landing page */
+body[data-slug="en/Topics/Mathematics/Abstract-Algebra/index"] .center {
+  max-width: min(100%, 72rem);
+}
+
+body[data-slug="en/Topics/Mathematics/Abstract-Algebra/index"] article.algebra-landing {
+  font-size: 1.06rem;
+}
+
+body[data-slug="en/Topics/Mathematics/Abstract-Algebra/index"] article.algebra-landing > p:first-of-type::first-letter {
+  float: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.algebra-landing .algebra-atlas {
+  display: grid;
+  gap: 1.35rem;
+}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.algebra-landing .algebra-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.85fr);
+  gap: 1rem;
+  padding: 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 24%, var(--lightgray));
+  border-radius: 1.4rem;
+  background:
+    radial-gradient(circle at top right, rgba(92, 122, 107, 0.1), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(139, 107, 44, 0.08), transparent 24%),
+    linear-gradient(145deg, rgba(255, 250, 241, 0.96), rgba(246, 238, 224, 0.92));
+  box-shadow: 0 18px 38px rgba(72, 88, 78, 0.07);
+  overflow: hidden;
+}
+
+.algebra-landing .algebra-hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% auto auto 58%;
+  width: 16rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(92, 122, 107, 0.1);
+  box-shadow:
+    0 0 0 1.2rem rgba(92, 122, 107, 0.04),
+    0 0 0 2.4rem rgba(92, 122, 107, 0.02);
+  pointer-events: none;
+}
+
+.algebra-landing .algebra-hero__copy,
+.algebra-landing .algebra-hero__tools {
+  position: relative;
+  z-index: 1;
+}
+
+.algebra-landing .algebra-hero__eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.algebra-landing .algebra-hero__headline {
+  margin: 0;
+  max-width: 16ch;
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: clamp(2rem, 1.55rem + 1.3vw, 3.1rem);
+  line-height: 0.98;
+  text-wrap: balance;
+  color: var(--dark);
+}
+
+.algebra-landing .algebra-hero__lede {
+  margin: 0.9rem 0 0;
+  max-width: 41rem;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--darkgray);
+}
+
+.algebra-landing .algebra-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.algebra-landing .algebra-hero__tags span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.38rem 0.72rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 16%, var(--lightgray));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, var(--dark) 84%, var(--secondary));
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+/* ── Study Tools Panel ─────────────────────────────────── */
+.algebra-landing .algebra-hero__tools {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 239, 227, 0.72));
+  backdrop-filter: blur(4px);
+}
+
+.algebra-landing .algebra-hero__tools-label {
+  margin: 0;
+  color: var(--secondary);
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.algebra-landing .algebra-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.algebra-landing .algebra-tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 3.4rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(248, 243, 234, 0.68));
+  color: var(--dark);
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: 0.84rem;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.algebra-landing .algebra-tool:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--light) 78%, var(--secondary) 22%);
+  border-color: color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
+}
+
+/* ── Inscription ───────────────────────────────────────── */
+.algebra-landing .algebra-inscription {
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(248, 242, 230, 0.72));
+  text-align: center;
+}
+
+.algebra-landing .algebra-inscription__motto,
+.algebra-landing .algebra-inscription__translation {
+  margin: 0;
+  font-style: italic;
+}
+
+.algebra-landing .algebra-inscription__motto {
+  font-size: 1.22rem;
+  color: color-mix(in srgb, var(--dark) 86%, var(--secondary));
+}
+
+.algebra-landing .algebra-inscription__translation {
+  margin-top: 0.28rem;
+  color: var(--darkgray);
+  font-size: 0.98rem;
+}
+
+/* ── Section layout ────────────────────────────────────── */
+.algebra-landing .algebra-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.algebra-landing .algebra-section__header {
+  max-width: 44rem;
+}
+
+.algebra-landing .algebra-section__kicker {
+  margin: 0 0 0.45rem;
+  color: var(--secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.algebra-landing .algebra-section__header h2 {
+  margin: 0;
+}
+
+.algebra-landing .algebra-section__header p:last-child {
+  margin-bottom: 0;
+  color: var(--darkgray);
+}
+
+/* ── Chapter group ─────────────────────────────────────── */
+.algebra-landing .algebra-group {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.algebra-landing .algebra-group__label {
+  margin: 0;
+  color: color-mix(in srgb, var(--secondary) 72%, var(--dark));
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.algebra-landing .algebra-chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.85rem;
+}
+
+/* ── Chapter card ──────────────────────────────────────── */
+.algebra-landing .algebra-chapter {
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.05rem 1rem 0.95rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
+  box-shadow: 0 8px 22px rgba(72, 88, 78, 0.04);
+  color: var(--dark);
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.algebra-landing .algebra-chapter:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(72, 88, 78, 0.09);
+  border-color: color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
+}
+
+.algebra-landing .algebra-chapter::before {
+  content: attr(data-ch);
+  position: absolute;
+  right: 0.4rem;
+  bottom: -0.2rem;
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: 4.2rem;
+  line-height: 1;
+  color: rgba(139, 107, 44, 0.07);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.algebra-landing .algebra-chapter:hover::before {
+  opacity: 1;
+  color: rgba(139, 107, 44, 0.12);
+  transform: scale(1.06);
+}
+
+.algebra-landing .algebra-chapter strong {
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: 0.98rem;
+  color: var(--dark);
+  line-height: 1.2;
+}
+
+.algebra-landing .algebra-chapter span {
+  color: var(--darkgray);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+/* ── Method cards ──────────────────────────────────────── */
+.algebra-landing .algebra-method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.algebra-landing .algebra-method-card {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  min-height: 10rem;
+  padding: 1rem 0.95rem 0.9rem;
+  border-radius: 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 18%, var(--lightgray));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 243, 231, 0.72));
+  overflow: hidden;
+}
+
+.algebra-landing .algebra-method-card::before {
+  content: attr(data-step);
+  position: absolute;
+  right: 0.65rem;
+  bottom: 0.2rem;
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: rgba(139, 107, 44, 0.09);
+}
+
+.algebra-landing .algebra-method-card strong {
+  font-family: "Cinzel", Palatino, "Palatino Linotype", serif;
+  color: var(--dark);
+}
+
+.algebra-landing .algebra-method-card p {
+  margin: 0;
+  color: var(--darkgray);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+/* ── Scope note ────────────────────────────────────────── */
+.algebra-landing .algebra-scope {
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--secondary) 14%, var(--lightgray));
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.algebra-landing .algebra-scope p {
+  margin: 0 0 0.5rem;
+  color: var(--darkgray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.algebra-landing .algebra-scope p:last-child {
+  margin-bottom: 0;
+}
+
+.algebra-landing .algebra-scope ul {
+  margin: 0.3rem 0 0.6rem;
+  padding-left: 1.2rem;
+  color: var(--darkgray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ── Dark mode ─────────────────────────────────────────── */
+[saved-theme="dark"] body[data-slug="en/Topics/Mathematics/Abstract-Algebra/index"] article.algebra-landing,
+[saved-theme="dark"] .algebra-landing .algebra-hero__lede,
+[saved-theme="dark"] .algebra-landing .algebra-section__header p:last-child,
+[saved-theme="dark"] .algebra-landing .algebra-chapter span,
+[saved-theme="dark"] .algebra-landing .algebra-method-card p,
+[saved-theme="dark"] .algebra-landing .algebra-scope p,
+[saved-theme="dark"] .algebra-landing .algebra-scope ul {
+  color: #d8ccb5;
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero,
+[saved-theme="dark"] .algebra-landing .algebra-inscription,
+[saved-theme="dark"] .algebra-landing .algebra-chapter,
+[saved-theme="dark"] .algebra-landing .algebra-method-card,
+[saved-theme="dark"] .algebra-landing .algebra-hero__tools,
+[saved-theme="dark"] .algebra-landing .algebra-tool {
+  border-color: rgba(198, 161, 91, 0.22);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero {
+  background:
+    radial-gradient(circle at top right, rgba(92, 122, 107, 0.14), transparent 26%),
+    radial-gradient(circle at bottom left, rgba(201, 164, 95, 0.1), transparent 24%),
+    linear-gradient(145deg, rgba(24, 26, 33, 0.98), rgba(15, 17, 22, 0.98));
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero::before {
+  border-color: rgba(92, 122, 107, 0.14);
+  box-shadow:
+    0 0 0 1.2rem rgba(92, 122, 107, 0.05),
+    0 0 0 2.4rem rgba(92, 122, 107, 0.03);
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero__headline,
+[saved-theme="dark"] .algebra-landing .algebra-chapter strong,
+[saved-theme="dark"] .algebra-landing .algebra-method-card strong,
+[saved-theme="dark"] .algebra-landing .algebra-section__header h2 {
+  color: #f3ead8;
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero__tags span,
+[saved-theme="dark"] .algebra-landing .algebra-tool {
+  border-color: rgba(201, 164, 95, 0.24);
+  background: rgba(201, 164, 95, 0.08);
+  color: #f0e2c9;
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-tool:hover {
+  background: rgba(201, 164, 95, 0.16);
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero__eyebrow,
+[saved-theme="dark"] .algebra-landing .algebra-section__kicker,
+[saved-theme="dark"] .algebra-landing .algebra-group__label {
+  color: #c9a45f;
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-inscription {
+  background: linear-gradient(180deg, rgba(29, 33, 41, 0.94), rgba(21, 24, 30, 0.94));
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-inscription__motto {
+  color: #f0ddb6;
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-inscription__translation {
+  color: #d8ccb5;
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-chapter,
+[saved-theme="dark"] .algebra-landing .algebra-method-card {
+  background: linear-gradient(180deg, rgba(31, 34, 43, 0.94), rgba(22, 25, 32, 0.94));
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-chapter::before,
+[saved-theme="dark"] .algebra-landing .algebra-method-card::before {
+  color: rgba(201, 164, 95, 0.12);
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-chapter:hover::before {
+  color: rgba(201, 164, 95, 0.2);
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-chapter:hover {
+  border-color: rgba(201, 164, 95, 0.35);
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-hero__tools {
+  background: linear-gradient(180deg, rgba(31, 34, 43, 0.96), rgba(22, 25, 32, 0.96));
+}
+
+[saved-theme="dark"] .algebra-landing .algebra-scope {
+  border-color: rgba(198, 161, 91, 0.16);
+  background: rgba(31, 34, 43, 0.5);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .algebra-landing .algebra-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .algebra-landing .algebra-method-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .algebra-landing .algebra-hero {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .algebra-landing .algebra-hero__headline {
+    max-width: 100%;
+    font-size: clamp(1.85rem, 1.45rem + 1vw, 2.35rem);
+  }
+
+  .algebra-landing .algebra-tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .algebra-landing .algebra-method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .algebra-landing .algebra-chapter-grid {
+    grid-template-columns: 1fr;
+  }
+}

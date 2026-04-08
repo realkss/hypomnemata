@@ -3,93 +3,119 @@ title: Hypomnemata
 lang: en
 sourceLanguage: en
 translationStatus: original
+hideFolderCount: true
+hideFolderListing: true
+cssclasses:
+  - homepage-landing
 ---
 
-<div class="landing-inscription">
-  <p class="landing-inscription__greek">&#x1F51;&#x03C0;&#x03BF;&#x03BC;&#x03BD;&#x03AE;&#x03BC;&#x03B1;&#x03C4;&#x03B1;</p>
-  <p class="landing-inscription__translation">A digital commonplace book shaped by the older disciplines of study, recollection, and return.</p>
+<div class="hp-atlas">
+
+  <section class="hp-hero">
+    <div class="hp-hero__copy">
+      <p class="hp-hero__eyebrow">Digital Commonplace Book</p>
+      <p class="hp-hero__headline">Study, recollection, and return.</p>
+      <p class="hp-hero__lede">A working archive of connected notes kept in view long enough to become understanding &mdash; gathering passages, arguments, and observations across subjects so they may be revisited, ordered, and sharpened.</p>
+      <div class="hp-hero__tags" aria-label="Disciplines">
+        <span>physics</span>
+        <span>mathematics</span>
+        <span>computation</span>
+        <span>3d graphics</span>
+        <span>literature</span>
+        <span>chess</span>
+        <span>baduk</span>
+      </div>
+    </div>
+    <aside class="hp-hero__panel">
+      <p class="hp-hero__panel-label">Start Here</p>
+      <div class="hp-hero__links">
+        <a class="hp-start-link" href="./en/Topics/Physics/Quantum-Computing/">Quantum Computing</a>
+        <a class="hp-start-link" href="./keeper/">On the Keeper</a>
+        <a class="hp-start-link" href="./map/">Map of the Notebook</a>
+        <a class="hp-start-link" href="./lexicon/">Lexicon</a>
+      </div>
+    </aside>
+  </section>
+
+  <div class="hp-inscription">
+    <p class="hp-inscription__motto">Hypomnemata were notebooks of recollection and study: places where one gathered passages, arguments, and lines of thought so they might be revisited, ordered, and sharpened.</p>
+  </div>
+
+  <section class="hp-section">
+    <div class="hp-section__header">
+      <p class="hp-section__kicker">Study Regions</p>
+      <h2 id="topics">Topics</h2>
+      <p>Seven regions of inquiry, each branching and cross-referencing as the notebook deepens.</p>
+    </div>
+    <div class="hp-topic-grid">
+      <a class="hp-topic" href="./en/Topics/Physics/" data-icon="&#9737;">
+        <strong>Physics</strong>
+        <span>Matter, motion, fields, quanta, and cosmological structure.</span>
+      </a>
+      <a class="hp-topic" href="./en/Topics/Mathematics/" data-icon="&#8750;">
+        <strong>Mathematics</strong>
+        <span>Formal structure, proof, abstraction, and the grammar of difficult thought.</span>
+      </a>
+      <a class="hp-topic" href="./en/Topics/3D-Graphics/" data-icon="&#9651;">
+        <strong>3D Graphics</strong>
+        <span>Geometry, rendering, simulation, and intelligible visual worlds.</span>
+      </a>
+      <a class="hp-topic" href="./en/Topics/Computation/" data-icon="&#955;">
+        <strong>Computation</strong>
+        <span>Algorithms, models, machine intelligence, and representation.</span>
+      </a>
+      <a class="hp-topic" href="./en/Literature/" data-icon="&#167;">
+        <strong>Literature</strong>
+        <span>Reading, form, memory, interpretation, and works worth returning to.</span>
+      </a>
+      <a class="hp-topic" href="./en/Chess/" data-icon="&#9812;">
+        <strong>Chess</strong>
+        <span>Calculation, structure, and strategic judgment under constraint.</span>
+      </a>
+      <a class="hp-topic" href="./ko/Baduk/" data-icon="&#8853;">
+        <strong>Baduk</strong>
+        <span>Shape, influence, whole-board thought, and long strategic rhythm.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="hp-section hp-section--method">
+    <div class="hp-section__header">
+      <p class="hp-section__kicker">Method</p>
+      <h2>How the notebook works</h2>
+      <p>A commonplace book rather than a blog. Topics deepen over time; pages branch, return, and cross-reference one another.</p>
+    </div>
+    <div class="hp-method-grid">
+      <div class="hp-method-card" data-step="I">
+        <strong>Gather</strong>
+        <p>Read and excerpt passages with care, preserving the chain of reasoning.</p>
+      </div>
+      <div class="hp-method-card" data-step="II">
+        <strong>Order</strong>
+        <p>Arrange notes so adjacencies and connections become visible.</p>
+      </div>
+      <div class="hp-method-card" data-step="III">
+        <strong>Connect</strong>
+        <p>Cross-reference and return to earlier threads as understanding grows.</p>
+      </div>
+      <div class="hp-method-card" data-step="IV">
+        <strong>Sharpen</strong>
+        <p>Revise and condense until notes become lasting understanding.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hp-runway">
+    <div>
+      <p class="hp-section__kicker">Reference</p>
+      <h2>Find your way in.</h2>
+      <p>Browse the full graph, consult the terminology, or meet the keeper of the notebook.</p>
+    </div>
+    <div class="hp-runway__links">
+      <a class="hp-runway__link" href="./map/">Map of the Notebook</a>
+      <a class="hp-runway__link" href="./lexicon/">Lexicon</a>
+      <a class="hp-runway__link hp-runway__link--secondary" href="./keeper/">On the Keeper</a>
+    </div>
+  </section>
+
 </div>
-
-> **Hypomnemata** were notebooks of recollection and study: places where one gathered passages, arguments, observations, and lines of thought so that they might be revisited, ordered, and sharpened.
-
-In the Greek and later Hellenistic traditions of learning, study was not only a matter of acquiring conclusions but of forming habits of attention. Texts were copied, excerpted, rearranged, commented upon, and returned to. Knowledge advanced through sustained encounter: through notebooks, marginalia, compilations, lectures, commentaries, and the patient ordering of what had been read.
-
-This site tries to recover something of that spirit in digital form. It is neither diary nor news sheet, but a working archive: a place where connected notes are kept in view long enough to become understanding. The aim is not merely to store information, but to cultivate a mode of study in which ideas can be gathered, compared, revised, and made to illuminate one another.
-
-The notebook therefore remains deliberately broad. Its materials may include technical subjects, historical questions, conceptual analysis, philosophical fragments, literary works, games of strategy, and whatever else proves worth preserving in ordered relation. What unites them is less a department than a discipline of inquiry.
-
-## Start Here
-
-<div class="landing-grid landing-grid--start-here">
-  <a class="landing-card" href="./en/Topics/Physics/Quantum-Computing/" data-icon="⟩">
-    <strong>Quantum Computing</strong>
-    <span>The most actively developed thread. Begin with the course notes and work outward.</span>
-  </a>
-  <a class="landing-card" href="./keeper/" data-icon="⌘">
-    <strong>On the Keeper</strong>
-    <span>Who maintains this notebook, and why. Start here if you want the human context.</span>
-  </a>
-  <a class="landing-card" href="./map/" data-icon="◎">
-    <strong>Map of the Notebook</strong>
-    <span>A bird's-eye view of everything. Good for orientation if you prefer to browse.</span>
-  </a>
-</div>
-
-## Topics
-
-<div class="landing-grid">
-  <a class="landing-card" href="./en/Topics/Physics/" data-icon="☉">
-    <strong>Physics</strong>
-    <span>Matter, motion, fields, quanta, and cosmological structure.</span>
-  </a>
-  <a class="landing-card" href="./en/Topics/Mathematics/" data-icon="∮">
-    <strong>Mathematics</strong>
-    <span>Formal structure, proof, abstraction, and the grammar of difficult thought.</span>
-  </a>
-  <a class="landing-card" href="./en/Topics/3D Graphics/" data-icon="△">
-    <strong>3D Graphics</strong>
-    <span>Geometry, rendering, simulation, and intelligible visual worlds.</span>
-  </a>
-  <a class="landing-card" href="./en/Topics/Computation/" data-icon="λ">
-    <strong>Computation</strong>
-    <span>Algorithms, models, machine intelligence, and representation.</span>
-  </a>
-  <a class="landing-card" href="./en/Literature/" data-icon="§">
-    <strong>Literature</strong>
-    <span>Reading, form, memory, interpretation, and works worth returning to.</span>
-  </a>
-  <a class="landing-card" href="./en/Chess/" data-icon="♔">
-    <strong>Chess</strong>
-    <span>Calculation, structure, and strategic judgment under constraint.</span>
-  </a>
-  <a class="landing-card" href="./ko/Baduk/" data-icon="⊕">
-    <strong>Baduk</strong>
-    <span>Shape, influence, whole-board thought, and long strategic rhythm.</span>
-  </a>
-</div>
-
-## Reference
-
-<div class="landing-grid landing-grid--reference">
-  <a class="landing-card" href="./lexicon/" data-icon="Α">
-    <strong>Lexicon</strong>
-    <span>Definitions, first terms, and short orienting entries for the vocabulary of the notebook.</span>
-  </a>
-  <a class="landing-card" href="./map/" data-icon="◎">
-    <strong>Map of the Notebook</strong>
-    <span>A larger graph view for tracing clusters, bridges, and the shape of the archive as a whole.</span>
-  </a>
-  <a class="landing-card" href="./en/Topics/Physics/Quantum-Computing/VIII.-Projects/" data-icon="Q">
-    <strong>Quantum Projects</strong>
-    <span>A direct path to the public projects overview, including the protected QIQC archive.</span>
-    <span>Use the Session panel after opening it if you need the verified-only course materials.</span>
-  </a>
-</div>
-
-## Method
-
-The notebook is arranged as a **commonplace book** rather than a chronological blog. Topics are meant to deepen over time; pages branch, return, and cross-reference one another. The graph is not ornament alone but a map of intellectual adjacency. The hope is to preserve something of the old scholarly practice: to read slowly, excerpt carefully, connect rigorously, and leave behind an ordered record of thought in motion.
-
-## Orientation
-
-Those seeking the human presence behind the notebook may consult [[keeper|On the Keeper]]. Those seeking the material itself may begin with the topic catalogue above, the [[lexicon|Lexicon]], or the [[map|Map of the Notebook]], and proceed outward from any note.

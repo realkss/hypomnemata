@@ -5,53 +5,168 @@ sourceLanguage: en
 translationStatus: original
 description: Rigorous Fraleigh 7e chapter notes, flashcards, counterexamples, and a dated sprint to the midterm.
 hideFolderCount: true
+hideFolderListing: true
+cssclasses:
+  - algebra-landing
 ---
 
-This study track is written for **John B. Fraleigh, 7th edition**, and it follows the exact chapter order through **Chapter 15**.
+<div class="algebra-atlas">
+  <section class="algebra-hero">
+    <div class="algebra-hero__copy">
+      <p class="algebra-hero__eyebrow">Fraleigh 7e &middot; Chapters 1 &ndash; 15</p>
+      <p class="algebra-hero__headline">Structure through axioms.</p>
+      <p class="algebra-hero__lede">A single study path through introductory group theory, from binary operations and the group axioms through homomorphisms, factor groups, and simple groups. Each chapter page gives rigorous summaries, companion exercises, and counterexamples worth memorizing.</p>
+      <div class="algebra-hero__tags" aria-label="Core concepts">
+        <span>groups</span>
+        <span>subgroups</span>
+        <span>permutations</span>
+        <span>cosets</span>
+        <span>homomorphisms</span>
+        <span>quotients</span>
+      </div>
+    </div>
+    <aside class="algebra-hero__tools">
+      <p class="algebra-hero__tools-label">Study Tools</p>
+      <div class="algebra-tool-grid">
+        <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Study-Materials/midterm-flashcards">Flashcard Deck</a>
+        <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Study-Materials/9-day-midterm-sprint">Midterm Sprint</a>
+        <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Reference/Terminology">Terminology</a>
+        <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Reference/Theorems">Theorems</a>
+      </div>
+    </aside>
+  </section>
 
-## Use This Section In Two Modes
+  <div class="algebra-inscription">
+    <p class="algebra-inscription__motto">Die ganzen Zahlen hat der liebe Gott gemacht, alles andere ist Menschenwerk.</p>
+    <p class="algebra-inscription__translation">God made the integers; all else is the work of man. &mdash; Kronecker</p>
+  </div>
 
-- desk study from the chapter pages below
-- commute review from the [mobile flashcard deck](./midterm-flashcards.html)
-- daily pacing from the [9-day midterm sprint](./9-day-midterm-sprint.md)
+  <section class="algebra-section">
+    <div class="algebra-section__header">
+      <p class="algebra-section__kicker">Chapter Atlas</p>
+      <h2>Fifteen chapters in five movements</h2>
+      <p>The chapter order follows Fraleigh exactly. The five groups below trace a single arc: from raw sets to groups, through internal structure, into the counting and classification theorems, and finally to the quotient machinery that connects everything.</p>
+    </div>
 
-Because Fraleigh is copyrighted, these public pages do **not** reproduce long textbook exercise statements verbatim. Instead they give:
+    <div class="algebra-group">
+      <p class="algebra-group__label">I. Foundations</p>
+      <div class="algebra-chapter-grid">
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/I.-Foundations/01.-Introduction-and-Examples" data-ch="1">
+          <strong>Ch 1. Introduction and Examples</strong>
+          <span>Build intuition for algebraic structures through sets equipped with operations and axioms.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/I.-Foundations/02.-Binary-Operations" data-ch="2">
+          <strong>Ch 2. Binary Operations</strong>
+          <span>Closure, associativity, identity, and inverses: the building blocks of algebraic structures.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/I.-Foundations/03.-Isomorphic-Binary-Structures" data-ch="3">
+          <strong>Ch 3. Isomorphic Binary Structures</strong>
+          <span>When two structures are the same in every way that matters.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/I.-Foundations/04.-Groups" data-ch="4">
+          <strong>Ch 4. Groups</strong>
+          <span>The central definition: associativity, identity, inverses, and the first examples.</span>
+        </a>
+      </div>
+    </div>
 
-- rigorous chapter summaries
-- original Fraleigh-style companion exercises
-- textbook drill prompts for your own copy
-- famous counterexamples worth memorizing
+    <div class="algebra-group">
+      <p class="algebra-group__label">II. Subgroup Structure</p>
+      <div class="algebra-chapter-grid">
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/II.-Subgroup-Structure/05.-Subgroups" data-ch="5">
+          <strong>Ch 5. Subgroups</strong>
+          <span>How smaller groups live inside larger ones, checked by the subgroup criterion.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/II.-Subgroup-Structure/06.-Cyclic-Groups" data-ch="6">
+          <strong>Ch 6. Cyclic Groups</strong>
+          <span>The simplest groups, generated by repeating a single element.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/II.-Subgroup-Structure/07.-Generators-and-Cayley-Digraphs" data-ch="7">
+          <strong>Ch 7. Generators and Cayley Digraphs</strong>
+          <span>Visualize group structure through generators and make abstract algebra concrete.</span>
+        </a>
+      </div>
+    </div>
 
-The detailed problem bank lives privately in your vault under `private/Mathematics/Abstract Algebra`.
+    <div class="algebra-group">
+      <p class="algebra-group__label">III. Permutations</p>
+      <div class="algebra-chapter-grid">
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/III.-Permutations/08.-Groups-of-Permutations" data-ch="8">
+          <strong>Ch 8. Groups of Permutations</strong>
+          <span>Every group is a permutation group: Cayley's theorem and concrete cycle notation.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/III.-Permutations/09.-Orbits,-Cycles,-and-the-Alternating-Groups" data-ch="9">
+          <strong>Ch 9. Orbits, Cycles, and Alternating Groups</strong>
+          <span>Classify permutations by parity and meet the alternating group.</span>
+        </a>
+      </div>
+    </div>
 
-## Start Here
+    <div class="algebra-group">
+      <p class="algebra-group__label">IV. Counting and Structure</p>
+      <div class="algebra-chapter-grid">
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/IV.-Counting-and-Structure/10.-Cosets-and-the-Theorem-of-Lagrange" data-ch="10">
+          <strong>Ch 10. Cosets and Lagrange</strong>
+          <span>Partition a group into cosets and turn that partition into a divisibility law.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/IV.-Counting-and-Structure/11.-Direct-Products-and-Finitely-Generated-Abelian-Groups" data-ch="11">
+          <strong>Ch 11. Direct Products and Abelian Groups</strong>
+          <span>Build new groups from old ones and classify all finitely generated abelian groups.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/IV.-Counting-and-Structure/12.-Plane-Isometries" data-ch="12">
+          <strong>Ch 12. Plane Isometries</strong>
+          <span>All distance-preserving maps of the plane: translations, rotations, reflections, glide reflections.</span>
+        </a>
+      </div>
+    </div>
 
-- [Midterm flashcard deck](./midterm-flashcards.html)
-- [9-day midterm sprint](./9-day-midterm-sprint.md)
-- [Terminology glossary](./Terminology.md)
-- [Theorem glossary](./Theorems.md)
+    <div class="algebra-group">
+      <p class="algebra-group__label">V. Homomorphisms and Quotients</p>
+      <div class="algebra-chapter-grid">
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/V.-Homomorphisms-and-Quotients/13.-Homomorphisms" data-ch="13">
+          <strong>Ch 13. Homomorphisms</strong>
+          <span>Structure-preserving maps, their kernels and images: the bridge between groups.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/V.-Homomorphisms-and-Quotients/14.-Factor-Groups" data-ch="14">
+          <strong>Ch 14. Factor Groups</strong>
+          <span>Quotient groups built from normal subgroups: when and why they work.</span>
+        </a>
+        <a class="algebra-chapter" href="/en/Topics/Mathematics/Abstract-Algebra/V.-Homomorphisms-and-Quotients/15.-Factor-Group-Computations-and-Simple-Groups" data-ch="15">
+          <strong>Ch 15. Factor-Group Computations and Simple Groups</strong>
+          <span>Practical quotient computations and groups with no proper nontrivial normal subgroups.</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-## Chapter Map
+  <section class="algebra-section algebra-section--method">
+    <div class="algebra-section__header">
+      <p class="algebra-section__kicker">Method</p>
+      <h2>Fast Workflow</h2>
+      <p>A single daily cycle designed for active recall and long-term retention.</p>
+    </div>
+    <div class="algebra-method-grid">
+      <div class="algebra-method-card" data-step="I">
+        <strong>Read and Rewrite</strong>
+        <p>Read one chapter page and rewrite the main definitions by hand.</p>
+      </div>
+      <div class="algebra-method-card" data-step="II">
+        <strong>Solve Cold</strong>
+        <p>Do two companion exercises with no notes open.</p>
+      </div>
+      <div class="algebra-method-card" data-step="III">
+        <strong>Drill on Mobile</strong>
+        <p>Drill the same chapter in the flashcard deck on your phone.</p>
+      </div>
+      <div class="algebra-method-card" data-step="IV">
+        <strong>Recall a Counterexample</strong>
+        <p>End the day by recalling one counterexample from memory.</p>
+      </div>
+    </div>
+  </section>
 
-1. [Chapter 01 - Introduction and Examples](./Chapter%2001%20-%20Introduction%20and%20Examples.md)
-2. [Chapter 02 - Binary Operations](./Chapter%2002%20-%20Binary%20Operations.md)
-3. [Chapter 03 - Isomorphic Binary Structures](./Chapter%2003%20-%20Isomorphic%20Binary%20Structures.md)
-4. [Chapter 04 - Groups](./Chapter%2004%20-%20Groups.md)
-5. [Chapter 05 - Subgroups](./Chapter%2005%20-%20Subgroups.md)
-6. [Chapter 06 - Cyclic Groups](./Chapter%2006%20-%20Cyclic%20Groups.md)
-7. [Chapter 07 - Generators and Cayley Digraphs](./Chapter%2007%20-%20Generators%20and%20Cayley%20Digraphs.md)
-8. [Chapter 08 - Groups of Permutations](./Chapter%2008%20-%20Groups%20of%20Permutations.md)
-9. [Chapter 09 - Orbits, Cycles, and the Alternating Groups](./Chapter%2009%20-%20Orbits,%20Cycles,%20and%20the%20Alternating%20Groups.md)
-10. [Chapter 10 - Cosets and the Theorem of Lagrange](./Chapter%2010%20-%20Cosets%20and%20the%20Theorem%20of%20Lagrange.md)
-11. [Chapter 11 - Direct Products and Finitely Generated Abelian Groups](./Chapter%2011%20-%20Direct%20Products%20and%20Finitely%20Generated%20Abelian%20Groups.md)
-12. [Chapter 12 - Plane Isometries](./Chapter%2012%20-%20Plane%20Isometries.md)
-13. [Chapter 13 - Homomorphisms](./Chapter%2013%20-%20Homomorphisms.md)
-14. [Chapter 14 - Factor Groups](./Chapter%2014%20-%20Factor%20Groups.md)
-15. [Chapter 15 - Factor-Group Computations and Simple Groups](./Chapter%2015%20-%20Factor-Group%20Computations%20and%20Simple%20Groups.md)
-
-## Fast Workflow
-
-1. Read one chapter page and rewrite the main definitions by hand.
-2. Do two companion exercises with no notes.
-3. Drill the same chapter in the flashcard deck on your phone.
-4. End the day by recalling one counterexample from memory.
+  <div class="algebra-scope">
+    <p>Because Fraleigh is copyrighted, these public pages do <strong>not</strong> reproduce long textbook exercise statements verbatim. Instead they give rigorous chapter summaries, original companion exercises, textbook drill prompts for your own copy, and famous counterexamples worth memorizing.</p>
+    <p>The detailed problem bank lives privately in your vault under <code>private/Mathematics/Abstract Algebra</code>.</p>
+  </div>
+</div>

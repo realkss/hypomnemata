@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fraleigh 7e Midterm Flashcards</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
       --bg: #f4efe8;
@@ -265,44 +268,44 @@
   <script>
     const cards = [
       { chapter: 1, type: "Definition", front: "What is an algebraic structure in this course?", back: "A set together with one or more operations and the laws those operations satisfy." },
-      { chapter: 1, type: "Counterexample", front: "Why is M_2(R) under multiplication not a group?", back: "Because singular matrices are not invertible." },
-      { chapter: 2, type: "Definition", front: "What is a binary operation on S?", back: "A function from S x S to S." },
-      { chapter: 2, type: "Theorem", front: "Why is a two-sided identity unique?", back: "If e and f are identities, then e = e*f = f." },
-      { chapter: 2, type: "Counterexample", front: "What is the standard warning example for closure without associativity?", back: "Subtraction on Z is closed but not associative." },
+      { chapter: 1, type: "Counterexample", front: "Why is $M_2(\\mathbb{R})$ under multiplication not a group?", back: "Because singular matrices are not invertible." },
+      { chapter: 2, type: "Definition", front: "What is a binary operation on $S$?", back: "A function from $S \\times S$ to $S$." },
+      { chapter: 2, type: "Theorem", front: "Why is a two-sided identity unique?", back: "If $e$ and $f$ are identities, then $e = e * f = f$." },
+      { chapter: 2, type: "Counterexample", front: "What is the standard warning example for closure without associativity?", back: "Subtraction on $\\mathbb{Z}$ is closed but not associative." },
       { chapter: 3, type: "Definition", front: "What is an isomorphism of binary structures?", back: "A bijection preserving the operation." },
-      { chapter: 3, type: "Counterexample", front: "Why are Z_4 and V_4 not isomorphic?", back: "Z_4 has an element of order 4, but V_4 does not." },
+      { chapter: 3, type: "Counterexample", front: "Why are $\\mathbb{Z}_4$ and $V_4$ not isomorphic?", back: "$\\mathbb{Z}_4$ has an element of order 4, but $V_4$ does not." },
       { chapter: 4, type: "Definition", front: "State the group axioms.", back: "Closure, associativity, identity, and inverses." },
-      { chapter: 4, type: "Theorem", front: "How do you solve ax = b in a group?", back: "x = a^{-1}b." },
-      { chapter: 5, type: "Theorem", front: "State the subgroup test.", back: "A nonempty subset H is a subgroup iff xy^{-1} is in H for all x,y in H." },
+      { chapter: 4, type: "Theorem", front: "How do you solve $ax = b$ in a group?", back: "$x = a^{-1}b$." },
+      { chapter: 5, type: "Theorem", front: "State the subgroup test.", back: "A nonempty subset $H$ is a subgroup iff $xy^{-1} \\in H$ for all $x, y \\in H$." },
       { chapter: 5, type: "Counterexample", front: "What is the standard false statement about unions of subgroups?", back: "The union of two subgroups is usually not a subgroup." },
-      { chapter: 6, type: "Definition", front: "What does G = <g> mean?", back: "Every element of G is a power of g." },
-      { chapter: 6, type: "Theorem", front: "What is ord(g^k) in a cyclic group of order n?", back: "n / gcd(n,k)." },
-      { chapter: 6, type: "Counterexample", front: "What is the standard abelian but noncyclic group?", back: "V_4 = Z_2 x Z_2." },
-      { chapter: 7, type: "Definition", front: "What does it mean for S to generate G?", back: "Every element of G is a finite word in elements of S and their inverses." },
-      { chapter: 7, type: "Counterexample", front: "Which standard additive group is not finitely generated?", back: "(Q,+)." },
+      { chapter: 6, type: "Definition", front: "What does $G = \\langle g \\rangle$ mean?", back: "Every element of $G$ is a power of $g$." },
+      { chapter: 6, type: "Theorem", front: "What is $\\operatorname{ord}(g^k)$ in a cyclic group of order $n$?", back: "$n / \\gcd(n, k)$." },
+      { chapter: 6, type: "Counterexample", front: "What is the standard abelian but noncyclic group?", back: "$V_4 = \\mathbb{Z}_2 \\times \\mathbb{Z}_2$." },
+      { chapter: 7, type: "Definition", front: "What does it mean for $S$ to generate $G$?", back: "Every element of $G$ is a finite word in elements of $S$ and their inverses." },
+      { chapter: 7, type: "Counterexample", front: "Which standard additive group is not finitely generated?", back: "$(\\mathbb{Q}, +)$." },
       { chapter: 8, type: "Theorem", front: "State Cayley's theorem.", back: "Every group is isomorphic to a subgroup of a symmetric group." },
       { chapter: 8, type: "Counterexample", front: "When do cycles fail to commute?", back: "When they are not disjoint." },
       { chapter: 9, type: "Definition", front: "What is an even permutation?", back: "A permutation expressible as a product of an even number of transpositions." },
-      { chapter: 9, type: "Theorem", front: "What is |A_n|?", back: "n!/2." },
-      { chapter: 9, type: "Counterexample", front: "Give an even permutation that is not a single cycle.", back: "(1 2)(3 4)." },
-      { chapter: 10, type: "Definition", front: "What is a left coset of H in G?", back: "A set of the form gH." },
-      { chapter: 10, type: "Theorem", front: "State Lagrange's theorem.", back: "If G is finite and H <= G, then |H| divides |G| and |G| = [G:H]|H|." },
-      { chapter: 10, type: "Counterexample", front: "What is the classic converse-to-Lagrange failure?", back: "A_4 has order 12 but no subgroup of order 6." },
-      { chapter: 11, type: "Definition", front: "What is the direct product G x H?", back: "The set of ordered pairs with componentwise multiplication." },
-      { chapter: 11, type: "Theorem", front: "State the structure theorem for finitely generated abelian groups.", back: "Every such group is isomorphic to Z^r x Z_{n1} x ... x Z_{nk} with n1 | ... | nk." },
-      { chapter: 11, type: "Counterexample", front: "Why is Z_2 x Z_2 a useful warning?", back: "It is a direct product of cyclic groups but is not cyclic." },
+      { chapter: 9, type: "Theorem", front: "What is $|A_n|$?", back: "$n!/2$." },
+      { chapter: 9, type: "Counterexample", front: "Give an even permutation that is not a single cycle.", back: "$(1\\ 2)(3\\ 4)$." },
+      { chapter: 10, type: "Definition", front: "What is a left coset of $H$ in $G$?", back: "A set of the form $gH$." },
+      { chapter: 10, type: "Theorem", front: "State Lagrange's theorem.", back: "If $G$ is finite and $H \\leq G$, then $|H|$ divides $|G|$ and $|G| = [G:H]|H|$." },
+      { chapter: 10, type: "Counterexample", front: "What is the classic converse-to-Lagrange failure?", back: "$A_4$ has order 12 but no subgroup of order 6." },
+      { chapter: 11, type: "Definition", front: "What is the direct product $G \\times H$?", back: "The set of ordered pairs with componentwise multiplication." },
+      { chapter: 11, type: "Theorem", front: "State the structure theorem for finitely generated abelian groups.", back: "Every such group is isomorphic to $\\mathbb{Z}^r \\times \\mathbb{Z}_{n_1} \\times \\cdots \\times \\mathbb{Z}_{n_k}$ with $n_1 \\mid \\cdots \\mid n_k$." },
+      { chapter: 11, type: "Counterexample", front: "Why is $\\mathbb{Z}_2 \\times \\mathbb{Z}_2$ a useful warning?", back: "It is a direct product of cyclic groups but is not cyclic." },
       { chapter: 12, type: "Definition", front: "Name the four plane isometry types.", back: "Translation, rotation, reflection, and glide reflection." },
       { chapter: 12, type: "Theorem", front: "What do two reflections compose to?", back: "A translation if their axes are parallel and a rotation if they intersect." },
-      { chapter: 13, type: "Definition", front: "What is a homomorphism?", back: "A map phi with phi(ab) = phi(a)phi(b)." },
+      { chapter: 13, type: "Definition", front: "What is a homomorphism?", back: "A map $\\varphi$ with $\\varphi(ab) = \\varphi(a)\\varphi(b)$." },
       { chapter: 13, type: "Definition", front: "What is the kernel of a homomorphism?", back: "The set of elements mapped to the identity." },
       { chapter: 13, type: "Theorem", front: "When is a homomorphism injective?", back: "Exactly when its kernel is trivial." },
       { chapter: 13, type: "Counterexample", front: "What is the warning about bijections between groups?", back: "A bijection need not be a homomorphism." },
-      { chapter: 14, type: "Definition", front: "When is a subgroup normal?", back: "When gN = Ng for every g in G." },
+      { chapter: 14, type: "Definition", front: "When is a subgroup normal?", back: "When $gN = Ng$ for every $g \\in G$." },
       { chapter: 14, type: "Theorem", front: "When does coset multiplication define a quotient group?", back: "Exactly when the subgroup is normal." },
       { chapter: 14, type: "Counterexample", front: "Why can you not quotient by any subgroup?", back: "If the subgroup is not normal, coset multiplication can depend on representatives." },
       { chapter: 15, type: "Definition", front: "What is a simple group?", back: "A group whose only normal subgroups are the trivial subgroup and the whole group." },
-      { chapter: 15, type: "Theorem", front: "Why is Z_p simple for prime p?", back: "Its only subgroups have orders 1 or p, so its only normal subgroups are trivial and whole." },
-      { chapter: 15, type: "Counterexample", front: "What is the standard not-simple example from this range?", back: "A_4 is not simple because it has a normal Klein four subgroup." }
+      { chapter: 15, type: "Theorem", front: "Why is $\\mathbb{Z}_p$ simple for prime $p$?", back: "Its only subgroups have orders 1 or $p$, so its only normal subgroups are trivial and whole." },
+      { chapter: 15, type: "Counterexample", front: "What is the standard not-simple example from this range?", back: "$A_4$ is not simple because it has a normal Klein four subgroup." }
     ];
 
     const flashcardsEl = document.getElementById("flashcards");
@@ -320,6 +323,18 @@
       option.value = String(i);
       option.textContent = `Chapter ${String(i).padStart(2, "0")}`;
       chapterFilterEl.appendChild(option);
+    }
+
+    function typeset() {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.getElementById("flashcards"), {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ],
+          throwOnError: false
+        });
+      }
     }
 
     function renderCards() {
@@ -364,6 +379,8 @@
           card.classList.toggle("flipped");
         });
       });
+
+      typeset();
     }
 
     searchEl.addEventListener("input", renderCards);
