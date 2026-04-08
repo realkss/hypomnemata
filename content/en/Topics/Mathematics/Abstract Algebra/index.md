@@ -28,7 +28,7 @@ cssclasses:
     <aside class="algebra-hero__tools">
       <p class="algebra-hero__tools-label">Study Tools</p>
       <div class="algebra-tool-grid">
-        <a class="algebra-tool" href="/static/algebra/midterm-flashcards.html">Flashcard Deck</a>
+        <a class="algebra-tool" href="/static/algebra/midterm-flashcards.html" data-router-ignore>Flashcard Deck</a>
         <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Study-Materials/9-day-midterm-sprint">Midterm Sprint</a>
         <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Reference/Terminology">Terminology</a>
         <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Reference/Theorems">Theorems</a>
@@ -47,7 +47,6 @@ cssclasses:
       <h2>Fifteen chapters in five movements</h2>
       <p>The chapter order follows Fraleigh exactly. The five groups below trace a single arc: from raw sets to groups, through internal structure, into the counting and classification theorems, and finally to the quotient machinery that connects everything.</p>
     </div>
-
     <div class="algebra-group">
       <p class="algebra-group__label">I. Foundations</p>
       <div class="algebra-chapter-grid">
@@ -69,7 +68,6 @@ cssclasses:
         </a>
       </div>
     </div>
-
     <div class="algebra-group">
       <p class="algebra-group__label">II. Subgroup Structure</p>
       <div class="algebra-chapter-grid">
@@ -87,7 +85,6 @@ cssclasses:
         </a>
       </div>
     </div>
-
     <div class="algebra-group">
       <p class="algebra-group__label">III. Permutations</p>
       <div class="algebra-chapter-grid">
@@ -101,7 +98,6 @@ cssclasses:
         </a>
       </div>
     </div>
-
     <div class="algebra-group">
       <p class="algebra-group__label">IV. Counting and Structure</p>
       <div class="algebra-chapter-grid">
@@ -119,7 +115,6 @@ cssclasses:
         </a>
       </div>
     </div>
-
     <div class="algebra-group">
       <p class="algebra-group__label">V. Homomorphisms and Quotients</p>
       <div class="algebra-chapter-grid">

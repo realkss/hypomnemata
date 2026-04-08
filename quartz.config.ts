@@ -36,6 +36,7 @@ const config: QuartzConfig = {
       ".trash",
       ".DS_Store",
       "Thumbs.db",
+      "**/*.exe",
     ],
 
     // Analytics (optional)
