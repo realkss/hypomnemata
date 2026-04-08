@@ -10,7 +10,18 @@ function isLanguageLanding(slug?: string) {
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [Component.Masthead()],
-  afterBody: [Component.ChessPgnViewer()],
+  afterBody: [
+    Component.ConditionalRender({
+      component: Component.RecentNotes({
+        title: "Recently Updated",
+        limit: 5,
+        showTags: false,
+        filter: (f) => f.slug !== "index" && !f.slug?.endsWith("/index"),
+      }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.ChessPgnViewer(),
+  ],
   footer: Component.Footer({
     links: {
       Lexicon: "lexicon",

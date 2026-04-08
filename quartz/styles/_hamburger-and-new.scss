@@ -1,0 +1,190 @@
+
+/* ── Mobile hamburger navigation ────────────────────── */
+.site-masthead__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--secondary) 20%, var(--lightgray));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--dark);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.site-masthead__hamburger:hover {
+  background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+  border-color: var(--secondary);
+}
+
+.site-masthead__hamburger svg line {
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.site-masthead__hamburger.is-open .hamburger-top {
+  transform: rotate(45deg) translate(4px, -2px);
+}
+
+.site-masthead__hamburger.is-open .hamburger-mid {
+  opacity: 0;
+}
+
+.site-masthead__hamburger.is-open .hamburger-bot {
+  transform: rotate(-45deg) translate(4px, 2px);
+}
+
+.site-masthead__drawer {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .site-masthead__nav-links {
+    display: none;
+  }
+
+  .site-masthead__hamburger {
+    display: flex;
+  }
+
+  .site-masthead__drawer {
+    display: grid;
+    gap: 0.25rem;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.35s ease;
+    margin-top: 0;
+  }
+
+  .site-masthead__drawer[aria-hidden="false"] {
+    max-height: 20rem;
+    opacity: 1;
+    margin-top: 0.85rem;
+  }
+
+  .site-masthead__drawer a {
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.65rem;
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .site-masthead__drawer a:hover {
+    background: color-mix(in srgb, var(--light) 84%, var(--secondary) 16%);
+  }
+
+  .site-masthead__body {
+    align-items: center;
+  }
+}
+
+[saved-theme="dark"] .site-masthead__hamburger {
+  background: rgba(201, 164, 95, 0.06);
+  border-color: rgba(201, 164, 95, 0.24);
+  color: #efe4cf;
+}
+
+[saved-theme="dark"] .site-masthead__hamburger:hover {
+  background: rgba(201, 164, 95, 0.14);
+}
+
+[saved-theme="dark"] .site-masthead__drawer a {
+  color: #efe4cf;
+}
+
+[saved-theme="dark"] .site-masthead__drawer a:hover {
+  background: rgba(201, 164, 95, 0.14);
+}
+
+/* ── Start here grid on landing ─────────────────────── */
+.landing-grid--start-here {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.landing-grid--start-here .landing-card {
+  border-color: color-mix(in srgb, var(--tertiary) 28%, var(--lightgray));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(241, 247, 250, 0.72));
+}
+
+.landing-grid--start-here .landing-card:hover {
+  background: color-mix(in srgb, var(--light) 82%, var(--tertiary) 18%);
+  border-color: var(--tertiary);
+}
+
+[saved-theme="dark"] .landing-grid--start-here .landing-card {
+  background: linear-gradient(180deg, rgba(24, 30, 39, 0.94), rgba(18, 23, 30, 0.94));
+  border-color: rgba(143, 183, 204, 0.24);
+}
+
+[saved-theme="dark"] .landing-grid--start-here .landing-card:hover {
+  background: rgba(143, 183, 204, 0.12);
+}
+
+/* ── Language switcher translation badges ───────────── */
+.wiki-lang-menu a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.wiki-lang-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.wiki-lang-badge[data-status="ai-translated"] {
+  background: color-mix(in srgb, var(--secondary) 14%, var(--light));
+  color: var(--secondary);
+  border: 1px solid color-mix(in srgb, var(--secondary) 24%, var(--lightgray));
+}
+
+.wiki-lang-badge[data-status="reviewed"] {
+  background: color-mix(in srgb, var(--tertiary) 14%, var(--light));
+  color: var(--tertiary);
+  border: 1px solid color-mix(in srgb, var(--tertiary) 24%, var(--lightgray));
+}
+
+.wiki-lang-badge[data-status="missing"] {
+  background: color-mix(in srgb, var(--gray) 14%, var(--light));
+  color: var(--gray);
+  border: 1px solid color-mix(in srgb, var(--gray) 24%, var(--lightgray));
+}
+
+.wiki-lang-menu a.fallback {
+  opacity: 0.6;
+}
+
+[saved-theme="dark"] .wiki-lang-badge[data-status="ai-translated"] {
+  background: rgba(201, 164, 95, 0.12);
+  color: #c9a45f;
+  border-color: rgba(201, 164, 95, 0.28);
+}
+
+[saved-theme="dark"] .wiki-lang-badge[data-status="reviewed"] {
+  background: rgba(143, 183, 204, 0.12);
+  color: #8fb7cc;
+  border-color: rgba(143, 183, 204, 0.28);
+}
+
+[saved-theme="dark"] .wiki-lang-badge[data-status="missing"] {
+  background: rgba(95, 90, 84, 0.16);
+  color: #8a8278;
+  border-color: rgba(95, 90, 84, 0.28);
+}
+

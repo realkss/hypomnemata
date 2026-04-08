@@ -20,6 +20,16 @@ document.addEventListener("nav", () => {
     window.addCleanup(() => readerModeButton.removeEventListener("click", switchReaderMode))
   }
 
+  // Keyboard shortcut: Alt+R to toggle reader mode
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.altKey && e.key === "r") {
+      e.preventDefault()
+      switchReaderMode()
+    }
+  }
+  document.addEventListener("keydown", handleKeydown)
+  window.addCleanup(() => document.removeEventListener("keydown", handleKeydown))
+
   // Set initial state
   document.documentElement.setAttribute("reader-mode", isReaderMode ? "on" : "off")
 })

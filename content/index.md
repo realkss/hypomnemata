@@ -18,6 +18,23 @@ This site tries to recover something of that spirit in digital form. It is neith
 
 The notebook therefore remains deliberately broad. Its materials may include technical subjects, historical questions, conceptual analysis, philosophical fragments, literary works, games of strategy, and whatever else proves worth preserving in ordered relation. What unites them is less a department than a discipline of inquiry.
 
+## Start Here
+
+<div class="landing-grid landing-grid--start-here">
+  <a class="landing-card" href="./en/Topics/Physics/Quantum-Computing/" data-icon="⟩">
+    <strong>Quantum Computing</strong>
+    <span>The most actively developed thread. Begin with the course notes and work outward.</span>
+  </a>
+  <a class="landing-card" href="./keeper/" data-icon="⌘">
+    <strong>On the Keeper</strong>
+    <span>Who maintains this notebook, and why. Start here if you want the human context.</span>
+  </a>
+  <a class="landing-card" href="./map/" data-icon="◎">
+    <strong>Map of the Notebook</strong>
+    <span>A bird's-eye view of everything. Good for orientation if you prefer to browse.</span>
+  </a>
+</div>
+
 ## Topics
 
 <div class="landing-grid">

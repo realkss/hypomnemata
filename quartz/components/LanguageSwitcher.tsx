@@ -6,11 +6,11 @@ const ROOT_SHARED_PAGES = new Set(["keeper", "lexicon", "map"])
 
 const LANGS = [
   { code: "en", label: "English" },
-  { code: "ko", label: "\uD55C\uAD6D\uC5B4" },
-  { code: "fr", label: "Fran\u00E7ais" },
+  { code: "ko", label: "한국어" },
+  { code: "fr", label: "Français" },
   { code: "de", label: "Deutsch" },
   { code: "la", label: "Latina" },
-  { code: "ru", label: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439" },
+  { code: "ru", label: "Русский" },
 ]
 
 function parseSlug(slug?: string) {
@@ -52,7 +52,15 @@ function hrefFromSlug(slug: string, basePath: string) {
 const LanguageSwitcher: QuartzComponent = ({ fileData, allFiles, cfg }: QuartzComponentProps) => {
   const { current, rest } = parseSlug(fileData.slug)
   const currentLanguage = LANGS.find((lang) => lang.code === current)?.label ?? "English"
-  const available = new Set(allFiles.map((file) => file.slug).filter(Boolean))
+  const fileMap = new Map<string, string | undefined>()
+  for (const file of allFiles) {
+    if (file.slug) {
+      const status = typeof file.frontmatter?.translationStatus === "string"
+        ? file.frontmatter.translationStatus
+        : undefined
+      fileMap.set(file.slug, status)
+    }
+  }
   const basePath = cfg.baseUrl
     ? new URL(`https://${cfg.baseUrl}`).pathname.replace(/\/+$/, "")
     : ""
@@ -64,11 +72,33 @@ const LanguageSwitcher: QuartzComponent = ({ fileData, allFiles, cfg }: QuartzCo
         {LANGS.map((lang) => {
           const exact = candidateSlug(lang.code, rest)
           const fallback = candidateSlug(lang.code, "")
-          const target = available.has(exact) ? exact : fallback
+          const hasExact = fileMap.has(exact)
+          const target = hasExact ? exact : fallback
+          const status = fileMap.get(exact)
+          const isFallback = !hasExact && rest !== ""
+
+          let badge = ""
+          if (current === lang.code) badge = ""
+          else if (isFallback) badge = "no translation"
+          else if (status === "ai-translated") badge = "AI"
+          else if (status === "reviewed") badge = "reviewed"
+
+          const classes = [
+            current === lang.code ? "active" : "",
+            isFallback ? "fallback" : "",
+          ].filter(Boolean).join(" ")
 
           return (
-            <a href={hrefFromSlug(target, basePath)} class={current === lang.code ? "active" : ""}>
-              {lang.label}
+            <a href={hrefFromSlug(target, basePath)} class={classes || undefined}>
+              <span>{lang.label}</span>
+              {badge && (
+                <span
+                  class="wiki-lang-badge"
+                  data-status={isFallback ? "missing" : status}
+                >
+                  {badge}
+                </span>
+              )}
             </a>
           )
         })}

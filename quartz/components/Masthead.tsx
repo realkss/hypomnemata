@@ -1,4 +1,6 @@
 import { joinSegments, pathToRoot } from "../util/path"
+// @ts-ignore
+import mastheadScript from "./scripts/masthead.inline"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 
 const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
@@ -28,10 +30,30 @@ const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
             </p>
           </div>
           <nav class="site-masthead__nav" aria-label="Primary">
-            <a href={homeHref}>Home</a>
-            <a href={topicsHref}>Topics</a>
-            <a href={lexiconHref}>Lexicon</a>
-            <a href={keeperHref}>On the Keeper</a>
+            <div class="site-masthead__nav-links">
+              <a href={homeHref}>Home</a>
+              <a href={topicsHref}>Topics</a>
+              <a href={lexiconHref}>Lexicon</a>
+              <a href={keeperHref}>On the Keeper</a>
+            </div>
+            <button
+              class="site-masthead__hamburger"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="masthead-mobile-menu"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line class="hamburger-top" x1="3" y1="6" x2="21" y2="6" />
+                <line class="hamburger-mid" x1="3" y1="12" x2="21" y2="12" />
+                <line class="hamburger-bot" x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+            <div id="masthead-mobile-menu" class="site-masthead__drawer" aria-hidden="true">
+              <a href={homeHref}>Home</a>
+              <a href={topicsHref}>Topics</a>
+              <a href={lexiconHref}>Lexicon</a>
+              <a href={keeperHref}>On the Keeper</a>
+            </div>
           </nav>
         </div>
       </div>
@@ -40,6 +62,7 @@ const Masthead: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
   )
 }
 
+Masthead.afterDOMLoaded = mastheadScript
 Masthead.displayName = "Masthead"
 
 export default (() => Masthead) satisfies QuartzComponentConstructor

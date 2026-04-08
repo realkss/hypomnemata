@@ -71,7 +71,7 @@ const config: QuartzConfig = {
           gray: "#5f5a54",
           darkgray: "#ddd6cc",
           dark: "#f6f1e8",
-          secondary: "#c6a15b",
+          secondary: "#d4b06a",
           tertiary: "#8fb7cc",
           highlight: "rgba(198, 161, 91, 0.12)",
           textHighlight: "#c6a15b66",
@@ -101,7 +101,7 @@ const config: QuartzConfig = {
 
       // Nice reading experience
       Plugin.TableOfContents(),
-      Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
+      Plugin.CrawlLinks({ markdownLinkResolution: "shortest", lazyLoad: true }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
