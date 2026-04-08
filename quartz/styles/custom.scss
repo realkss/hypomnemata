@@ -327,7 +327,7 @@ article h2 {
   padding-top: 0.25rem;
 }
 
-article blockquote {
+article blockquote:not(.callout) {
   border-left: 4px solid var(--secondary);
   background: color-mix(in srgb, var(--light) 90%, var(--secondary) 10%);
   padding: 1rem 1.1rem;
@@ -336,7 +336,7 @@ article blockquote {
   font-style: italic;
 }
 
-article blockquote p {
+article blockquote:not(.callout) p {
   margin: 0;
 }
 
