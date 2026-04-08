@@ -5,49 +5,156 @@ sourceLanguage: en
 translationStatus: original
 ---
 
-This opening chapter teaches the habit of seeing algebraic objects as **sets equipped with operations and laws**, not just as familiar symbols.
+This chapter establishes the central idea of abstract algebra: the study of sets equipped with operations, and the structure-preserving maps between them. The goal is not to memorize vocabulary but to absorb the habit of treating the operation as part of the object.
 
-## Core ideas
+---
 
-- A structure is a set together with operations.
-- The same set can carry different algebraic structures under different operations.
-- Examples and nonexamples matter because they force you to test the axioms rather than trust intuition.
+## §1.1 What algebra is about
 
-## Standard examples
+### Remark 1.1 (The core idea)
 
-- $(\mathbb{Z}, +)$ is an infinite abelian group.
-- $(\mathbb{R}^{\times}, \cdot)$ is an abelian group.
-- $GL_n(\mathbb{R})$ is a group under matrix multiplication.
-- $\mathbb{Z}_n$ under addition mod $n$ is a finite cyclic group.
+Abstract algebra studies **sets with operations** and the **structure-preserving maps** (homomorphisms, isomorphisms) between them. The key insight: the same underlying set can carry different algebraic structures depending on which operation is imposed.
 
-## Counterexamples worth remembering
+**Example:** The set $\mathbb{Z}$ under addition $(\mathbb{Z}, +)$ is a group, but $\mathbb{Z}$ under multiplication $(\mathbb{Z}, \cdot)$ is not (most elements lack multiplicative inverses). Same set, different structures, fundamentally different behavior.
 
-- $M_n(\mathbb{R})$ under multiplication is not a group because singular matrices are not invertible.
-- Positive integers under addition are closed and associative, but have no additive identity inside the set.
-- Nonzero integers under multiplication have an identity, but most elements have no inverses in the set.
+Figure: the same underlying set can support different algebraic structures.
 
-## Toggleable proofs
+![](../../_figures/01-same-set-different-operations.svg)
 
-> [!info]- Proof that (Z, +) is a group
->
-> Let $m,n,k \in \mathbb{Z}$. Since the integers are closed under addition, $m+n \in \mathbb{Z}$. Associativity holds because ordinary integer addition satisfies $(m+n)+k = m+(n+k)$. The element $0$ is an identity because $m+0=0+m=m$ for every $m \in \mathbb{Z}$. Finally, each $m \in \mathbb{Z}$ has inverse $-m$, since $m+(-m)=(-m)+m=0$. Thus $(\mathbb{Z}, +)$ satisfies closure, associativity, identity, and inverses, so it is a group. It is abelian because $m+n=n+m$ for all integers $m,n$.
+The point of the figure is that the operation is part of the data; changing the operation changes the object.
 
-> [!info]- Why M_n(R) under multiplication is not a group
->
-> Closure and associativity do hold for matrix multiplication, and the identity matrix $I_n$ lies in $M_n(\mathbb{R})$. The failure is invertibility. Take any singular matrix $A \in M_n(\mathbb{R})$, for example the zero matrix. If $A$ had a multiplicative inverse $B$, then $AB=I_n$. Taking determinants would give
-> $$
-> \det(A)\det(B)=\det(I_n)=1.
-> $$
-> But $\det(A)=0$ for a singular matrix, so the left-hand side would be $0$, a contradiction. Therefore not every element of $M_n(\mathbb{R})$ is invertible, so $M_n(\mathbb{R})$ is not a group under multiplication.
+### Remark 1.2 (Why abstraction matters)
 
-## Companion exercises
+Abstraction is not generalization for its own sake. It serves three purposes:
 
-1. Decide whether $(\mathbb{Z}, +)$, $(\mathbb{Z}, \cdot)$, $(\mathbb{Q}^{\times}, \cdot)$, $(M_2(\mathbb{R}), \cdot)$, and $(M_2(\mathbb{R}), +)$ are groups.
-2. Give one finite group and one finite algebraic system that is not a group.
-3. Explain why the same set $\mathbb{Z}$ behaves differently under addition and multiplication.
+1. **Unification.** Seemingly unrelated objects (rotations of a square, residue classes mod $n$, permutations of a set) turn out to satisfy the same axioms, so one proof covers all cases.
+2. **Structural invariants.** Instead of computing with specific elements, one reasons about properties (like element orders or subgroup lattices) that are preserved under isomorphism.
+3. **Transfer of problems.** An isomorphism $(\mathbb{R}, +) \cong (\mathbb{R}^+, \cdot)$ via $\exp$ allows one to turn additive problems into multiplicative ones and vice versa.
 
-## Textbook drill in your copy of Fraleigh 7e
+---
 
-- Work one classification problem: group or nongroup.
-- Work one matrix example.
-- Work one modular arithmetic example.
+## §1.2 Symmetries as motivation
+
+### Definition 1.3 (Symmetry of a geometric object)
+
+A **symmetry** of a geometric figure is a rigid motion (distance-preserving transformation) of the plane that maps the figure onto itself. The set of all symmetries, under composition, forms a group.
+
+### Example 1.4 (Symmetries of an equilateral triangle)
+
+An equilateral triangle has $6$ symmetries:
+- $3$ rotations: by $0°$, $120°$, and $240°$ about the center.
+- $3$ reflections: across each altitude.
+
+These form the **dihedral group** $D_3$ (also called $S_3$, the symmetric group on $3$ elements), of order $6$. This is the simplest nonabelian group one encounters naturally.
+
+---
+
+## §1.3 The dihedral group $D_4$: symmetries of the square
+
+### Definition 1.5 (Dihedral group $D_4$)
+
+The **dihedral group of the square**, denoted $D_4$, is the group of all symmetries of a square. It has $8$ elements.
+
+Label the vertices of the square $1, 2, 3, 4$ (clockwise). The elements are:
+
+| Element | Description | Effect on vertices |
+| --- | --- | --- |
+| $e$ | identity | $(1)(2)(3)(4)$ |
+| $r$ | rotation by $90°$ | $(1\;2\;3\;4)$ |
+| $r^2$ | rotation by $180°$ | $(1\;3)(2\;4)$ |
+| $r^3$ | rotation by $270°$ | $(1\;4\;3\;2)$ |
+| $s$ | reflection across vertical axis | $(1\;2)(3\;4)$ |
+| $sr$ | reflection across diagonal $1$-$3$ | $(2\;4)$ |
+| $sr^2$ | reflection across horizontal axis | $(1\;4)(2\;3)$ |
+| $sr^3$ | reflection across diagonal $2$-$4$ | $(1\;3)$ |
+
+**Group structure:** The group is generated by $r$ (rotation by $90°$) and $s$ (one reflection), subject to:
+$$
+r^4 = e, \qquad s^2 = e, \qquad srs = r^{-1} = r^3.
+$$
+The relation $srs = r^{-1}$ says that conjugating a rotation by a reflection reverses the direction of rotation. This is the defining feature of dihedral groups.
+
+### Remark 1.6 ($D_4$ is not abelian)
+
+Since $sr \neq rs$ (in fact $rs = sr^3$), the group $D_4$ is nonabelian. This is visible from the geometry: rotating then reflecting is not the same as reflecting then rotating.
+
+### Example 1.7 (A computation in $D_4$)
+
+Compute $r^2 \cdot sr$ in $D_4$.
+
+Using the relation $sr = r^{-1}s = r^3 s$:
+$$
+r^2 \cdot sr = r^2 \cdot r^3 s = r^5 s = r^{4+1} s = r \cdot s = rs = sr^3.
+$$
+So $r^2 \cdot sr = sr^3$. In terms of the table above, the composition of a $180°$ rotation with the diagonal reflection gives the other diagonal reflection.
+
+---
+
+## §1.4 Modular arithmetic as a preview
+
+### Definition 1.8 (Integers modulo $n$)
+
+For a positive integer $n$, define the set
+$$
+\mathbb{Z}_n = \{\bar{0}, \bar{1}, \bar{2}, \ldots, \overline{n-1}\}
+$$
+with **addition modulo $n$**: $\bar{a} + \bar{b} = \overline{a + b \bmod n}$.
+
+### Example 1.9 ($\mathbb{Z}_6$ addition table, partial)
+
+In $\mathbb{Z}_6$: $\bar{4} + \bar{5} = \overline{9} = \bar{3}$ (since $9 = 1 \cdot 6 + 3$).
+
+Key observations:
+- **Identity:** $\bar{0}$.
+- **Inverses:** The inverse of $\bar{a}$ is $\overline{n - a}$. For instance, in $\mathbb{Z}_6$, the inverse of $\bar{4}$ is $\bar{2}$.
+- **Cyclic:** $\bar{1}$ generates all of $\mathbb{Z}_n$ by repeated addition.
+
+### Remark 1.10 (Why modular arithmetic matters in algebra)
+
+$\mathbb{Z}_n$ is the simplest family of finite groups. It provides test cases for every definition and theorem in the course: subgroups, cyclic groups, homomorphisms, quotients, and direct products all have clean concrete manifestations in $\mathbb{Z}_n$.
+
+---
+
+## §1.5 The same set, different structures
+
+### Example 1.11 (A non-standard operation on $\mathbb{Z}$)
+
+On $\mathbb{Z}$, define $a \star b = a + b + 1$. Then $(\mathbb{Z}, \star)$ is a group:
+
+- **Closure:** $a + b + 1 \in \mathbb{Z}$ for $a, b \in \mathbb{Z}$.
+- **Associativity:** $(a \star b) \star c = (a+b+1)+c+1 = a+b+c+2 = a+(b+c+1)+1 = a \star (b \star c)$.
+- **Identity:** $e = -1$, since $a \star (-1) = a + (-1) + 1 = a$ and $(-1) \star a = -1 + a + 1 = a$.
+- **Inverses:** The inverse of $a$ is $-a - 2$, since $a \star (-a-2) = a + (-a-2) + 1 = -1 = e$.
+
+Moreover, $\varphi : (\mathbb{Z}, \star) \to (\mathbb{Z}, +)$ defined by $\varphi(n) = n + 1$ is an isomorphism:
+$$
+\varphi(a \star b) = a + b + 2 = (a+1) + (b+1) = \varphi(a) + \varphi(b).
+$$
+So $(\mathbb{Z}, \star)$ is just the usual additive integers in disguise. This illustrates why algebra studies structures up to isomorphism, not specific element names.
+
+---
+
+## §1.6 Axiom-failure diagnosis
+
+### Remark 1.12 (Name the first failure)
+
+When a proposed algebraic structure fails to satisfy the axioms, one should identify the **first** failing axiom in the logical order: (1) closure, (2) associativity, (3) identity, (4) inverses.
+
+| Proposed structure | First failure |
+| --- | --- |
+| Division on $\mathbb{Z}$ | Not a binary operation (closure: $1/2 \notin \mathbb{Z}$) |
+| $(\mathbb{Z}^+, +)$ | Identity ($0 \notin \mathbb{Z}^+$) |
+| $(\mathbb{Z}, \cdot)$ | Inverses ($1/2 \notin \mathbb{Z}$) |
+| $(M_n(\mathbb{R}), \cdot)$ | Inverses (singular matrices) |
+| $(\mathbb{R}^*, a/b)$ | Associativity ($(a/b)/c \neq a/(b/c)$ generally) |
+
+---
+
+## Mastery Checklist
+
+- [ ] Explain what extra data distinguishes an algebraic structure from a bare set.
+- [ ] List all $8$ elements of $D_4$ and perform computations using $r^4 = s^2 = e$ and $srs = r^{-1}$.
+- [ ] Describe the symmetries of a regular $n$-gon and why they form a group.
+- [ ] Compute in $\mathbb{Z}_n$ (addition, inverses, orders of elements).
+- [ ] Give an example of two different group structures on the same underlying set.
+- [ ] Diagnose precisely why a proposed structure fails to be a group (name the first failing axiom).
