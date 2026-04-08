@@ -30,9 +30,9 @@ cssclasses:
       <p class="hp-hero__panel-label">Start Here</p>
       <div class="hp-hero__links">
         <a class="hp-start-link" href="./en/Topics/Physics/Quantum-Computing/">Quantum Computing</a>
-        <a class="hp-start-link" href="./keeper/">On the Keeper</a>
-        <a class="hp-start-link" href="./map/">Map of the Notebook</a>
-        <a class="hp-start-link" href="./lexicon/">Lexicon</a>
+        <a class="hp-start-link" href="./keeper">On the Keeper</a>
+        <a class="hp-start-link" href="./map">Map of the Notebook</a>
+        <a class="hp-start-link" href="./lexicon">Lexicon</a>
       </div>
     </aside>
   </section>
@@ -112,9 +112,9 @@ cssclasses:
       <p>Browse the full graph, consult the terminology, or meet the keeper of the notebook.</p>
     </div>
     <div class="hp-runway__links">
-      <a class="hp-runway__link" href="./map/">Map of the Notebook</a>
-      <a class="hp-runway__link" href="./lexicon/">Lexicon</a>
-      <a class="hp-runway__link hp-runway__link--secondary" href="./keeper/">On the Keeper</a>
+      <a class="hp-runway__link" href="./map">Map of the Notebook</a>
+      <a class="hp-runway__link" href="./lexicon">Lexicon</a>
+      <a class="hp-runway__link hp-runway__link--secondary" href="./keeper">On the Keeper</a>
     </div>
   </section>
 

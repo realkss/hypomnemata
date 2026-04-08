@@ -28,7 +28,7 @@ cssclasses:
     <aside class="algebra-hero__tools">
       <p class="algebra-hero__tools-label">Study Tools</p>
       <div class="algebra-tool-grid">
-        <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Study-Materials/midterm-flashcards">Flashcard Deck</a>
+        <a class="algebra-tool" href="/static/algebra/midterm-flashcards.html">Flashcard Deck</a>
         <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Study-Materials/9-day-midterm-sprint">Midterm Sprint</a>
         <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Reference/Terminology">Terminology</a>
         <a class="algebra-tool" href="/en/Topics/Mathematics/Abstract-Algebra/Reference/Theorems">Theorems</a>
