@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fraleigh 7e Midterm Flashcards</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
       --bg: #f4efe8;
@@ -138,20 +138,20 @@
 
     .flashcard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 14px;
     }
 
     .flashcard {
       perspective: 1000px;
-      min-height: 205px;
+      min-height: 240px;
     }
 
     .flashcard-inner {
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 205px;
+      min-height: 240px;
       transform-style: preserve-3d;
       transition: transform 0.45s ease;
     }
@@ -172,6 +172,8 @@
       flex-direction: column;
       justify-content: space-between;
       box-shadow: var(--shadow);
+      overflow-x: auto;
+      overflow-y: auto;
     }
 
     .back {
@@ -215,19 +217,128 @@
       color: var(--muted);
       text-align: center;
     }
+
+    /* --- Spaced-Repetition Additions --- */
+
+    .confidence-dot {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      z-index: 2;
+    }
+    .confidence-dot.unseen { background: #ccc; }
+    .confidence-dot.again  { background: #d9534f; }
+    .confidence-dot.hard   { background: #f0ad4e; }
+    .confidence-dot.easy   { background: #5cb85c; }
+
+    .face.front { position: relative; }
+
+    .rating-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      justify-content: center;
+    }
+
+    .rating-btn {
+      width: auto;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .rating-btn:hover { transform: scale(1.06); }
+    .rating-btn.again { background: #d9534f; }
+    .rating-btn.hard  { background: #f0ad4e; color: #3a2e00; }
+    .rating-btn.easy  { background: #5cb85c; }
+
+    .session-stats {
+      margin-top: 8px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .mastery-section {
+      margin-top: 16px;
+    }
+    .mastery-section h3 {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    .mastery-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 5px;
+      font-size: 0.78rem;
+    }
+    .mastery-label {
+      width: 42px;
+      text-align: right;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .mastery-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .mastery-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .mastery-pct {
+      width: 32px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .toolbar button.review-due {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .toolbar button.review-due:hover {
+      opacity: 0.9;
+    }
+    .badge {
+      display: inline-block;
+      background: #fff;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 999px;
+      margin-left: 4px;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="hero">
       <h1>Fraleigh 7e Midterm Deck</h1>
-      <p>Built for Chapters 1 through 15 of the 7th edition. Use it as the fast commuting layer: definitions, theorem statements, and famous counterexamples. For full notes, go back to the chapter pages, theorem glossary, and terminology glossary in the Abstract Algebra section.</p>
+      <p>Chapters 1&ndash;15, 7th edition. Definitions, theorems, proof sketches, algorithms, computations, counterexamples, and True/False exercises. Use the chapter and type filters to drill by topic.</p>
+      <div id="sessionStats" class="session-stats"></div>
     </header>
 
     <div class="layout">
       <aside class="panel sidebar">
         <div class="controls">
-          <input id="search" type="text" placeholder="Search definition, theorem, counterexample..." />
+          <input id="search" type="text" placeholder="Search cards..." />
           <select id="chapterFilter">
             <option value="all">All chapters</option>
           </select>
@@ -235,10 +346,15 @@
             <option value="all">All card types</option>
             <option value="Definition">Definition</option>
             <option value="Theorem">Theorem</option>
+            <option value="Proof Sketch">Proof Sketch</option>
+            <option value="Algorithm">Algorithm</option>
+            <option value="Computation">Computation</option>
             <option value="Counterexample">Counterexample</option>
             <option value="Example">Example</option>
+            <option value="True/False">True/False</option>
           </select>
           <button id="showAll">Show all</button>
+          <button id="showTF">True/False only</button>
           <button id="showCounterexamples">Counterexamples only</button>
         </div>
 
@@ -251,13 +367,26 @@
             <div class="label">Total</div>
             <div id="totalCount" class="value">0</div>
           </div>
+          <div class="stat">
+            <div class="label">Mastered</div>
+            <div id="masteredCount" class="value" style="color:#5cb85c">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Need Review</div>
+            <div id="reviewCount" class="value" style="color:#d9534f">0</div>
+          </div>
+        </div>
+        <div id="masteryBars" class="mastery-section">
+          <h3>Chapter Mastery</h3>
         </div>
       </aside>
 
       <main class="panel main">
         <div class="toolbar">
+          <button id="reviewDue" class="review-due">Review Due <span id="dueBadge" class="badge">0</span></button>
           <button id="flipAll">Flip visible cards</button>
           <button id="resetCards">Reset flips</button>
+          <button id="shuffleCards">Shuffle</button>
         </div>
         <div id="flashcards" class="flashcard-grid"></div>
         <div id="emptyState" class="empty" style="display:none;">No cards match the current filters.</div>
@@ -267,45 +396,415 @@
 
   <script>
     const cards = [
-      { chapter: 1, type: "Definition", front: "What is an algebraic structure in this course?", back: "A set together with one or more operations and the laws those operations satisfy." },
-      { chapter: 1, type: "Counterexample", front: "Why is $M_2(\\mathbb{R})$ under multiplication not a group?", back: "Because singular matrices are not invertible." },
-      { chapter: 2, type: "Definition", front: "What is a binary operation on $S$?", back: "A function from $S \\times S$ to $S$." },
-      { chapter: 2, type: "Theorem", front: "Why is a two-sided identity unique?", back: "If $e$ and $f$ are identities, then $e = e * f = f$." },
-      { chapter: 2, type: "Counterexample", front: "What is the standard warning example for closure without associativity?", back: "Subtraction on $\\mathbb{Z}$ is closed but not associative." },
-      { chapter: 3, type: "Definition", front: "What is an isomorphism of binary structures?", back: "A bijection preserving the operation." },
-      { chapter: 3, type: "Counterexample", front: "Why are $\\mathbb{Z}_4$ and $V_4$ not isomorphic?", back: "$\\mathbb{Z}_4$ has an element of order 4, but $V_4$ does not." },
-      { chapter: 4, type: "Definition", front: "State the group axioms.", back: "Closure, associativity, identity, and inverses." },
-      { chapter: 4, type: "Theorem", front: "How do you solve $ax = b$ in a group?", back: "$x = a^{-1}b$." },
-      { chapter: 5, type: "Theorem", front: "State the subgroup test.", back: "A nonempty subset $H$ is a subgroup iff $xy^{-1} \\in H$ for all $x, y \\in H$." },
-      { chapter: 5, type: "Counterexample", front: "What is the standard false statement about unions of subgroups?", back: "The union of two subgroups is usually not a subgroup." },
-      { chapter: 6, type: "Definition", front: "What does $G = \\langle g \\rangle$ mean?", back: "Every element of $G$ is a power of $g$." },
-      { chapter: 6, type: "Theorem", front: "What is $\\operatorname{ord}(g^k)$ in a cyclic group of order $n$?", back: "$n / \\gcd(n, k)$." },
-      { chapter: 6, type: "Counterexample", front: "What is the standard abelian but noncyclic group?", back: "$V_4 = \\mathbb{Z}_2 \\times \\mathbb{Z}_2$." },
-      { chapter: 7, type: "Definition", front: "What does it mean for $S$ to generate $G$?", back: "Every element of $G$ is a finite word in elements of $S$ and their inverses." },
-      { chapter: 7, type: "Counterexample", front: "Which standard additive group is not finitely generated?", back: "$(\\mathbb{Q}, +)$." },
-      { chapter: 8, type: "Theorem", front: "State Cayley's theorem.", back: "Every group is isomorphic to a subgroup of a symmetric group." },
-      { chapter: 8, type: "Counterexample", front: "When do cycles fail to commute?", back: "When they are not disjoint." },
-      { chapter: 9, type: "Definition", front: "What is an even permutation?", back: "A permutation expressible as a product of an even number of transpositions." },
-      { chapter: 9, type: "Theorem", front: "What is $|A_n|$?", back: "$n!/2$." },
-      { chapter: 9, type: "Counterexample", front: "Give an even permutation that is not a single cycle.", back: "$(1\\ 2)(3\\ 4)$." },
-      { chapter: 10, type: "Definition", front: "What is a left coset of $H$ in $G$?", back: "A set of the form $gH$." },
-      { chapter: 10, type: "Theorem", front: "State Lagrange's theorem.", back: "If $G$ is finite and $H \\leq G$, then $|H|$ divides $|G|$ and $|G| = [G:H]|H|$." },
-      { chapter: 10, type: "Counterexample", front: "What is the classic converse-to-Lagrange failure?", back: "$A_4$ has order 12 but no subgroup of order 6." },
-      { chapter: 11, type: "Definition", front: "What is the direct product $G \\times H$?", back: "The set of ordered pairs with componentwise multiplication." },
-      { chapter: 11, type: "Theorem", front: "State the structure theorem for finitely generated abelian groups.", back: "Every such group is isomorphic to $\\mathbb{Z}^r \\times \\mathbb{Z}_{n_1} \\times \\cdots \\times \\mathbb{Z}_{n_k}$ with $n_1 \\mid \\cdots \\mid n_k$." },
-      { chapter: 11, type: "Counterexample", front: "Why is $\\mathbb{Z}_2 \\times \\mathbb{Z}_2$ a useful warning?", back: "It is a direct product of cyclic groups but is not cyclic." },
-      { chapter: 12, type: "Definition", front: "Name the four plane isometry types.", back: "Translation, rotation, reflection, and glide reflection." },
-      { chapter: 12, type: "Theorem", front: "What do two reflections compose to?", back: "A translation if their axes are parallel and a rotation if they intersect." },
-      { chapter: 13, type: "Definition", front: "What is a homomorphism?", back: "A map $\\varphi$ with $\\varphi(ab) = \\varphi(a)\\varphi(b)$." },
-      { chapter: 13, type: "Definition", front: "What is the kernel of a homomorphism?", back: "The set of elements mapped to the identity." },
-      { chapter: 13, type: "Theorem", front: "When is a homomorphism injective?", back: "Exactly when its kernel is trivial." },
-      { chapter: 13, type: "Counterexample", front: "What is the warning about bijections between groups?", back: "A bijection need not be a homomorphism." },
-      { chapter: 14, type: "Definition", front: "When is a subgroup normal?", back: "When $gN = Ng$ for every $g \\in G$." },
-      { chapter: 14, type: "Theorem", front: "When does coset multiplication define a quotient group?", back: "Exactly when the subgroup is normal." },
-      { chapter: 14, type: "Counterexample", front: "Why can you not quotient by any subgroup?", back: "If the subgroup is not normal, coset multiplication can depend on representatives." },
-      { chapter: 15, type: "Definition", front: "What is a simple group?", back: "A group whose only normal subgroups are the trivial subgroup and the whole group." },
-      { chapter: 15, type: "Theorem", front: "Why is $\\mathbb{Z}_p$ simple for prime $p$?", back: "Its only subgroups have orders 1 or $p$, so its only normal subgroups are trivial and whole." },
-      { chapter: 15, type: "Counterexample", front: "What is the standard not-simple example from this range?", back: "$A_4$ is not simple because it has a normal Klein four subgroup." }
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 1 — Introduction and Examples
+      // ═══════════════════════════════════════════
+
+      { chapter: 1, type: "Definition", front: "What is a binary algebraic structure?", back: "A set \\(S\\) together with a binary operation \\(*\\) on \\(S\\), written \\(\\langle S, * \\rangle\\)." },
+      { chapter: 1, type: "Definition", front: "What additional axioms does a group satisfy beyond being a binary algebraic structure?", back: "Associativity (\\(\\mathscr{G}_1\\)), existence of identity (\\(\\mathscr{G}_2\\)), and existence of inverses (\\(\\mathscr{G}_3\\))." },
+      { chapter: 1, type: "Example", front: "Which of \\((\\mathbb{Z},+)\\), \\((\\mathbb{Z},\\cdot)\\), \\((\\mathbb{Q}^\\times,\\cdot)\\) are groups?", back: "\\((\\mathbb{Z},+)\\) and \\((\\mathbb{Q}^\\times,\\cdot)\\) are groups. \\((\\mathbb{Z},\\cdot)\\) is not: \\(2\\) has no multiplicative inverse in \\(\\mathbb{Z}\\)." },
+      { chapter: 1, type: "Counterexample", front: "Why is \\(M_2(\\mathbb{R})\\) under multiplication not a group?", back: "Singular matrices (those with \\(\\det = 0\\)) have no multiplicative inverse." },
+
+      // Ch 1 — New cards
+      { chapter: 1, type: "Definition", front: "What is a symmetry of a geometric figure?", back: "A distance-preserving bijection of the plane that maps the figure onto itself. The set of all symmetries forms a group under composition." },
+      { chapter: 1, type: "Definition", front: "Define \\(\\mathbb{Z}_n\\) and its group operation.", back: "\\(\\mathbb{Z}_n = \\{\\bar{0}, \\bar{1}, \\ldots, \\overline{n-1}\\}\\) with addition modulo \\(n\\): \\(\\bar{a} + \\bar{b} = \\overline{a+b \\bmod n}\\). The identity is \\(\\bar{0}\\); the inverse of \\(\\bar{a}\\) is \\(\\overline{n-a}\\)." },
+      { chapter: 1, type: "Computation", front: "List all 8 elements of \\(D_4\\) and compute \\(r^3 \\cdot s\\).", back: "Elements: \\(e, r, r^2, r^3, s, sr, sr^2, sr^3\\). Using \\(rs = sr^3\\): \\(r^3 s = r^2(rs) = r^2(sr^3) = r(rs)r^3 = r(sr^3)r^3 = sr^3 \\cdot r^3 \\cdot r^3 \\). More directly: \\(r^3 s = sr^{-3} = sr\\). So \\(r^3 s = sr\\)." },
+      { chapter: 1, type: "Computation", front: "In \\(\\mathbb{Z}_6\\), compute \\(\\bar{4} + \\bar{5}\\) and find the inverse of \\(\\bar{4}\\).", back: "\\(\\bar{4} + \\bar{5} = \\bar{9} = \\bar{3}\\) (since \\(9 \\bmod 6 = 3\\)). The inverse of \\(\\bar{4}\\) is \\(\\overline{6-4} = \\bar{2}\\)." },
+      { chapter: 1, type: "True/False", front: "T/F: \\(D_4\\) is abelian.", back: "<b>False.</b> \\(rs = sr^3 \\neq sr\\), so rotation followed by reflection differs from reflection followed by rotation." },
+      { chapter: 1, type: "True/False", front: "T/F: The relation \\(srs = r^{-1}\\) in \\(D_n\\) means conjugating a rotation by a reflection reverses its direction.", back: "<b>True.</b> Geometrically, reflecting, rotating, then reflecting again gives the reverse rotation." },
+      { chapter: 1, type: "True/False", front: "T/F: Two different operations on the same set always give isomorphic groups.", back: "<b>False.</b> \\((\\mathbb{Z}, +)\\) is a group but \\((\\mathbb{Z}, \\cdot)\\) is not even a group." },
+      { chapter: 1, type: "True/False", front: "T/F: Division on \\(\\mathbb{Z}\\) fails to be a binary operation because of closure.", back: "<b>True.</b> \\(1/2 \\notin \\mathbb{Z}\\), so division does not map \\(\\mathbb{Z} \\times \\mathbb{Z}\\) into \\(\\mathbb{Z}\\)." },
+      { chapter: 1, type: "Example", front: "Give an example of a group with a non-standard operation on a familiar set.", back: "On \\(\\mathbb{Z}\\), define \\(a \\star b = a + b + 1\\). Identity is \\(-1\\), inverse of \\(a\\) is \\(-a-2\\). This group is isomorphic to \\((\\mathbb{Z}, +)\\) via \\(\\varphi(n) = n+1\\)." },
+      { chapter: 1, type: "Counterexample", front: "Name the first failing axiom: \\((\\mathbb{Z}^+, +)\\) as a group.", back: "Identity fails. The additive identity \\(0\\) is not in \\(\\mathbb{Z}^+ = \\{1,2,3,\\ldots\\}\\)." },
+      { chapter: 1, type: "Theorem", front: "How many symmetries does a regular \\(n\\)-gon have?", back: "\\(2n\\): \\(n\\) rotations (by \\(0, 2\\pi/n, \\ldots, 2\\pi(n-1)/n\\)) and \\(n\\) reflections. These form the dihedral group \\(D_n\\)." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 2 — Binary Operations
+      // ═══════════════════════════════════════════
+
+      { chapter: 2, type: "Definition", front: "What is a binary operation on \\(S\\)?", back: "A function \\(*: S \\times S \\to S\\). It assigns to each ordered pair \\((a,b) \\in S \\times S\\) exactly one element \\(a*b \\in S\\)." },
+      { chapter: 2, type: "Theorem", front: "Why is a two-sided identity unique?", back: "If \\(e\\) and \\(f\\) are both identities, then \\(e = e * f = f\\)." },
+      { chapter: 2, type: "Proof Sketch", front: "Sketch: uniqueness of a two-sided identity.", back: "Let \\(e, f\\) both be identities. Then \\(e = e*f\\) (since \\(f\\) is a right identity) and \\(e*f = f\\) (since \\(e\\) is a left identity). So \\(e = f\\)." },
+      { chapter: 2, type: "Counterexample", front: "Standard example of closure without associativity?", back: "Subtraction on \\(\\mathbb{Z}\\): closed, but \\((1-1)-1 = -1 \\neq 1 = 1-(1-1)\\)." },
+      { chapter: 2, type: "Computation", front: "How many binary operations exist on an \\(n\\)-element set?", back: "\\(n^{n^2}\\). There are \\(n^2\\) ordered pairs, and each maps to one of \\(n\\) elements." },
+
+      // Ch 2 True/False (Exercise 24)
+      { chapter: 2, type: "True/False", front: "T/F: If \\(*\\) is any binary operation on any set \\(S\\), then \\(a*a=a\\) for all \\(a \\in S\\).", back: "<b>False.</b> In \\((\\mathbb{Z},+)\\), \\(1+1=2\\neq 1\\). Idempotency is not guaranteed." },
+      { chapter: 2, type: "True/False", front: "T/F: If \\(*\\) is any commutative binary operation on \\(S\\), then \\(a*(b*c) = (b*c)*a\\) for all \\(a,b,c\\).", back: "<b>True.</b> Commutativity gives \\(a*(b*c) = (b*c)*a\\) directly (swap the two operands)." },
+      { chapter: 2, type: "True/False", front: "T/F: If \\(*\\) is any associative binary operation on \\(S\\), then \\(a*(b*c) = (b*c)*a\\).", back: "<b>False.</b> Associativity lets you re-bracket, not re-order. Matrix multiplication is associative but not commutative." },
+      { chapter: 2, type: "True/False", front: "T/F: The only binary operations of any importance are those defined on sets of numbers.", back: "<b>False.</b> Function composition, matrix multiplication, and group operations on symmetries are all crucial non-numeric examples." },
+      { chapter: 2, type: "True/False", front: "T/F: A binary operation \\(*\\) on \\(S\\) is commutative if there exist \\(a,b \\in S\\) such that \\(a*b = b*a\\).", back: "<b>False.</b> Commutativity requires \\(a*b = b*a\\) for <em>all</em> \\(a,b \\in S\\), not just one pair." },
+      { chapter: 2, type: "True/False", front: "T/F: Every binary operation on a set having exactly one element is both commutative and associative.", back: "<b>True.</b> There is only one operation: \\(a*a = a\\). All identities hold vacuously or by direct check." },
+      { chapter: 2, type: "True/False", front: "T/F: A binary operation on \\(S\\) assigns at least one element of \\(S\\) to each ordered pair.", back: "<b>True.</b> A function assigns exactly one, hence at least one." },
+      { chapter: 2, type: "True/False", front: "T/F: A binary operation on \\(S\\) assigns at most one element of \\(S\\) to each ordered pair.", back: "<b>True.</b> A binary operation is a function, so exactly one output per input." },
+      { chapter: 2, type: "True/False", front: "T/F: A binary operation on \\(S\\) assigns exactly one element of \\(S\\) to each ordered pair.", back: "<b>True.</b> By definition, a binary operation is a function \\(S \\times S \\to S\\)." },
+      { chapter: 2, type: "True/False", front: "T/F: A binary operation on \\(S\\) may assign more than one element of \\(S\\) to some ordered pair.", back: "<b>False.</b> Functions are single-valued. If it assigns more than one value, it is not a function and hence not a binary operation." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 3 — Isomorphic Binary Structures
+      // ═══════════════════════════════════════════
+
+      { chapter: 3, type: "Definition", front: "What is an isomorphism of binary structures \\(\\langle S,*\\rangle\\) and \\(\\langle S',*'\\rangle\\)?", back: "A bijection \\(\\phi: S \\to S'\\) such that \\(\\phi(a*b) = \\phi(a) *' \\phi(b)\\) for all \\(a,b \\in S\\)." },
+      { chapter: 3, type: "Definition", front: "What is a structural invariant?", back: "A property preserved under isomorphism: cardinality, commutativity, number of solutions to \\(x*x=x\\), element orders, etc. If two structures differ on any invariant, they are not isomorphic." },
+      { chapter: 3, type: "Example", front: "Show \\((\\mathbb{R},+) \\cong (\\mathbb{R}_{>0}, \\cdot)\\).", back: "\\(\\phi(x) = e^x\\) is a bijection with \\(\\phi(a+b) = e^{a+b} = e^a \\cdot e^b = \\phi(a)\\phi(b)\\)." },
+      { chapter: 3, type: "Counterexample", front: "Why are \\(\\mathbb{Z}_4\\) and \\(V_4\\) not isomorphic?", back: "\\(\\mathbb{Z}_4\\) has an element of order 4; every non-identity element of \\(V_4 = \\mathbb{Z}_2 \\times \\mathbb{Z}_2\\) has order 2." },
+      { chapter: 3, type: "Theorem", front: "What does an isomorphism preserve about the identity?", back: "If \\(\\phi: \\langle S,*\\rangle \\to \\langle S',*'\\rangle\\) is an isomorphism and \\(e\\) is the identity in \\(S\\), then \\(\\phi(e)\\) is the identity in \\(S'\\)." },
+
+      // Ch 3 — New cards
+      { chapter: 3, type: "Theorem", front: "Does an isomorphism preserve element orders?", back: "Yes. If \\(\\phi: G \\to G'\\) is an isomorphism, then \\(\\operatorname{ord}(\\phi(a)) = \\operatorname{ord}(a)\\) for all \\(a \\in G\\). Proof: \\(\\phi(a^n) = \\phi(a)^n\\), so \\(a^n = e \\iff \\phi(a)^n = e'\\)." },
+      { chapter: 3, type: "Theorem", front: "Is the isomorphism relation an equivalence relation?", back: "Yes. Reflexive: \\(\\mathrm{id}_S\\). Symmetric: \\(\\phi^{-1}\\) is an isomorphism. Transitive: \\(\\psi \\circ \\phi\\) is an isomorphism." },
+      { chapter: 3, type: "Definition", front: "What is a commuting diagram for an isomorphism?", back: "The square with \\(S \\times S \\xrightarrow{*} S\\) on top, \\(S' \\times S' \\xrightarrow{*'} S'\\) on bottom, and \\(\\phi\\) on the sides. It says: multiply then rename = rename then multiply." },
+      { chapter: 3, type: "Example", front: "Show \\((\\mathbb{Z}, +) \\cong (2\\mathbb{Z}, +)\\).", back: "Define \\(\\phi(n) = 2n\\). Injective: \\(2m = 2n \\Rightarrow m=n\\). Surjective: every \\(2k\\) is \\(\\phi(k)\\). Homomorphism: \\(\\phi(m+n) = 2(m+n) = 2m+2n\\)." },
+      { chapter: 3, type: "Example", front: "Show \\(\\mathbb{Z}_6 \\cong U_7\\) (units mod 7).", back: "\\(U_7 = \\{1,2,3,4,5,6\\}\\) under \\(\\cdot \\bmod 7\\). Map \\(\\phi(\\bar{k}) = 3^k \\bmod 7\\). Since \\(3\\) generates \\(U_7\\): \\(\\phi(\\bar{a}+\\bar{b}) = 3^{a+b} = 3^a \\cdot 3^b = \\phi(\\bar{a})\\phi(\\bar{b})\\). Bijective since all 6 powers are distinct." },
+      { chapter: 3, type: "Counterexample", front: "Give a bijection that is NOT an isomorphism.", back: "\\(\\phi: (\\mathbb{Z},+) \\to (\\mathbb{Z},+)\\) by \\(\\phi(n) = n+1\\). Bijective, but \\(\\phi(a+b) = a+b+1 \\neq a+b+2 = \\phi(a)+\\phi(b)\\)." },
+      { chapter: 3, type: "Counterexample", front: "Prove \\((\\mathbb{Z},+) \\not\\cong (\\mathbb{Q},+)\\).", back: "\\(\\mathbb{Z}\\) is cyclic (generated by 1). \\(\\mathbb{Q}\\) is not cyclic: for any \\(q \\in \\mathbb{Q}\\), \\(q/2\\) is rational but not in \\(\\langle q \\rangle = \\{nq : n \\in \\mathbb{Z}\\}\\). Since cyclicity is an invariant, they are not isomorphic." },
+      { chapter: 3, type: "True/False", front: "T/F: If two groups have the same order, they are isomorphic.", back: "<b>False.</b> \\(\\mathbb{Z}_4\\) and \\(V_4\\) both have order 4 but are not isomorphic (different element orders)." },
+      { chapter: 3, type: "True/False", front: "T/F: If \\(\\phi: G \\to G'\\) is an isomorphism, then \\(\\phi^{-1}: G' \\to G\\) is also an isomorphism.", back: "<b>True.</b> The inverse of a bijective homomorphism is again a bijective homomorphism." },
+      { chapter: 3, type: "True/False", front: "T/F: An isomorphism preserves commutativity.", back: "<b>True.</b> If \\(ab = ba\\) for all \\(a,b \\in G\\), then \\(\\phi(a)\\phi(b) = \\phi(ab) = \\phi(ba) = \\phi(b)\\phi(a)\\)." },
+      { chapter: 3, type: "Computation", front: "Verify that \\(\\phi(x) = 2^x\\) is an isomorphism \\((\\mathbb{R},+) \\to (\\mathbb{R}^+, \\cdot)\\).", back: "Injective: \\(2^a = 2^b \\Rightarrow a=b\\). Surjective: for \\(y>0\\), \\(\\phi(\\log_2 y) = y\\). Homomorphism: \\(\\phi(a+b) = 2^{a+b} = 2^a \\cdot 2^b\\). Inverse: \\(\\phi^{-1}(y) = \\log_2 y\\)." },
+      { chapter: 3, type: "Proof Sketch", front: "Sketch: isomorphisms preserve the number of solutions to \\(x^2 = e\\).", back: "If \\(x^2 = e\\) in \\(G\\), then \\(\\phi(x)^2 = \\phi(x^2) = \\phi(e) = e'\\). So \\(\\phi\\) maps solutions to solutions. Since \\(\\phi\\) is a bijection, the count is preserved." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 4 — Groups
+      // ═══════════════════════════════════════════
+
+      { chapter: 4, type: "Definition", front: "State the group axioms precisely.", back: "A group \\(\\langle G, * \\rangle\\) satisfies:<br>(\\(\\mathscr{G}_1\\)) \\(*\\) is associative: \\((a*b)*c = a*(b*c)\\) for all \\(a,b,c\\).<br>(\\(\\mathscr{G}_2\\)) There exists \\(e \\in G\\) with \\(e*a = a*e = a\\) for all \\(a\\).<br>(\\(\\mathscr{G}_3\\)) For each \\(a\\), there exists \\(a' \\in G\\) with \\(a*a' = a'*a = e\\)." },
+      { chapter: 4, type: "Theorem", front: "State the cancellation laws.", back: "In a group: if \\(a*b = a*c\\) then \\(b=c\\) (left cancellation), and if \\(b*a = c*a\\) then \\(b=c\\) (right cancellation)." },
+      { chapter: 4, type: "Proof Sketch", front: "Sketch: left cancellation in a group.", back: "Given \\(a*b = a*c\\), multiply both sides on the left by \\(a'\\): \\(a'*(a*b) = a'*(a*c)\\), so \\((a'*a)*b = (a'*a)*c\\), hence \\(e*b = e*c\\), i.e. \\(b=c\\)." },
+      { chapter: 4, type: "Theorem", front: "How do you solve \\(a*x = b\\) in a group?", back: "\\(x = a^{-1} * b\\). This is the unique solution." },
+      { chapter: 4, type: "Theorem", front: "What is \\((a*b)^{-1}\\)?", back: "\\((a*b)^{-1} = b^{-1} * a^{-1}\\). The order reverses (socks-shoes property)." },
+      { chapter: 4, type: "Theorem", front: "What does each row/column of a group Cayley table look like?", back: "Each row and each column is a permutation of the group elements. No element repeats in any row or column." },
+      { chapter: 4, type: "Counterexample", front: "Why is \\((\\mathbb{Z}, \\cdot)\\) not a group?", back: "No inverses: \\(2\\) has no integer \\(n\\) with \\(2n = 1\\)." },
+      { chapter: 4, type: "Counterexample", front: "Give a set with an associative binary operation, identity, but no group structure.", back: "\\((\\mathbb{Z}, \\cdot)\\): associative, identity \\(1\\), but most elements lack inverses." },
+      { chapter: 4, type: "Theorem", front: "State the theorem on uniqueness of inverses.", back: "In a group, the inverse of each element is unique. If \\(a*a' = e\\) and \\(a*a'' = e\\), then \\(a' = a''\\) by left cancellation." },
+
+      // Ch 4 True/False (Exercise 25)
+      { chapter: 4, type: "True/False", front: "T/F: A group may have more than one identity element.", back: "<b>False.</b> The identity is unique: if \\(e,f\\) are both identities, \\(e = e*f = f\\)." },
+      { chapter: 4, type: "True/False", front: "T/F: Any two groups of three elements are isomorphic.", back: "<b>True.</b> Up to isomorphism there is exactly one group of order 3, namely \\(\\mathbb{Z}_3\\)." },
+      { chapter: 4, type: "True/False", front: "T/F: In a group, each linear equation has a solution.", back: "<b>True.</b> \\(a*x = b\\) has the unique solution \\(x = a^{-1}*b\\)." },
+      { chapter: 4, type: "True/False", front: "T/F: The proper attitude toward a definition is to memorize it word for word.", back: "<b>False.</b> You should understand the definition well enough to state it precisely in your own words." },
+      { chapter: 4, type: "True/False", front: "T/F: Any definition of a group is correct if everything satisfying it is a group by the text's definition.", back: "<b>False.</b> The definition must also go the other way: everything that is a group by the text's definition must satisfy your definition (iff, not just if)." },
+      { chapter: 4, type: "True/False", front: "T/F: Any definition of a group is correct if it is logically equivalent to the text's definition.", back: "<b>True.</b> Logical equivalence means exactly the same objects satisfy both definitions." },
+      { chapter: 4, type: "True/False", front: "T/F: Every finite group of at most three elements is abelian.", back: "<b>True.</b> Groups of orders 1, 2, 3 are all cyclic, hence abelian." },
+      { chapter: 4, type: "True/False", front: "T/F: An equation \\(a*x*b = c\\) always has a unique solution in a group.", back: "<b>True.</b> \\(x = a^{-1}*c*b^{-1}\\) is the unique solution." },
+      { chapter: 4, type: "True/False", front: "T/F: The empty set can be considered a group.", back: "<b>False.</b> A group must contain at least the identity element." },
+      { chapter: 4, type: "True/False", front: "T/F: Every group is a binary algebraic structure.", back: "<b>True.</b> A group is a set with a binary operation satisfying additional axioms." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 5 — Subgroups
+      // ═══════════════════════════════════════════
+
+      { chapter: 5, type: "Definition", front: "What is a subgroup?", back: "A subset \\(H \\subseteq G\\) that is itself a group under the induced operation of \\(G\\). Write \\(H \\le G\\)." },
+      { chapter: 5, type: "Theorem", front: "State the one-step subgroup test.", back: "A nonempty subset \\(H\\) of \\(G\\) is a subgroup iff \\(ab^{-1} \\in H\\) for all \\(a,b \\in H\\)." },
+      { chapter: 5, type: "Theorem", front: "State the two-step subgroup test.", back: "A nonempty \\(H \\subseteq G\\) is a subgroup iff (1) \\(H\\) is closed under \\(*\\), and (2) \\(a^{-1} \\in H\\) for all \\(a \\in H\\)." },
+      { chapter: 5, type: "Proof Sketch", front: "Sketch: the one-step subgroup test.", back: "Nonempty \\(\\Rightarrow\\) pick \\(a \\in H\\); then \\(e = aa^{-1} \\in H\\). For any \\(b \\in H\\), \\(b^{-1} = eb^{-1} \\in H\\). For \\(a,b \\in H\\), \\(ab = a(b^{-1})^{-1} \\in H\\). So \\(H\\) is closed and has identity and inverses." },
+      { chapter: 5, type: "Theorem", front: "Is the intersection of subgroups a subgroup?", back: "Yes. If \\(H \\le G\\) and \\(K \\le G\\), then \\(H \\cap K \\le G\\). (Apply the one-step test: if \\(a,b \\in H \\cap K\\), then \\(ab^{-1} \\in H\\) and \\(ab^{-1} \\in K\\).)" },
+      { chapter: 5, type: "Counterexample", front: "Is the union of two subgroups always a subgroup?", back: "No. In \\(\\mathbb{Z}_6\\): \\(H = \\{0,3\\}\\) and \\(K = \\{0,2,4\\}\\) are subgroups, but \\(H \\cup K = \\{0,2,3,4\\}\\) is not (\\(2+3=5 \\notin H \\cup K\\))." },
+      { chapter: 5, type: "Definition", front: "What is the cyclic subgroup generated by \\(a\\)?", back: "\\(\\langle a \\rangle = \\{a^n \\mid n \\in \\mathbb{Z}\\}\\), the smallest subgroup containing \\(a\\)." },
+
+      // Ch 5 True/False (Exercise 39)
+      { chapter: 5, type: "True/False", front: "T/F: The associative law holds in every group.", back: "<b>True.</b> Associativity is axiom \\(\\mathscr{G}_1\\)." },
+      { chapter: 5, type: "True/False", front: "T/F: There may be a group in which the cancellation law fails.", back: "<b>False.</b> Cancellation is a theorem that holds in every group." },
+      { chapter: 5, type: "True/False", front: "T/F: Every group is a subgroup of itself.", back: "<b>True.</b> \\(G \\le G\\) always (an improper subgroup)." },
+      { chapter: 5, type: "True/False", front: "T/F: Every group has exactly two improper subgroups.", back: "<b>False.</b> Every group has exactly two <em>trivial or improper</em> subgroups: \\(\\{e\\}\\) and \\(G\\) itself. But the number is two only if \\(|G|>1\\); if \\(|G|=1\\) they coincide." },
+      { chapter: 5, type: "True/False", front: "T/F: In every cyclic group, every element is a generator.", back: "<b>False.</b> In \\(\\mathbb{Z}_6\\), \\(\\bar{2}\\) generates only \\(\\{0,2,4\\}\\), not the whole group." },
+      { chapter: 5, type: "True/False", front: "T/F: A cyclic group has a unique generator.", back: "<b>False.</b> \\(\\mathbb{Z}_6\\) has generators \\(\\bar{1}\\) and \\(\\bar{5}\\); \\(\\mathbb{Z}\\) has generators \\(1\\) and \\(-1\\)." },
+      { chapter: 5, type: "True/False", front: "T/F: Every set of numbers that is a group under addition is also a group under multiplication.", back: "<b>False.</b> \\((\\mathbb{Z},+)\\) is a group, but \\((\\mathbb{Z},\\cdot)\\) is not." },
+      { chapter: 5, type: "True/False", front: "T/F: A subgroup may be defined as a subset of a group.", back: "<b>False.</b> A subgroup must be a subset that is <em>itself a group</em> under the induced operation. Not every subset qualifies." },
+      { chapter: 5, type: "True/False", front: "T/F: \\(\\mathbb{Z}_4\\) is a cyclic group.", back: "<b>True.</b> \\(\\mathbb{Z}_4 = \\langle \\bar{1} \\rangle\\)." },
+      { chapter: 5, type: "True/False", front: "T/F: Every subset of every group is a subgroup under the induced operation.", back: "<b>False.</b> \\(\\{0,1\\} \\subset \\mathbb{Z}\\) is not a subgroup under addition." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 6 — Cyclic Groups
+      // ═══════════════════════════════════════════
+
+      { chapter: 6, type: "Definition", front: "When is a group \\(G\\) cyclic?", back: "When there exists \\(g \\in G\\) with \\(G = \\langle g \\rangle = \\{g^n \\mid n \\in \\mathbb{Z}\\}\\). Such \\(g\\) is called a generator." },
+      { chapter: 6, type: "Theorem", front: "Every cyclic group is abelian. Why?", back: "\\(g^m \\cdot g^n = g^{m+n} = g^{n+m} = g^n \\cdot g^m\\)." },
+      { chapter: 6, type: "Theorem", front: "Are all subgroups of a cyclic group cyclic?", back: "Yes. Every subgroup of a cyclic group is cyclic. If \\(G = \\langle g \\rangle\\) and \\(H \\le G\\), then \\(H = \\langle g^d \\rangle\\) where \\(d\\) is the smallest positive integer with \\(g^d \\in H\\)." },
+      { chapter: 6, type: "Proof Sketch", front: "Sketch: every subgroup of a cyclic group is cyclic.", back: "Let \\(H \\le \\langle g \\rangle\\), \\(H \\neq \\{e\\}\\). Let \\(d\\) be the smallest positive integer with \\(g^d \\in H\\). For any \\(g^n \\in H\\), divide: \\(n = qd + r\\), \\(0 \\le r < d\\). Then \\(g^r = g^n (g^d)^{-q} \\in H\\), so \\(r=0\\) by minimality. Hence \\(H = \\langle g^d \\rangle\\)." },
+      { chapter: 6, type: "Theorem", front: "State the order formula for powers in a cyclic group.", back: "If \\(g\\) has order \\(n\\), then \\(\\operatorname{ord}(g^k) = \\dfrac{n}{\\gcd(n,k)}\\)." },
+      { chapter: 6, type: "Theorem", front: "How many generators does \\(\\mathbb{Z}_n\\) have?", back: "\\(\\varphi(n)\\), Euler's totient. The generators are \\(\\bar{k}\\) with \\(\\gcd(k,n)=1\\)." },
+      { chapter: 6, type: "Theorem", front: "How many subgroups does \\(\\mathbb{Z}_n\\) have?", back: "Exactly one for each divisor \\(d\\) of \\(n\\): the unique subgroup of order \\(d\\) is \\(\\langle \\overline{n/d} \\rangle\\)." },
+      { chapter: 6, type: "Counterexample", front: "Standard abelian but non-cyclic group?", back: "\\(V_4 = \\mathbb{Z}_2 \\times \\mathbb{Z}_2\\). Every non-identity element has order 2, so no single element generates the group." },
+
+      // Ch 6 True/False (Exercise 32)
+      { chapter: 6, type: "True/False", front: "T/F: Every cyclic group is abelian.", back: "<b>True.</b> \\(g^m g^n = g^{m+n} = g^n g^m\\)." },
+      { chapter: 6, type: "True/False", front: "T/F: Every abelian group is cyclic.", back: "<b>False.</b> \\(V_4 = \\mathbb{Z}_2 \\times \\mathbb{Z}_2\\) is abelian but not cyclic." },
+      { chapter: 6, type: "True/False", front: "T/F: \\(\\mathbb{Q}\\) under addition is a cyclic group.", back: "<b>False.</b> \\(\\mathbb{Q}\\) is not even finitely generated (between any two rationals \\(a/b\\) and \\(2a/b\\) there's no common generator)." },
+      { chapter: 6, type: "True/False", front: "T/F: Every element of every cyclic group generates the group.", back: "<b>False.</b> In \\(\\mathbb{Z}_6\\), \\(\\bar{2}\\) generates \\(\\{0,2,4\\}\\), not all of \\(\\mathbb{Z}_6\\)." },
+      { chapter: 6, type: "True/False", front: "T/F: There is at least one abelian group of every finite order \\(>0\\).", back: "<b>True.</b> \\(\\mathbb{Z}_n\\) is abelian and has order \\(n\\)." },
+      { chapter: 6, type: "True/False", front: "T/F: Every group of order \\(\\le 4\\) is cyclic.", back: "<b>False.</b> The Klein four-group \\(V_4\\) has order 4 and is not cyclic." },
+      { chapter: 6, type: "True/False", front: "T/F: All generators of \\(\\mathbb{Z}_{20}\\) are prime numbers.", back: "<b>False.</b> \\(\\bar{9}\\) generates \\(\\mathbb{Z}_{20}\\) since \\(\\gcd(9,20)=1\\), but 9 is not prime." },
+      { chapter: 6, type: "True/False", front: "T/F: If \\(G\\) and \\(G'\\) are groups, then \\(G \\cap G'\\) is a group.", back: "<b>False.</b> \\(G \\cap G'\\) is only meaningful if both are subgroups of some ambient group. As abstract groups, the intersection is not defined." },
+      { chapter: 6, type: "True/False", front: "T/F: If \\(H \\le G\\) and \\(K \\le G\\), then \\(H \\cap K \\le G\\).", back: "<b>True.</b> The intersection of subgroups of \\(G\\) is a subgroup of \\(G\\)." },
+      { chapter: 6, type: "True/False", front: "T/F: Every cyclic group of order \\(> 2\\) has at least two distinct generators.", back: "<b>True.</b> If \\(g\\) generates, so does \\(g^{-1}\\), and \\(g \\neq g^{-1}\\) when \\(|G|>2\\)." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 7 — Generators and Cayley Digraphs
+      // ═══════════════════════════════════════════
+
+      { chapter: 7, type: "Definition", front: "What does it mean for \\(S\\) to generate \\(G\\)?", back: "Every element of \\(G\\) can be written as a finite product of elements of \\(S\\) and their inverses." },
+      { chapter: 7, type: "Theorem", front: "Why is \\((\\mathbb{Q},+)\\) not finitely generated?", back: "If \\(\\mathbb{Q} = \\langle a_1/b_1, \\ldots, a_n/b_n \\rangle\\), every element would have denominator dividing \\(b_1 \\cdots b_n\\). But \\(1/(b_1 \\cdots b_n + 1) \\in \\mathbb{Q}\\) does not." },
+      { chapter: 7, type: "Example", front: "What generates the dihedral group \\(D_n\\)?", back: "A rotation \\(r\\) by \\(2\\pi/n\\) and any reflection \\(s\\). Every element is \\(r^k\\) or \\(r^k s\\). The relations are \\(r^n = e\\), \\(s^2 = e\\), \\(srs = r^{-1}\\)." },
+      { chapter: 7, type: "Definition", front: "What is a Cayley digraph?", back: "A directed graph with one vertex per group element and colored arrows for each generator. An arrow \\(g \\to gs\\) is drawn for each generator \\(s\\) and element \\(g\\)." },
+      { chapter: 7, type: "Counterexample", front: "Give an example of an infinite group that is finitely generated.", back: "\\((\\mathbb{Z},+) = \\langle 1 \\rangle\\). Infinite but generated by one element." },
+
+      // Ch 7 — New cards
+      { chapter: 7, type: "Theorem", front: "State the intersection characterization of \\(\\langle S \\rangle\\).", back: "\\(\\langle S \\rangle = \\bigcap_{H \\le G,\\, S \\subseteq H} H\\). That is, the subgroup generated by \\(S\\) is the intersection of all subgroups containing \\(S\\) — the smallest such subgroup." },
+      { chapter: 7, type: "Theorem", front: "When is the Cayley digraph \\(\\operatorname{Cay}(G,S)\\) connected?", back: "If and only if \\(S\\) generates \\(G\\). Connectivity means every vertex is reachable from \\(e\\) by a directed path, which corresponds to writing every element as a word in \\(S\\)." },
+      { chapter: 7, type: "Theorem", front: "Is the Cayley digraph vertex-transitive?", back: "Yes. For any \\(g, h \\in G\\), the map \\(x \\mapsto hg^{-1}x\\) is a graph automorphism sending \\(g\\) to \\(h\\). The graph looks the same from every vertex." },
+      { chapter: 7, type: "Theorem", front: "What do cycles in a Cayley digraph represent?", back: "Relations among the generators. A cycle returning to the starting vertex spells a word \\(s_1^{\\varepsilon_1} \\cdots s_r^{\\varepsilon_r} = e\\)." },
+      { chapter: 7, type: "Definition", front: "What is a group presentation \\(\\langle s_1,\\ldots,s_k \\mid r_1,r_2,\\ldots \\rangle\\)?", back: "Generators \\(s_i\\) and relations \\(r_i\\) (equations among words). The group is the largest group generated by the \\(s_i\\) in which all \\(r_i\\) hold. Formally, it is the free group on the generators modulo the normal closure of the relators." },
+      { chapter: 7, type: "Definition", front: "What is a finitely generated group?", back: "A group \\(G\\) such that \\(G = \\langle S \\rangle\\) for some finite subset \\(S \\subseteq G\\). Equivalently, every element can be written as a finite word in finitely many generators and their inverses." },
+      { chapter: 7, type: "Computation", front: "In \\(\\mathbb{Z}_{12}\\), compute \\(\\langle \\bar{5}, \\bar{8} \\rangle\\).", back: "In \\(\\mathbb{Z}_{12}\\): \\(\\bar{8} - \\bar{5} = \\bar{3}\\), then \\(\\bar{5} - \\bar{3} = \\bar{2}\\), then \\(\\bar{3} - \\bar{2} = \\bar{1}\\). Since \\(\\bar{1}\\) generates \\(\\mathbb{Z}_{12}\\), we get \\(\\langle \\bar{5}, \\bar{8} \\rangle = \\mathbb{Z}_{12}\\). (Equivalently, \\(\\gcd(5,8)=1\\).)" },
+      { chapter: 7, type: "Computation", front: "Find \\(\\langle (1\\;2), (3\\;4) \\rangle\\) in \\(S_4\\).", back: "Both generators have order 2 and are disjoint, so they commute. The subgroup is \\(\\{e, (1\\;2), (3\\;4), (1\\;2)(3\\;4)\\} \\cong V_4\\). This is a proper subgroup of \\(S_4\\)." },
+      { chapter: 7, type: "Example", front: "Write the presentation of \\(D_n\\).", back: "\\(D_n = \\langle r, s \\mid r^n = e,\\; s^2 = e,\\; srs = r^{-1} \\rangle\\). Two generators, three relations. \\(|D_n| = 2n\\). Every element is \\(r^k\\) or \\(sr^k\\)." },
+      { chapter: 7, type: "Example", front: "Show \\(S_n = \\langle (1\\;2),\\, (1\\;2\\;\\cdots\\;n) \\rangle\\).", back: "Let \\(\\sigma = (1\\;2)\\) and \\(\\tau = (1\\;2\\;\\cdots\\;n)\\). Conjugating: \\(\\tau^{k-1}\\sigma\\tau^{-(k-1)} = (k\\;k{+}1)\\). This gives all adjacent transpositions, which generate \\(S_n\\)." },
+      { chapter: 7, type: "True/False", front: "T/F: A generating set for a group must be unique.", back: "<b>False.</b> \\(\\mathbb{Z} = \\langle 1 \\rangle = \\langle 2, 3 \\rangle = \\langle -1 \\rangle\\). Many generating sets exist." },
+      { chapter: 7, type: "True/False", front: "T/F: If \\(\\varphi: G \\to H\\) is a homomorphism and \\(S\\) generates \\(G\\), then \\(\\varphi\\) is determined by its values on \\(S\\).", back: "<b>True.</b> Every \\(g \\in G\\) is a word in \\(S\\), and \\(\\varphi(s_1^{\\varepsilon_1}\\cdots s_r^{\\varepsilon_r}) = \\varphi(s_1)^{\\varepsilon_1}\\cdots\\varphi(s_r)^{\\varepsilon_r}\\)." },
+      { chapter: 7, type: "Proof Sketch", front: "Sketch: \\(\\langle S \\rangle\\) equals the intersection of all subgroups containing \\(S\\).", back: "(1) \\(\\langle S \\rangle\\) is a subgroup containing \\(S\\) (words include single letters; closure by concatenation/inversion). (2) Any subgroup \\(H \\supseteq S\\) contains all words in \\(S\\), so \\(\\langle S \\rangle \\subseteq H\\). (3) Thus \\(\\langle S \\rangle\\) is the smallest, i.e., the intersection." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 8 — Groups of Permutations
+      // ═══════════════════════════════════════════
+
+      { chapter: 8, type: "Definition", front: "What is the symmetric group \\(S_n\\)?", back: "The group of all permutations of \\(\\{1,2,\\ldots,n\\}\\) under composition. \\(|S_n| = n!\\)." },
+      { chapter: 8, type: "Theorem", front: "State Cayley's theorem.", back: "Every group \\(G\\) is isomorphic to a subgroup of \\(S_G\\) (the symmetric group on the underlying set of \\(G\\))." },
+      { chapter: 8, type: "Proof Sketch", front: "Sketch the proof of Cayley's theorem.", back: "For each \\(g \\in G\\), define \\(\\lambda_g: G \\to G\\) by \\(\\lambda_g(x) = gx\\). This is a bijection (left multiplication). The map \\(g \\mapsto \\lambda_g\\) is an injective homomorphism \\(G \\hookrightarrow S_G\\)." },
+      { chapter: 8, type: "Theorem", front: "Every permutation decomposes into disjoint cycles. Is this unique?", back: "Yes (up to the order of the cycles). Disjoint cycle decomposition is unique." },
+      { chapter: 8, type: "Theorem", front: "Do disjoint cycles commute?", back: "Yes. If \\(\\sigma\\) and \\(\\tau\\) are disjoint cycles, then \\(\\sigma\\tau = \\tau\\sigma\\)." },
+      { chapter: 8, type: "Theorem", front: "What is the order of a permutation in terms of its cycle decomposition?", back: "The order is the lcm of the lengths of its disjoint cycles." },
+      { chapter: 8, type: "Theorem", front: "How does conjugation act on cycle notation?", back: "\\(\\tau (a_1\\, a_2\\, \\ldots\\, a_k) \\tau^{-1} = (\\tau(a_1)\\, \\tau(a_2)\\, \\ldots\\, \\tau(a_k))\\). Conjugation relabels the entries." },
+      { chapter: 8, type: "Definition", front: "Define the dihedral group \\(D_n\\).", back: "The group of symmetries of a regular \\(n\\)-gon. \\(|D_n| = 2n\\). It has \\(n\\) rotations and \\(n\\) reflections, generated by \\(r\\) (rotation by \\(2\\pi/n\\)) and \\(s\\) (a reflection)." },
+      { chapter: 8, type: "Counterexample", front: "When do cycles fail to commute?", back: "When they are not disjoint. E.g., \\((1\\,2)(2\\,3) = (1\\,2\\,3)\\) but \\((2\\,3)(1\\,2) = (1\\,3\\,2)\\)." },
+      { chapter: 8, type: "Computation", front: "Compute \\((1\\,3\\,5)(2\\,4)(1\\,2\\,3)\\) in \\(S_5\\).", back: "Apply right-to-left: \\(1 \\to 2 \\to 4 \\to 4\\); \\(4 \\to 4 \\to 2 \\to 2\\); \\(2 \\to 3 \\to 3 \\to 5\\); \\(5 \\to 5 \\to 5 \\to 1\\); \\(3 \\to 1 \\to 1 \\to 3\\). Result: \\((1\\,4\\,2\\,5)\\), a single 4-cycle." },
+      { chapter: 8, type: "Theorem", front: "What is \\(|D_n|\\)?", back: "\\(2n\\). The \\(n\\) rotations \\(\\{e, r, r^2, \\ldots, r^{n-1}\\}\\) plus \\(n\\) reflections \\(\\{s, rs, r^2 s, \\ldots, r^{n-1}s\\}\\)." },
+
+      // Ch 8 True/False (Exercise 35)
+      { chapter: 8, type: "True/False", front: "T/F: Every permutation is a one-to-one function.", back: "<b>True.</b> A permutation of a set \\(A\\) is a bijection \\(A \\to A\\), hence one-to-one." },
+      { chapter: 8, type: "True/False", front: "T/F: Every function is a permutation if and only if it is one to one.", back: "<b>False.</b> A permutation must also be onto. For infinite sets, injective does not imply surjective." },
+      { chapter: 8, type: "True/False", front: "T/F: Every function from a finite set onto itself must be one to one.", back: "<b>True.</b> For finite sets, surjective implies injective (pigeonhole principle)." },
+      { chapter: 8, type: "True/False", front: "T/F: Every group \\(G\\) is isomorphic to a subgroup of \\(S_G\\).", back: "<b>True.</b> This is Cayley's theorem." },
+      { chapter: 8, type: "True/False", front: "T/F: Every subgroup of an abelian group is abelian.", back: "<b>True.</b> If \\(ab = ba\\) for all \\(a,b \\in G\\), then certainly for all \\(a,b \\in H \\le G\\)." },
+      { chapter: 8, type: "True/False", front: "T/F: Every element of a group generates a cyclic subgroup of the group.", back: "<b>True.</b> \\(\\langle a \\rangle = \\{a^n \\mid n \\in \\mathbb{Z}\\}\\) is always a cyclic subgroup." },
+      { chapter: 8, type: "True/False", front: "T/F: The symmetric group \\(S_{10}\\) has 10 elements.", back: "<b>False.</b> \\(|S_{10}| = 10! = 3{,}628{,}800\\)." },
+      { chapter: 8, type: "True/False", front: "T/F: The symmetric group \\(S_3\\) is cyclic.", back: "<b>False.</b> \\(|S_3| = 6\\) but \\(S_3\\) is non-abelian, and every cyclic group is abelian." },
+      { chapter: 8, type: "True/False", front: "T/F: \\(S_n\\) is not cyclic for any \\(n\\).", back: "<b>False.</b> \\(S_1 = \\{e\\}\\) and \\(S_2 \\cong \\mathbb{Z}_2\\) are both cyclic." },
+      { chapter: 8, type: "True/False", front: "T/F: Every group is isomorphic to some group of permutations.", back: "<b>True.</b> This is precisely Cayley's theorem." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 9 — Orbits, Cycles, Alternating Groups
+      // ═══════════════════════════════════════════
+
+      { chapter: 9, type: "Definition", front: "What is an even permutation?", back: "A permutation that can be written as a product of an even number of transpositions." },
+      { chapter: 9, type: "Definition", front: "What is the alternating group \\(A_n\\)?", back: "The subgroup of \\(S_n\\) consisting of all even permutations." },
+      { chapter: 9, type: "Theorem", front: "Is parity well-defined? Why?", back: "Yes. No permutation is both even and odd. (Proved via the sign homomorphism or the inversion-count argument.)" },
+      { chapter: 9, type: "Proof Sketch", front: "Sketch: parity is well-defined via inversions.", back: "Define \\(N(\\sigma) = |\\{(i,j) : i < j,\\, \\sigma(i) > \\sigma(j)\\}|\\). A transposition changes the parity of \\(N\\). So the parity of the number of transpositions in any decomposition of \\(\\sigma\\) equals the parity of \\(N(\\sigma)\\), which is fixed." },
+      { chapter: 9, type: "Theorem", front: "What is \\(|A_n|\\)?", back: "\\(n!/2\\) for \\(n \\ge 2\\)." },
+      { chapter: 9, type: "Theorem", front: "State the sign homomorphism.", back: "\\(\\operatorname{sgn}: S_n \\to \\{\\pm 1\\}\\) defined by \\(\\operatorname{sgn}(\\sigma) = (-1)^{\\text{number of transpositions}}\\). This is a surjective homomorphism with \\(\\ker(\\operatorname{sgn}) = A_n\\)." },
+      { chapter: 9, type: "Theorem", front: "For \\(n \\ge 3\\), what generates \\(A_n\\)?", back: "The 3-cycles. Every even permutation is a product of 3-cycles." },
+      { chapter: 9, type: "Theorem", front: "How many transpositions does a \\(k\\)-cycle decompose into?", back: "\\((a_1\\, a_2\\, \\ldots\\, a_k) = (a_1\\, a_k)(a_1\\, a_{k-1}) \\cdots (a_1\\, a_2)\\), a product of \\(k-1\\) transpositions. So a \\(k\\)-cycle is even iff \\(k\\) is odd." },
+      { chapter: 9, type: "Counterexample", front: "Give an even permutation that is not a single cycle.", back: "\\((1\\,2)(3\\,4) \\in S_4\\). It is even (product of 2 transpositions) but its cycle type is \\((2,2)\\), not a single cycle." },
+
+      // Ch 9 True/False (Exercise 23)
+      { chapter: 9, type: "True/False", front: "T/F: Every permutation is a cycle.", back: "<b>False.</b> \\((1\\,2)(3\\,4) \\in S_4\\) is not a cycle." },
+      { chapter: 9, type: "True/False", front: "T/F: Every cycle is a permutation.", back: "<b>True.</b> A cycle is a special kind of permutation." },
+      { chapter: 9, type: "True/False", front: "T/F: The definition of even/odd permutations could have been given before Theorem 9.15.", back: "<b>False.</b> Without proving parity is well-defined (Theorem 9.15), we cannot know the definition is consistent." },
+      { chapter: 9, type: "True/False", front: "T/F: Every nontrivial subgroup of \\(S_9\\) containing some odd permutation contains a transposition.", back: "<b>False.</b> The subgroup generated by \\((1\\,2\\,3\\,4)\\) contains the odd permutation \\((1\\,2\\,3\\,4)\\) but no transposition." },
+      { chapter: 9, type: "True/False", front: "T/F: \\(A_5\\) has 120 elements.", back: "<b>False.</b> \\(|A_5| = 5!/2 = 60\\)." },
+      { chapter: 9, type: "True/False", front: "T/F: \\(S_n\\) is not cyclic for any \\(n \\ge 1\\).", back: "<b>False.</b> \\(S_1\\) and \\(S_2\\) are cyclic (orders 1 and 2)." },
+      { chapter: 9, type: "True/False", front: "T/F: \\(A_3\\) is a commutative group.", back: "<b>True.</b> \\(A_3 = \\{e, (1\\,2\\,3), (1\\,3\\,2)\\} \\cong \\mathbb{Z}_3\\), which is cyclic hence abelian." },
+      { chapter: 9, type: "True/False", front: "T/F: \\(S_7\\) is isomorphic to the subgroup of \\(S_8\\) fixing 8.", back: "<b>True.</b> The stabilizer of 8 in \\(S_8\\) is naturally isomorphic to \\(S_7\\)." },
+      { chapter: 9, type: "True/False", front: "T/F: \\(S_7\\) is isomorphic to the subgroup of \\(S_8\\) fixing 5.", back: "<b>True.</b> The stabilizer of any single point in \\(S_8\\) is isomorphic to \\(S_7\\)." },
+      { chapter: 9, type: "True/False", front: "T/F: The odd permutations in \\(S_8\\) form a subgroup of \\(S_8\\).", back: "<b>False.</b> The product of two odd permutations is even, so the set of odd permutations is not closed under composition." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 10 — Cosets and Lagrange's Theorem
+      // ═══════════════════════════════════════════
+
+      { chapter: 10, type: "Definition", front: "What is a left coset of \\(H\\) in \\(G\\)?", back: "For \\(g \\in G\\): \\(gH = \\{gh \\mid h \\in H\\}\\)." },
+      { chapter: 10, type: "Theorem", front: "Do the left cosets of \\(H\\) partition \\(G\\)?", back: "Yes. The left cosets form a partition of \\(G\\): every element belongs to exactly one coset, and distinct cosets are disjoint." },
+      { chapter: 10, type: "Theorem", front: "State Lagrange's theorem.", back: "If \\(G\\) is finite and \\(H \\le G\\), then \\(|H|\\) divides \\(|G|\\), and \\(|G| = [G:H] \\cdot |H|\\)." },
+      { chapter: 10, type: "Proof Sketch", front: "Sketch the proof of Lagrange's theorem.", back: "The left cosets of \\(H\\) partition \\(G\\). Each coset has \\(|H|\\) elements (the map \\(h \\mapsto gh\\) is a bijection \\(H \\to gH\\)). If there are \\([G:H]\\) cosets, then \\(|G| = [G:H] \\cdot |H|\\)." },
+      { chapter: 10, type: "Theorem", front: "What is the index formula?", back: "If \\(K \\le H \\le G\\) with finite indices, then \\([G:K] = [G:H][H:K]\\)." },
+      { chapter: 10, type: "Theorem", front: "What does Lagrange say about element orders?", back: "The order of any element divides \\(|G|\\). In particular, \\(a^{|G|} = e\\) for all \\(a \\in G\\)." },
+      { chapter: 10, type: "Counterexample", front: "Does the converse of Lagrange hold?", back: "No. \\(A_4\\) has order 12, and 6 divides 12, but \\(A_4\\) has no subgroup of order 6." },
+
+      // Ch 10 True/False (Exercise 19)
+      { chapter: 10, type: "True/False", front: "T/F: Every subgroup of every group has left cosets.", back: "<b>True.</b> Left cosets \\(gH\\) exist for any subgroup \\(H\\) of any group \\(G\\)." },
+      { chapter: 10, type: "True/False", front: "T/F: The number of left cosets of a subgroup of a finite group divides the order of the group.", back: "<b>True.</b> \\(|G| = [G:H] \\cdot |H|\\), so \\([G:H]\\) divides \\(|G|\\)." },
+      { chapter: 10, type: "True/False", front: "T/F: Every group of prime order is abelian.", back: "<b>True.</b> A group of prime order \\(p\\) is cyclic (by Lagrange, only subgroups have order 1 or \\(p\\)), hence abelian." },
+      { chapter: 10, type: "True/False", front: "T/F: One cannot have left cosets of a finite subgroup of an infinite group.", back: "<b>False.</b> \\(\\mathbb{Z}/n\\mathbb{Z}\\): the subgroup \\(n\\mathbb{Z}\\) of \\(\\mathbb{Z}\\) is infinite, but finite subgroups of infinite groups also have cosets." },
+      { chapter: 10, type: "True/False", front: "T/F: A subgroup of a group is a left coset of itself.", back: "<b>True.</b> \\(H = eH\\)." },
+      { chapter: 10, type: "True/False", front: "T/F: Only subgroups of finite groups can have left cosets.", back: "<b>False.</b> Every subgroup of every group (finite or infinite) has left cosets." },
+      { chapter: 10, type: "True/False", front: "T/F: \\(A_5\\) has index 2 in \\(S_n\\) for \\(n > 1\\).", back: "<b>False.</b> \\(A_n\\) has index 2 in \\(S_n\\) (not \\(A_5\\) in \\(S_n\\) for all \\(n\\))." },
+      { chapter: 10, type: "True/False", front: "T/F: The theorem of Lagrange is a nice result.", back: "<b>True.</b> (Fraleigh's joke. Accept it.)" },
+      { chapter: 10, type: "True/False", front: "T/F: Every finite group contains an element of every order that divides the order of the group.", back: "<b>False.</b> \\(A_4\\) has order 12, but contains no element of order 6." },
+      { chapter: 10, type: "True/False", front: "T/F: Every finite cyclic group contains an element of every order dividing the order of the group.", back: "<b>True.</b> \\(\\mathbb{Z}_n\\) has exactly one subgroup (hence element) of each order dividing \\(n\\)." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 11 — Direct Products and FTFGAG
+      // ═══════════════════════════════════════════
+
+      { chapter: 11, type: "Definition", front: "What is the external direct product \\(G_1 \\times \\cdots \\times G_n\\)?", back: "The set of all \\(n\\)-tuples \\((g_1, \\ldots, g_n)\\) with componentwise operation: \\((g_1,\\ldots,g_n)(h_1,\\ldots,h_n) = (g_1 h_1, \\ldots, g_n h_n)\\)." },
+      { chapter: 11, type: "Theorem", front: "State the order formula in a direct product.", back: "\\(\\operatorname{ord}(g_1, \\ldots, g_n) = \\operatorname{lcm}(\\operatorname{ord}(g_1), \\ldots, \\operatorname{ord}(g_n))\\)." },
+      { chapter: 11, type: "Theorem", front: "When is \\(\\mathbb{Z}_m \\times \\mathbb{Z}_n\\) cyclic?", back: "If and only if \\(\\gcd(m,n) = 1\\). In that case, \\(\\mathbb{Z}_m \\times \\mathbb{Z}_n \\cong \\mathbb{Z}_{mn}\\)." },
+      { chapter: 11, type: "Proof Sketch", front: "Sketch: \\(\\mathbb{Z}_m \\times \\mathbb{Z}_n\\) is cyclic iff \\(\\gcd(m,n)=1\\).", back: "\\((\\Rightarrow)\\) If cyclic of order \\(mn\\), it has an element of order \\(mn\\), which requires \\(\\operatorname{lcm}(m,n) = mn\\), i.e. \\(\\gcd(m,n)=1\\). \\((\\Leftarrow)\\) If \\(\\gcd(m,n)=1\\), then \\(\\operatorname{ord}(\\bar{1},\\bar{1}) = \\operatorname{lcm}(m,n) = mn\\)." },
+      { chapter: 11, type: "Theorem", front: "State the Chinese Remainder Theorem for cyclic groups.", back: "If \\(n = m_1 m_2 \\cdots m_k\\) with the \\(m_i\\) pairwise coprime, then \\[\\mathbb{Z}_n \\cong \\mathbb{Z}_{m_1} \\times \\mathbb{Z}_{m_2} \\times \\cdots \\times \\mathbb{Z}_{m_k}.\\] Equivalently (ring form): \\(\\mathbb{Z}/n\\mathbb{Z} \\cong \\mathbb{Z}/m_1\\mathbb{Z} \\times \\cdots \\times \\mathbb{Z}/m_k\\mathbb{Z}\\) as rings." },
+      { chapter: 11, type: "Computation", front: "Use CRT to decompose \\(\\mathbb{Z}_{60}\\).", back: "\\(60 = 2^2 \\cdot 3 \\cdot 5\\). The factors \\(4, 3, 5\\) are pairwise coprime, so \\(\\mathbb{Z}_{60} \\cong \\mathbb{Z}_4 \\times \\mathbb{Z}_3 \\times \\mathbb{Z}_5\\)." },
+      { chapter: 11, type: "Theorem", front: "State the FTFGAG (invariant factor form).", back: "Every finitely generated abelian group is isomorphic to \\(\\mathbb{Z}^r \\times \\mathbb{Z}_{n_1} \\times \\cdots \\times \\mathbb{Z}_{n_s}\\) where \\(n_1 \\mid n_2 \\mid \\cdots \\mid n_s\\), \\(n_i > 1\\). The rank \\(r\\) and the invariant factors \\(n_i\\) are unique." },
+      { chapter: 11, type: "Theorem", front: "State the FTFGAG (elementary divisor form).", back: "Every finitely generated abelian group is isomorphic to \\(\\mathbb{Z}^r \\times \\mathbb{Z}_{p_1^{a_1}} \\times \\cdots \\times \\mathbb{Z}_{p_t^{a_t}}\\) where the \\(p_i\\) are primes (not necessarily distinct) and \\(a_i \\ge 1\\). The elementary divisors are unique up to order." },
+      { chapter: 11, type: "Algorithm", front: "How to convert elementary divisors to invariant factors?", back: "1. Group by prime. 2. Arrange each prime's powers in ascending order. 3. Pad shorter columns with 1. 4. Each column's product (across primes) gives one invariant factor. Read left to right: \\(n_1 \\mid n_2 \\mid \\cdots \\mid n_s\\)." },
+      { chapter: 11, type: "Algorithm", front: "How to convert invariant factors to elementary divisors?", back: "Factor each invariant factor \\(n_i\\) into prime powers. The complete list of all prime powers (across all \\(n_i\\)) gives the elementary divisors." },
+      { chapter: 11, type: "Computation", front: "Classify all abelian groups of order 200.", back: "\\(200 = 2^3 \\cdot 5^2\\). Partitions of 3: \\(\\{3\\}, \\{2,1\\}, \\{1,1,1\\}\\). Partitions of 2: \\(\\{2\\}, \\{1,1\\}\\). Total: \\(3 \\times 2 = 6\\) groups." },
+      { chapter: 11, type: "Definition", front: "What is an internal direct product?", back: "\\(G\\) is the internal direct product of \\(H\\) and \\(K\\) if \\(H, K \\trianglelefteq G\\), \\(H \\cap K = \\{e\\}\\), and every \\(g \\in G\\) can be written \\(g = hk\\). Then \\(G \\cong H \\times K\\)." },
+      { chapter: 11, type: "Definition", front: "What is the exponent of a group?", back: "The least positive integer \\(m\\) such that \\(a^m = e\\) for all \\(a \\in G\\) (if it exists). For a finite abelian group, the exponent equals the largest invariant factor." },
+      { chapter: 11, type: "Computation", front: "Find all elements of order 6 in \\(\\mathbb{Z}_2 \\times \\mathbb{Z}_6\\).", back: "Need \\(\\operatorname{lcm}(\\operatorname{ord}(a), \\operatorname{ord}(b)) = 6\\). The pairs \\((a,b)\\) with \\(\\operatorname{ord}(b) \\in \\{3,6\\}\\) and appropriate \\(\\operatorname{ord}(a)\\): \\((0,1),(0,5),(1,1),(1,5),(1,2),(1,4)\\). That's 6 elements." },
+
+      // Ch 11 True/False (Exercise 32)
+      { chapter: 11, type: "True/False", front: "T/F: If \\(G_1, G_2\\) are any groups, then \\(G_1 \\times G_2 \\cong G_2 \\times G_1\\).", back: "<b>True.</b> The map \\((a,b) \\mapsto (b,a)\\) is an isomorphism." },
+      { chapter: 11, type: "True/False", front: "T/F: Computation in a direct product is easy if you know how to compute in each component.", back: "<b>True.</b> Operations are componentwise." },
+      { chapter: 11, type: "True/False", front: "T/F: Groups of finite order must be used to form an external direct product.", back: "<b>False.</b> You can take direct products of infinite groups, e.g. \\(\\mathbb{Z} \\times \\mathbb{Z}\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: A group of prime order could not be the internal direct product of two proper nontrivial subgroups.", back: "<b>True.</b> If \\(|G|=p\\), then the only subgroups are \\(\\{e\\}\\) and \\(G\\), neither pair of which gives a nontrivial decomposition." },
+      { chapter: 11, type: "True/False", front: "T/F: \\(\\mathbb{Z}_2 \\times \\mathbb{Z}_4 \\cong \\mathbb{Z}_8\\).", back: "<b>False.</b> \\(\\gcd(2,4) = 2 \\neq 1\\), so \\(\\mathbb{Z}_2 \\times \\mathbb{Z}_4\\) is not cyclic, but \\(\\mathbb{Z}_8\\) is." },
+      { chapter: 11, type: "True/False", front: "T/F: \\(\\mathbb{Z}_2 \\times \\mathbb{Z}_4 \\cong S_8\\).", back: "<b>False.</b> \\(|\\mathbb{Z}_2 \\times \\mathbb{Z}_4| = 8\\) but \\(|S_8| = 40320\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: \\(\\mathbb{Z}_3 \\times \\mathbb{Z}_8 \\cong S_4\\).", back: "<b>False.</b> \\(\\mathbb{Z}_3 \\times \\mathbb{Z}_8\\) has order 24 and is abelian; \\(S_4\\) has order 24 but is non-abelian." },
+      { chapter: 11, type: "True/False", front: "T/F: Every element in \\(\\mathbb{Z}_4 \\times \\mathbb{Z}_8\\) has order 8.", back: "<b>False.</b> \\((0,0)\\) has order 1; \\((2,4)\\) has order \\(\\operatorname{lcm}(2,2)=2\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: The order of \\(\\mathbb{Z}_{12} \\times \\mathbb{Z}_{15}\\) is 60.", back: "<b>False.</b> \\(|\\mathbb{Z}_{12} \\times \\mathbb{Z}_{15}| = 12 \\cdot 15 = 180\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: \\(\\mathbb{Z}_m \\times \\mathbb{Z}_n\\) has \\(mn\\) elements whether or not \\(m,n\\) are coprime.", back: "<b>True.</b> The cardinality is always \\(mn\\). Coprimality only affects cyclicity." },
+
+      // Ch 11 True/False (Exercise 36)
+      { chapter: 11, type: "True/False", front: "T/F: Every abelian group of prime order is cyclic.", back: "<b>True.</b> By Lagrange, the only subgroups have order 1 or \\(p\\), so any non-identity element generates the whole group." },
+      { chapter: 11, type: "True/False", front: "T/F: Every abelian group of prime power order is cyclic.", back: "<b>False.</b> \\(\\mathbb{Z}_2 \\times \\mathbb{Z}_2\\) has order \\(2^2 = 4\\) but is not cyclic." },
+      { chapter: 11, type: "True/False", front: "T/F: \\(\\mathbb{Z}_8\\) is generated by \\(\\{4, 6\\}\\).", back: "<b>False.</b> \\(\\langle 4,6 \\rangle = \\langle \\gcd(4,6) \\rangle = \\langle 2 \\rangle = \\{0,2,4,6\\} \\neq \\mathbb{Z}_8\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: \\(\\mathbb{Z}_8\\) is generated by \\(\\{4, 5, 6\\}\\).", back: "<b>True.</b> \\(\\gcd(4,5,6,8) = 1\\), or directly: \\(5 \\in \\{4,5,6\\}\\) and \\(\\gcd(5,8)=1\\), so \\(\\langle 5 \\rangle = \\mathbb{Z}_8\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: All finite abelian groups are classified up to isomorphism by the Fundamental Theorem.", back: "<b>True.</b> The FTFGAG gives a complete classification." },
+      { chapter: 11, type: "True/False", front: "T/F: Any two finitely generated abelian groups with the same Betti number are isomorphic.", back: "<b>False.</b> \\(\\mathbb{Z}\\) and \\(\\mathbb{Z} \\times \\mathbb{Z}_2\\) both have Betti number 1 but are not isomorphic." },
+      { chapter: 11, type: "True/False", front: "T/F: Every abelian group of order divisible by 5 contains a cyclic subgroup of order 5.", back: "<b>True.</b> By the FTFGAG, one of the elementary divisors is a power of 5, say \\(5^a\\) with \\(a \\ge 1\\). Then \\(\\mathbb{Z}_{5^a}\\) contains a subgroup of order 5." },
+      { chapter: 11, type: "True/False", front: "T/F: Every abelian group of order divisible by 4 contains a cyclic subgroup of order 4.", back: "<b>False.</b> \\(\\mathbb{Z}_2 \\times \\mathbb{Z}_2\\) has order 4 but every element has order \\(\\le 2\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: Every abelian group of order divisible by 6 contains a cyclic subgroup of order 6.", back: "<b>True.</b> By FTFGAG, if \\(2 \\mid |G|\\) and \\(3 \\mid |G|\\), then \\(G\\) has elements \\(a\\) of order 2 and \\(b\\) of order 3. Since \\(G\\) is abelian and \\(\\gcd(2,3)=1\\), \\(\\operatorname{ord}(ab) = \\operatorname{lcm}(2,3) = 6\\)." },
+      { chapter: 11, type: "True/False", front: "T/F: Every finite abelian group has a Betti number of 0.", back: "<b>True.</b> Finite abelian groups are entirely torsion, so the free rank \\(r = 0\\)." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 12 — Plane Isometries
+      // ═══════════════════════════════════════════
+
+      { chapter: 12, type: "Definition", front: "Name the four types of plane isometries.", back: "Translation, rotation, reflection, and glide reflection." },
+      { chapter: 12, type: "Theorem", front: "What do two reflections across parallel axes compose to?", back: "A translation (perpendicular to the axes, by twice the distance between them)." },
+      { chapter: 12, type: "Theorem", front: "What do two reflections across intersecting axes compose to?", back: "A rotation about the point of intersection, by twice the angle between the axes." },
+      { chapter: 12, type: "Definition", front: "What is a glide reflection?", back: "A reflection across an axis followed by a translation along that axis. It has no fixed points." },
+      { chapter: 12, type: "Counterexample", front: "Can a rotation have no fixed points?", back: "No (in the plane). Every rotation fixes its center. Only translations and glide reflections have no fixed points." },
+
+      // Ch 12 — New cards
+      { chapter: 12, type: "Definition", front: "What is a plane isometry?", back: "A bijection \\(\\phi: \\mathbb{R}^2 \\to \\mathbb{R}^2\\) preserving Euclidean distance: \\(|\\phi(\\mathbf{x}) - \\phi(\\mathbf{y})| = |\\mathbf{x} - \\mathbf{y}|\\) for all \\(\\mathbf{x}, \\mathbf{y}\\)." },
+      { chapter: 12, type: "Definition", front: "What is orientation in the context of plane isometries?", back: "An isometry \\(\\phi(\\mathbf{x}) = A\\mathbf{x} + \\mathbf{b}\\) is orientation-preserving if \\(\\det(A) = +1\\) (translations, rotations) and orientation-reversing if \\(\\det(A) = -1\\) (reflections, glide reflections)." },
+      { chapter: 12, type: "Theorem", front: "State the classification of plane isometries.", back: "Every plane isometry is exactly one of: (1) translation (orientation-preserving, no fixed points unless identity), (2) rotation (orientation-preserving, one fixed point), (3) reflection (orientation-reversing, a line of fixed points), (4) glide reflection (orientation-reversing, no fixed points)." },
+      { chapter: 12, type: "Theorem", front: "What is the affine form of every plane isometry?", back: "\\(\\phi(\\mathbf{x}) = A\\mathbf{x} + \\mathbf{b}\\) where \\(A \\in O(2)\\) (orthogonal matrix, \\(A^T A = I\\)) and \\(\\mathbf{b} \\in \\mathbb{R}^2\\)." },
+      { chapter: 12, type: "Theorem", front: "State Leonardo's theorem on finite subgroups of the isometry group.", back: "Every finite subgroup of the group of plane isometries is isomorphic to either \\(C_n\\) (cyclic, rotations only) or \\(D_n\\) (dihedral, rotations + reflections). No other finite subgroups exist." },
+      { chapter: 12, type: "Theorem", front: "Is the set of translations a normal subgroup of the isometry group?", back: "Yes. For any isometry \\(\\phi(\\mathbf{x}) = A\\mathbf{x} + \\mathbf{b}\\), conjugation gives \\(\\phi \\circ T_{\\mathbf{v}} \\circ \\phi^{-1} = T_{A\\mathbf{v}}\\), which is still a translation." },
+      { chapter: 12, type: "Computation", front: "Compose two reflections across parallel lines distance \\(d\\) apart. What do you get?", back: "A translation perpendicular to the lines by distance \\(2d\\)." },
+      { chapter: 12, type: "Computation", front: "Compose two reflections across lines meeting at angle \\(\\theta\\). What do you get?", back: "A rotation about the intersection point by angle \\(2\\theta\\)." },
+      { chapter: 12, type: "True/False", front: "T/F: Every plane isometry can be written as a composition of at most three reflections.", back: "<b>True.</b> Translations = 2 reflections (parallel axes). Rotations = 2 reflections (intersecting axes). Reflections = 1. Glide reflections = 3." },
+      { chapter: 12, type: "True/False", front: "T/F: A glide reflection has a fixed point.", back: "<b>False.</b> A glide reflection has no fixed points. It is a reflection followed by a nonzero translation along the axis." },
+      { chapter: 12, type: "True/False", front: "T/F: The composition of two orientation-reversing isometries is orientation-preserving.", back: "<b>True.</b> \\(\\det(A_1)\\det(A_2) = (-1)(-1) = +1\\)." },
+      { chapter: 12, type: "Proof Sketch", front: "Sketch: rotations about the origin form a group isomorphic to \\(SO(2) \\cong S^1\\).", back: "\\(R_\\theta \\circ R_\\varphi = R_{\\theta+\\varphi}\\), identity \\(R_0 = I\\), inverse \\(R_\\theta^{-1} = R_{-\\theta}\\). The map \\(\\theta \\mapsto R_\\theta\\) is a surjective homomorphism \\(\\mathbb{R} \\to SO(2)\\) with kernel \\(2\\pi\\mathbb{Z}\\), so \\(SO(2) \\cong \\mathbb{R}/2\\pi\\mathbb{Z} \\cong S^1\\)." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 13 — Homomorphisms
+      // ═══════════════════════════════════════════
+
+      { chapter: 13, type: "Definition", front: "What is a group homomorphism?", back: "A map \\(\\phi: G \\to G'\\) with \\(\\phi(ab) = \\phi(a)\\phi(b)\\) for all \\(a,b \\in G\\)." },
+      { chapter: 13, type: "Definition", front: "What is the kernel of a homomorphism?", back: "\\(\\ker(\\phi) = \\{g \\in G \\mid \\phi(g) = e'\\}\\), the preimage of the identity." },
+      { chapter: 13, type: "Definition", front: "What is the image of a homomorphism?", back: "\\(\\phi[G] = \\{\\phi(g) \\mid g \\in G\\}\\), a subgroup of \\(G'\\)." },
+      { chapter: 13, type: "Theorem", front: "Is the kernel always a normal subgroup?", back: "Yes. \\(\\ker(\\phi) \\trianglelefteq G\\). Proof: if \\(k \\in \\ker(\\phi)\\) and \\(g \\in G\\), then \\(\\phi(gkg^{-1}) = \\phi(g)e'\\phi(g)^{-1} = e'\\)." },
+      { chapter: 13, type: "Theorem", front: "When is a homomorphism injective?", back: "\\(\\phi\\) is injective iff \\(\\ker(\\phi) = \\{e\\}\\)." },
+      { chapter: 13, type: "Proof Sketch", front: "Sketch: \\(\\ker(\\phi) = \\{e\\} \\Leftrightarrow \\phi\\) injective.", back: "\\((\\Rightarrow)\\) If \\(\\phi(a) = \\phi(b)\\), then \\(\\phi(ab^{-1}) = e'\\), so \\(ab^{-1} \\in \\ker(\\phi) = \\{e\\}\\), hence \\(a=b\\). \\((\\Leftarrow)\\) \\(e \\in \\ker(\\phi)\\) always; if \\(\\phi\\) is injective, no other element maps to \\(e'\\)." },
+      { chapter: 13, type: "Theorem", front: "What does \\(|\\phi[G]|\\) divide?", back: "\\(|\\phi[G]|\\) divides both \\(|G|\\) (by the first isomorphism theorem: \\(|G|/|\\ker\\phi|\\)) and \\(|G'|\\) (since \\(\\phi[G] \\le G'\\))." },
+      { chapter: 13, type: "Example", front: "Give the standard example of a homomorphism \\(\\mathbb{Z} \\to \\mathbb{Z}_n\\).", back: "Reduction mod \\(n\\): \\(\\phi(a) = a \\mod n\\). \\(\\ker(\\phi) = n\\mathbb{Z}\\), \\(\\phi[\\mathbb{Z}] = \\mathbb{Z}_n\\)." },
+      { chapter: 13, type: "Counterexample", front: "Can a bijection between groups fail to be a homomorphism?", back: "Yes. Define \\(f: \\mathbb{Z}_4 \\to \\mathbb{Z}_4\\) by \\(f(0)=0, f(1)=2, f(2)=1, f(3)=3\\). This is a bijection but \\(f(1+1) = f(2) = 1 \\neq 0 = 2+2 = f(1)+f(1)\\)." },
+
+      // Ch 13 True/False (Exercise 32)
+      { chapter: 13, type: "True/False", front: "T/F: \\(A_n\\) is a normal subgroup of \\(S_n\\).", back: "<b>True.</b> \\(A_n = \\ker(\\operatorname{sgn})\\), and the kernel of any homomorphism is normal." },
+      { chapter: 13, type: "True/False", front: "T/F: For any two groups \\(G, G'\\), there exists a homomorphism of \\(G\\) into \\(G'\\).", back: "<b>True.</b> The trivial homomorphism \\(\\phi(g) = e'\\) for all \\(g\\) always works." },
+      { chapter: 13, type: "True/False", front: "T/F: Every homomorphism is a one-to-one map.", back: "<b>False.</b> The trivial homomorphism maps everything to \\(e'\\)." },
+      { chapter: 13, type: "True/False", front: "T/F: A homomorphism is one-to-one iff the kernel is \\(\\{e\\}\\).", back: "<b>True.</b> This is a fundamental theorem of group homomorphisms." },
+      { chapter: 13, type: "True/False", front: "T/F: The image of a group of 6 elements under some homomorphism may have 4 elements.", back: "<b>False.</b> \\(|\\phi[G]|\\) divides \\(|G|=6\\), and 4 does not divide 6." },
+      { chapter: 13, type: "True/False", front: "T/F: The image of a group of 6 elements under a homomorphism may have 12 elements.", back: "<b>False.</b> \\(|\\phi[G]| \\le |G| = 6\\)." },
+      { chapter: 13, type: "True/False", front: "T/F: There is a homomorphism of some group of 6 elements into some group of 12 elements.", back: "<b>True.</b> The trivial homomorphism, or the inclusion \\(\\mathbb{Z}_6 \\hookrightarrow \\mathbb{Z}_6 \\times \\mathbb{Z}_2\\) via \\(a \\mapsto (a,0)\\)." },
+      { chapter: 13, type: "True/False", front: "T/F: There is a homomorphism of some group of 6 elements into some group of 10 elements.", back: "<b>True.</b> The trivial homomorphism \\(\\phi: \\mathbb{Z}_6 \\to \\mathbb{Z}_{10}\\) with \\(\\phi(g) = 0\\) for all \\(g\\)." },
+      { chapter: 13, type: "True/False", front: "T/F: A homomorphism may have an empty kernel.", back: "<b>False.</b> \\(\\phi(e) = e'\\) always, so \\(e \\in \\ker(\\phi)\\)." },
+      { chapter: 13, type: "True/False", front: "T/F: It is not possible to have a nontrivial homomorphism of a finite group into an infinite group.", back: "<b>False.</b> \\(\\mathbb{Z}_3 \\to \\mathbb{Z}\\) must be trivial (only element of finite order in \\(\\mathbb{Z}\\) is 0). But \\(S_3 \\to GL_2(\\mathbb{R})\\) by permutation matrices is nontrivial." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 14 — Factor Groups
+      // ═══════════════════════════════════════════
+
+      { chapter: 14, type: "Definition", front: "When is a subgroup \\(N\\) normal in \\(G\\)?", back: "When \\(gN = Ng\\) for every \\(g \\in G\\). Equivalently: \\(gNg^{-1} = N\\) for all \\(g\\), or equivalently: \\(gng^{-1} \\in N\\) for all \\(g \\in G, n \\in N\\). Write \\(N \\trianglelefteq G\\)." },
+      { chapter: 14, type: "Theorem", front: "When does coset multiplication define a group?", back: "Exactly when the subgroup is normal. If \\(N \\trianglelefteq G\\), then \\((aN)(bN) = (ab)N\\) is well-defined, and \\(G/N\\) is a group (the quotient or factor group)." },
+      { chapter: 14, type: "Proof Sketch", front: "Sketch: well-definedness of coset multiplication.", back: "Need: if \\(aN = a'N\\) and \\(bN = b'N\\), then \\(abN = a'b'N\\). Write \\(a' = an_1, b' = bn_2\\). Then \\(a'b' = an_1 bn_2\\). We need \\(n_1 b \\in bN\\), i.e. \\(b^{-1}n_1 b \\in N\\). This holds exactly when \\(N\\) is normal." },
+      { chapter: 14, type: "Theorem", front: "What is the kernel of the natural projection \\(\\gamma: G \\to G/N\\)?", back: "\\(\\ker(\\gamma) = N\\). The natural projection \\(\\gamma(g) = gN\\) is a surjective homomorphism with kernel \\(N\\)." },
+      { chapter: 14, type: "Theorem", front: "State the Fundamental Homomorphism Theorem.", back: "If \\(\\phi: G \\to G'\\) is a homomorphism with \\(\\ker(\\phi) = N\\), then \\(G/N \\cong \\phi[G]\\). The isomorphism is \\(\\mu: gN \\mapsto \\phi(g)\\), and \\(\\phi = \\mu \\circ \\gamma\\)." },
+      { chapter: 14, type: "Proof Sketch", front: "Sketch the Fundamental Homomorphism Theorem.", back: "Define \\(\\mu: G/N \\to \\phi[G]\\) by \\(\\mu(gN) = \\phi(g)\\). Well-defined: \\(gN = hN \\Rightarrow h^{-1}g \\in N = \\ker\\phi \\Rightarrow \\phi(g) = \\phi(h)\\). Injective: \\(\\mu(gN) = e' \\Rightarrow g \\in \\ker\\phi = N \\Rightarrow gN = N\\). Surjective: by definition of \\(\\phi[G]\\). Homomorphism: \\(\\mu(gN \\cdot hN) = \\mu(ghN) = \\phi(gh) = \\phi(g)\\phi(h)\\)." },
+      { chapter: 14, type: "Definition", front: "What is an inner automorphism?", back: "For fixed \\(g \\in G\\), the map \\(i_g: G \\to G\\) defined by \\(i_g(x) = gxg^{-1}\\). This is an automorphism of \\(G\\)." },
+      { chapter: 14, type: "Theorem", front: "Is every subgroup of an abelian group normal?", back: "Yes. If \\(G\\) is abelian, then \\(gH = Hg\\) for all \\(g\\), so every subgroup is normal." },
+      { chapter: 14, type: "Theorem", front: "If \\([G:H] = 2\\), is \\(H\\) normal?", back: "Yes. A subgroup of index 2 is always normal. There are only two cosets: \\(H\\) and \\(G \\setminus H\\), so left and right cosets must coincide." },
+      { chapter: 14, type: "Computation", front: "Compute \\(S_3 / A_3\\).", back: "\\(A_3 = \\{e, (1\\,2\\,3), (1\\,3\\,2)\\}\\) has index 2 in \\(S_3\\). The two cosets are \\(A_3\\) and \\((1\\,2)A_3 = \\{(1\\,2),(1\\,3),(2\\,3)\\}\\). So \\(S_3/A_3 \\cong \\mathbb{Z}_2\\)." },
+      { chapter: 14, type: "Counterexample", front: "Why can you not form a quotient by a non-normal subgroup?", back: "Coset multiplication depends on the choice of representative. E.g. in \\(S_3\\) with \\(H = \\{e, (1\\,2)\\}\\): \\((1\\,3)H = \\{(1\\,3),(1\\,2\\,3)\\}\\) but \\(H(1\\,3) = \\{(1\\,3),(1\\,3\\,2)\\}\\). Since \\((1\\,3)H \\neq H(1\\,3)\\), coset multiplication is not well-defined." },
+
+      // ═══════════════════════════════════════════
+      // CHAPTER 15 — Factor-Group Computations, Simple Groups
+      // ═══════════════════════════════════════════
+
+      { chapter: 15, type: "Definition", front: "What is a simple group?", back: "A nontrivial group whose only normal subgroups are \\(\\{e\\}\\) and \\(G\\) itself." },
+      { chapter: 15, type: "Theorem", front: "Why is \\(\\mathbb{Z}_p\\) simple for prime \\(p\\)?", back: "By Lagrange, the only subgroups of \\(\\mathbb{Z}_p\\) have order 1 or \\(p\\). So the only normal subgroups are \\(\\{0\\}\\) and \\(\\mathbb{Z}_p\\)." },
+      { chapter: 15, type: "Proof Sketch", front: "Sketch: \\(\\mathbb{Z}_p\\) is simple.", back: "If \\(H \\trianglelefteq \\mathbb{Z}_p\\), then \\(|H|\\) divides \\(p\\). Since \\(p\\) is prime, \\(|H| = 1\\) or \\(|H| = p\\). Done." },
+      { chapter: 15, type: "Theorem", front: "Is \\(A_n\\) simple for \\(n \\ge 5\\)?", back: "Yes. \\(A_n\\) is simple for all \\(n \\ge 5\\). This is a deep result; the proof uses the fact that any normal subgroup of \\(A_n\\) containing a 3-cycle must be all of \\(A_n\\)." },
+      { chapter: 15, type: "Counterexample", front: "Is \\(A_4\\) simple?", back: "No. \\(A_4\\) has a normal subgroup \\(V = \\{e, (1\\,2)(3\\,4), (1\\,3)(2\\,4), (1\\,4)(2\\,3)\\} \\cong V_4\\), which is the Klein four-group." },
+      { chapter: 15, type: "Computation", front: "Compute \\((\\mathbb{Z}_4 \\times \\mathbb{Z}_2) / (\\{0\\} \\times \\mathbb{Z}_2)\\).", back: "\\(N = \\{(0,0),(0,1)\\}\\). The cosets are \\((k,0)+N\\) for \\(k=0,1,2,3\\). The quotient has 4 elements and is cyclic: \\((\\mathbb{Z}_4 \\times \\mathbb{Z}_2)/N \\cong \\mathbb{Z}_4\\)." },
+      { chapter: 15, type: "Theorem", front: "What are the simple abelian groups?", back: "Exactly the cyclic groups \\(\\mathbb{Z}_p\\) for \\(p\\) prime. Every other abelian group has a proper nontrivial (normal) subgroup." },
+
+      // Ch 15 — New cards
+      { chapter: 15, type: "Definition", front: "What is the commutator \\([a,b]\\) and the commutator subgroup \\(G'\\)?", back: "\\([a,b] = aba^{-1}b^{-1}\\). The commutator subgroup \\(G' = [G,G]\\) is the subgroup generated by all commutators. Note: the set of commutators alone may not be a subgroup." },
+      { chapter: 15, type: "Definition", front: "What is the center \\(Z(G)\\)?", back: "\\(Z(G) = \\{z \\in G : zg = gz \\text{ for all } g \\in G\\}\\). It is always a normal subgroup. \\(G\\) is abelian iff \\(Z(G) = G\\)." },
+      { chapter: 15, type: "Theorem", front: "State the \\(G/Z(G)\\) theorem.", back: "If \\(G/Z(G)\\) is cyclic, then \\(G\\) is abelian. Contrapositive: if \\(G\\) is non-abelian, \\(G/Z(G)\\) is not cyclic." },
+      { chapter: 15, type: "Proof Sketch", front: "Sketch: if \\(G/Z(G)\\) is cyclic then \\(G\\) is abelian.", back: "If \\(G/Z(G) = \\langle aZ \\rangle\\), every element is \\(a^k z\\) for some \\(z \\in Z(G)\\). Then \\((a^j z_1)(a^k z_2) = a^{j+k} z_1 z_2 = (a^k z_2)(a^j z_1)\\) since \\(z_i\\) commute with everything and powers of \\(a\\) commute." },
+      { chapter: 15, type: "Theorem", front: "Why is \\(G'\\) always a normal subgroup?", back: "Conjugating a commutator gives a commutator: \\(g[a,b]g^{-1} = [gag^{-1}, gbg^{-1}]\\). Since \\(G'\\) is generated by commutators and conjugation maps generators into \\(G'\\), we get \\(gG'g^{-1} \\subseteq G'\\)." },
+      { chapter: 15, type: "Theorem", front: "What is the relationship between \\(G'\\) and abelian quotients?", back: "\\(G/G'\\) is abelian, and \\(G'\\) is the smallest normal subgroup with this property: if \\(N \\trianglelefteq G\\) and \\(G/N\\) is abelian, then \\(G' \\subseteq N\\)." },
+      { chapter: 15, type: "Computation", front: "Compute the commutator subgroup of \\(S_3\\).", back: "\\([{(12)},{(123)}] = (12)(123)(12)(132) = (132)\\). Since \\((132) \\in S_3'\\) and \\((132)\\) has order 3, we get \\(A_3 = \\{e,(123),(132)\\} \\subseteq S_3'\\). Since \\(S_3/A_3 \\cong \\mathbb{Z}_2\\) is abelian, \\(S_3' \\subseteq A_3\\). So \\(S_3' = A_3\\)." },
+      { chapter: 15, type: "Computation", front: "Compute the commutator subgroup of \\(D_8\\) (dihedral group of the square).", back: "\\([s,r] = srs^{-1}r^{-1} = (srs)r^{-1} = r^{-1}r^{-1} = r^2\\). So \\(r^2 \\in D_8'\\). Since \\(\\langle r^2 \\rangle = \\{e, r^2\\}\\) has index 4, and \\(D_8/\\langle r^2 \\rangle \\cong V_4\\) is abelian, we get \\(D_8' = \\{e, r^2\\}\\)." },
+      { chapter: 15, type: "True/False", front: "T/F: Every group of order \\(p^2\\) (\\(p\\) prime) is abelian.", back: "<b>True.</b> \\(Z(G)\\) has order \\(p\\) or \\(p^2\\). If \\(|Z(G)| = p^2\\) then \\(G\\) is abelian. If \\(|Z(G)| = p\\), then \\(|G/Z(G)| = p\\), which is cyclic, so \\(G\\) is abelian by the \\(G/Z(G)\\) theorem. Contradiction." },
+      { chapter: 15, type: "True/False", front: "T/F: \\(A_4\\) is simple.", back: "<b>False.</b> \\(A_4\\) has a normal subgroup \\(V = \\{e, (12)(34), (13)(24), (14)(23)\\} \\cong V_4\\)." },
+      { chapter: 15, type: "Counterexample", front: "For an abelian group \\(G\\), what is \\(G'\\)?", back: "\\(G' = \\{e\\}\\), since \\([a,b] = aba^{-1}b^{-1} = e\\) for all \\(a,b\\). The abelianization \\(G/G' = G/\\{e\\} \\cong G\\)." },
+
+      // ═══════════════════════════════════════════
+      // NEW CARDS — Post-midterm additions
+      // ═══════════════════════════════════════════
+
+      // Ch 11 — Converse of Lagrange
+      { chapter: 11, type: "Theorem", front: "State the converse of Lagrange for abelian groups.", back: "If \\(G\\) is a finite abelian group and \\(d \\mid |G|\\), then \\(G\\) has a subgroup of order \\(d\\). This follows from the FTFGAG: decompose \\(G\\) into cyclic \\(p\\)-groups and pick subgroups of the right prime-power orders." },
+      { chapter: 11, type: "Counterexample", front: "Does every finite group have a subgroup of every order dividing \\(|G|\\)?", back: "<b>No.</b> \\(A_4\\) has order 12 but no subgroup of order 6. The converse of Lagrange holds for abelian groups but fails in general." },
+
+      // Ch 13 — Image/preimage of subgroups + counting formula
+      { chapter: 13, type: "Theorem", front: "If \\(H \\le G\\) and \\(\\phi: G \\to G'\\) is a homomorphism, is \\(\\phi(H)\\) a subgroup of \\(G'\\)?", back: "Yes. \\(\\phi(H) \\le G'\\). Proof: \\(e' = \\phi(e) \\in \\phi(H)\\); closure: \\(\\phi(h_1)\\phi(h_2) = \\phi(h_1 h_2) \\in \\phi(H)\\); inverses: \\(\\phi(h)^{-1} = \\phi(h^{-1}) \\in \\phi(H)\\)." },
+      { chapter: 13, type: "Theorem", front: "If \\(K' \\le G'\\) and \\(\\phi: G \\to G'\\) is a homomorphism, is \\(\\phi^{-1}(K')\\) a subgroup of \\(G\\)?", back: "Yes. \\(\\phi^{-1}(K') \\le G\\). The preimage of a subgroup is always a subgroup." },
+      { chapter: 13, type: "Theorem", front: "If \\(H \\trianglelefteq G\\), is \\(\\phi(H)\\) normal in \\(G'\\)?", back: "<b>Not necessarily.</b> \\(\\phi(H) \\trianglelefteq \\phi(G)\\), but \\(\\phi(H)\\) is normal in all of \\(G'\\) only when \\(\\phi\\) is surjective. This is a common exam trap." },
+      { chapter: 13, type: "Theorem", front: "If \\(K' \\trianglelefteq G'\\), is \\(\\phi^{-1}(K')\\) normal in \\(G\\)?", back: "Yes, always. For \\(a \\in \\phi^{-1}(K')\\) and \\(g \\in G\\): \\(\\phi(gag^{-1}) = \\phi(g)\\phi(a)\\phi(g)^{-1} \\in K'\\) since \\(K' \\trianglelefteq G'\\)." },
+      { chapter: 13, type: "Theorem", front: "State the counting formula for homomorphisms.", back: "If \\(G\\) is finite and \\(\\phi: G \\to G'\\) is a homomorphism, then \\(|G| = |\\ker(\\phi)| \\cdot |\\operatorname{im}(\\phi)|\\). Each fiber \\(\\phi^{-1}(\\{y\\})\\) is a coset of \\(\\ker(\\phi)\\), so all fibers have equal size." },
+      { chapter: 13, type: "Computation", front: "If \\(|G| = 30\\) and \\(\\phi: G \\to G'\\) has \\(|\\ker(\\phi)| = 5\\), what is \\(|\\operatorname{im}(\\phi)|\\)?", back: "\\(|\\operatorname{im}(\\phi)| = |G|/|\\ker(\\phi)| = 30/5 = 6\\)." },
+
+      // Ch 15 — Factor group of cyclic, maximal normal, composition series, solvability
+      { chapter: 15, type: "Theorem", front: "Is a factor group of a cyclic group always cyclic?", back: "Yes. If \\(G = \\langle a \\rangle\\) and \\(N \\trianglelefteq G\\), then every coset \\(gN = a^k N = (aN)^k\\), so \\(G/N = \\langle aN \\rangle\\) is cyclic." },
+      { chapter: 15, type: "True/False", front: "T/F: If \\(G/N\\) is cyclic, then \\(G\\) is cyclic.", back: "<b>False.</b> \\(V_4/\\langle(12)(34)\\rangle \\cong \\mathbb{Z}_2\\) is cyclic, but \\(V_4\\) is not cyclic." },
+      { chapter: 15, type: "Definition", front: "What is a maximal normal subgroup?", back: "A normal subgroup \\(N \\trianglelefteq G\\) with \\(N \\neq G\\) such that there is no normal subgroup \\(M\\) of \\(G\\) with \\(N \\subsetneq M \\subsetneq G\\)." },
+      { chapter: 15, type: "Theorem", front: "When is \\(N\\) a maximal normal subgroup of \\(G\\)?", back: "\\(N\\) is maximal normal in \\(G\\) if and only if \\(G/N\\) is simple." },
+      { chapter: 15, type: "Computation", front: "What is \\(Z(S_n)\\) for \\(n \\ge 3\\)? What is \\(Z(D_n)\\)?", back: "\\(Z(S_n) = \\{e\\}\\) for \\(n \\ge 3\\). \\(Z(D_n) = \\{e\\}\\) for odd \\(n\\); \\(Z(D_n) = \\{e, r^{n/2}\\}\\) for even \\(n\\)." },
+      { chapter: 15, type: "Definition", front: "What is a composition series?", back: "A chain \\(\\{e\\} = G_0 \\trianglelefteq G_1 \\trianglelefteq \\cdots \\trianglelefteq G_n = G\\) where each factor \\(G_{i+1}/G_i\\) is simple. The factors are called <b>composition factors</b>." },
+      { chapter: 15, type: "Theorem", front: "State the Jordan-Holder theorem.", back: "Any two composition series of a finite group \\(G\\) have the same length and the same composition factors (up to reordering and isomorphism). This is the group-theoretic analogue of unique prime factorization." },
+      { chapter: 15, type: "Computation", front: "Give a composition series for \\(S_3\\) and list its factors.", back: "\\(\\{e\\} \\trianglelefteq A_3 \\trianglelefteq S_3\\). Factors: \\(A_3/\\{e\\} \\cong \\mathbb{Z}_3\\) and \\(S_3/A_3 \\cong \\mathbb{Z}_2\\). Both are simple (prime order)." },
+      { chapter: 15, type: "Definition", front: "What does it mean for a group to be solvable?", back: "\\(G\\) is solvable if it has a composition series in which every composition factor is abelian (equivalently, cyclic of prime order for finite groups)." },
+      { chapter: 15, type: "Theorem", front: "Is \\(S_n\\) solvable?", back: "Yes for \\(n \\le 4\\). No for \\(n \\ge 5\\), because \\(A_n\\) is simple and nonabelian, so it appears as a non-abelian composition factor." },
+      { chapter: 15, type: "True/False", front: "T/F: Quotienting by \\(Z(G)\\) makes \\(G\\) abelian.", back: "<b>False.</b> \\(Z(G)\\) collects what already commutes. The correct subgroup is \\(G'\\): quotienting by \\(G'\\) gives the abelianization \\(G/G'\\). For \\(S_3\\), \\(Z(S_3) = \\{e\\}\\) so \\(S_3/Z(S_3) \\cong S_3\\), still nonabelian." }
     ];
 
     const flashcardsEl = document.getElementById("flashcards");
@@ -325,15 +824,109 @@
       chapterFilterEl.appendChild(option);
     }
 
-    function typeset() {
-      if (typeof renderMathInElement === "function") {
-        renderMathInElement(document.getElementById("flashcards"), {
-          delimiters: [
-            { left: "$$", right: "$$", display: true },
-            { left: "$", right: "$", display: false }
-          ],
-          throwOnError: false
-        });
+    let currentCards = [...cards];
+    let reviewMode = false;
+
+    // --- Spaced-Repetition Engine ---
+
+    const STORAGE_KEY = "aa-flashcards-v1";
+
+    function cardId(card) {
+      const slug = card.front.substring(0, 60).replace(/[^a-zA-Z0-9]/g, "").substring(0, 20).toLowerCase();
+      return `ch${card.chapter}-${card.type.replace(/[^a-z]/gi, "").toLowerCase()}-${slug}`;
+    }
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : { version: 1, cards: {}, lastSession: null };
+      } catch { return { version: 1, cards: {}, lastSession: null }; }
+    }
+
+    function saveProgress(state) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+    }
+
+    function getCardState(id) {
+      const state = loadProgress();
+      return state.cards[id] || { confidence: 0, lastReviewed: null, reviewCount: 0, streak: 0 };
+    }
+
+    function rateCard(id, level) {
+      const state = loadProgress();
+      const prev = state.cards[id] || { confidence: 0, lastReviewed: null, reviewCount: 0, streak: 0 };
+      prev.confidence = level;
+      prev.lastReviewed = new Date().toISOString();
+      prev.reviewCount += 1;
+      prev.streak = level === 3 ? prev.streak + 1 : 0;
+      state.cards[id] = prev;
+      state.lastSession = new Date().toISOString();
+      saveProgress(state);
+      updateDashboard();
+    }
+
+    function confidenceClass(level) {
+      return ["unseen", "again", "hard", "easy"][level] || "unseen";
+    }
+
+    function getDueCards() {
+      return cards.filter(c => {
+        const s = getCardState(cardId(c));
+        return s.confidence < 3; // unseen, again, or hard
+      }).sort((a, b) => {
+        const sa = getCardState(cardId(a)).confidence;
+        const sb = getCardState(cardId(b)).confidence;
+        // again (1) first, then hard (2), then unseen (0)
+        const pri = x => x === 1 ? 0 : x === 2 ? 1 : 2;
+        return pri(sa) - pri(sb);
+      });
+    }
+
+    function updateDashboard() {
+      const state = loadProgress();
+      let mastered = 0, needReview = 0, unseen = 0;
+      const chapterStats = {};
+
+      cards.forEach(c => {
+        const id = cardId(c);
+        const s = state.cards[id] || { confidence: 0 };
+        if (s.confidence === 3) mastered++;
+        else if (s.confidence >= 1) needReview++;
+        else unseen++;
+
+        if (!chapterStats[c.chapter]) chapterStats[c.chapter] = { total: 0, mastered: 0 };
+        chapterStats[c.chapter].total++;
+        if (s.confidence === 3) chapterStats[c.chapter].mastered++;
+      });
+
+      document.getElementById("masteredCount").textContent = mastered;
+      document.getElementById("reviewCount").textContent = needReview + unseen;
+
+      const due = getDueCards().length;
+      document.getElementById("dueBadge").textContent = due;
+
+      // Chapter mastery bars
+      const barsEl = document.getElementById("masteryBars");
+      let barsHTML = "<h3>Chapter Mastery</h3>";
+      const chapters = Object.keys(chapterStats).map(Number).sort((a, b) => a - b);
+      chapters.forEach(ch => {
+        const { total, mastered: m } = chapterStats[ch];
+        const pct = total ? Math.round(100 * m / total) : 0;
+        barsHTML += `<div class="mastery-row">
+          <span class="mastery-label">Ch ${String(ch).padStart(2, "0")}</span>
+          <div class="mastery-bar-bg"><div class="mastery-bar-fill" style="width:${pct}%"></div></div>
+          <span class="mastery-pct">${pct}%</span>
+        </div>`;
+      });
+      barsEl.innerHTML = barsHTML;
+
+      // Session stats
+      const statsEl = document.getElementById("sessionStats");
+      if (mastered + needReview > 0) {
+        const totalCards = cards.length;
+        statsEl.textContent = `${mastered} mastered, ${needReview} need review, ${unseen} unseen out of ${totalCards} cards.`;
+      } else {
+        statsEl.textContent = "No progress yet. Flip a card and rate it to start tracking.";
       }
     }
 
@@ -342,7 +935,9 @@
       const chapter = chapterFilterEl.value;
       const type = typeFilterEl.value;
 
-      const filtered = cards.filter((card) => {
+      let source = reviewMode ? getDueCards() : currentCards;
+
+      const filtered = source.filter((card) => {
         const haystack = [card.front, card.back, card.type, `chapter ${card.chapter}`].join(" ").toLowerCase();
         const matchesQuery = !q || haystack.includes(q);
         const matchesChapter = chapter === "all" || String(card.chapter) === chapter;
@@ -353,10 +948,15 @@
       visibleCountEl.textContent = filtered.length;
       emptyStateEl.style.display = filtered.length ? "none" : "block";
 
-      flashcardsEl.innerHTML = filtered.map((card, idx) => `
-        <article class="flashcard" data-idx="${idx}">
+      flashcardsEl.innerHTML = filtered.map((card, idx) => {
+        const cid = cardId(card);
+        const cs = getCardState(cid);
+        const dotClass = confidenceClass(cs.confidence);
+        return `
+        <article class="flashcard" data-cid="${cid}">
           <div class="flashcard-inner">
             <div class="face front">
+              <div class="confidence-dot ${dotClass}"></div>
               <div>
                 <div class="tag">Chapter ${card.chapter} · ${card.type}</div>
                 <div class="prompt">${card.front}</div>
@@ -368,19 +968,51 @@
                 <div class="tag">Answer</div>
                 <div class="answer">${card.back}</div>
               </div>
-              <div class="muted small">Tap to turn back</div>
+              <div class="rating-bar">
+                <button class="rating-btn again" data-cid="${cid}" data-level="1">Again</button>
+                <button class="rating-btn hard" data-cid="${cid}" data-level="2">Hard</button>
+                <button class="rating-btn easy" data-cid="${cid}" data-level="3">Easy</button>
+              </div>
             </div>
           </div>
-        </article>
-      `).join("");
+        </article>`;
+      }).join("");
 
+      // Card flip on click (but not on rating buttons)
       document.querySelectorAll(".flashcard").forEach((card) => {
-        card.addEventListener("click", () => {
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".rating-btn")) return;
           card.classList.toggle("flipped");
         });
       });
 
-      typeset();
+      // Rating button handlers
+      document.querySelectorAll(".rating-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const cid = btn.dataset.cid;
+          const level = parseInt(btn.dataset.level);
+          rateCard(cid, level);
+          // Update the dot on the front face
+          const cardEl = btn.closest(".flashcard");
+          const dot = cardEl.querySelector(".confidence-dot");
+          dot.className = "confidence-dot " + confidenceClass(level);
+          // Brief visual feedback then flip back
+          btn.style.transform = "scale(1.2)";
+          setTimeout(() => { cardEl.classList.remove("flipped"); }, 400);
+        });
+      });
+
+      // Render math after inserting HTML
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(flashcardsEl, {
+          delimiters: [
+            { left: "\\[", right: "\\]", display: true },
+            { left: "\\(", right: "\\)", display: false }
+          ],
+          throwOnError: false
+        });
+      }
     }
 
     searchEl.addEventListener("input", renderCards);
@@ -391,6 +1023,11 @@
       searchEl.value = "";
       chapterFilterEl.value = "all";
       typeFilterEl.value = "all";
+      renderCards();
+    });
+
+    document.getElementById("showTF").addEventListener("click", () => {
+      typeFilterEl.value = "True/False";
       renderCards();
     });
 
@@ -407,8 +1044,38 @@
       document.querySelectorAll(".flashcard").forEach((card) => card.classList.remove("flipped"));
     });
 
+    document.getElementById("shuffleCards").addEventListener("click", () => {
+      for (let i = currentCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
+      }
+      renderCards();
+    });
+
+    // Review Due mode toggle
+    document.getElementById("reviewDue").addEventListener("click", () => {
+      reviewMode = !reviewMode;
+      const btn = document.getElementById("reviewDue");
+      if (reviewMode) {
+        btn.textContent = "Show All Cards";
+        btn.classList.add("review-due");
+      } else {
+        btn.innerHTML = 'Review Due <span id="dueBadge" class="badge">0</span>';
+        btn.classList.add("review-due");
+        updateDashboard();
+      }
+      renderCards();
+    });
+
+    // Wait for KaTeX to load, then render
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        renderCards();
+        updateDashboard();
+      }, 100);
+    });
     renderCards();
-    document.addEventListener("DOMContentLoaded", typeset);
+    updateDashboard();
   </script>
 </body>
 </html>
