@@ -25,5 +25,5 @@ These boards replay the cited master-game lines embedded in the session annotati
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-23/Master-Games/">Prev Session</a>
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/">All Sessions</a>
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-24/">Session Boards</a>
-  <span class="training-session-nav__text">Next Session</span>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-25/Master-Games/">Next Session</a>
 </nav>

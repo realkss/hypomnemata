@@ -1,0 +1,34 @@
+[Event "Training game"]
+[Site "?"]
+[Date "2026.04.01"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwipo"]
+[Result "1-0"]
+[ECO "B12"]
+[PlyCount "23"]
+[EventDate "2026.??.??"]
+
+1. e4 c6 2. d4 d5 3. f3 dxe4 ({another good line to play} 3... e6 4. Nc3 Qb6 5.
+a3 Nd7 6. Be3 Ngf6 7. b4 dxe4 8. fxe4 e5 9. Nf3 Bd6 10. Qd2 Qc7 11. Rd1 O-O 12.
+d5 a6 13. dxc6 Qxc6 14. Be2 Re8 15. O-O Bf8 16. Nh4 Nb6 17. b5 Qc7 18. bxa6
+bxa6 19. Nd5 Nbxd5 20. exd5 Ne4 21. Qd3 Nd6 22. c4 Be7 23. g3 e4 24. Qc3 Bh3
+25. c5 Bxf1 26. Rxf1 Rec8 27. Qe5 Nb7 28. d6 Nxd6 29. cxd6 Bxd6 30. Qxe4 Re8
+31. Qf3 Bxa3 32. Nf5 Bc5 33. Bxc5 Qxc5+ 34. Rf2 Ra7 35. Kg2 a5 36. Bd3 Kh8 37.
+Rc2 Qf8 38. Bb5 Rd8 39. Qf2 Rb7 40. Rc5 g6 41. Bc6 Rbb8 42. Rxa5 gxf5 43. Rxf5
+Qh6 44. Rf6 Qc1 45. Kh3 Rd2 46. Qf4 Qb2 47. Rxf7 Rxh2+ 48. Kg4 Qe2+ 49. Qf3
+Qe6+ 50. Rf5 Rb4+ {0-1 (50) Nabaty,T (2585)-Rodshtein,M (2660) Jerusalem 2015
+CBM 166 [Roiz,M]}) 4. fxe4 e5 5. Nf3 Bg4 6. Bc4 exd4 $2 ({right way to continue
+} 6... Nd7 7. c3 Bd6 8. O-O Ngf6 9. Bg5 O-O 10. Nbd2 b5 11. Bb3 c5 12. dxc5
+Bxc5+ 13. Kh1 h6 14. Bh4 Be3 15. h3 Bh5 16. Qe1 Bf4 17. g3 Bxd2 18. Nxd2 Qb6
+19. Bc2 Rac8 20. a3 a5 21. g4 Bg6 22. Qe2 Rfe8 23. Kh2 Nd5 24. Bf2 Qb7 25. Rad1
+Nf4 26. Qe3 Nc5 27. Bg3 Nce6 28. Nf3 Nc5 29. Nxe5 Rxe5 30. Rxf4 Ree8 31. Re1 b4
+32. axb4 axb4 33. cxb4 Qxb4 34. Qc3 Qb7 35. Qe3 Qxb2 36. Rf2 Qb7 37. e5 Bxc2
+38. Rxc2 Ne6 39. Rf2 Rc4 40. Qf3 Qc7 41. Ref1 Rc2 42. Rxc2 Qxc2+ 43. Rf2 Qc7
+44. Rd2 Rb8 45. h4 Qc4 46. Rf2 Qc7 47. Rd2 Qa7 48. Kg2 Qa4 49. Rf2 Qd7 50. Qc3
+Ra8 51. Rd2 Qe8 52. Qf3 Ra4 53. Kh2 Qc8 54. Kg2 Nf8 55. Qf5 Qa8+ 56. Qf3 Qc8
+57. Qf5 Qc4 58. Rd8 Ra2+ 59. Kh3 Qc6 60. Qf1 h5 61. Rd4 Ne6 62. Rc4 hxg4+ 63.
+Kxg4 Qd7 64. Kh5 g6+ 65. Kg4 Nd4+ 66. Kg5 Rg2 67. e6 Qd5+ 68. Kg4 Qxe6+ {0-1 
+(68) Wei,Y (2732)-Ding,L (2791) Chess.com INT 2020}) 7. Bxf7+ Kxf7 8. Ne5+ Ke8
+9. Qxg4 {Winning advantage for White} Qa5+ (9... Nd7 10. Qh5+ g6 11. Nxg6 Ngf6
+12. Qh3 {winning}) 10. Nd2 Qxe5 11. Qc8+ Kf7 12. Qxb7+ 1-0
