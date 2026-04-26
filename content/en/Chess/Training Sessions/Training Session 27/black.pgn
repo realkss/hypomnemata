@@ -1,0 +1,47 @@
+[Event "Training game"]
+[Site "?"]
+[Date "2026.04.15"]
+[Round "?"]
+[White "Parviz"]
+[Black "Jwipo"]
+[Result "1-0"]
+[ECO "B13"]
+[PlyCount "96"]
+[EventDate "2026.??.??"]
+
+1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nf6 5. c3 Nc6 6. Bf4 Bg4 7. Qb3 Qb6 $6 {
+ruins Black's pawn structure} ({more popular and better choice} 7... Qd7 8. Nd2
+e6 9. Ngf3 Bd6 10. Bxd6 Qxd6 11. O-O O-O 12. Rae1 Bxf3 13. Nxf3 Qc7 14. Qc2 g6
+15. Qd2 Kg7 16. Ne5 Nxe5 17. dxe5 Nd7 18. f4 Rae8 19. Kh1 a6 20. Bc2 b5 21. Rf3
+h5 22. Rg3 Nc5 23. Qe2 Rh8 24. b4 Nd7 25. a4 h4 26. Rh3 bxa4 27. Bxa4 Ra8 28.
+Ra1 a5 29. Bxd7 axb4 30. Rc1 Qxd7 31. cxb4 Rhc8 32. Rb1 Rc4 33. Qe1 Qe7 34.
+Rhb3 Rxf4 35. b5 Qg5 36. R3b2 Re4 37. Qf2 Qxe5 38. b6 Rb8 39. b7 Rc4 40. h3 Qg3
+41. Qb6 Qc7 42. Qe3 d4 43. Qd2 e5 44. Kg1 e4 45. Rb4 e3 46. Qd3 Rxb4 47. Rxb4
+Qc1+ 48. Kh2 Qc7+ 49. Kg1 Qc1+ 50. Kh2 Qc5 51. Qxd4+ Qxd4 52. Rxd4 Rxb7 53.
+Rxh4 Re7 {0-1 (53) Wang,K (2447)-Shimanov,A (2626) Saint Louis 2018}) 8. Qxb6
+axb6 9. Nd2 {[%csl Gb6,Gb7] White is slightly better} e6 10. Ngf3 h6 $6 ({it
+is better to develop pieces} 10... Be7 11. O-O O-O) 11. h3 Bh5 (11... Bxf3 12.
+Nxf3 Be7) 12. g4 Bg6 13. Bxg6 fxg6 {[%csl Ge6,Gg6] Black's pawn structure is
+ruined} 14. Ke2 ({stronger} 14. O-O g5 15. Bg3 Be7 16. Rfe1) 14... g5 15. Bg3
+b5 16. a3 Na5 17. Ne5 Nc4 18. Ndxc4 bxc4 19. f3 ({White should try to open b
+file} 19. b3 b5 (19... cxb3 20. Rhb1 Ne4 21. Rxb3) 20. a4 bxa4 21. bxc4 dxc4
+22. Nxc4 Nd5 23. Kd3 {[%cal Gc4e5,Gc3c4] White has advantage in the endgame})
+19... Bd6 $6 ({Black should trade White's strong knight on e5} 19... Nd7 20.
+Rhe1 Nxe5 21. Bxe5 Kd7 $11) 20. Kd2 $6 {too slow} (20. Ng6 Bxg3 21. Nxh8 Ke7
+22. Ng6+ Kf7 23. Ne5+ Bxe5 24. dxe5 Nd7 {White is slightly better but it is
+not easy to win}) 20... Rf8 21. Rae1 Nd7 $11 22. Rhf1 Nxe5 23. Bxe5 Bxe5 24.
+Rxe5 Kd7 25. Ke2 Rf6 26. Kf2 Ra6 27. Kg3 {[%cal Gd7c6,Gc6b5,Gb5a4,Ga4b3]} Rb6 (
+{Black can activate the king and the king will be dangerous for White pawns} 
+27... Kc6 28. f4 gxf4+ 29. Rxf4 Rxf4 30. Kxf4 g5+ 31. Ke3 Kd6 $11 (31... Kb5
+32. Kd2 Ka4 33. Kc2)) 28. Re2 Rb3 {the rook is not doing much on b3} 29. f4 g6
+30. Rf3 gxf4+ 31. Rxf4 Rxf4 32. Kxf4 g5+ $2 ({Black should control e5 square} 
+32... Kd6 {[%cal Gg6g5]} 33. h4 Rb6) 33. Ke5 {White king is very active} Rb6
+34. Rf2 Ke7 35. Rf6 Rxb2 36. Rxe6+ Kf7 37. Rxh6 Rb3 38. Kxd5 (38. Rf6+ Ke7 39.
+Rf3 {[%cal Ge5d5] winning advantage for White} Rb5 40. a4 Ra5 41. Rf5) 38...
+Rxc3 39. Rh7+ ({winning} 39. a4 Ra3 40. Rh7+ Kf6 41. Rxb7 Rxa4 42. Rb6+ Ke7 43.
+Rc6) 39... Kg6 40. Rxb7 Rxa3 41. Kxc4 Rxh3 42. Rb6+ Kg7 43. Kd5 $2 ({White
+should cut the Black king and push d5 pawn} 43. Re6 {[%cal Gd4d5]} Rg3 44. Re4
+Rg1 45. d5 Rd1 46. Kc5 {winning for White}) 43... Rg3 44. Ke6 Rxg4 45. d5 Rd4
+$2 ({right way to equalize} 45... Rg1 46. d6 Re1+ 47. Kd7 Kf6 48. Kc8 Rd1 49.
+d7+ Kf5 50. d8=Q Rxd8+ 51. Kxd8 g4 $11) 46. d6 g4 47. d7 {winning for White} g3
+48. Rb4 ({stronger} 48. Rb3 g2 49. Rg3+) 48... Rd1 1-0

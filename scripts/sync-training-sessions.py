@@ -642,7 +642,7 @@ def render_catalog(sessions: list[SessionData]) -> str:
             "",
             "These sessions pair one White game and one Black game from the archive so each page can be reviewed as a balanced training set.",
             "",
-            "The archive below now surfaces the opening pair for each session and links onward to the cited master-game references.",
+            "The archive below now surfaces the opening pair for each session and links onward to the cited master-game [[References|references]].",
             "",
             '<div class="training-session-catalog">',
             *rows,

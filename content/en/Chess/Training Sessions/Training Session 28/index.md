@@ -1,9 +1,9 @@
 ---
-title: "Training Session #26"
+title: "Training Session #28"
 lang: en
 sourceLanguage: en
 translationStatus: original
-date: 2026-04-07
+date: 2026-04-20
 hideFolderListing: true
 tags:
   - training-session
@@ -12,12 +12,12 @@ tags:
 ---
 
 <ul class="training-session-meta">
-  <li>Session date: 2026-04-07</li>
-  <li>White game: 2026.04.07 (0-1)</li>
-  <li>Black game: 2026.04.01 (1-0)</li>
+  <li>Session date: 2026-04-20</li>
+  <li>White game: 2026.04.20 (1/2-1/2)</li>
+  <li>Black game: 2026.04.20 (1-0)</li>
 </ul>
 
-The cited model games from the annotations are collected on the [Master Games](en/Chess/Training-Sessions/Training-Session-26/Master-Games/) subpage.
+The cited model games from the annotations are collected on the [Master Games](en/Chess/Training-Sessions/Training-Session-28/Master-Games/) subpage.
 
 ## White Game
 
@@ -44,8 +44,8 @@ The cited model games from the annotations are collected on the [Master Games](e
 </details>
 
 <nav class="training-session-nav" aria-label="Session navigation">
-  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-25/">Prev Session</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-27/">Prev Session</a>
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/">All Sessions</a>
-  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-26/Master-Games/">Master Games</a>
-  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-27/">Next Session</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-28/Master-Games/">Master Games</a>
+  <span class="training-session-nav__text">Next Session</span>
 </nav>

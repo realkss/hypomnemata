@@ -1,23 +1,23 @@
 ---
-title: "Training Session #26"
+title: "Training Session #27"
 lang: en
 sourceLanguage: en
 translationStatus: original
-date: 2026-04-07
+date: 2026-04-15
 hideFolderListing: true
 tags:
   - training-session
   - sicilian-defense-grand-prix-attack
-  - caro-kann-defense-advance-variation
+  - caro-kann-defense-exchange-variation
 ---
 
 <ul class="training-session-meta">
-  <li>Session date: 2026-04-07</li>
-  <li>White game: 2026.04.07 (0-1)</li>
-  <li>Black game: 2026.04.01 (1-0)</li>
+  <li>Session date: 2026-04-15</li>
+  <li>White game: 2026.04.15 (1/2-1/2)</li>
+  <li>Black game: 2026.04.15 (1-0)</li>
 </ul>
 
-The cited model games from the annotations are collected on the [Master Games](en/Chess/Training-Sessions/Training-Session-26/Master-Games/) subpage.
+The cited model games from the annotations are collected on the [Master Games](en/Chess/Training-Sessions/Training-Session-27/Master-Games/) subpage.
 
 ## White Game
 
@@ -33,7 +33,7 @@ The cited model games from the annotations are collected on the [Master Games](e
 
 ## Black Game
 
-<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense: Advance Variation</span><em>B12</em></p>
+<p class="training-session-opening-note"><strong>Opening</strong><span>Caro-Kann Defense: Exchange Variation</span><em>B13</em></p>
 
 <div class="chess-training-board" data-label="Black Game" data-orientation="black" data-pgn-src="./black.pgn"></div>
 
@@ -44,8 +44,8 @@ The cited model games from the annotations are collected on the [Master Games](e
 </details>
 
 <nav class="training-session-nav" aria-label="Session navigation">
-  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-25/">Prev Session</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-26/">Prev Session</a>
   <a class="training-session-nav__link" href="en/Chess/Training-Sessions/">All Sessions</a>
-  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-26/Master-Games/">Master Games</a>
-  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-27/">Next Session</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-27/Master-Games/">Master Games</a>
+  <a class="training-session-nav__link" href="en/Chess/Training-Sessions/Training-Session-28/">Next Session</a>
 </nav>

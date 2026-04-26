@@ -8,9 +8,25 @@ hideFolderListing: true
 
 These sessions pair one White game and one Black game from the archive so each page can be reviewed as a balanced training set.
 
-The archive below now surfaces the opening pair for each session and links onward to the cited master-game references.
+The archive below now surfaces the opening pair for each session and links onward to the cited master-game [[References|references]].
 
 <div class="training-session-catalog">
+  <a class="training-session-row" href="en/Chess/Training-Sessions/Training-Session-28/">
+    <span class="training-session-row__date">Apr 20, 2026</span>
+    <span class="training-session-row__title">Training Session #28</span>
+    <span class="training-session-row__summary">
+      <span class="training-session-row__chip">White: Sicilian Defense: Grand Prix Attack</span>
+      <span class="training-session-row__chip">Black: Caro-Kann Defense: Advance Variation</span>
+    </span>
+  </a>
+  <a class="training-session-row" href="en/Chess/Training-Sessions/Training-Session-27/">
+    <span class="training-session-row__date">Apr 15, 2026</span>
+    <span class="training-session-row__title">Training Session #27</span>
+    <span class="training-session-row__summary">
+      <span class="training-session-row__chip">White: Sicilian Defense: Grand Prix Attack</span>
+      <span class="training-session-row__chip">Black: Caro-Kann Defense: Exchange Variation</span>
+    </span>
+  </a>
   <a class="training-session-row" href="en/Chess/Training-Sessions/Training-Session-26/">
     <span class="training-session-row__date">Apr 07, 2026</span>
     <span class="training-session-row__title">Training Session #26</span>

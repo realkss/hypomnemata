@@ -1,0 +1,48 @@
+[Event "Training game"]
+[Site "?"]
+[Date "2026.04.20"]
+[Round "?"]
+[White "Jwipo"]
+[Black "Parviz"]
+[Result "1/2-1/2"]
+[ECO "B23"]
+[PlyCount "84"]
+[EventDate "2026.??.??"]
+
+1. e4 c5 2. Nc3 Nc6 3. Bb5 Nd4 4. Nf3 Nxb5 5. Nxb5 e6 {not so popular choice} (
+{more popular choice} 5... d6 6. d4 Nf6 7. Qd3 a6 8. Nc3 cxd4 9. Nxd4 e5 10.
+Nf5 Bxf5 11. exf5 h6 12. Bd2 Be7 13. O-O-O O-O 14. g4 d5 15. g5 d4 16. gxf6
+dxc3 17. Qxc3 Bxf6 18. Bxh6 Qc8 19. Qxc8 Rfxc8 20. Rhg1 Kf8 21. Be3 Ke7 22. Rg4
+Rd8 23. Rb4 Rxd1+ 24. Kxd1 Rd8+ 25. Ke2 Rd7 26. a4 Kd6 27. b3 Kc7 28. Rc4+ Kb8
+29. Bb6 Bg5 30. Rg4 f6 31. Rc4 Bh6 32. Kf3 Re7 33. Kg4 Bf4 34. h3 Bh6 35. Kh5
+Rd7 36. Kg6 Rd1 37. Rc3 Rg1+ 38. Kf7 {1-0 (38) Rapport,R (2719)-Nihal,S (2556)
+Abu Dhabi 2018}) 6. d4 ({better choice} 6. c4 a6 7. Nc3 d6 8. d4 cxd4 9. Qxd4)
+6... cxd4 $6 (6... Qa5+ 7. Nc3 b5 8. O-O b4 9. Ne2 cxd4 10. Nexd4 Bb7 {Black
+has comfortable position}) 7. Qxd4 a6 (7... Qa5+ 8. Nc3 d6 9. O-O Nf6 10. Bd2
+Qa6 11. e5 dxe5 12. Nxe5 {White has advantage}) 8. Nc3 (8. Nd6+ Bxd6 9. Qxd6 {
+[%csl Gd6] White control dark squares} Nf6 10. e5 Nd5 11. Bg5 Qa5+ 12. Bd2 Qb6
+13. Qxb6 Nxb6 14. b3 Nd5 15. c4 {White is better}) 8... Ne7 ({better way to
+develop the pieces} 8... b5 9. O-O Bb7) 9. Bf4 Nc6 10. Qd3 Bc5 11. a3 $6 {too
+slow} ({stronger} 11. O-O-O O-O (11... Bxf2 12. Bd6 {[%cal Gh1f1] White has
+big advantage}) 12. h4 b5 13. h5 {[%cal Gh5h6]} h6 14. Rh3 {[%cal Gh3g3]})
+11... O-O 12. Bd6 ({better choice} 12. O-O-O b5 13. e5 {[%cal Gc3e4]}) 12...
+Bxd6 13. Qxd6 Qb6 14. Na4 (14. O-O-O Qxf2 15. e5 b5 16. Kb1 Qb6 17. Ne4 {White
+has compensation}) 14... Qa5+ 15. Nc3 b5 16. O-O b4 ({Black can fight for d6
+square} 16... Ra7 17. Rad1 Qc7) 17. axb4 (17. Ne2 Ra7 18. Rfd1 bxa3 19. Rxa3
+Qc7 20. Rc3 {White has advantage in the endgame}) 17... Qxb4 18. Qxb4 Nxb4 {
+Black has no problems now} 19. Nd4 Bb7 20. e5 ({it is better to activate the
+rooks} 20. Ra5 Rfc8 21. Rd1) 20... Nc6 21. Nxc6 Bxc6 {The position is about
+equal but The bishop is stronger than the knight and Black's position is more
+comfortable} 22. Rfd1 f6 23. exf6 gxf6 24. Ne2 Rfc8 25. Nd4 Bd5 26. c3 $6 ({
+White should try to kick Bd5 away} 26. b3 {[%cal Gc2c4]} Rc3 27. Rd2 Kf7 28.
+Ne2 Rc7 29. c4 $11) 26... a5 27. Nc2 ({more active choice} 27. Nf5 {[%cal
+Gf5e7]} Kf8 28. Ne3 Bc6 29. Nc4) 27... Rab8 ({also good} 27... Rcb8 28. Ne3 Bc6
+29. Ra2 a4) 28. Ne3 Bc6 29. Rxa5 Rxb2 {Black has advantage. c3 pawn is weak
+and the bishop is stronger than the knight} 30. h3 Rcb8 31. Ng4 $6 {the knight
+is not doing much on g4 square} ({better defending idea} 31. Raa1 Re2 32. Rab1)
+31... Kf7 32. Rc5 ({better choice} 32. Rd4 Re2 33. Rf4) 32... Re2 {[%cal Gb8b2]
+Black rooks are very active} 33. Rh5 f5 34. Ne3 Kg6 35. g4 (35. Rh4 Rbb2 36.
+Rf4 Kg5 37. g3 h5 38. h4+ Kf6 39. Kf1 Be4 {Black has winning advantage}) 35...
+Rbb2 36. Rf1 $2 (36. Nc4 Rbc2 37. Ne3 Ra2 38. Nc4 d5 39. Ne3 Rxf2) 36... Rxe3 {
+winning for black} 37. fxe3 Rg2+ 38. Kh1 Rxg4+ 39. Kh2 Rg2+ 40. Kh1 Rf2+ 41.
+Kg1 Rxf1+ 42. Kxf1 Kxh5 1/2-1/2
