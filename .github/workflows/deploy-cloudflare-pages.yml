@@ -10,31 +10,55 @@ permissions:
 
 jobs:
   deploy:
-    if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' && secrets.CLOUDFLARE_PAGES_PROJECT != '' }}
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_PAGES_PROJECT: ${{ secrets.CLOUDFLARE_PAGES_PROJECT }}
     steps:
+      - name: Check Cloudflare deployment secrets
+        id: cloudflare_secrets
+        shell: bash
+        run: |
+          missing=()
+          [[ -z "$CLOUDFLARE_API_TOKEN" ]] && missing+=("CLOUDFLARE_API_TOKEN")
+          [[ -z "$CLOUDFLARE_ACCOUNT_ID" ]] && missing+=("CLOUDFLARE_ACCOUNT_ID")
+          [[ -z "$CLOUDFLARE_PAGES_PROJECT" ]] && missing+=("CLOUDFLARE_PAGES_PROJECT")
+
+          if (( ${#missing[@]} > 0 )); then
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "Cloudflare Pages deploy skipped. Missing secrets: ${missing[*]}." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.cloudflare_secrets.outputs.available == 'true'
         uses: actions/checkout@v4
 
       - name: Setup Node
+        if: steps.cloudflare_secrets.outputs.available == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
 
       - name: Install deps
+        if: steps.cloudflare_secrets.outputs.available == 'true'
         run: npm ci
 
       - name: Build Quartz
+        if: steps.cloudflare_secrets.outputs.available == 'true'
         run: npx quartz build
 
       - name: Deploy to Cloudflare Pages
+        if: steps.cloudflare_secrets.outputs.available == 'true'
         uses: AdrianGonz97/refined-cf-pages-action@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: ${{ secrets.CLOUDFLARE_PAGES_PROJECT }}
+          projectName: ${{ env.CLOUDFLARE_PAGES_PROJECT }}
           branch: main
           deploymentName: Production
           directory: public
