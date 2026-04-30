@@ -58,6 +58,11 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
                 let dest = node.properties.href as RelativeURL
                 const classes = (node.properties.className ?? []) as string[]
                 const isExternal = isAbsoluteUrl(dest, { httpOnly: false })
+                const preserveHref =
+                  node.properties.dataPreserveHref === true ||
+                  node.properties.dataPreserveHref === "true" ||
+                  node.properties["data-preserve-href"] === true ||
+                  node.properties["data-preserve-href"] === "true"
                 classes.push(isExternal ? "external" : "internal")
 
                 if (isExternal && opts.externalLinkIcon) {
@@ -102,7 +107,7 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
                 const isInternal = !(
                   isAbsoluteUrl(dest, { httpOnly: false }) || dest.startsWith("#")
                 )
-                if (isInternal) {
+                if (isInternal && !preserveHref) {
                   dest = node.properties.href = transformLink(
                     file.data.slug!,
                     dest,
@@ -129,6 +134,7 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
                 if (
                   opts.prettyLinks &&
                   isInternal &&
+                  !preserveHref &&
                   node.children.length === 1 &&
                   node.children[0].type === "text" &&
                   !node.children[0].value.startsWith("#")

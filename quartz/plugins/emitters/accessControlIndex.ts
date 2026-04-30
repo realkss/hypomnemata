@@ -1,5 +1,5 @@
 import path from "path"
-import { FilePath, FullSlug, joinSegments, slugifyFilePath } from "../../util/path"
+import { FilePath, FullSlug, joinSegments, slugifyAssetFilePath } from "../../util/path"
 import { QuartzEmitterPlugin } from "../types"
 import { glob } from "../../util/glob"
 import {
@@ -67,7 +67,7 @@ export const AccessControlIndex: QuartzEmitterPlugin = () => {
           }
 
           restrictedAssets.push({
-            slug: slugifyFilePath(assetPath as FilePath),
+            slug: slugifyAssetFilePath(assetPath as FilePath),
             pageSlug: inheritedRoot.pageSlug,
             access: inheritedRoot.access,
           })

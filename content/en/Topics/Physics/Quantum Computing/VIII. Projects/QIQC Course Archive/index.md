@@ -15,47 +15,67 @@ Each archive entry now opens a viewer page where you can preview the material wh
 
 ## Qiskit Class Notebooks
 
-- [Measurement with Qiskit notebook viewer](./measurement-with-qiskit-notebook-view.html)
-- [Superposition with Qiskit notebook viewer](./superposition-with-qiskit-notebook-view.html)
+<ul>
+  <li><a href="./measurement-with-qiskit-notebook-view.html" data-preserve-href="true">Measurement with Qiskit notebook viewer</a></li>
+  <li><a href="./superposition-with-qiskit-notebook-view.html" data-preserve-href="true">Superposition with Qiskit notebook viewer</a></li>
+</ul>
 
 ## Homework 1
 
-- [Homework prompt viewer](./homework-1-prompt-view.html)
-- [Worked notebook and submitted PDF package](./homework-1-worked-notebook-view.html)
+<ul>
+  <li><a href="./homework-1-prompt-view.html" data-preserve-href="true">Homework prompt viewer</a></li>
+  <li><a href="./homework-1-worked-notebook-view.html" data-preserve-href="true">Worked notebook and submitted PDF package</a></li>
+</ul>
 
 ## Homework 2
 
-- [Homework 2 notebook and PDF package](./homework-2-materials-view.html)
+<ul>
+  <li><a href="./homework-2-materials-view.html" data-preserve-href="true">Homework 2 notebook and PDF package</a></li>
+</ul>
 
 ## Homework 3
 
-- [Homework 3 notebook and submitted PDF package](./homework-3-materials-view.html)
+<ul>
+  <li><a href="./homework-3-materials-view.html" data-preserve-href="true">Homework 3 notebook and submitted PDF package</a></li>
+</ul>
 
 ## Homework 4
 
-- [Homework 4 prompt and submitted PDF package](./homework-4-materials-view.html)
+<ul>
+  <li><a href="./homework-4-materials-view.html" data-preserve-href="true">Homework 4 prompt and submitted PDF package</a></li>
+</ul>
 
 ## Midterm
 
 ### Problem 1
 
-- [Notebook package](./midterm-problem-1-notebook-view.html)
+<ul>
+  <li><a href="./midterm-problem-1-notebook-view.html" data-preserve-href="true">Notebook package</a></li>
+</ul>
 
 ### Problem 2
 
-- [Source and executable package](./midterm-problem-2-materials-view.html)
+<ul>
+  <li><a href="./midterm-problem-2-materials-view.html" data-preserve-href="true">Source and executable package</a></li>
+</ul>
 
 ### Problem 3
 
-- [Notebook package](./midterm-problem-3-notebook-view.html)
+<ul>
+  <li><a href="./midterm-problem-3-notebook-view.html" data-preserve-href="true">Notebook package</a></li>
+</ul>
 
 ### Full Midterm
 
-- [Midterm prompt and submitted PDF package](./midterm-full-materials-view.html)
+<ul>
+  <li><a href="./midterm-full-materials-view.html" data-preserve-href="true">Midterm prompt and submitted PDF package</a></li>
+</ul>
 
 ## Final
 
-- [Final notebooks and submitted PDF package](./final-materials-view.html)
+<ul>
+  <li><a href="./final-materials-view.html" data-preserve-href="true">Final notebooks and submitted PDF package</a></li>
+</ul>
 
 > [!warning]
 > This archive includes a compiled executable. Download or run local binaries only if you trust the source and intend to inspect or use them yourself.

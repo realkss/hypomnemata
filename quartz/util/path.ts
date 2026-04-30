@@ -87,6 +87,13 @@ export function slugifyFilePath(fp: FilePath, excludeExt?: boolean): FullSlug {
   return (slug + ext) as FullSlug
 }
 
+export function slugifyAssetFilePath(fp: FilePath): FullSlug {
+  const slug = slugifyFilePath(fp)
+  const ext = getFileExtension(stripSlashes(fp) as FilePath)
+
+  return (ext === ".html" ? `${slug}.html` : slug) as FullSlug
+}
+
 export function simplifySlug(fp: FullSlug): SimpleSlug {
   const res = stripSlashes(trimSuffix(fp, "index"), true)
   return (res.length === 0 ? "/" : res) as SimpleSlug
